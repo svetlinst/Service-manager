@@ -2,7 +2,7 @@ from django.core.validators import EmailValidator
 from django.db import models
 
 
-class AuditEntity(models.Model):
+class BaseAuditEntity(models.Model):
     created_on = models.DateTimeField(
         auto_now_add=True,
     )
@@ -15,7 +15,7 @@ class AuditEntity(models.Model):
         abstract = True
 
 
-class CustomerType(AuditEntity):
+class CustomerType(BaseAuditEntity):
     NAME_MAX_LENGTH = 50
 
     name = models.CharField(
@@ -26,7 +26,7 @@ class CustomerType(AuditEntity):
         db_table = 'main_customer_type'
 
 
-class Customer(AuditEntity):
+class Customer(BaseAuditEntity):
     NAME_MAX_LENGTH = 100
     VAT_MAX_LENGTH = 20
     EMAIL_MAX_LENGTH = 254
@@ -59,7 +59,7 @@ class Customer(AuditEntity):
     )
 
 
-class CustomerRepresentative(AuditEntity):
+class CustomerRepresentative(BaseAuditEntity):
     FIRST_NAME_MAX_LENGTH = 20
     LAST_NAME_MAX_LENGTH = 20
     EMAIL_ADDRESS_MAX_LENGTH = 254
@@ -93,7 +93,7 @@ class CustomerRepresentative(AuditEntity):
         db_table = 'main_customer_representative'
 
 
-class CustomerDepartment(AuditEntity):
+class CustomerDepartment(BaseAuditEntity):
     NAME_MAX_LENGTH = 100
 
     name = models.CharField(
@@ -109,7 +109,7 @@ class CustomerDepartment(AuditEntity):
         db_table = 'main_customer_department'
 
 
-class Brand(AuditEntity):
+class Brand(BaseAuditEntity):
     NAME_MAX_LENGTH = 100
 
     name = models.CharField(
@@ -117,7 +117,7 @@ class Brand(AuditEntity):
     )
 
 
-class AssetCategory(AuditEntity):
+class AssetCategory(BaseAuditEntity):
     NAME_MAX_LENGTH = 100
 
     name = models.CharField(
@@ -128,7 +128,7 @@ class AssetCategory(AuditEntity):
         db_table = 'main_asset_category'
 
 
-class Asset(AuditEntity):
+class Asset(BaseAuditEntity):
     MODEL_NUMBER_MAX_LENGTH = 20
     MODEL_NAME_MAX_LENGTH = 100
 
@@ -151,7 +151,7 @@ class Asset(AuditEntity):
     )
 
 
-class CustomerAsset(AuditEntity):
+class CustomerAsset(BaseAuditEntity):
     SERIAL_NUMBER_MAX_LENGTH = 20
     PRODUCT_NUMBER_MAX_LENGTH = 20
 
@@ -179,3 +179,129 @@ class CustomerAsset(AuditEntity):
 
     class Meta:
         db_table = 'main_customer_asset'
+
+
+class Employee(BaseAuditEntity):
+    FIRST_NAME_MAX_LENGTH = 20
+    LAST_NAME_MAX_LENGTH = 20
+    EMAIL_ADDRESS_MAX_LENGTH = 254
+
+    first_name = models.CharField(
+        max_length=FIRST_NAME_MAX_LENGTH,
+    )
+
+    last_name = models.CharField(
+        max_length=LAST_NAME_MAX_LENGTH,
+    )
+
+    email_address = models.EmailField(
+        max_length=EMAIL_ADDRESS_MAX_LENGTH,
+        validators=(
+            EmailValidator,
+        )
+    )
+
+
+class Role(BaseAuditEntity):
+    NAME_MAX_LENGTH = 20
+
+    name = models.CharField(
+        max_length=NAME_MAX_LENGTH,
+    )
+
+    employee = models.ManyToManyField(
+        Employee
+    )
+
+
+class MaterialCategory(BaseAuditEntity):
+    NAME_MAX_LENGTH = 20
+
+    name = models.CharField(
+        max_length=NAME_MAX_LENGTH,
+    )
+
+
+class Material(BaseAuditEntity):
+    NAME_MAX_LENGTH = 100
+
+    name = models.CharField(
+        max_length=NAME_MAX_LENGTH,
+    )
+
+    price = models.FloatField()
+
+    category = models.ForeignKey(
+        MaterialCategory,
+        on_delete=models.CASCADE,
+    )
+
+
+class ServiceOrderHeader(BaseAuditEntity):
+    is_completed = models.BooleanField(
+        default=False,
+    )
+
+    serviced_on = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
+    completed_on = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
+    customer = models.ForeignKey(
+        Customer,
+        on_delete=models.CASCADE,
+    )
+
+    asset = models.ForeignKey(
+        Asset,
+        on_delete=models.CASCADE,
+    )
+
+    accepted_by = models.ForeignKey(
+        Employee,
+        on_delete=models.CASCADE,
+        related_name='accepted_by',
+    )
+
+    serviced_by = models.ForeignKey(
+        Employee,
+        on_delete=models.CASCADE,
+        related_name='serviced_by',
+    )
+
+    completed_by = models.ForeignKey(
+        Employee,
+        on_delete=models.CASCADE,
+        related_name='completed_by'
+    )
+
+    department = models.ForeignKey(
+        CustomerDepartment,
+        on_delete=models.CASCADE,
+    )
+
+    class Meta:
+        db_table = 'main_service_order_header'
+
+
+class ServiceOrderDetail(BaseAuditEntity):
+    quantity = models.FloatField()
+    discount = models.FloatField()
+
+    service_order = models.ForeignKey(
+        ServiceOrderHeader,
+        on_delete=models.CASCADE,
+    )
+
+    material = models.ForeignKey(
+        Material,
+        on_delete=models.CASCADE,
+    )
+
+    class Meta:
+        db_table = 'main_service_order_detail'
