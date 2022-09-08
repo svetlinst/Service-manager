@@ -22,6 +22,9 @@ class CustomerType(BaseAuditEntity):
         max_length=NAME_MAX_LENGTH,
     )
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         db_table = 'main_customer_type'
 
@@ -58,6 +61,9 @@ class Customer(BaseAuditEntity):
         on_delete=models.CASCADE,
     )
 
+    def __str__(self):
+        return self.name
+
 
 class CustomerRepresentative(BaseAuditEntity):
     FIRST_NAME_MAX_LENGTH = 20
@@ -89,6 +95,9 @@ class CustomerRepresentative(BaseAuditEntity):
         on_delete=models.CASCADE,
     )
 
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
+
     class Meta:
         db_table = 'main_customer_representative'
 
@@ -105,6 +114,9 @@ class CustomerDepartment(BaseAuditEntity):
         on_delete=models.CASCADE,
     )
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         db_table = 'main_customer_department'
 
@@ -116,6 +128,9 @@ class Brand(BaseAuditEntity):
         max_length=NAME_MAX_LENGTH,
     )
 
+    def __str__(self):
+        return self.name
+
 
 class AssetCategory(BaseAuditEntity):
     NAME_MAX_LENGTH = 100
@@ -123,6 +138,9 @@ class AssetCategory(BaseAuditEntity):
     name = models.CharField(
         max_length=NAME_MAX_LENGTH,
     )
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         db_table = 'main_asset_category'
@@ -145,10 +163,13 @@ class Asset(BaseAuditEntity):
         on_delete=models.CASCADE,
     )
 
-    asset_category = models.ForeignKey(
+    category = models.ForeignKey(
         AssetCategory,
         on_delete=models.CASCADE,
     )
+
+    def __str__(self):
+        return f'{self.brand.name}---{self.model_number}---{self.model_name}'
 
 
 class CustomerAsset(BaseAuditEntity):
@@ -181,6 +202,17 @@ class CustomerAsset(BaseAuditEntity):
         db_table = 'main_customer_asset'
 
 
+class Role(BaseAuditEntity):
+    NAME_MAX_LENGTH = 20
+
+    name = models.CharField(
+        max_length=NAME_MAX_LENGTH,
+    )
+
+    def __str__(self):
+        return self.name
+
+
 class Employee(BaseAuditEntity):
     FIRST_NAME_MAX_LENGTH = 20
     LAST_NAME_MAX_LENGTH = 20
@@ -201,17 +233,12 @@ class Employee(BaseAuditEntity):
         )
     )
 
-
-class Role(BaseAuditEntity):
-    NAME_MAX_LENGTH = 20
-
-    name = models.CharField(
-        max_length=NAME_MAX_LENGTH,
+    role = models.ManyToManyField(
+        Role,
     )
 
-    employee = models.ManyToManyField(
-        Employee
-    )
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
 
 
 class MaterialCategory(BaseAuditEntity):
@@ -220,6 +247,9 @@ class MaterialCategory(BaseAuditEntity):
     name = models.CharField(
         max_length=NAME_MAX_LENGTH,
     )
+
+    def __str__(self):
+        return self.name
 
 
 class Material(BaseAuditEntity):
@@ -235,6 +265,9 @@ class Material(BaseAuditEntity):
         MaterialCategory,
         on_delete=models.CASCADE,
     )
+
+    def __str__(self):
+        return f'{self.name} ({str(self.category)})'
 
 
 class ServiceOrderHeader(BaseAuditEntity):
@@ -272,18 +305,27 @@ class ServiceOrderHeader(BaseAuditEntity):
         Employee,
         on_delete=models.CASCADE,
         related_name='serviced_by',
+        null=True,
+        blank=True
     )
 
     completed_by = models.ForeignKey(
         Employee,
         on_delete=models.CASCADE,
-        related_name='completed_by'
+        related_name='completed_by',
+        null=True,
+        blank=True,
     )
 
     department = models.ForeignKey(
         CustomerDepartment,
         on_delete=models.CASCADE,
+        null=True,
+        blank=True,
     )
+
+    def __str__(self):
+        return f'{str(self.customer)}--{str(self.asset)}'
 
     class Meta:
         db_table = 'main_service_order_header'
@@ -303,5 +345,22 @@ class ServiceOrderDetail(BaseAuditEntity):
         on_delete=models.CASCADE,
     )
 
+    def __str__(self):
+        return f'{str(self.service_order)}---{str(self.material)}'
+
     class Meta:
         db_table = 'main_service_order_detail'
+
+
+class ServiceOrderNode(BaseAuditEntity):
+    note = models.TextField()
+
+    created_by = models.ForeignKey(
+        Employee,
+        on_delete=models.CASCADE,
+    )
+
+    service_order = models.ForeignKey(
+        ServiceOrderHeader,
+        on_delete=models.CASCADE,
+    )
