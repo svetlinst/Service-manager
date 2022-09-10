@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+    <table class="table table-striped text-center">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">VAT</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if object_list %}
+            {% for customer in object_list %}
+                <tr>
+                    <td>{{ customer.id }}</td>
+                    <td>{{ customer.name }}</td>
+                    <td>{{ customer.type }}</td>
+                    <td>{{ customer.vat }}</td>
+                    <td>{{ customer.email_address }}</td>
+                    <td>{{ customer.phone_number }}</td>
+                    <td>
+                        <a class="btn btn-outline-primary btn-sm" href="{% url 'customer_details' customer.id %}" role="button">Edit</a>
+                        <a class="btn btn-outline-danger btn-sm" href="#" role="button">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}
