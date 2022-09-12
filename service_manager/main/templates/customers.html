@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
+    <div class="row my-md-2">
+        <div class="col-md-12 text-right">
+            <a href="{% url 'create_customer' %}" class="btn btn-success">Create</a>
+        </div>
+    </div>
     <table class="table table-striped text-center">
         <thead>
         <tr>
@@ -23,7 +28,8 @@
                     <td>{{ customer.email_address }}</td>
                     <td>{{ customer.phone_number }}</td>
                     <td>
-                        <a class="btn btn-outline-primary btn-sm" href="{% url 'customer_details' customer.id %}" role="button">Edit</a>
+                        <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_customer' customer.id %}"
+                           role="button">Edit</a>
                         <a class="btn btn-outline-danger btn-sm" href="#" role="button">Delete</a>
                     </td>
                 </tr>
