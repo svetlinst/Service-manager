@@ -3,7 +3,7 @@ from django.shortcuts import render
 import django.views.generic as views
 from django.urls import reverse_lazy
 
-from service_manager.main.forms import EditCustomerForm, CreateCustomerForm
+from service_manager.main.forms import EditCustomerForm, CreateCustomerForm, CreateAssetForm, EditAssetForm
 from service_manager.main.models import Customer, Asset
 
 
@@ -31,7 +31,33 @@ class CreateCustomerView(views.CreateView):
     success_url = reverse_lazy('customers_list')
 
 
-# class AssetsListView(views.ListView):
-#     model = Asset
-#     ordering = ('model_name', 'model_number')
+class DeleteCustomerView(views.DeleteView):
+    model = Customer
+    template_name = 'customer_delete.html'
+    success_url = reverse_lazy('customers_list')
 
+
+class AssetsListView(views.ListView):
+    model = Asset
+    template_name = 'assets.html'
+    ordering = ('model_name', 'model_number')
+
+
+class CreateAssetView(views.CreateView):
+    model = Asset
+    form_class = CreateAssetForm
+    template_name = 'asset_create.html'
+    success_url = reverse_lazy('assets_list')
+
+
+class EditAssetView(views.UpdateView):
+    model = Asset
+    form_class = EditAssetForm
+    template_name = 'asset_edit.html'
+    success_url = reverse_lazy('assets_list')
+
+
+class DeleteAssetView(views.DeleteView):
+    model = Asset
+    template_name = 'asset_delete.html'
+    success_url = reverse_lazy('assets_list')

@@ -30,7 +30,7 @@
                     <td>
                         <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_customer' customer.id %}"
                            role="button">Edit</a>
-                        <a class="btn btn-outline-danger btn-sm" href="#" role="button">Delete</a>
+                        <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_customer' customer.id %}" role="button">Delete</a>
                     </td>
                 </tr>
             {% endfor %}
