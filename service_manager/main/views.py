@@ -4,8 +4,8 @@ import django.views.generic as views
 from django.urls import reverse_lazy
 
 from service_manager.main.forms import EditCustomerForm, CreateCustomerForm, CreateAssetForm, EditAssetForm, \
-    CreateMaterialForm, EditMaterialForm
-from service_manager.main.models import Customer, Asset, Material
+    CreateMaterialForm, EditMaterialForm, CreateCustomerAssetForm
+from service_manager.main.models import Customer, Asset, Material, CustomerAsset
 
 
 def get_index(request):
@@ -88,3 +88,10 @@ class DeleteMaterialView(views.DeleteView):
     model = Material
     template_name = 'material/material_delete.html'
     success_url = reverse_lazy('materials_list')
+
+
+class CreateCustomerAssetView(views.CreateView):
+    model = CustomerAsset
+    form_class = CreateCustomerAssetForm
+    template_name = 'customer_asset_create.html'
+    success_url = reverse_lazy('customers_list')

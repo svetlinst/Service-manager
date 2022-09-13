@@ -1,6 +1,6 @@
 from django import forms
 
-from service_manager.main.models import Customer, Asset, Material
+from service_manager.main.models import Customer, Asset, Material, CustomerAsset
 
 
 class EditCustomerForm(forms.ModelForm):
@@ -73,3 +73,23 @@ class CreateMaterialForm(forms.ModelForm):
 
 class EditMaterialForm(CreateMaterialForm):
     pass
+
+
+class CreateCustomerAssetForm(forms.ModelForm):
+    class Meta:
+        model = CustomerAsset
+        fields = '__all__'
+        widgets = {
+            'customer': forms.Select(
+                attrs={'class': 'form-control'},
+            ),
+            'asset': forms.Select(
+                attrs={'class': 'form-control'},
+            ),
+            'serial_number': forms.TextInput(
+                attrs={'class': 'form-control'},
+            ),
+            'product_number': forms.TextInput(
+                attrs={'class': 'form-control'},
+            ),
+        }
