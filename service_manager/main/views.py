@@ -3,8 +3,9 @@ from django.shortcuts import render
 import django.views.generic as views
 from django.urls import reverse_lazy
 
-from service_manager.main.forms import EditCustomerForm, CreateCustomerForm, CreateAssetForm, EditAssetForm
-from service_manager.main.models import Customer, Asset
+from service_manager.main.forms import EditCustomerForm, CreateCustomerForm, CreateAssetForm, EditAssetForm, \
+    CreateMaterialForm, EditMaterialForm
+from service_manager.main.models import Customer, Asset, Material
 
 
 def get_index(request):
@@ -61,3 +62,29 @@ class DeleteAssetView(views.DeleteView):
     model = Asset
     template_name = 'asset_delete.html'
     success_url = reverse_lazy('assets_list')
+
+
+class MaterialsListView(views.ListView):
+    model = Material
+    template_name = 'materials.html'
+    ordering = ('name', 'category')
+
+
+class CreateMaterialView(views.CreateView):
+    model = Material
+    form_class = CreateMaterialForm
+    template_name = 'material_create.html'
+    success_url = reverse_lazy('materials_list')
+
+
+class EditMaterialView(views.UpdateView):
+    model = Material
+    form_class = EditMaterialForm
+    template_name = 'material_edit.html'
+    success_url = reverse_lazy('materials_list')
+
+
+class DeleteMaterialView(views.DeleteView):
+    model = Material
+    template_name = 'material_delete.html'
+    success_url = reverse_lazy('materials_list')

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row my-md-2">
+        <div class="col-md-12 text-right">
+            <a href="{% url 'create_material' %}" class="btn btn-success">Create</a>
+        </div>
+    </div>
+    <table class="table table-striped text-center">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if object_list %}
+            {% for material in object_list %}
+                <tr>
+                    <td>{{ material.id }}</td>
+                    <td>{{ material.name }}</td>
+                    <td>{{ material.category }}</td>
+                    <td>{{ material.price }}</td>
+                    <td>
+                        <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_material' material.id %}"
+                           role="button">Edit</a>
+                        <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_material' material.id %}" role="button">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}
