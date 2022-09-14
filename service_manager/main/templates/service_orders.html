@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+
     <table class="table table-striped text-center">
         <thead>
         <tr>
@@ -31,7 +32,8 @@
                     <td>{{ service_order.created_on }}</td>
                     <td>{{ service_order.accepted_by }}</td>
                     <td>
-                        <a class="btn btn-outline-primary btn-sm" href="{% url 'detail_service_order' service_order.id %}"
+                        <a class="btn btn-outline-primary btn-sm"
+                           href="{% url 'detail_service_order' service_order.id %}"
                            role="button">Detail</a>
                     </td>
                 </tr>
