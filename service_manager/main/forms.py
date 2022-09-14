@@ -81,11 +81,25 @@ class CreateCustomerAssetForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'customer': forms.Select(
-                attrs={'class': 'form-control'},
+                attrs={'class': 'form-control', 'disabled': True},
             ),
             'asset': forms.Select(
                 attrs={'class': 'form-control'},
             ),
+            'serial_number': forms.TextInput(
+                attrs={'class': 'form-control'},
+            ),
+            'product_number': forms.TextInput(
+                attrs={'class': 'form-control'},
+            ),
+        }
+
+
+class EditCustomerAssetForm(forms.ModelForm):
+    class Meta:
+        model = CustomerAsset
+        fields = ('serial_number', 'product_number',)
+        widgets = {
             'serial_number': forms.TextInput(
                 attrs={'class': 'form-control'},
             ),

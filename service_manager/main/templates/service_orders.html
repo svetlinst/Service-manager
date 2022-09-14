@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+    <table class="table table-striped text-center">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Model Name</th>
+            <th scope="col">Model Number</th>
+            <th scope="col">Serial Number</th>
+            <th scope="col">Product Number</th>
+            <th scope="col">Accepted On</th>
+            <th scope="col">Accepted By</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% if object_list %}
+            {% for service_order in object_list %}
+                <tr>
+                    <td>{{ service_order.id }}</td>
+                    <td>{{ service_order.customer.name }}</td>
+                    <td>{{ service_order.customer_asset.asset.category.name }}</td>
+                    <td>{{ service_order.customer_asset.asset.brand.name }}</td>
+                    <td>{{ service_order.customer_asset.asset.model_name }}</td>
+                    <td>{{ service_order.customer_asset.asset.model_number }}</td>
+                    <td>{{ service_order.customer_asset.serial_number }}</td>
+                    <td>{{ service_order.customer_asset.product_number }}</td>
+                    <td>{{ service_order.created_on }}</td>
+                    <td>{{ service_order.accepted_by }}</td>
+                    <td>
+                        <a class="btn btn-outline-primary btn-sm" href="{% url 'detail_service_order' service_order.id %}"
+                           role="button">Detail</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

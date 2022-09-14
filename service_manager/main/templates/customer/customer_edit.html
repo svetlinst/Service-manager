@@ -1,10 +1,58 @@
 {% extends 'base.html' %}
 {% block content %}
+    {#    Edit Customer form#}
     <form method="post" action="{% url "edit_customer" object.pk %}">
         {% csrf_token %}
         {{ form }}
         <div>
-            <button type="submit" class="btn btn-primary">Edit</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </form>
+    {#    Table with Assets assigned to the customer#}
+    <table class="table table-striped text-center">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Category</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Model Name</th>
+            <th scope="col">Model Number</th>
+            <th scope="col">Serial Number</th>
+            <th scope="col">Product Number</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if customer_assets %}
+            <div class="col-md-12 text-right">
+                <a href="{% url 'create_customer_asset' %}?customer_id={{ object.pk }}" class="btn btn-success">Add Asset</a>
+            </div>
+            {% for asset in customer_assets %}
+                <tr>
+                    <td>{{ asset.id }}</td>
+                    <td>{{ asset.asset.category }}</td>
+                    <td>{{ asset.asset.brand.name }}</td>
+                    <td>{{ asset.asset.model_name }}</td>
+                    <td>{{ asset.asset.model_number }}</td>
+                    <td>{{ asset.serial_number }}</td>
+                    <td>{{ asset.product_number }}</td>
+                    <td>
+                        <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_customer_asset' asset.id %}"
+                           role="button">Edit</a>
+                        <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_customer_asset' asset.id %}"
+                           role="button">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="100%">
+                    <a href="{% url 'create_customer_asset' %}?customer_id={{ object.pk }}">
+                        Customer Has no Assets Assigned. Create Asset.
+                    </a>
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
 {% endblock %}

@@ -169,7 +169,7 @@ class Asset(BaseAuditEntity):
     )
 
     def __str__(self):
-        return f'{self.brand.name}---{self.model_number}---{self.model_name}'
+        return f'{self.category}---{self.brand.name}---{self.model_number}---{self.model_name}'
 
 
 class CustomerAsset(BaseAuditEntity):
@@ -197,6 +197,9 @@ class CustomerAsset(BaseAuditEntity):
         Asset,
         on_delete=models.CASCADE,
     )
+
+    def __str__(self):
+        return f'{str(self.customer)}---{str(self.asset)}--{self.serial_number}---{self.product_number}'
 
     class Meta:
         db_table = 'main_customer_asset'
@@ -290,8 +293,8 @@ class ServiceOrderHeader(BaseAuditEntity):
         on_delete=models.CASCADE,
     )
 
-    asset = models.ForeignKey(
-        Asset,
+    customer_asset = models.ForeignKey(
+        CustomerAsset,
         on_delete=models.CASCADE,
     )
 
@@ -325,7 +328,7 @@ class ServiceOrderHeader(BaseAuditEntity):
     )
 
     def __str__(self):
-        return f'{str(self.customer)}--{str(self.asset)}'
+        return f'{str(self.customer)}--{str(self.customer_asset)}'
 
     class Meta:
         db_table = 'main_service_order_header'

@@ -4,7 +4,8 @@ from django.urls import path
 
 from service_manager.main.views import get_index, CustomersListView, EditCustomerView, CreateCustomerView, \
     AssetsListView, CreateAssetView, EditAssetView, DeleteAssetView, DeleteCustomerView, MaterialsListView, \
-    CreateMaterialView, EditMaterialView, DeleteMaterialView, CreateCustomerAssetView
+    CreateMaterialView, EditMaterialView, DeleteMaterialView, CreateCustomerAssetView, EditCustomerAssetView, \
+    DeleteCustomerAssetView, ServiceOrderListView, ServiceOrderDetailView
 
 urlpatterns = [
                   path('', get_index, name='index'),
@@ -21,4 +22,9 @@ urlpatterns = [
                   path('material/<int:pk>/', EditMaterialView.as_view(), name='edit_material'),
                   path('material/delete/<int:pk>/', DeleteMaterialView.as_view(), name='delete_material'),
                   path('customer_asset/create/', CreateCustomerAssetView.as_view(), name='create_customer_asset'),
+                  path('customer_asset/<int:pk>/', EditCustomerAssetView.as_view(), name='edit_customer_asset'),
+                  path('customer_asset/delete/<int:pk>/', DeleteCustomerAssetView.as_view(),
+                       name='delete_customer_asset'),
+                  path('service_orders/', ServiceOrderListView.as_view(), name='service_orders_lst'),
+                  path('service_order/<int:pk>/', ServiceOrderDetailView.as_view(), name='detail_service_order'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

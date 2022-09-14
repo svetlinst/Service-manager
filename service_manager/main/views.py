@@ -4,8 +4,8 @@ import django.views.generic as views
 from django.urls import reverse_lazy
 
 from service_manager.main.forms import EditCustomerForm, CreateCustomerForm, CreateAssetForm, EditAssetForm, \
-    CreateMaterialForm, EditMaterialForm, CreateCustomerAssetForm
-from service_manager.main.models import Customer, Asset, Material, CustomerAsset
+    CreateMaterialForm, EditMaterialForm, CreateCustomerAssetForm, EditCustomerAssetForm
+from service_manager.main.models import Customer, Asset, Material, CustomerAsset, ServiceOrderHeader
 
 
 def get_index(request):
@@ -23,6 +23,14 @@ class EditCustomerView(views.UpdateView):
     form_class = EditCustomerForm
     template_name = 'customer/customer_edit.html'
     success_url = reverse_lazy('customers_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        customer = context['customer']
+
+        context['customer_assets'] = customer.customerasset_set.all()
+
+        return context
 
 
 class CreateCustomerView(views.CreateView):
@@ -93,5 +101,46 @@ class DeleteMaterialView(views.DeleteView):
 class CreateCustomerAssetView(views.CreateView):
     model = CustomerAsset
     form_class = CreateCustomerAssetForm
-    template_name = 'customer_asset_create.html'
+    template_name = 'customer_asset/customer_asset_create.html'
     success_url = reverse_lazy('customers_list')
+
+    def get_initial(self):
+        initial = {}
+        customer_id = self.request.GET.get('customer_id', None)
+        if customer_id:
+            initial['customer'] = customer_id
+        return initial
+
+    # def get_queryset(self):
+    #     queryset = super().get_queryset()
+    #
+    #     filter = self.request.GET.get('customer_id', None)
+    #
+    #     if filter:
+    #         queryset = queryset.filter(customer_id=filter)
+    #
+    #     return queryset
+
+
+class EditCustomerAssetView(views.UpdateView):
+    model = CustomerAsset
+    form_class = EditCustomerAssetForm
+    template_name = 'customer_asset/customer_asset_edit.html'
+    success_url = reverse_lazy('customers_list')
+
+
+class DeleteCustomerAssetView(views.DeleteView):
+    model = CustomerAsset
+    template_name = 'customer_asset/customer_asset_delete.html'
+    success_url = reverse_lazy('customers_list')
+
+
+class ServiceOrderListView(views.ListView):
+    model = ServiceOrderHeader
+    template_name = 'service_orders.html'
+    ordering = ('-created_on', 'customer')
+
+
+class ServiceOrderDetailView(views.DetailView):
+    model = ServiceOrderHeader
+    template_name = 'service_order_details.html'

@@ -67,7 +67,7 @@ class MaterialCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(ServiceOrderHeader)
 class ServiceOrderHeaderAdmin(admin.ModelAdmin):
-    list_display = ['customer', 'asset', 'department', 'is_completed']
+    list_display = ['customer', 'customer_asset', 'department', 'is_completed']
 
 
 @admin.register(ServiceOrderDetail)
