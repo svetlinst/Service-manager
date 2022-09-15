@@ -103,37 +103,34 @@ class CreateCustomerAssetView(views.CreateView):
     model = CustomerAsset
     form_class = CreateCustomerAssetForm
     template_name = 'customer_asset/customer_asset_create.html'
-    success_url = reverse_lazy('customers_list')
+
+    def get_success_url(self):
+        return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
 
     def get_initial(self):
-        initial = {}
         customer_id = self.request.GET.get('customer_id', None)
         if customer_id:
-            initial['customer'] = customer_id
-        return initial
-
-    # def get_queryset(self):
-    #     queryset = super().get_queryset()
-    #
-    #     filter = self.request.GET.get('customer_id', None)
-    #
-    #     if filter:
-    #         queryset = queryset.filter(customer_id=filter)
-    #
-    #     return queryset
+            self.initial.update({
+                'customer': customer_id,
+            })
+        return super().get_initial()
 
 
 class EditCustomerAssetView(views.UpdateView):
     model = CustomerAsset
     form_class = EditCustomerAssetForm
     template_name = 'customer_asset/customer_asset_edit.html'
-    success_url = reverse_lazy('customers_list')
+
+    def get_success_url(self):
+        return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
 
 
 class DeleteCustomerAssetView(views.DeleteView):
     model = CustomerAsset
     template_name = 'customer_asset/customer_asset_delete.html'
-    success_url = reverse_lazy('customers_list')
+
+    def get_success_url(self):
+        return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
 
 
 class ServiceOrderHeaderListView(views.ListView):
@@ -152,13 +149,6 @@ class CreateServiceOrderHeader(views.CreateView):
     form_class = CreateServiceOrderHeaderForm
     template_name = 'service_order_create.html'
     success_url = reverse_lazy('customers_list')
-
-    # def get_initial(self):
-    #     initial = {}
-    #     customer_id = self.request.GET.get('customer_id', None)
-    #     if customer_id:
-    #         initial['customer'] = customer_id
-    #     return initial
 
     # def get_queryset(self):
     #     queryset = super().get_queryset()
@@ -182,12 +172,9 @@ class CreateServiceOrderHeader(views.CreateView):
 
 def load_customer_representatives(request):
     customer = request.GET.get('customer', None)
-
     if customer:
         customer_representatives = CustomerRepresentative.objects.filter(customer=customer)
-
         context = {
             'customer_representatives': customer_representatives,
         }
-
-        return render(request, 'customer_representatives.html', context)
+        return render(request, 'partial/customer_representatives.html', context)

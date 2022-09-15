@@ -77,13 +77,17 @@ class EditMaterialForm(CreateMaterialForm):
 
 
 class CreateCustomerAssetForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['customer'].disabled = True
+
     class Meta:
         model = CustomerAsset
-        fields = ('asset', 'serial_number', 'product_number')
+        fields = ('customer', 'asset', 'serial_number', 'product_number')
         widgets = {
-            # 'customer': forms.Select(
-            #     attrs={'class': 'form-control', 'disabled': 'disabled'},
-            # ),
+            'customer': forms.Select(
+                attrs={'class': 'form-control'},
+            ),
             'asset': forms.Select(
                 attrs={'class': 'form-control'},
             ),

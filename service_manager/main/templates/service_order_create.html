@@ -1,27 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
     <h4 class='text-center'>Customer: {{ object.customer }}</h4>
-    <form method="post" id="service_order_form" data-reps-url="{% url 'ajax_load_customer_representatives' %}" action="{% url 'create_service_order' %}">
+    <form method="post" id="service_order_form" data-reps-url="{% url 'ajax_load_customer_representatives' %}"
+          action="{% url 'create_service_order' %}">
         {% csrf_token %}
         {{ form }}
         <button type="submit" class="btn btn-primary">Save</button>
     </form>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
-    $("#id_customer").change(function () {
-      var url = $("#service_order_form").attr("data-reps-url");  // get the url of the `load_cities` view
-      var customerId = $(this).val();  // get the selected country ID from the HTML input
+        $("#id_customer").change(function () {
+            var url = $("#service_order_form").attr("data-reps-url");  // get the url of the `load_customer_representatives` view
+            var customerId = $(this).val();  // get the selected customer ID from the HTML input
 
-      $.ajax({                       // initialize an AJAX request
-        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
-        data: {
-          'customer': customerId       // add the country id to the GET parameters
-        },
-        success: function (data) {   // `data` is the return of the `load_cities` view function
-          $("#id_customer_representative").html(data);  // replace the contents of the city input with the data that came from the server
-        }
-      });
+            $.ajax({                       // initialize an AJAX request
+                url: url,                    // set the url of the request (= localhost:8000/ajax/load_customer_representatives)
+                data: {
+                    'customer': customerId       // add the customer id to the GET parameters
+                },
+                success: function (data) {   // `data` is the return of the `load_customer_representatives` view function
+                    $("#id_customer_representative").html(data);  // replace the contents of the customer representative input with the data that came from the server
+                }
+            });
 
-    });
-  </script>
+        });
+    </script>
 {% endblock %}
