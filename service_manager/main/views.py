@@ -40,6 +40,10 @@ class EditCustomerView(views.UpdateView):
 
         context['customer_assets'] = customer.customerasset_set.all()
 
+        search_text = self.request.GET.get('search_value', None)
+        if search_text:
+            context['customer_assets'] = customer.customerasset_set.filter(serial_number__icontains=search_text)
+
         return context
 
 
