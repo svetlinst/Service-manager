@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 import django.views.generic as views
 from django.urls import reverse_lazy
+from django.db.models import Q
 
 from service_manager.main.forms import EditCustomerForm, CreateCustomerForm, CreateAssetForm, EditAssetForm, \
     CreateMaterialForm, EditMaterialForm, CreateCustomerAssetForm, EditCustomerAssetForm, CreateServiceOrderHeaderForm
@@ -17,6 +18,14 @@ class CustomersListView(views.ListView):
     model = Customer
     template_name = 'customer/customers.html'
     ordering = ('name',)
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        search_text = self.request.GET.get('search_value', None)
+        if search_text:
+            queryset = queryset.filter(Q(name__icontains=search_text) | Q(vat__icontains=search_text))
+        return queryset
 
 
 class EditCustomerView(views.UpdateView):
@@ -149,25 +158,6 @@ class CreateServiceOrderHeader(views.CreateView):
     form_class = CreateServiceOrderHeaderForm
     template_name = 'service_order_create.html'
     success_url = reverse_lazy('customers_list')
-
-    # def get_queryset(self):
-    #     queryset = super().get_queryset()
-    #
-    #     filter = self.request.GET.get('customer_id', None)
-    #
-    #     if filter:
-    #         queryset = queryset.filter(customer_id=filter)
-    #
-    #     return queryset
-    #
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     customer = context['customer']
-    #
-    #     context['customer_representatives'] = customer.customerrepresentative_set.all()
-    #     context['customer_assets'] = customer.customerasset_set.all()
-    #
-    #     return context
 
 
 def load_customer_representatives(request):
