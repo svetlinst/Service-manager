@@ -25,7 +25,8 @@
         <tbody>
         {% if customer_assets %}
             <div class="col-md-12 text-right">
-                <a href="{% url 'create_customer_asset' %}?customer_id={{ object.pk }}" class="btn btn-success">Add Asset</a>
+                <a href="{% url 'create_customer_asset' %}?customer_id={{ object.pk }}" class="btn btn-success">Add
+                    Asset</a>
             </div>
             {% for asset in customer_assets %}
                 <tr>
@@ -37,6 +38,8 @@
                     <td>{{ asset.serial_number }}</td>
                     <td>{{ asset.product_number }}</td>
                     <td>
+                        <a class="btn btn-outline-success btn-sm" href="{% url 'create_service_order'%}"
+                           role="button">Service</a>
                         <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_customer_asset' asset.id %}"
                            role="button">Edit</a>
                         <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_customer_asset' asset.id %}"

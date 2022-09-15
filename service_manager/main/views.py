@@ -4,8 +4,9 @@ import django.views.generic as views
 from django.urls import reverse_lazy
 
 from service_manager.main.forms import EditCustomerForm, CreateCustomerForm, CreateAssetForm, EditAssetForm, \
-    CreateMaterialForm, EditMaterialForm, CreateCustomerAssetForm, EditCustomerAssetForm
-from service_manager.main.models import Customer, Asset, Material, CustomerAsset, ServiceOrderHeader
+    CreateMaterialForm, EditMaterialForm, CreateCustomerAssetForm, EditCustomerAssetForm, CreateServiceOrderHeaderForm
+from service_manager.main.models import Customer, Asset, Material, CustomerAsset, ServiceOrderHeader, \
+    CustomerRepresentative
 
 
 def get_index(request):
@@ -135,12 +136,58 @@ class DeleteCustomerAssetView(views.DeleteView):
     success_url = reverse_lazy('customers_list')
 
 
-class ServiceOrderListView(views.ListView):
+class ServiceOrderHeaderListView(views.ListView):
     model = ServiceOrderHeader
     template_name = 'service_orders.html'
     ordering = ('-created_on', 'customer')
 
 
-class ServiceOrderDetailView(views.DetailView):
+class ServiceOrderHeaderDetailView(views.DetailView):
     model = ServiceOrderHeader
     template_name = 'service_order_details.html'
+
+
+class CreateServiceOrderHeader(views.CreateView):
+    model = ServiceOrderHeader
+    form_class = CreateServiceOrderHeaderForm
+    template_name = 'service_order_create.html'
+    success_url = reverse_lazy('customers_list')
+
+    # def get_initial(self):
+    #     initial = {}
+    #     customer_id = self.request.GET.get('customer_id', None)
+    #     if customer_id:
+    #         initial['customer'] = customer_id
+    #     return initial
+
+    # def get_queryset(self):
+    #     queryset = super().get_queryset()
+    #
+    #     filter = self.request.GET.get('customer_id', None)
+    #
+    #     if filter:
+    #         queryset = queryset.filter(customer_id=filter)
+    #
+    #     return queryset
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     customer = context['customer']
+    #
+    #     context['customer_representatives'] = customer.customerrepresentative_set.all()
+    #     context['customer_assets'] = customer.customerasset_set.all()
+    #
+    #     return context
+
+
+def load_customer_representatives(request):
+    customer = request.GET.get('customer', None)
+
+    if customer:
+        customer_representatives = CustomerRepresentative.objects.filter(customer=customer)
+
+        context = {
+            'customer_representatives': customer_representatives,
+        }
+
+        return render(request, 'customer_representatives.html', context)

@@ -298,12 +298,6 @@ class ServiceOrderHeader(BaseAuditEntity):
         on_delete=models.CASCADE,
     )
 
-    accepted_by = models.ForeignKey(
-        Employee,
-        on_delete=models.CASCADE,
-        related_name='accepted_by',
-    )
-
     serviced_by = models.ForeignKey(
         Employee,
         on_delete=models.CASCADE,
@@ -325,6 +319,11 @@ class ServiceOrderHeader(BaseAuditEntity):
         on_delete=models.CASCADE,
         null=True,
         blank=True,
+    )
+
+    customer_representative = models.ForeignKey(
+        CustomerRepresentative,
+        on_delete=models.CASCADE,
     )
 
     def __str__(self):

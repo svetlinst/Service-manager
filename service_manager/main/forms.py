@@ -1,6 +1,7 @@
 from django import forms
 
-from service_manager.main.models import Customer, Asset, Material, CustomerAsset
+from service_manager.main.models import Customer, Asset, Material, CustomerAsset, ServiceOrderHeader, \
+    CustomerRepresentative
 
 
 class EditCustomerForm(forms.ModelForm):
@@ -78,11 +79,11 @@ class EditMaterialForm(CreateMaterialForm):
 class CreateCustomerAssetForm(forms.ModelForm):
     class Meta:
         model = CustomerAsset
-        fields = '__all__'
+        fields = ('asset', 'serial_number', 'product_number')
         widgets = {
-            'customer': forms.Select(
-                attrs={'class': 'form-control', 'disabled': True},
-            ),
+            # 'customer': forms.Select(
+            #     attrs={'class': 'form-control', 'disabled': 'disabled'},
+            # ),
             'asset': forms.Select(
                 attrs={'class': 'form-control'},
             ),
@@ -107,3 +108,37 @@ class EditCustomerAssetForm(forms.ModelForm):
                 attrs={'class': 'form-control'},
             ),
         }
+
+
+class CreateServiceOrderHeaderForm(forms.ModelForm):
+    class Meta:
+        model = ServiceOrderHeader
+        fields = ('customer', 'customer_asset', 'customer_representative',)
+        widgets = {
+            'customer': forms.Select(
+                attrs={'class': 'form-control'},
+            ),
+            'customer_asset': forms.Select(
+                attrs={'class': 'form-control', 'id': 'customer_asset_id'},
+            ),
+            'department': forms.Select(
+                attrs={'class': 'form-control'},
+            ),
+            'customer_representative': forms.Select(
+                attrs={'class': 'form-control'},
+            ),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['customer_representative'].queryset = CustomerRepresentative.objects.none()
+
+        if 'customer' in self.data:
+            try:
+                customer_id = int(self.data.get('customer'))
+                self.fields['customer_representative'].queryset = CustomerRepresentative.objects.filter(
+                    customer_id=customer_id).order_by('first_name')
+            except (ValueError, TypeError):
+                pass  # Invalid input from the client; ignore
+        elif self.instance.pk:
+            self.fields['customer_representative'].queryset = self.instance.customer.customerrepresentative_set
