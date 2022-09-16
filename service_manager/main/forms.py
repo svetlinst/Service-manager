@@ -135,6 +135,7 @@ class CreateServiceOrderHeaderForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['customer'].disabled = True
         self.fields['customer_representative'].queryset = CustomerRepresentative.objects.none()
 
         if 'customer' in self.data:
@@ -146,3 +147,50 @@ class CreateServiceOrderHeaderForm(forms.ModelForm):
                 pass  # Invalid input from the client; ignore
         elif self.instance.pk:
             self.fields['customer_representative'].queryset = self.instance.customer.customerrepresentative_set
+
+
+class EditCustomerRepresentativeForm(forms.ModelForm):
+    class Meta:
+        model = CustomerRepresentative
+        fields = ('first_name', 'last_name', 'email_address', 'phone_number')
+        widgets = {
+            'first_name': forms.TextInput(
+                attrs={'class': 'form-control'},
+            ),
+            'last_name': forms.TextInput(
+                attrs={'class': 'form-control'},
+            ),
+            'email_address': forms.TextInput(
+                attrs={'class': 'form-control'},
+            ),
+            'phone_number': forms.TextInput(
+                attrs={'class': 'form-control'},
+            ),
+        }
+
+
+class CreateCustomerRepresentativeForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['customer'].disabled = True
+
+    class Meta:
+        model = CustomerRepresentative
+        fields = ('customer', 'first_name', 'last_name', 'email_address', 'phone_number')
+        widgets = {
+            'customer': forms.Select(
+                attrs={'class': 'form-control'},
+            ),
+            'first_name': forms.TextInput(
+                attrs={'class': 'form-control'},
+            ),
+            'last_name': forms.TextInput(
+                attrs={'class': 'form-control'},
+            ),
+            'email_address': forms.TextInput(
+                attrs={'class': 'form-control'},
+            ),
+            'phone_number': forms.TextInput(
+                attrs={'class': 'form-control'},
+            ),
+        }

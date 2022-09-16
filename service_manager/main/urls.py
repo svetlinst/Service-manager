@@ -6,7 +6,9 @@ from service_manager.main import views
 from service_manager.main.views import get_index, CustomersListView, EditCustomerView, CreateCustomerView, \
     AssetsListView, CreateAssetView, EditAssetView, DeleteAssetView, DeleteCustomerView, MaterialsListView, \
     CreateMaterialView, EditMaterialView, DeleteMaterialView, CreateCustomerAssetView, EditCustomerAssetView, \
-    DeleteCustomerAssetView, ServiceOrderHeaderListView, ServiceOrderHeaderDetailView, CreateServiceOrderHeader
+    DeleteCustomerAssetView, ServiceOrderHeaderListView, ServiceOrderHeaderDetailView, CreateServiceOrderHeader, \
+    CustomerRepresentativesListView, CreateCustomerRepresentativeView, EditCustomerRepresentativeView, \
+    DeleteCustomerRepresentativeView
 
 urlpatterns = [
                   path('', get_index, name='index'),
@@ -26,9 +28,17 @@ urlpatterns = [
                   path('customer_asset/<int:pk>/', EditCustomerAssetView.as_view(), name='edit_customer_asset'),
                   path('customer_asset/delete/<int:pk>/', DeleteCustomerAssetView.as_view(),
                        name='delete_customer_asset'),
-                  path('service_orders/', ServiceOrderHeaderListView.as_view(), name='service_orders_lst'),
+                  path('service_orders/', ServiceOrderHeaderListView.as_view(), name='service_orders_list'),
                   path('service_order/<int:pk>/', ServiceOrderHeaderDetailView.as_view(), name='detail_service_order'),
                   path('service_order/create/', CreateServiceOrderHeader.as_view(), name='create_service_order'),
                   path('ajax/load_customer_represenatives/', views.load_customer_representatives,
                        name='ajax_load_customer_representatives'),
+                  path('customer_representatives/', CustomerRepresentativesListView.as_view(),
+                       name='customer_representatives_list'),
+                  path('customer_representative/create/', CreateCustomerRepresentativeView.as_view(),
+                       name='create_customer_representative'),
+                  path('customer_representative/<int:pk>/', EditCustomerRepresentativeView.as_view(),
+                       name='edit_customer_representative'),
+                  path('customer_representative/delete/<int:pk>/', DeleteCustomerRepresentativeView.as_view(),
+                       name='delete_customer_representative'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

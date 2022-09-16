@@ -5,7 +5,8 @@ from django.urls import reverse_lazy
 from django.db.models import Q
 
 from service_manager.main.forms import EditCustomerForm, CreateCustomerForm, CreateAssetForm, EditAssetForm, \
-    CreateMaterialForm, EditMaterialForm, CreateCustomerAssetForm, EditCustomerAssetForm, CreateServiceOrderHeaderForm
+    CreateMaterialForm, EditMaterialForm, CreateCustomerAssetForm, EditCustomerAssetForm, CreateServiceOrderHeaderForm, \
+    EditCustomerRepresentativeForm, CreateCustomerRepresentativeForm
 from service_manager.main.models import Customer, Asset, Material, CustomerAsset, ServiceOrderHeader, \
     CustomerRepresentative
 
@@ -39,10 +40,16 @@ class EditCustomerView(views.UpdateView):
         customer = context['customer']
 
         context['customer_assets'] = customer.customerasset_set.all()
+        context['customer_representatives'] = customer.customerrepresentative_set.all()
 
         search_text = self.request.GET.get('search_value', None)
         if search_text:
             context['customer_assets'] = customer.customerasset_set.filter(serial_number__icontains=search_text)
+
+        representative_search = self.request.GET.get('representative', None)
+        if representative_search:
+            context['customer_representatives'] = customer.customerrepresentative_set.filter(
+                Q(first_name__icontains=representative_search) | Q(last_name__icontains=representative_search))
 
         return context
 
@@ -148,20 +155,30 @@ class DeleteCustomerAssetView(views.DeleteView):
 
 class ServiceOrderHeaderListView(views.ListView):
     model = ServiceOrderHeader
-    template_name = 'service_orders.html'
+    template_name = 'service_order_header/service_orders.html'
     ordering = ('-created_on', 'customer')
 
 
 class ServiceOrderHeaderDetailView(views.DetailView):
     model = ServiceOrderHeader
-    template_name = 'service_order_details.html'
+    template_name = 'service_order_header/service_order_details.html'
 
 
 class CreateServiceOrderHeader(views.CreateView):
     model = ServiceOrderHeader
     form_class = CreateServiceOrderHeaderForm
-    template_name = 'service_order_create.html'
+    template_name = 'service_order_header/service_order_create.html'
     success_url = reverse_lazy('customers_list')
+
+    def get_initial(self):
+        customer_id = self.request.GET.get('customer_id', None)
+        if customer_id:
+            customer_assets = list(CustomerAsset.objects.filter(customer_id=customer_id).all().values('id'))
+            self.initial.update({
+                'customer': customer_id,
+                'customer_asset': customer_assets,
+            })
+        return super().get_initial()
 
 
 def load_customer_representatives(request):
@@ -172,3 +189,39 @@ def load_customer_representatives(request):
             'customer_representatives': customer_representatives,
         }
         return render(request, 'partial/customer_representatives.html', context)
+
+
+class CustomerRepresentativesListView(views.ListView):
+    model = CustomerRepresentative
+    template_name = 'customer_representatives.html'
+    ordering = ('first_name', 'last_name')
+
+
+class CreateCustomerRepresentativeView(views.CreateView):
+    model = CustomerRepresentative
+    template_name = 'customer_representatives_create.html'
+    form_class = CreateCustomerRepresentativeForm
+
+    def get_initial(self):
+        customer_id = self.request.GET.get('customer_id', None)
+        if customer_id:
+            self.initial.update({
+                'customer': customer_id,
+            })
+        return super().get_initial()
+
+    def get_success_url(self):
+        return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
+
+
+class EditCustomerRepresentativeView(views.UpdateView):
+    model = CustomerRepresentative
+    template_name = 'customer_representative_edit.html'
+    form_class = EditCustomerRepresentativeForm
+
+    def get_success_url(self):
+        return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
+
+
+class DeleteCustomerRepresentativeView(views.DeleteView):
+    pass

@@ -9,6 +9,7 @@
             <button type="submit" class="btn btn-primary">Update</button>
         </div>
     </form>
+
     {#    Table with Assets assigned to the customer#}
     <table class="table table-striped text-center">
         <thead>
@@ -29,7 +30,7 @@
             <div class="col-md-9 my-3">
                 <form class="form" method="GET" action="">
                     <div class="input-group my-3">
-                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                        <input type="search" class="form-control rounded" placeholder="Search Assets" aria-label="Search"
                                aria-describedby="search-addon" name="search_value"/>
                         <button type="submit" class="btn btn-outline-primary"
                                 href="{% url 'edit_customer' object.pk %}">
@@ -54,7 +55,8 @@
                     <td>{{ asset.serial_number }}</td>
                     <td>{{ asset.product_number }}</td>
                     <td>
-                        <a class="btn btn-outline-success btn-sm" href="{% url 'create_service_order' %}"
+                        <a class="btn btn-outline-success btn-sm"
+                           href="{% url 'create_service_order' %}?customer_id={{ object.pk }}"
                            role="button">Service</a>
                         <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_customer_asset' asset.id %}"
                            role="button">Edit</a>
@@ -74,4 +76,9 @@
         {% endif %}
         </tbody>
     </table>
+
+    {#    Table with Assets assigned to the customer#}
+    <h2 class='text-center'>Customer Representatives</h2>
+    {% include 'customer_representatives.html' %}
+
 {% endblock %}

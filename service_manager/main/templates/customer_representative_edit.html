@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="post" action="{% url "edit_customer_representative" object.pk %}">
+        {% csrf_token %}
+        {{ form }}
+        <div class="my-3">
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </form>
+{% endblock %}

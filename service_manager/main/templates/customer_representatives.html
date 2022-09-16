@@ -1,0 +1,59 @@
+{% block content %}
+    <table class="table table-striped text-center">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">E-mail Address</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <div class="row">
+            <div class="col-md-9 my-3">
+                <form class="form" method="GET" action="">
+                    <div class="input-group my-3">
+                        <input type="search" class="form-control rounded" placeholder="Search Representatives" aria-label="Search"
+                               aria-describedby="search-addon" name="representative"/>
+                        <button type="submit" class="btn btn-outline-primary"
+                                href="{% url 'edit_customer_representative' object.pk %}">
+                            search
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3 text-right align-self-center my-3">
+                <a href="{% url 'create_customer_representative' %}?customer_id={{ object.pk }}" class="btn btn-success">Add
+                    Representative</a>
+            </div>
+        </div>
+        {% if customer_representatives %}
+            {% for rep in customer_representatives %}
+                <tr>
+                    <td>{{ rep.id }}</td>
+                    <td>{{ rep.first_name }}</td>
+                    <td>{{ rep.last_name }}</td>
+                    <td>{{ rep.email_address }}</td>
+                    <td>{{ rep.phone_number }}</td>
+                    <td>
+                        <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_customer_representative' rep.id %}"
+                           role="button">Edit</a>
+                        <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_customer_representative' rep.id %}"
+                           role="button">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="100%">
+                    <p>
+                        No records matching your search
+                    </p>
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}
