@@ -168,15 +168,20 @@ class CreateServiceOrderHeader(views.CreateView):
     model = ServiceOrderHeader
     form_class = CreateServiceOrderHeaderForm
     template_name = 'service_order_header/service_order_create.html'
-    success_url = reverse_lazy('customers_list')
+
+    def get_success_url(self):
+        return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
 
     def get_initial(self):
         customer_id = self.request.GET.get('customer_id', None)
+        customer_asset_id = self.request.GET.get('customer_asset_id', None)
         if customer_id:
-            customer_assets = list(CustomerAsset.objects.filter(customer_id=customer_id).all().values('id'))
             self.initial.update({
                 'customer': customer_id,
-                'customer_asset': customer_assets,
+            })
+        if customer_id:
+            self.initial.update({
+                'customer_asset': customer_asset_id,
             })
         return super().get_initial()
 
@@ -193,13 +198,13 @@ def load_customer_representatives(request):
 
 class CustomerRepresentativesListView(views.ListView):
     model = CustomerRepresentative
-    template_name = 'customer_representatives.html'
+    template_name = 'customer_representatives/customer_representatives.html'
     ordering = ('first_name', 'last_name')
 
 
 class CreateCustomerRepresentativeView(views.CreateView):
     model = CustomerRepresentative
-    template_name = 'customer_representatives_create.html'
+    template_name = 'customer_representatives/customer_representatives_create.html'
     form_class = CreateCustomerRepresentativeForm
 
     def get_initial(self):
@@ -216,7 +221,7 @@ class CreateCustomerRepresentativeView(views.CreateView):
 
 class EditCustomerRepresentativeView(views.UpdateView):
     model = CustomerRepresentative
-    template_name = 'customer_representative_edit.html'
+    template_name = 'customer_representatives/customer_representative_edit.html'
     form_class = EditCustomerRepresentativeForm
 
     def get_success_url(self):
@@ -225,7 +230,7 @@ class EditCustomerRepresentativeView(views.UpdateView):
 
 class DeleteCustomerRepresentativeView(views.DeleteView):
     model = CustomerRepresentative
-    template_name = 'customer_representative_delete.html'
+    template_name = 'customer_representatives/customer_representative_delete.html'
 
     def get_success_url(self):
         return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})

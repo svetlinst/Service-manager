@@ -135,18 +135,15 @@ class CreateServiceOrderHeaderForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['customer'].disabled = True
-        self.fields['customer_representative'].queryset = CustomerRepresentative.objects.none()
 
-        if 'customer' in self.data:
-            try:
-                customer_id = int(self.data.get('customer'))
-                self.fields['customer_representative'].queryset = CustomerRepresentative.objects.filter(
-                    customer_id=customer_id).order_by('first_name')
-            except (ValueError, TypeError):
-                pass  # Invalid input from the client; ignore
-        elif self.instance.pk:
-            self.fields['customer_representative'].queryset = self.instance.customer.customerrepresentative_set
+        if 'customer' in self.initial:
+            customer_id = int(self.initial['customer'])
+            self.fields['customer'].queryset = Customer.objects.filter(pk=customer_id)
+            self.fields['customer_asset'].queryset = CustomerAsset.objects.filter(customer=customer_id)
+            self.fields['customer_representative'].queryset = CustomerRepresentative.objects.filter(customer=customer_id)
+
+        self.fields['customer'].disabled = True
+        self.fields['customer_asset'].disabled = True
 
 
 class EditCustomerRepresentativeForm(forms.ModelForm):
