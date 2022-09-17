@@ -224,4 +224,8 @@ class EditCustomerRepresentativeView(views.UpdateView):
 
 
 class DeleteCustomerRepresentativeView(views.DeleteView):
-    pass
+    model = CustomerRepresentative
+    template_name = 'customer_representative_delete.html'
+
+    def get_success_url(self):
+        return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
