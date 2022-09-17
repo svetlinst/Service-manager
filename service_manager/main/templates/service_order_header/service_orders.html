@@ -32,6 +32,11 @@
                     <td>{{ service_order.created_on }}</td>
                     <td>{{ service_order.accepted_by }}</td>
                     <td>
+                        <a class="btn btn-outline-success btn-sm"
+                           href="{% url 'detail_service_order' service_order.id %}"
+                           role="button">Service</a>
+                    </td>
+                    <td>
                         <a class="btn btn-outline-primary btn-sm"
                            href="{% url 'detail_service_order' service_order.id %}"
                            role="button">Detail</a>
