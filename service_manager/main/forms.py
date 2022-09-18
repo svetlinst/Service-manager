@@ -1,7 +1,7 @@
 from django import forms
 
 from service_manager.main.models import Customer, Asset, Material, CustomerAsset, ServiceOrderHeader, \
-    CustomerRepresentative
+    CustomerRepresentative, ServiceOrderDetail
 
 
 class EditCustomerForm(forms.ModelForm):
@@ -191,3 +191,34 @@ class CreateCustomerRepresentativeForm(forms.ModelForm):
                 attrs={'class': 'form-control'},
             ),
         }
+
+
+class CreateServiceOrderDetailForm(forms.ModelForm):
+    class Meta:
+        model = ServiceOrderDetail
+        fields = ('service_order', 'material', 'quantity', 'discount')
+        widgets = {
+            'service_order': forms.HiddenInput(
+                attrs={'class': 'form-control'},
+            ),
+            'material': forms.Select(
+                attrs={'class': 'form-control'},
+            ),
+            'quantity': forms.NumberInput(
+                attrs={'class': 'form-control'},
+            ),
+            'discount': forms.NumberInput(
+                attrs={'class': 'form-control'},
+            ),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if 'service_order' in self.initial:
+            service_order_id = int(self.initial['service_order'])
+            self.fields['service_order'].queryset = ServiceOrderHeader.objects.filter(pk=service_order_id)
+
+
+
+

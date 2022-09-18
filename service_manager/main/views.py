@@ -6,9 +6,9 @@ from django.db.models import Q
 
 from service_manager.main.forms import EditCustomerForm, CreateCustomerForm, CreateAssetForm, EditAssetForm, \
     CreateMaterialForm, EditMaterialForm, CreateCustomerAssetForm, EditCustomerAssetForm, CreateServiceOrderHeaderForm, \
-    EditCustomerRepresentativeForm, CreateCustomerRepresentativeForm
+    EditCustomerRepresentativeForm, CreateCustomerRepresentativeForm, CreateServiceOrderDetailForm
 from service_manager.main.models import Customer, Asset, Material, CustomerAsset, ServiceOrderHeader, \
-    CustomerRepresentative
+    CustomerRepresentative, ServiceOrderDetail
 
 
 def get_index(request):
@@ -162,6 +162,7 @@ class ServiceOrderHeaderListView(views.ListView):
 class ServiceOrderHeaderDetailView(views.DetailView):
     model = ServiceOrderHeader
     template_name = 'service_order_header/service_order_details.html'
+    context_object_name = 'service_order_header'
 
 
 class CreateServiceOrderHeader(views.CreateView):
@@ -234,3 +235,29 @@ class DeleteCustomerRepresentativeView(views.DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
+
+
+class CreateServiceOrderDetailView(views.CreateView):
+    model = ServiceOrderDetail
+    template_name = 'service_order_details_create.html'
+    form_class = CreateServiceOrderDetailForm
+    success_url = reverse_lazy('service_orders_list')
+
+    def get_initial(self):
+        service_order_id = self.request.GET.get('service_order', None)
+
+        if service_order_id:
+            self.initial.update({
+                'service_order': service_order_id,
+            })
+        return super().get_initial()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        service_order_header_id = self.request.GET.get('service_order', None)
+        if service_order_header_id:
+            context['service_order_header'] = ServiceOrderHeader.objects.filter(pk=int(service_order_header_id)).get()
+
+        return context
+

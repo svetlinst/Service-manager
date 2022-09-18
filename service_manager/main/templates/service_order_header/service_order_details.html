@@ -2,18 +2,18 @@
 {% block content %}
     <div class="d-block mt-5" style="background-color: #f1e3e3; padding:2%">
         <h4 class='text-center'>Customer</h4>
-        <h5><u>Customer Name:</u> {{ object.customer.name }}</h5>
+        <h5><u>Customer Name:</u> {{ service_order_header.customer.name }}</h5>
     </div>
     <div class="d-block mt-5" style="background-color: #f1e3e3; padding:2%">
         <h4 class='text-center'>Model</h4>
-        <h5><u>Category:</u> {{ object.customer_asset.asset.category }}</h5>
-        <h5><u>Brand:</u> {{ object.customer_asset.asset.brand.name }}</h5>
-        <h5><u>Model Name:</u> {{ object.customer_asset.asset.model_name }}</h5>
-        <h5><u>Model Number:</u> {{ object.customer_asset.asset.model_number }}</h5>
+        <h5><u>Category:</u> {{ service_order_header.customer_asset.asset.category }}</h5>
+        <h5><u>Brand:</u> {{ service_order_header.customer_asset.asset.brand.name }}</h5>
+        <h5><u>Model Name:</u> {{ service_order_header.customer_asset.asset.model_name }}</h5>
+        <h5><u>Model Number:</u> {{ service_order_header.customer_asset.asset.model_number }}</h5>
     </div>
     <div class="d-block mt-5" style="background-color: #f1e3e3; padding:2%">
         <h4 class='text-center'>Identification</h4>
-        <h5><u>Serial Number:</u> {{ object.customer_asset.serial_number }}</h5>
-        <h5><u>Product:</u> {{ object.customer_asset.product_number }}</h5>
+        <h5><u>Serial Number:</u> {{ service_order_header.customer_asset.serial_number }}</h5>
+        <h5><u>Product:</u> {{ service_order_header.customer_asset.product_number }}</h5>
     </div>
 {% endblock %}

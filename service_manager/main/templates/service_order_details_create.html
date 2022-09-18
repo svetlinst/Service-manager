@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>test {{ header_data.customer }}</h1>
+    {% include 'service_order_header/service_order_details.html' %}
+    <form method="post" action="{% url 'create_service_order_detail' %}">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+{% endblock %}

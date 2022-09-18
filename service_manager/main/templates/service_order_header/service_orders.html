@@ -33,7 +33,7 @@
                     <td>{{ service_order.accepted_by }}</td>
                     <td>
                         <a class="btn btn-outline-success btn-sm"
-                           href="{% url 'detail_service_order' service_order.id %}"
+                           href="{% url 'create_service_order_detail' %}?service_order={{ service_order.id }}"
                            role="button">Service</a>
                     </td>
                     <td>
