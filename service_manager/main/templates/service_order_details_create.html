@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     {% include 'service_order_header/service_order_details.html' %}
-    <form method="post" action="{% url 'create_service_order_detail' %}">
+    <form method="post" action="{% url 'create_service_order_detail' service_order_header.pk %}">
         {% csrf_token %}
         {{ form }}
         <button type="submit" class="btn btn-primary">Add</button>
