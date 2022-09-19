@@ -326,6 +326,10 @@ class ServiceOrderHeader(BaseAuditEntity):
         on_delete=models.CASCADE,
     )
 
+    @property
+    def total_amount_due(self):
+        return f'{sum([x.total_amount for x in self.serviceorderdetail_set.all()]):.2f}'
+
     def __str__(self):
         return f'{str(self.customer)}--{str(self.customer_asset)}'
 
@@ -349,6 +353,24 @@ class ServiceOrderDetail(BaseAuditEntity):
 
     def __str__(self):
         return f'{str(self.service_order)}---{str(self.material)}'
+
+    @property
+    def discount_percentage(self):
+        pct = 0
+        if self.discount > 0:
+            pct = self.discount / 100
+        return pct
+
+    @property
+    def discounted_price(self):
+        price = self.material.price
+        if self.discount_percentage > 0:
+            price = price * (1 - self.discount_percentage)
+        return price
+
+    @property
+    def total_amount(self):
+        return self.discounted_price * self.quantity
 
     class Meta:
         db_table = 'main_service_order_detail'

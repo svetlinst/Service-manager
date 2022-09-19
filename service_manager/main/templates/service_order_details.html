@@ -1,0 +1,43 @@
+{% block content %}
+    <table class="table table-striped text-center">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Material Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Discount</th>
+            <th scope="col">Unit Price</th>
+            <th scope="col">Total Amount</th>
+            <th scope="col">Action</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% if service_order_header.serviceorderdetail_set %}
+            {% for service_order_detail in service_order_header.serviceorderdetail_set.all %}
+                <tr>
+                    <td>{{ service_order_detail.id }}</td>
+                    <td>{{ service_order_detail.material.name }}</td>
+                    <td>{{ service_order_detail.material.category }}</td>
+                    <td>{{ service_order_detail.material.price|floatformat:"2" }}</td>
+                    <td>{{ service_order_detail.quantity|floatformat:"1" }}</td>
+                    <td>{{ service_order_detail.discount|floatformat:"1" }}%</td>
+                    <td>{{ service_order_detail.discounted_price|floatformat:"2" }}</td>
+                    <td>{{ service_order_detail.total_amount|floatformat:"2" }}</td>
+                    <td>
+                        <a class="btn btn-outline-primary btn-sm"
+                           href="{% url 'create_service_order_detail' %}?service_order={{ service_order_detail.service_order.id }}"
+                           role="button">Edit</a>
+                        <a class="btn btn-outline-danger btn-sm"
+                           href="{% url 'delete_service_order_detail' service_order_detail.id %}"
+                           role="button">Delete</a>
+                    </td>
+
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

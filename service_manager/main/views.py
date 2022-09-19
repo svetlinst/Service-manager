@@ -241,7 +241,6 @@ class CreateServiceOrderDetailView(views.CreateView):
     model = ServiceOrderDetail
     template_name = 'service_order_details_create.html'
     form_class = CreateServiceOrderDetailForm
-    success_url = reverse_lazy('service_orders_list')
 
     def get_initial(self):
         service_order_id = self.request.GET.get('service_order', None)
@@ -250,6 +249,10 @@ class CreateServiceOrderDetailView(views.CreateView):
             self.initial.update({
                 'service_order': service_order_id,
             })
+        self.initial.update({
+            'discount': 0,
+            'quantity': 1,
+        })
         return super().get_initial()
 
     def get_context_data(self, **kwargs):
@@ -257,7 +260,34 @@ class CreateServiceOrderDetailView(views.CreateView):
 
         service_order_header_id = self.request.GET.get('service_order', None)
         if service_order_header_id:
-            context['service_order_header'] = ServiceOrderHeader.objects.filter(pk=int(service_order_header_id)).get()
+            context['service_order_header'] = ServiceOrderHeader.objects.prefetch_related(
+                'serviceorderdetail_set').filter(pk=int(service_order_header_id)).get()
 
         return context
 
+    def get_success_url(self):
+        service_order_header_id = self.request.GET.get('service_order', None)
+        if service_order_header_id:
+            return reverse_lazy('create_service_order_detail', kwargs={'service_order': service_order_header_id})
+        return reverse_lazy('service_orders_list')
+
+
+class ServiceOrderDetailsListView(views.ListView):
+    model = ServiceOrderDetail
+    template_name = 'service_order_details.html'
+    ordering = ('material', 'quantity',)
+
+
+class ServiceOrderDetailEditView(views.UpdateView):
+    pass
+
+
+class ServiceOrderDetailDeleteView(views.DeleteView):
+    model = ServiceOrderDetail
+    template_name = 'service_order_detail_delete.html'
+
+    def get_success_url(self):
+        service_order_header_id = self.request.GET.get('service_order', None)
+        if service_order_header_id:
+            return reverse_lazy('create_service_order_detail', kwargs={'service_order': service_order_header_id})
+        return reverse_lazy('service_orders_list')
