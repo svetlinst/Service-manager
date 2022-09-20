@@ -258,7 +258,7 @@ class CreateServiceOrderDetailView(views.CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        service_order_header_id = self.request.GET.get('service_order', None)
+        service_order_header_id = self.kwargs['pk']
         if service_order_header_id:
             context['service_order_header'] = ServiceOrderHeader.objects.prefetch_related(
                 'serviceorderdetail_set').filter(pk=int(service_order_header_id)).get()
@@ -279,7 +279,15 @@ class ServiceOrderDetailsListView(views.ListView):
 
 
 class ServiceOrderDetailEditView(views.UpdateView):
-    pass
+    model = ServiceOrderDetail
+    template_name = 'service_order_detail_edit.html'
+    form_class = CreateServiceOrderDetailForm
+
+    def get_success_url(self):
+        service_order_header_id = self.request.GET.get('service_order', None)
+        if service_order_header_id:
+            return reverse_lazy('create_service_order_detail', kwargs={'service_order': service_order_header_id})
+        return reverse_lazy('service_orders_list')
 
 
 class ServiceOrderDetailDeleteView(views.DeleteView):

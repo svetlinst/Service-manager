@@ -28,7 +28,8 @@
                     <td>{{ service_order_detail.total_amount|floatformat:"2" }}</td>
                     <td>
                         <a class="btn btn-outline-primary btn-sm"
-                           href="{% url 'create_service_order_detail' service_order_header.pk %}?service_order={{ service_order_detail.service_order.id }}"
+{#                           href="{% url 'edit_service_order_detail' service_order_header.pk %}?service_order={{ service_order_detail.service_order.id }}"#}
+                           href="{% url 'edit_service_order_detail' service_order_header.pk service_order_detail.id%}"
                            role="button">Edit</a>
                         <a class="btn btn-outline-danger btn-sm"
                            href="{% url 'delete_service_order_detail' service_order_header.id service_order_detail.id %}"
