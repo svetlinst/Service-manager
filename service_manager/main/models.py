@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.core.validators import EmailValidator
 from django.db import models
 
@@ -217,31 +218,17 @@ class Role(BaseAuditEntity):
 
 
 class Employee(BaseAuditEntity):
-    FIRST_NAME_MAX_LENGTH = 20
-    LAST_NAME_MAX_LENGTH = 20
-    EMAIL_ADDRESS_MAX_LENGTH = 254
-
-    first_name = models.CharField(
-        max_length=FIRST_NAME_MAX_LENGTH,
-    )
-
-    last_name = models.CharField(
-        max_length=LAST_NAME_MAX_LENGTH,
-    )
-
-    email_address = models.EmailField(
-        max_length=EMAIL_ADDRESS_MAX_LENGTH,
-        validators=(
-            EmailValidator,
-        )
-    )
-
     role = models.ManyToManyField(
         Role,
     )
 
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return f'{self.user.first_name} {self.user.last_name}'
 
 
 class MaterialCategory(BaseAuditEntity):

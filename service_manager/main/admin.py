@@ -47,7 +47,7 @@ class CustomerAssetAdmin(admin.ModelAdmin):
 
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ['first_name', 'last_name', 'email_address']
+    list_display = ['user']
 
 
 @admin.register(Role)
