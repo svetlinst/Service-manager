@@ -222,9 +222,10 @@ class Employee(BaseAuditEntity):
         Role,
     )
 
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
+        primary_key=False,
     )
 
     def __str__(self):

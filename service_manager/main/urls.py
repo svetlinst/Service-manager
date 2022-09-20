@@ -9,7 +9,7 @@ from service_manager.main.views import get_index, CustomersListView, EditCustome
     DeleteCustomerAssetView, ServiceOrderHeaderListView, ServiceOrderHeaderDetailView, CreateServiceOrderHeader, \
     CustomerRepresentativesListView, CreateCustomerRepresentativeView, EditCustomerRepresentativeView, \
     DeleteCustomerRepresentativeView, CreateServiceOrderDetailView, ServiceOrderDetailsListView, \
-    EditServiceOrderDetailView, DeleteServiceOrderDetailView
+    EditServiceOrderDetailView, DeleteServiceOrderDetailView, complete_service_order
 
 urlpatterns = [
                   path('', get_index, name='index'),
@@ -42,7 +42,8 @@ urlpatterns = [
                        name='edit_customer_representative'),
                   path('customer_representative/delete/<int:pk>/', DeleteCustomerRepresentativeView.as_view(),
                        name='delete_customer_representative'),
-                  path('service_order/<int:order_id>/service_order_detail/create/', CreateServiceOrderDetailView.as_view(),
+                  path('service_order/<int:order_id>/service_order_detail/create/',
+                       CreateServiceOrderDetailView.as_view(),
                        name='create_service_order_detail'),
                   path('service_order/<int:order_id>/service_order_details/', ServiceOrderDetailsListView.as_view(),
                        name='service_order_details'),
@@ -52,4 +53,5 @@ urlpatterns = [
                   path('service_order/<int:order_id>/service_order_detail/delete/<int:pk>/',
                        DeleteServiceOrderDetailView.as_view(),
                        name='delete_service_order_detail'),
+                  path('service_order/<int:pk>/complete/', complete_service_order, name='complete_service_order'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

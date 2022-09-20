@@ -1,5 +1,7 @@
+import datetime
+
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import django.views.generic as views
 from django.urls import reverse_lazy
 from django.db.models import Q
@@ -159,6 +161,9 @@ class ServiceOrderHeaderListView(views.ListView):
     template_name = 'service_order_header/service_orders.html'
     ordering = ('created_on', '-created_on', 'customer')
 
+    def get_queryset(self):
+        return ServiceOrderHeader.objects.filter(is_serviced=False)
+
 
 class ServiceOrderHeaderDetailView(views.DetailView):
     model = ServiceOrderHeader
@@ -297,3 +302,13 @@ class DeleteServiceOrderDetailView(views.DeleteView):
         if service_order_header_id:
             return reverse_lazy('create_service_order_detail', kwargs={'order_id': service_order_header_id})
         return reverse_lazy('service_orders_list')
+
+
+def complete_service_order(request, pk):
+    service_order_header = ServiceOrderHeader.objects.get(pk=pk)
+    service_order_header.is_serviced = True
+    service_order_header.serviced_by = request.user.employee
+    service_order_header.serviced_on = datetime.datetime.now()
+    service_order_header.save()
+
+    return redirect('service_orders_list')

@@ -4,9 +4,11 @@
             <h2> Total Amount Due: {{ service_order_header.total_amount_due }}</h2>
         </div>
         <div class="col-md-3 text-right align-self-center my-3">
-            <a class="btn btn-outline-success btn-lg"
-               href="{% url 'create_service_order' %}?customer_id={{ object.pk }}&customer_asset_id={{ asset.id }}"
-               role="button">Complete Order</a>
+            {#            <a class="btn btn-outline-success btn-lg"#}
+            {#               href="{% url 'complete_service_order' service_order_header.pk %}"#}
+            {#               role="button">Complete Order</a>#}
+            <a class="btn btn-outline-success btn-lg" href="#" data-toggle="modal" data-target="#exampleModal">Complete
+                Order</a>
         </div>
     </div>
     <table class="table table-striped text-center">
@@ -38,17 +40,40 @@
                     <td>{{ service_order_detail.total_amount|floatformat:"2" }}</td>
                     <td>
                         <a class="btn btn-outline-primary btn-sm"
-                                {#                           href="{% url 'edit_service_order_detail' service_order_header.pk %}?service_order={{ service_order_detail.service_order.id }}"#}
                            href="{% url 'edit_service_order_detail' service_order_header.pk service_order_detail.id %}"
                            role="button">Edit</a>
                         <a class="btn btn-outline-danger btn-sm"
                            href="{% url 'delete_service_order_detail' service_order_header.id service_order_detail.id %}"
                            role="button">Delete</a>
                     </td>
-
                 </tr>
             {% endfor %}
         {% endif %}
         </tbody>
     </table>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Complete Service Order with
+                        ID: {{ service_order_header.pk }}</h5>
+                    {#                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+                    {#                        <span aria-hidden="true">&times;</span>#}
+                    {#                    </button>#}
+                </div>
+                <div class="modal-body">
+                    <p class="my-0">Customer: {{ service_order_header.customer.name }}</p>
+                    <p class="my-0"> Asset Serial Number: {{ service_order_header.customer_asset.serial_number }}</p>
+                    <p class="my-0"> Asset Product Number: {{ service_order_header.customer_asset.product_number }}</p>
+                    <p class="my-2"> <b>Total Amount Due: {{ service_order_header.total_amount_due }}</b></p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                    <a class="btn btn-sm btn-success" href="{% url 'complete_service_order' service_order_header.pk %}">Confirm</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
