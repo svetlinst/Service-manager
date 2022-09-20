@@ -6,7 +6,8 @@ from django.db.models import Q
 
 from service_manager.main.forms import EditCustomerForm, CreateCustomerForm, CreateAssetForm, EditAssetForm, \
     CreateMaterialForm, EditMaterialForm, CreateCustomerAssetForm, EditCustomerAssetForm, CreateServiceOrderHeaderForm, \
-    EditCustomerRepresentativeForm, CreateCustomerRepresentativeForm, CreateServiceOrderDetailForm
+    EditCustomerRepresentativeForm, CreateCustomerRepresentativeForm, CreateServiceOrderDetailForm, \
+    EditServiceOrderDetailForm
 from service_manager.main.models import Customer, Asset, Material, CustomerAsset, ServiceOrderHeader, \
     CustomerRepresentative, ServiceOrderDetail
 
@@ -243,22 +244,19 @@ class CreateServiceOrderDetailView(views.CreateView):
     form_class = CreateServiceOrderDetailForm
 
     def get_initial(self):
-        service_order_id = self.request.GET.get('service_order', None)
+        service_order_id = self.kwargs['order_id']
 
         if service_order_id:
             self.initial.update({
                 'service_order': service_order_id,
             })
-        self.initial.update({
-            'discount': 0,
-            'quantity': 1,
-        })
+
         return super().get_initial()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        service_order_header_id = self.kwargs['pk']
+        service_order_header_id = self.kwargs['order_id']
         if service_order_header_id:
             context['service_order_header'] = ServiceOrderHeader.objects.prefetch_related(
                 'serviceorderdetail_set').filter(pk=int(service_order_header_id)).get()
@@ -266,9 +264,21 @@ class CreateServiceOrderDetailView(views.CreateView):
         return context
 
     def get_success_url(self):
-        service_order_header_id = self.request.GET.get('service_order', None)
+        service_order_header_id = self.kwargs['order_id']
         if service_order_header_id:
-            return reverse_lazy('create_service_order_detail', kwargs={'service_order': service_order_header_id})
+            return reverse_lazy('create_service_order_detail', kwargs={'order_id': service_order_header_id})
+        return reverse_lazy('service_orders_list')
+
+
+class EditServiceOrderDetailView(views.UpdateView):
+    model = ServiceOrderDetail
+    template_name = 'service_order_detail_edit.html'
+    form_class = EditServiceOrderDetailForm
+
+    def get_success_url(self):
+        service_order_header_id = self.kwargs['order_id']
+        if service_order_header_id:
+            return reverse_lazy('create_service_order_detail', kwargs={'order_id': service_order_header_id})
         return reverse_lazy('service_orders_list')
 
 
@@ -278,24 +288,12 @@ class ServiceOrderDetailsListView(views.ListView):
     ordering = ('material', 'quantity',)
 
 
-class ServiceOrderDetailEditView(views.UpdateView):
-    model = ServiceOrderDetail
-    template_name = 'service_order_detail_edit.html'
-    form_class = CreateServiceOrderDetailForm
-
-    def get_success_url(self):
-        service_order_header_id = self.request.GET.get('service_order', None)
-        if service_order_header_id:
-            return reverse_lazy('create_service_order_detail', kwargs={'service_order': service_order_header_id})
-        return reverse_lazy('service_orders_list')
-
-
-class ServiceOrderDetailDeleteView(views.DeleteView):
+class DeleteServiceOrderDetailView(views.DeleteView):
     model = ServiceOrderDetail
     template_name = 'service_order_detail_delete.html'
 
     def get_success_url(self):
-        service_order_header_id = self.request.GET.get('service_order', None)
+        service_order_header_id = self.kwargs['order_id']
         if service_order_header_id:
-            return reverse_lazy('create_service_order_detail', kwargs={'service_order': service_order_header_id})
+            return reverse_lazy('create_service_order_detail', kwargs={'order_id': service_order_header_id})
         return reverse_lazy('service_orders_list')

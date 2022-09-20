@@ -9,7 +9,7 @@ from service_manager.main.views import get_index, CustomersListView, EditCustome
     DeleteCustomerAssetView, ServiceOrderHeaderListView, ServiceOrderHeaderDetailView, CreateServiceOrderHeader, \
     CustomerRepresentativesListView, CreateCustomerRepresentativeView, EditCustomerRepresentativeView, \
     DeleteCustomerRepresentativeView, CreateServiceOrderDetailView, ServiceOrderDetailsListView, \
-    ServiceOrderDetailEditView, ServiceOrderDetailDeleteView
+    EditServiceOrderDetailView, DeleteServiceOrderDetailView
 
 urlpatterns = [
                   path('', get_index, name='index'),
@@ -42,14 +42,14 @@ urlpatterns = [
                        name='edit_customer_representative'),
                   path('customer_representative/delete/<int:pk>/', DeleteCustomerRepresentativeView.as_view(),
                        name='delete_customer_representative'),
-                  path('service_order/<int:pk>/service_order_detail/create/', CreateServiceOrderDetailView.as_view(),
+                  path('service_order/<int:order_id>/service_order_detail/create/', CreateServiceOrderDetailView.as_view(),
                        name='create_service_order_detail'),
-                  path('service_order/<int:pk>/service_order_details/', ServiceOrderDetailsListView.as_view(),
+                  path('service_order/<int:order_id>/service_order_details/', ServiceOrderDetailsListView.as_view(),
                        name='service_order_details'),
                   path('service_order/<int:order_id>/service_order_detail/edit/<int:pk>/',
-                       ServiceOrderDetailEditView.as_view(),
+                       EditServiceOrderDetailView.as_view(),
                        name='edit_service_order_detail'),
                   path('service_order/<int:order_id>/service_order_detail/delete/<int:pk>/',
-                       ServiceOrderDetailDeleteView.as_view(),
+                       DeleteServiceOrderDetailView.as_view(),
                        name='delete_service_order_detail'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -140,7 +140,8 @@ class CreateServiceOrderHeaderForm(forms.ModelForm):
             customer_id = int(self.initial['customer'])
             self.fields['customer'].queryset = Customer.objects.filter(pk=customer_id)
             self.fields['customer_asset'].queryset = CustomerAsset.objects.filter(customer=customer_id)
-            self.fields['customer_representative'].queryset = CustomerRepresentative.objects.filter(customer=customer_id)
+            self.fields['customer_representative'].queryset = CustomerRepresentative.objects.filter(
+                customer=customer_id)
 
         self.fields['customer'].disabled = True
         self.fields['customer_asset'].disabled = True
@@ -193,7 +194,7 @@ class CreateCustomerRepresentativeForm(forms.ModelForm):
         }
 
 
-class CreateServiceOrderDetailForm(forms.ModelForm):
+class EditServiceOrderDetailForm(forms.ModelForm):
     class Meta:
         model = ServiceOrderDetail
         fields = ('service_order', 'material', 'quantity', 'discount')
@@ -212,13 +213,17 @@ class CreateServiceOrderDetailForm(forms.ModelForm):
             ),
         }
 
+
+class CreateServiceOrderDetailForm(forms.ModelForm):
+    class Meta(EditServiceOrderDetailForm.Meta):
+        model = ServiceOrderDetail
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.fields['quantity'].initial = 1
+        self.fields['discount'].initial = 0
 
         if 'service_order' in self.initial:
             service_order_id = int(self.initial['service_order'])
             self.fields['service_order'].queryset = ServiceOrderHeader.objects.filter(pk=service_order_id)
-
-
-
-
