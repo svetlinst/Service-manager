@@ -261,8 +261,42 @@ class Material(BaseAuditEntity):
 
 
 class ServiceOrderHeader(BaseAuditEntity):
+    customer = models.ForeignKey(
+        Customer,
+        on_delete=models.CASCADE,
+    )
+
+    customer_asset = models.ForeignKey(
+        CustomerAsset,
+        on_delete=models.CASCADE,
+    )
+
+    customer_representative = models.ForeignKey(
+        CustomerRepresentative,
+        on_delete=models.CASCADE,
+    )
+
+    department = models.ForeignKey(
+        CustomerDepartment,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+
+    is_serviced = models.BooleanField(
+        default=False,
+    )
+
     is_completed = models.BooleanField(
         default=False,
+    )
+
+    serviced_by = models.ForeignKey(
+        Employee,
+        on_delete=models.CASCADE,
+        related_name='serviced_by',
+        null=True,
+        blank=True
     )
 
     serviced_on = models.DateTimeField(
@@ -275,42 +309,12 @@ class ServiceOrderHeader(BaseAuditEntity):
         blank=True,
     )
 
-    customer = models.ForeignKey(
-        Customer,
-        on_delete=models.CASCADE,
-    )
-
-    customer_asset = models.ForeignKey(
-        CustomerAsset,
-        on_delete=models.CASCADE,
-    )
-
-    serviced_by = models.ForeignKey(
-        Employee,
-        on_delete=models.CASCADE,
-        related_name='serviced_by',
-        null=True,
-        blank=True
-    )
-
     completed_by = models.ForeignKey(
         Employee,
         on_delete=models.CASCADE,
         related_name='completed_by',
         null=True,
         blank=True,
-    )
-
-    department = models.ForeignKey(
-        CustomerDepartment,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-    )
-
-    customer_representative = models.ForeignKey(
-        CustomerRepresentative,
-        on_delete=models.CASCADE,
     )
 
     @property

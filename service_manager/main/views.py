@@ -157,7 +157,7 @@ class DeleteCustomerAssetView(views.DeleteView):
 class ServiceOrderHeaderListView(views.ListView):
     model = ServiceOrderHeader
     template_name = 'service_order_header/service_orders.html'
-    ordering = ('-created_on', 'customer')
+    ordering = ('created_on', '-created_on', 'customer')
 
 
 class ServiceOrderHeaderDetailView(views.DetailView):
@@ -240,7 +240,7 @@ class DeleteCustomerRepresentativeView(views.DeleteView):
 
 class CreateServiceOrderDetailView(views.CreateView):
     model = ServiceOrderDetail
-    template_name = 'service_order_details_create.html'
+    template_name = 'service_order_detail/service_order_details_create.html'
     form_class = CreateServiceOrderDetailForm
 
     def get_initial(self):
@@ -272,7 +272,7 @@ class CreateServiceOrderDetailView(views.CreateView):
 
 class EditServiceOrderDetailView(views.UpdateView):
     model = ServiceOrderDetail
-    template_name = 'service_order_detail_edit.html'
+    template_name = 'service_order_detail/service_order_detail_edit.html'
     form_class = EditServiceOrderDetailForm
 
     def get_success_url(self):
@@ -284,13 +284,13 @@ class EditServiceOrderDetailView(views.UpdateView):
 
 class ServiceOrderDetailsListView(views.ListView):
     model = ServiceOrderDetail
-    template_name = 'service_order_details.html'
+    template_name = 'service_order_detail/service_order_details.html'
     ordering = ('material', 'quantity',)
 
 
 class DeleteServiceOrderDetailView(views.DeleteView):
     model = ServiceOrderDetail
-    template_name = 'service_order_detail_delete.html'
+    template_name = 'service_order_detail/service_order_detail_delete.html'
 
     def get_success_url(self):
         service_order_header_id = self.kwargs['order_id']
