@@ -1,4 +1,14 @@
 {% block content %}
+    <div class="row">
+        <div class="col-md-9 my-3">
+            <h2> Total Amount Due: {{ service_order_header.total_amount_due }}</h2>
+        </div>
+        <div class="col-md-3 text-right align-self-center my-3">
+            <a class="btn btn-outline-success btn-lg"
+               href="{% url 'create_service_order' %}?customer_id={{ object.pk }}&customer_asset_id={{ asset.id }}"
+               role="button">Complete Order</a>
+        </div>
+    </div>
     <table class="table table-striped text-center">
         <thead>
         <tr>
@@ -28,8 +38,8 @@
                     <td>{{ service_order_detail.total_amount|floatformat:"2" }}</td>
                     <td>
                         <a class="btn btn-outline-primary btn-sm"
-{#                           href="{% url 'edit_service_order_detail' service_order_header.pk %}?service_order={{ service_order_detail.service_order.id }}"#}
-                           href="{% url 'edit_service_order_detail' service_order_header.pk service_order_detail.id%}"
+                                {#                           href="{% url 'edit_service_order_detail' service_order_header.pk %}?service_order={{ service_order_detail.service_order.id }}"#}
+                           href="{% url 'edit_service_order_detail' service_order_header.pk service_order_detail.id %}"
                            role="button">Edit</a>
                         <a class="btn btn-outline-danger btn-sm"
                            href="{% url 'delete_service_order_detail' service_order_header.id service_order_detail.id %}"
