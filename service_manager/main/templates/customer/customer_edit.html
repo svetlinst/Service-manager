@@ -34,7 +34,7 @@
                                aria-label="Search"
                                aria-describedby="search-addon" name="search_value"/>
                         <button type="submit" class="btn btn-outline-primary"
-                                href="{% url 'edit_customer' object.pk %}">
+                                href="#">
                             search
                         </button>
                     </div>
@@ -78,8 +78,12 @@
         </tbody>
     </table>
 
-    {#    Table with Assets assigned to the customer#}
+    {#    Table with Customer Representatives#}
     <h2 class='text-center'>Customer Representatives</h2>
     {% include 'customer_representatives/customer_representatives.html' %}
+
+    {#    Table with Customer Departments#}
+    <h2 class='text-center'>Customer Departments</h2>
+    {% include 'customer_departments.html' %}
 
 {% endblock %}

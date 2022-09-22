@@ -1,7 +1,7 @@
 from django import forms
 
 from service_manager.main.models import Customer, Asset, Material, CustomerAsset, ServiceOrderHeader, \
-    CustomerRepresentative, ServiceOrderDetail
+    CustomerRepresentative, ServiceOrderDetail, CustomerDepartment
 
 
 class EditCustomerForm(forms.ModelForm):
@@ -227,3 +227,27 @@ class CreateServiceOrderDetailForm(forms.ModelForm):
         if 'service_order' in self.initial:
             service_order_id = int(self.initial['service_order'])
             self.fields['service_order'].queryset = ServiceOrderHeader.objects.filter(pk=service_order_id)
+
+
+class CreateCustomerDepartmentForm(forms.ModelForm):
+    class Meta:
+        model = CustomerDepartment
+        fields = ('customer', 'name',)
+        widgets = {
+            'customer': forms.HiddenInput(
+                attrs={'class': 'form-control'},
+            ),
+            'name': forms.TextInput(
+                attrs={'class': 'form-control'},
+            ),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if 'customer_id' in self.initial:
+            customer_id = int(self.initial['customer_id'])
+            self.fields['customer'].queryset = Customer.objects.filter(pk=customer_id)
+
+        self.fields['customer'].disabled = True
+

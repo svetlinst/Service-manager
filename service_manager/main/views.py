@@ -9,9 +9,9 @@ from django.db.models import Q
 from service_manager.main.forms import EditCustomerForm, CreateCustomerForm, CreateAssetForm, EditAssetForm, \
     CreateMaterialForm, EditMaterialForm, CreateCustomerAssetForm, EditCustomerAssetForm, CreateServiceOrderHeaderForm, \
     EditCustomerRepresentativeForm, CreateCustomerRepresentativeForm, CreateServiceOrderDetailForm, \
-    EditServiceOrderDetailForm
+    EditServiceOrderDetailForm, CreateCustomerDepartmentForm
 from service_manager.main.models import Customer, Asset, Material, CustomerAsset, ServiceOrderHeader, \
-    CustomerRepresentative, ServiceOrderDetail
+    CustomerRepresentative, ServiceOrderDetail, CustomerDepartment
 
 
 def get_index(request):
@@ -44,6 +44,7 @@ class EditCustomerView(views.UpdateView):
 
         context['customer_assets'] = customer.customerasset_set.all()
         context['customer_representatives'] = customer.customerrepresentative_set.all()
+        context['customer_departments'] = customer.customerdepartment_set.all()
 
         search_text = self.request.GET.get('search_value', None)
         if search_text:
@@ -53,6 +54,10 @@ class EditCustomerView(views.UpdateView):
         if representative_search:
             context['customer_representatives'] = customer.customerrepresentative_set.filter(
                 Q(first_name__icontains=representative_search) | Q(last_name__icontains=representative_search))
+
+        department_search = self.request.GET.get('departments', None)
+        if department_search:
+            context['customer_departments'] = customer.customerdepartment_set.filter(name__icontains=department_search)
 
         return context
 
@@ -312,3 +317,62 @@ def complete_service_order(request, pk):
     service_order_header.save()
 
     return redirect('service_orders_list')
+
+
+class CustomerDepartmentsListView(views.ListView):
+    model = CustomerDepartment
+    template_name = 'customer_departments.html'
+
+
+class CreateCustomerDepartmentView(views.CreateView):
+    model = CustomerDepartment
+    template_name = 'customer_department_create.html'
+    form_class = CreateCustomerDepartmentForm
+
+    def get_initial(self):
+        customer_id = self.kwargs['customer_id']
+
+        if customer_id:
+            self.initial.update({
+                'customer': customer_id,
+            })
+
+        return super().get_initial()
+
+    def get_success_url(self):
+        customer_id = self.kwargs['customer_id']
+        if customer_id:
+            return reverse_lazy('edit_customer', kwargs={'pk': customer_id})
+        return reverse_lazy('customers_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        customer_id = self.kwargs['customer_id']
+        if customer_id:
+            customer = Customer.objects.prefetch_related('customerdepartment_set').filter(pk=customer_id).get()
+            context['customer'] = customer
+        return context
+
+
+class EditCustomerDepartmentView(views.UpdateView):
+    model = CustomerDepartment
+    template_name = 'customer_department_edit.html'
+    form_class = CreateCustomerDepartmentForm
+
+    def get_success_url(self):
+        customer_id = self.kwargs['customer_id']
+        if customer_id:
+            return reverse_lazy('edit_customer', kwargs={'pk': customer_id})
+        return reverse_lazy('customers_list')
+
+
+class DeleteCustomerDepartmentView(views.DeleteView):
+    model = CustomerDepartment
+    template_name = 'customer_department_delete.html'
+
+    def get_success_url(self):
+        customer_id = self.kwargs['customer_id']
+        if customer_id:
+            return reverse_lazy('edit_customer', kwargs={'pk': customer_id})
+        return reverse_lazy('customers_list')
