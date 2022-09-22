@@ -41,7 +41,7 @@
                 </form>
             </div>
             <div class="col-md-3 text-right align-self-center my-3">
-                <a href="{% url 'create_customer_asset' %}?customer_id={{ object.pk }}" class="btn btn-success">Add
+                <a href="{% url 'create_customer_asset' object.pk %}" class="btn btn-success">Add
                     Asset</a>
             </div>
         </div>
@@ -59,9 +59,9 @@
                         <a class="btn btn-outline-success btn-sm"
                            href="{% url 'create_service_order' %}?customer_id={{ object.pk }}&customer_asset_id={{ asset.id }}"
                            role="button">Create Order</a>
-                        <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_customer_asset' asset.id %}"
+                        <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_customer_asset' asset.customer.id asset.id %}"
                            role="button">Edit</a>
-                        <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_customer_asset' asset.id %}"
+                        <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_customer_asset' asset.customer.id asset.id %}"
                            role="button">Delete</a>
                     </td>
                 </tr>

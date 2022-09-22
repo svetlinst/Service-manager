@@ -136,12 +136,21 @@ class CreateCustomerAssetView(views.CreateView):
         return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
 
     def get_initial(self):
-        customer_id = self.request.GET.get('customer_id', None)
+        customer_id = self.kwargs['customer_id']
         if customer_id:
             self.initial.update({
                 'customer': customer_id,
             })
         return super().get_initial()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        customer_id = self.kwargs['customer_id']
+        if customer_id:
+            customer = Customer.objects.prefetch_related('customerasset_set').filter(pk=customer_id).get()
+            context['customer'] = customer
+        return context
 
 
 class EditCustomerAssetView(views.UpdateView):
@@ -184,6 +193,7 @@ class CreateServiceOrderHeader(views.CreateView):
     def get_success_url(self):
         return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
 
+    # ToDO: Fix this
     def get_initial(self):
         customer_id = self.request.GET.get('customer_id', None)
         customer_asset_id = self.request.GET.get('customer_asset_id', None)
@@ -220,7 +230,7 @@ class CreateCustomerRepresentativeView(views.CreateView):
     form_class = CreateCustomerRepresentativeForm
 
     def get_initial(self):
-        customer_id = self.request.GET.get('customer_id', None)
+        customer_id = self.kwargs['customer_id']
         if customer_id:
             self.initial.update({
                 'customer': customer_id,
@@ -229,6 +239,15 @@ class CreateCustomerRepresentativeView(views.CreateView):
 
     def get_success_url(self):
         return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        customer_id = self.kwargs['customer_id']
+        if customer_id:
+            customer = Customer.objects.prefetch_related('customerrepresentative_set').filter(pk=customer_id).get()
+            context['customer'] = customer
+        return context
 
 
 class EditCustomerRepresentativeView(views.UpdateView):

@@ -85,7 +85,7 @@ class CreateCustomerAssetForm(forms.ModelForm):
         model = CustomerAsset
         fields = ('customer', 'asset', 'serial_number', 'product_number')
         widgets = {
-            'customer': forms.Select(
+            'customer': forms.HiddenInput(
                 attrs={'class': 'form-control'},
             ),
             'asset': forms.Select(
@@ -176,7 +176,7 @@ class CreateCustomerRepresentativeForm(forms.ModelForm):
         model = CustomerRepresentative
         fields = ('customer', 'first_name', 'last_name', 'email_address', 'phone_number')
         widgets = {
-            'customer': forms.Select(
+            'customer': forms.HiddenInput(
                 attrs={'class': 'form-control'},
             ),
             'first_name': forms.TextInput(

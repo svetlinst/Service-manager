@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <form method="post" action="{% url "edit_customer_representative" object.pk %}">
+    <form method="post" action="{% url "edit_customer_representative" object.customer.id object.pk %}">
         {% csrf_token %}
         {{ form }}
         <div class="my-3">

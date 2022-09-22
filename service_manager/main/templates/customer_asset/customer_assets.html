@@ -2,7 +2,7 @@
 {% block content %}
     <div class="row my-md-2">
         <div class="col-md-12 text-right">
-            <a href="{% url 'create_customer_asset' %}" class="btn btn-success">Create New Asset</a>
+            <a href="{% url 'create_customer_asset' object.pk %}" class="btn btn-success">Create New Asset</a>
         </div>
     </div>
     <table class="table table-striped text-center">
@@ -24,9 +24,9 @@
                     <td>{{ customer_asset.serial_number }}</td>
                     <td>{{ customer_asset.product_number }}</td>
                     <td>
-                        <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_customer' customer.id %}"
+                        <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_customer_asset' customer_asset.customer.id customer_asset.pk %}"
                            role="button">Edit</a>
-                        <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_customer' customer.id %}" role="button">Delete</a>
+                        <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_customer_asset' customer_asset.customer.id customer_asset.pk%}" role="button">Delete</a>
                     </td>
                 </tr>
             {% endfor %}
