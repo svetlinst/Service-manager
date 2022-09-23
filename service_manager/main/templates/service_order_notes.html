@@ -1,0 +1,33 @@
+{% block content %}
+    <table class="table table-striped text-center">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Note</th>
+            <th scope="col">Created By</th>
+            <th scope="col">Created On</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if service_order_header.serviceordernote_set.all %}
+            {% for note in service_order_header.serviceordernote_set.all %}
+                <tr>
+                    <td>{{ note.id }}</td>
+                    <td>{{ note.note }}</td>
+                    <td>{{ note.created_by }}</td>
+                    <td>{{ note.created_on }}</td>
+                    <td>
+                        <a class="btn btn-outline-primary btn-sm"
+                           href="{% url 'edit_service_order_note' note.service_order.id note.pk %}"
+                           role="button">Edit</a>
+                        <a class="btn btn-outline-danger btn-sm"
+                           href="{% url 'delete_service_order_note' note.service_order.id note.pk %}"
+                           role="button">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

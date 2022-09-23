@@ -9,9 +9,9 @@ from django.db.models import Q
 from service_manager.main.forms import EditCustomerForm, CreateCustomerForm, CreateAssetForm, EditAssetForm, \
     CreateMaterialForm, EditMaterialForm, CreateCustomerAssetForm, EditCustomerAssetForm, CreateServiceOrderHeaderForm, \
     EditCustomerRepresentativeForm, CreateCustomerRepresentativeForm, CreateServiceOrderDetailForm, \
-    EditServiceOrderDetailForm, CreateCustomerDepartmentForm
+    EditServiceOrderDetailForm, CreateCustomerDepartmentForm, CreateServiceOrderNoteForm
 from service_manager.main.models import Customer, Asset, Material, CustomerAsset, ServiceOrderHeader, \
-    CustomerRepresentative, ServiceOrderDetail, CustomerDepartment
+    CustomerRepresentative, ServiceOrderDetail, CustomerDepartment, ServiceOrderNote
 
 
 def get_index(request):
@@ -191,12 +191,11 @@ class CreateServiceOrderHeader(views.CreateView):
     template_name = 'service_order_header/service_order_create.html'
 
     def get_success_url(self):
-        return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
+        return reverse_lazy('detail_service_order', kwargs={'pk': self.object.id})
 
-    # ToDO: Fix this
     def get_initial(self):
-        customer_id = self.request.GET.get('customer_id', None)
-        customer_asset_id = self.request.GET.get('customer_asset_id', None)
+        customer_id = self.kwargs['customer_id']
+        customer_asset_id = self.kwargs['asset_id']
         if customer_id:
             self.initial.update({
                 'customer': customer_id,
@@ -206,6 +205,27 @@ class CreateServiceOrderHeader(views.CreateView):
                 'customer_asset': customer_asset_id,
             })
         return super().get_initial()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        customer_id = self.kwargs['customer_id']
+        customer_asset_id = self.kwargs['asset_id']
+
+        if customer_id:
+            customer = Customer.objects.filter(pk=customer_id).get()
+            context['customer'] = customer
+        if customer_asset_id:
+            customer_asset = CustomerAsset.objects.filter(pk=customer_asset_id).get()
+            context['customer_asset'] = customer_asset
+
+        return context
+
+
+class DeleteServiceOrderHeaderView(views.DeleteView):
+    model = ServiceOrderHeader
+    template_name = 'service_order_header/service_order_delete.html'
+    success_url = reverse_lazy('service_orders_list')
 
 
 def load_customer_representatives(request):
@@ -340,12 +360,12 @@ def complete_service_order(request, pk):
 
 class CustomerDepartmentsListView(views.ListView):
     model = CustomerDepartment
-    template_name = 'customer_departments.html'
+    template_name = 'customer_department/customer_departments.html'
 
 
 class CreateCustomerDepartmentView(views.CreateView):
     model = CustomerDepartment
-    template_name = 'customer_department_create.html'
+    template_name = 'customer_department/customer_department_create.html'
     form_class = CreateCustomerDepartmentForm
 
     def get_initial(self):
@@ -376,7 +396,7 @@ class CreateCustomerDepartmentView(views.CreateView):
 
 class EditCustomerDepartmentView(views.UpdateView):
     model = CustomerDepartment
-    template_name = 'customer_department_edit.html'
+    template_name = 'customer_department/customer_department_edit.html'
     form_class = CreateCustomerDepartmentForm
 
     def get_success_url(self):
@@ -388,10 +408,59 @@ class EditCustomerDepartmentView(views.UpdateView):
 
 class DeleteCustomerDepartmentView(views.DeleteView):
     model = CustomerDepartment
-    template_name = 'customer_department_delete.html'
+    template_name = 'customer_department/customer_department_delete.html'
 
     def get_success_url(self):
         customer_id = self.kwargs['customer_id']
         if customer_id:
             return reverse_lazy('edit_customer', kwargs={'pk': customer_id})
         return reverse_lazy('customers_list')
+
+
+class CreateServiceOrderNoteView(views.CreateView):
+    model = ServiceOrderNote
+    template_name = 'service_order_note_create.html'
+    form_class = CreateServiceOrderNoteForm
+
+    def get_initial(self):
+        # todo: Add the user as created by
+        user = self.request.user
+
+        service_order_header_id = self.kwargs['order_id']
+
+        if service_order_header_id:
+            self.initial.update({
+                'service_order': service_order_header_id,
+            })
+
+        return super().get_initial()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        service_order_id = self.kwargs['order_id']
+        if service_order_id:
+            service_order = ServiceOrderHeader.objects.filter(pk=service_order_id).get()
+            context['service_order'] = service_order
+
+        return context
+
+    def get_success_url(self):
+        service_order_header_id = self.kwargs['order_id']
+        if service_order_header_id:
+            return reverse_lazy('create_service_order_detail', kwargs={'order_id': service_order_header_id})
+        return reverse_lazy('service_orders_list')
+
+
+class ServiceOrderNotesListView(views.ListView):
+    model = ServiceOrderNote
+    template_name = 'service_order_notes.html'
+    ordering = ('-note',)
+
+
+class EditServiceOrderNoteView(views.UpdateView):
+    pass
+
+
+class DeleteServiceOrderNoteView(views.DeleteView):
+    pass

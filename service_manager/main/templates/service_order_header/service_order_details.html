@@ -2,6 +2,7 @@
     <div class="d-block mt-5" style="background-color: #f1e3e3; padding:2%">
         <h4 class='text-center'>Customer</h4>
         <h5><u>Customer Name:</u> {{ service_order_header.customer.name }}</h5>
+        <h5><u>Customer Department:</u> {{ service_order_header.department.name }}</h5>
     </div>
     <div class="d-block mt-5" style="background-color: #f1e3e3; padding:2%">
         <h4 class='text-center'>Model</h4>
@@ -15,4 +16,11 @@
         <h5><u>Serial Number:</u> {{ service_order_header.customer_asset.serial_number }}</h5>
         <h5><u>Product:</u> {{ service_order_header.customer_asset.product_number }}</h5>
     </div>
+    <div class="row">
+        <div class="col-md-3 text-right align-self-center my-3">
+            <a href="{% url 'create_service_order_note' service_order_header.pk  %}" class="btn btn-success">Add
+                Note</a>
+        </div>
+    </div>
+    {% include 'service_order_notes.html' %}
 {% endblock %}

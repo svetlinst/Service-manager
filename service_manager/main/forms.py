@@ -1,7 +1,7 @@
 from django import forms
 
 from service_manager.main.models import Customer, Asset, Material, CustomerAsset, ServiceOrderHeader, \
-    CustomerRepresentative, ServiceOrderDetail, CustomerDepartment
+    CustomerRepresentative, ServiceOrderDetail, CustomerDepartment, ServiceOrderNote
 
 
 class EditCustomerForm(forms.ModelForm):
@@ -117,7 +117,7 @@ class EditCustomerAssetForm(forms.ModelForm):
 class CreateServiceOrderHeaderForm(forms.ModelForm):
     class Meta:
         model = ServiceOrderHeader
-        fields = ('customer', 'customer_asset', 'customer_representative',)
+        fields = ('customer', 'customer_asset', 'department', 'customer_representative',)
         widgets = {
             'customer': forms.Select(
                 attrs={'class': 'form-control'},
@@ -142,6 +142,7 @@ class CreateServiceOrderHeaderForm(forms.ModelForm):
             self.fields['customer_asset'].queryset = CustomerAsset.objects.filter(customer=customer_id)
             self.fields['customer_representative'].queryset = CustomerRepresentative.objects.filter(
                 customer=customer_id)
+            self.fields['department'].queryset = CustomerDepartment.objects.filter(customer=customer_id)
 
         self.fields['customer'].disabled = True
         self.fields['customer_asset'].disabled = True
@@ -251,3 +252,28 @@ class CreateCustomerDepartmentForm(forms.ModelForm):
 
         self.fields['customer'].disabled = True
 
+
+class CreateServiceOrderNoteForm(forms.ModelForm):
+    class Meta:
+        model = ServiceOrderNote
+        fields = ('service_order', 'created_by', 'note',)
+        widgets = {
+            'service_order': forms.Select(
+                attrs={'class': 'form-control'},
+            ),
+            'note': forms.Textarea(
+                attrs={'class': 'form-control'},
+            ),
+            'created_by': forms.Select(
+                attrs={'class': 'form-control'},
+            ),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if 'service_order' in self.initial:
+            service_order_id = int(self.initial['service_order'])
+            self.fields['service_order'].queryset = ServiceOrderHeader.objects.filter(pk=service_order_id)
+
+        self.fields['service_order'].disabled = True

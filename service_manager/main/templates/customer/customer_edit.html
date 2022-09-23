@@ -57,7 +57,7 @@
                     <td>{{ asset.product_number }}</td>
                     <td>
                         <a class="btn btn-outline-success btn-sm"
-                           href="{% url 'create_service_order' %}?customer_id={{ object.pk }}&customer_asset_id={{ asset.id }}"
+                           href="{% url 'create_service_order' asset.customer.id asset.pk%}"
                            role="button">Create Order</a>
                         <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_customer_asset' asset.customer.id asset.id %}"
                            role="button">Edit</a>
@@ -84,6 +84,6 @@
 
     {#    Table with Customer Departments#}
     <h2 class='text-center'>Customer Departments</h2>
-    {% include 'customer_departments.html' %}
+    {% include 'customer_department/customer_departments.html' %}
 
 {% endblock %}

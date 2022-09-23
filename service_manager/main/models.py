@@ -116,7 +116,7 @@ class CustomerDepartment(BaseAuditEntity):
     )
 
     def __str__(self):
-        return self.name
+        return f'{str(self.customer)} {self.name}'
 
     class Meta:
         db_table = 'main_customer_department'
@@ -368,7 +368,7 @@ class ServiceOrderDetail(BaseAuditEntity):
         db_table = 'main_service_order_detail'
 
 
-class ServiceOrderNode(BaseAuditEntity):
+class ServiceOrderNote(BaseAuditEntity):
     note = models.TextField()
 
     created_by = models.ForeignKey(

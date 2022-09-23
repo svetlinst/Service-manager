@@ -41,6 +41,12 @@
                            href="{% url 'detail_service_order' service_order.id %}"
                            role="button">Detail</a>
                     </td>
+                    {#                    todo: allow only certain roles to delete#}
+                    <td>
+                        <a class="btn btn-outline-danger btn-sm"
+                           href="{% url 'delete_service_order' service_order.id %}"
+                           role="button">Delete</a>
+                    </td>
                 </tr>
             {% endfor %}
         {% endif %}
