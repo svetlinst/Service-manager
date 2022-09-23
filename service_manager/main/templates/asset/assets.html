@@ -9,10 +9,10 @@
         <thead>
         <tr>
             <th scope="col">ID</th>
+            <th scope="col">Category</th>
+            <th scope="col">Brand</th>
             <th scope="col">Model Name</th>
             <th scope="col">Model Number</th>
-            <th scope="col">Brand</th>
-            <th scope="col">Category</th>
         </tr>
         </thead>
         <tbody>
@@ -20,10 +20,10 @@
             {% for asset in object_list %}
                 <tr>
                     <td>{{ asset.id }}</td>
+                    <td>{{ asset.category }}</td>
+                    <td>{{ asset.brand }}</td>
                     <td>{{ asset.model_name }}</td>
                     <td>{{ asset.model_number }}</td>
-                    <td>{{ asset.brand }}</td>
-                    <td>{{ asset.category }}</td>
                     <td>
                         <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_asset' asset.id %}"
                            role="button">Edit</a>

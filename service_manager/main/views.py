@@ -78,7 +78,7 @@ class DeleteCustomerView(views.DeleteView):
 class AssetsListView(views.ListView):
     model = Asset
     template_name = 'asset/assets.html'
-    ordering = ('model_name', 'model_number')
+    ordering = ('category', 'brand', 'model_name', 'model_number')
 
 
 class CreateAssetView(views.CreateView):
@@ -104,7 +104,7 @@ class DeleteAssetView(views.DeleteView):
 class MaterialsListView(views.ListView):
     model = Material
     template_name = 'material/materials.html'
-    ordering = ('name', 'category')
+    ordering = ('category', 'name')
 
 
 class CreateMaterialView(views.CreateView):
@@ -173,7 +173,7 @@ class DeleteCustomerAssetView(views.DeleteView):
 class ServiceOrderHeaderListView(views.ListView):
     model = ServiceOrderHeader
     template_name = 'service_order_header/service_orders.html'
-    ordering = ('created_on', '-created_on', 'customer')
+    ordering = ('created_on', 'customer')
 
     def get_queryset(self):
         return ServiceOrderHeader.objects.filter(is_serviced=False)
@@ -455,7 +455,6 @@ class CreateServiceOrderNoteView(views.CreateView):
 class ServiceOrderNotesListView(views.ListView):
     model = ServiceOrderNote
     template_name = 'service_order_notes.html'
-    ordering = ('-note',)
 
 
 class EditServiceOrderNoteView(views.UpdateView):

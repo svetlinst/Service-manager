@@ -101,6 +101,7 @@ class CustomerRepresentative(BaseAuditEntity):
 
     class Meta:
         db_table = 'main_customer_representative'
+        ordering = ('first_name', 'last_name',)
 
 
 class CustomerDepartment(BaseAuditEntity):
@@ -120,6 +121,7 @@ class CustomerDepartment(BaseAuditEntity):
 
     class Meta:
         db_table = 'main_customer_department'
+        ordering = ('name',)
 
 
 class Brand(BaseAuditEntity):
@@ -131,6 +133,9 @@ class Brand(BaseAuditEntity):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ('name',)
 
 
 class AssetCategory(BaseAuditEntity):
@@ -145,6 +150,7 @@ class AssetCategory(BaseAuditEntity):
 
     class Meta:
         db_table = 'main_asset_category'
+        ordering = ('name',)
 
 
 class Asset(BaseAuditEntity):
@@ -171,6 +177,7 @@ class Asset(BaseAuditEntity):
 
     def __str__(self):
         return f'{self.category}---{self.brand.name}---{self.model_number}---{self.model_name}'
+
 
 
 class CustomerAsset(BaseAuditEntity):
@@ -204,6 +211,7 @@ class CustomerAsset(BaseAuditEntity):
 
     class Meta:
         db_table = 'main_customer_asset'
+        ordering = ('asset__category__name', 'asset__brand__name', 'asset__model_name', 'serial_number',)
 
 
 class Role(BaseAuditEntity):
@@ -380,3 +388,6 @@ class ServiceOrderNote(BaseAuditEntity):
         ServiceOrderHeader,
         on_delete=models.CASCADE,
     )
+
+    class Meta:
+        ordering = ('-created_on',)

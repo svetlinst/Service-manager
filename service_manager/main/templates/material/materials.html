@@ -9,8 +9,8 @@
         <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Name</th>
             <th scope="col">Category</th>
+            <th scope="col">Name</th>
             <th scope="col">Price</th>
         </tr>
         </thead>
@@ -19,8 +19,8 @@
             {% for material in object_list %}
                 <tr>
                     <td>{{ material.id }}</td>
-                    <td>{{ material.name }}</td>
                     <td>{{ material.category }}</td>
+                    <td>{{ material.name }}</td>
                     <td>{{ material.price }}</td>
                     <td>
                         <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_material' material.id %}"
