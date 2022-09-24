@@ -3,10 +3,12 @@
         <div class="col-md-9 my-3">
             <h2> Total Amount Due: {{ service_order_header.total_amount_due }}</h2>
         </div>
-        <div class="col-md-3 text-right align-self-center my-3">
-            <a class="btn btn-outline-success btn-lg" href="#" data-toggle="modal" data-target="#exampleModal">Complete
-                Order</a>
-        </div>
+        {% if not serrvice_order_header.is_serviced %}
+            <div class="col-md-3 text-right align-self-center my-3">
+                <a class="btn btn-outline-success btn-lg" href="#" data-toggle="modal" data-target="#exampleModal">Complete
+                    Order</a>
+            </div>
+        {% endif %}
     </div>
     <table class="table table-striped text-center">
         <thead>
@@ -60,7 +62,7 @@
                     <p class="my-0">Customer: {{ service_order_header.customer.name }}</p>
                     <p class="my-0"> Asset Serial Number: {{ service_order_header.customer_asset.serial_number }}</p>
                     <p class="my-0"> Asset Product Number: {{ service_order_header.customer_asset.product_number }}</p>
-                    <p class="my-2"> <b>Total Amount Due: {{ service_order_header.total_amount_due }}</b></p>
+                    <p class="my-2"><b>Total Amount Due: {{ service_order_header.total_amount_due }}</b></p>
 
                 </div>
                 <div class="modal-footer">

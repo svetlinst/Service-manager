@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+
 {% block content %}
     <div class="d-block mt-5" style="background-color: #f1e3e3; padding:2%">
         <h4 class='text-center'>Customer</h4>
@@ -18,9 +20,14 @@
     </div>
     <div class="row">
         <div class="col-md-3 text-right align-self-center my-3">
-            <a href="{% url 'create_service_order_note' service_order_header.pk  %}" class="btn btn-success">Add
+            <a href="{% url 'create_service_order_note' service_order_header.pk %}?next={{ request.path|urlencode }}" class="btn btn-success">Add
                 Note</a>
         </div>
     </div>
     {% include 'service_order_notes.html' %}
+    {% block sod_create %}
+
+    {% endblock %}
+    {% include 'service_order_detail/service_order_details.html' %}
+
 {% endblock %}

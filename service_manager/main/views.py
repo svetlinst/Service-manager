@@ -1,6 +1,6 @@
 import datetime
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 import django.views.generic as views
 from django.urls import reverse_lazy
@@ -176,7 +176,7 @@ class ServiceOrderHeaderListView(views.ListView):
     ordering = ('created_on', 'customer')
 
     def get_queryset(self):
-        return ServiceOrderHeader.objects.filter(is_serviced=False)
+        return ServiceOrderHeader.objects.filter(is_serviced=False).prefetch_related('serviceordernote_set')
 
 
 class ServiceOrderHeaderDetailView(views.DetailView):
@@ -446,10 +446,8 @@ class CreateServiceOrderNoteView(views.CreateView):
         return context
 
     def get_success_url(self):
-        service_order_header_id = self.kwargs['order_id']
-        if service_order_header_id:
-            return reverse_lazy('create_service_order_detail', kwargs={'order_id': service_order_header_id})
-        return reverse_lazy('service_orders_list')
+        go_to_next = self.request.POST.get('next', '/')
+        return go_to_next
 
 
 class ServiceOrderNotesListView(views.ListView):
