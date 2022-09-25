@@ -117,7 +117,7 @@ class EditCustomerAssetForm(forms.ModelForm):
 class CreateServiceOrderHeaderForm(forms.ModelForm):
     class Meta:
         model = ServiceOrderHeader
-        fields = ('customer', 'customer_asset', 'department', 'customer_representative',)
+        fields = ('customer', 'customer_asset', 'department', 'handed_over_by',)
         widgets = {
             'customer': forms.Select(
                 attrs={'class': 'form-control'},
@@ -128,7 +128,7 @@ class CreateServiceOrderHeaderForm(forms.ModelForm):
             'department': forms.Select(
                 attrs={'class': 'form-control'},
             ),
-            'customer_representative': forms.Select(
+            'handed_over_by': forms.Select(
                 attrs={'class': 'form-control'},
             ),
         }
@@ -140,7 +140,7 @@ class CreateServiceOrderHeaderForm(forms.ModelForm):
             customer_id = int(self.initial['customer'])
             self.fields['customer'].queryset = Customer.objects.filter(pk=customer_id)
             self.fields['customer_asset'].queryset = CustomerAsset.objects.filter(customer=customer_id)
-            self.fields['customer_representative'].queryset = CustomerRepresentative.objects.filter(
+            self.fields['handed_over_by'].queryset = CustomerRepresentative.objects.filter(
                 customer=customer_id)
             self.fields['department'].queryset = CustomerDepartment.objects.filter(customer=customer_id)
 

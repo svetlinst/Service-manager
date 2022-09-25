@@ -172,7 +172,7 @@ class DeleteCustomerAssetView(views.DeleteView):
 
 class ServiceOrderHeaderListView(views.ListView):
     model = ServiceOrderHeader
-    template_name = 'service_order_header/service_orders.html'
+    template_name = 'service_order_header/list_views/service_orders_service.html'
     ordering = ('created_on', 'customer')
 
     def get_queryset(self):
@@ -181,14 +181,14 @@ class ServiceOrderHeaderListView(views.ListView):
 
 class ServiceOrderHeaderDetailView(views.DetailView):
     model = ServiceOrderHeader
-    template_name = 'service_order_header/service_order_details.html'
+    template_name = 'service_order_header/core/service_order_details.html'
     context_object_name = 'service_order_header'
 
 
 class CreateServiceOrderHeader(views.CreateView):
     model = ServiceOrderHeader
     form_class = CreateServiceOrderHeaderForm
-    template_name = 'service_order_header/service_order_create.html'
+    template_name = 'service_order_header/core/service_order_create.html'
 
     def get_success_url(self):
         return reverse_lazy('detail_service_order', kwargs={'pk': self.object.id})
@@ -224,7 +224,7 @@ class CreateServiceOrderHeader(views.CreateView):
 
 class DeleteServiceOrderHeaderView(views.DeleteView):
     model = ServiceOrderHeader
-    template_name = 'service_order_header/service_order_delete.html'
+    template_name = 'service_order_header/core/service_order_delete.html'
     success_url = reverse_lazy('service_orders_list')
 
 

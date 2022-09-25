@@ -84,7 +84,9 @@ class CustomerRepresentative(BaseAuditEntity):
         max_length=EMAIL_ADDRESS_MAX_LENGTH,
         validators=(
             EmailValidator,
-        )
+        ),
+        null=True,
+        blank=True,
     )
 
     phone_number = models.CharField(
@@ -177,7 +179,6 @@ class Asset(BaseAuditEntity):
 
     def __str__(self):
         return f'{self.category}---{self.brand.name}---{self.model_number}---{self.model_name}'
-
 
 
 class CustomerAsset(BaseAuditEntity):
@@ -280,9 +281,10 @@ class ServiceOrderHeader(BaseAuditEntity):
         on_delete=models.CASCADE,
     )
 
-    customer_representative = models.ForeignKey(
+    handed_over_by = models.ForeignKey(
         CustomerRepresentative,
         on_delete=models.CASCADE,
+        related_name='handed_by_customer_representative',
     )
 
     department = models.ForeignKey(
@@ -324,6 +326,14 @@ class ServiceOrderHeader(BaseAuditEntity):
         related_name='completed_by',
         null=True,
         blank=True,
+    )
+
+    handed_over_to = models.ForeignKey(
+        CustomerRepresentative,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name='handed_to_customer_representative',
     )
 
     @property

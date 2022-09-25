@@ -1,4 +1,4 @@
-{% extends 'service_order_header/service_order_details.html' %}
+{% extends 'service_order_header/core/service_order_details.html' %}
 {% block sod_create %}
     <form method="post" action="{% url 'create_service_order_detail' service_order_header.pk %}">
         {% csrf_token %}
