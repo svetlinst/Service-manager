@@ -419,7 +419,7 @@ class DeleteCustomerDepartmentView(views.DeleteView):
 
 class CreateServiceOrderNoteView(views.CreateView):
     model = ServiceOrderNote
-    template_name = 'service_order_note_create.html'
+    template_name = 'service_order_note/service_order_note_create.html'
     form_class = CreateServiceOrderNoteForm
 
     def get_initial(self):
@@ -452,12 +452,23 @@ class CreateServiceOrderNoteView(views.CreateView):
 
 class ServiceOrderNotesListView(views.ListView):
     model = ServiceOrderNote
-    template_name = 'service_order_notes.html'
+    template_name = 'service_order_note/service_order_notes.html'
 
 
 class EditServiceOrderNoteView(views.UpdateView):
-    pass
+    model = ServiceOrderNote
+    template_name = 'service_order_note/service_order_note_edit.html'
+    form_class = CreateServiceOrderNoteForm
+
+    def get_success_url(self):
+        go_to_next = self.request.POST.get('next', '/')
+        return go_to_next
 
 
 class DeleteServiceOrderNoteView(views.DeleteView):
-    pass
+    model = ServiceOrderNote
+    template_name = 'service_order_note/service_order_note_delete.html'
+
+    def get_success_url(self):
+        go_to_next = self.request.POST.get('next', '/')
+        return go_to_next
