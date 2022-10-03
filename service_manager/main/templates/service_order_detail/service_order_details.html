@@ -3,12 +3,6 @@
         <div class="col-md-9 my-3">
             <h2> Total Amount Due: {{ service_order_header.total_amount_due }}</h2>
         </div>
-        {% if not serrvice_order_header.is_serviced %}
-            <div class="col-md-3 text-right align-self-center my-3">
-                <a class="btn btn-outline-success btn-lg" href="#" data-toggle="modal" data-target="#exampleModal">Complete
-                    Order</a>
-            </div>
-        {% endif %}
     </div>
     <table class="table table-striped text-center">
         <thead>

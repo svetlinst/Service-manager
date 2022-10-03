@@ -6,12 +6,14 @@ from service_manager.main import views
 from service_manager.main.views import get_index, CustomersListView, EditCustomerView, CreateCustomerView, \
     AssetsListView, CreateAssetView, EditAssetView, DeleteAssetView, DeleteCustomerView, MaterialsListView, \
     CreateMaterialView, EditMaterialView, DeleteMaterialView, CreateCustomerAssetView, EditCustomerAssetView, \
-    DeleteCustomerAssetView, ServiceOrderHeaderListView, ServiceOrderHeaderDetailView, CreateServiceOrderHeader, \
+    DeleteCustomerAssetView, ServiceOrderHeaderPendingServiceListView, ServiceOrderHeaderDetailView, \
+    CreateServiceOrderHeader, \
     CustomerRepresentativesListView, CreateCustomerRepresentativeView, EditCustomerRepresentativeView, \
     DeleteCustomerRepresentativeView, CreateServiceOrderDetailView, ServiceOrderDetailsListView, \
     EditServiceOrderDetailView, DeleteServiceOrderDetailView, complete_service_order, CustomerDepartmentsListView, \
     CreateCustomerDepartmentView, EditCustomerDepartmentView, DeleteCustomerDepartmentView, CreateServiceOrderNoteView, \
-    ServiceOrderNotesListView, EditServiceOrderNoteView, DeleteServiceOrderNoteView, DeleteServiceOrderHeaderView
+    ServiceOrderNotesListView, EditServiceOrderNoteView, DeleteServiceOrderNoteView, DeleteServiceOrderHeaderView, \
+    ServiceOrderHeaderServicedListView
 
 urlpatterns = [
                   path('', get_index, name='index'),
@@ -33,7 +35,10 @@ urlpatterns = [
                        name='edit_customer_asset'),
                   path('customer/<int:customer_id>/customer_asset/delete/<int:pk>/', DeleteCustomerAssetView.as_view(),
                        name='delete_customer_asset'),
-                  path('service_orders/', ServiceOrderHeaderListView.as_view(), name='service_orders_list'),
+                  path('service_orders/pending/', ServiceOrderHeaderPendingServiceListView.as_view(),
+                       name='service_orders_list_pending_service'),
+                  path('service_orders/serviced/', ServiceOrderHeaderServicedListView.as_view(),
+                       name='service_orders_list_serviced'),
                   path('service_order/<int:pk>/', ServiceOrderHeaderDetailView.as_view(), name='detail_service_order'),
                   path('service_order/customer/<int:customer_id>/asset/<int:asset_id>/create/',
                        CreateServiceOrderHeader.as_view(),

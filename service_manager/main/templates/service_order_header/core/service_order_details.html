@@ -18,9 +18,28 @@
         <h5><u>Serial Number:</u> {{ service_order_header.customer_asset.serial_number }}</h5>
         <h5><u>Product:</u> {{ service_order_header.customer_asset.product_number }}</h5>
     </div>
+
+    {#    Action menu bar#}
+    {#    todo: restric the below actions to the respective roles#}
+    <div class="row">
+        {% if not service_order_header.is_serviced %}
+            <div class="col-md-12 text-right align-self-center my-3">
+                <a class="btn btn-outline-success btn-lg" href="#" data-toggle="modal" data-target="#exampleModal">Complete
+                    Service</a>
+            </div>
+        {% else %}
+            <div class="col-md-12 text-right align-self-center my-3">
+                <a class="btn btn-outline-success btn-lg" href="#" data-toggle="modal" data-target="#exampleModal">Finalize
+                    Order</a>
+            </div>
+        {% endif %}
+    </div>
+
+    {#    Service order notes actions#}
     <div class="row">
         <div class="col-md-3 text-right align-self-center my-3">
-            <a href="{% url 'create_service_order_note' service_order_header.pk %}?next={{ request.path|urlencode }}" class="btn btn-success">Add
+            <a href="{% url 'create_service_order_note' service_order_header.pk %}?next={{ request.path|urlencode }}"
+               class="btn btn-success">Add
                 Note</a>
         </div>
     </div>

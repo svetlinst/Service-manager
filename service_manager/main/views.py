@@ -170,13 +170,22 @@ class DeleteCustomerAssetView(views.DeleteView):
         return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
 
 
-class ServiceOrderHeaderListView(views.ListView):
+class ServiceOrderHeaderPendingServiceListView(views.ListView):
     model = ServiceOrderHeader
     template_name = 'service_order_header/list_views/service_orders_service.html'
     ordering = ('created_on', 'customer')
+    RELATED_ENTITIES = ['serviceordernote_set', 'serviceorderdetail_set', ]
 
     def get_queryset(self):
-        return ServiceOrderHeader.objects.filter(is_serviced=False).prefetch_related('serviceordernote_set')
+        return ServiceOrderHeader.objects.filter(is_serviced=False).prefetch_related(*self.RELATED_ENTITIES)
+
+
+class ServiceOrderHeaderServicedListView(ServiceOrderHeaderPendingServiceListView):
+    template_name = 'service_order_header/list_views/service_orders_complete.html'
+    ordering = ('serviced_on', 'customer')
+
+    def get_queryset(self):
+        return ServiceOrderHeader.objects.filter(is_serviced=True).prefetch_related(*self.RELATED_ENTITIES)
 
 
 class ServiceOrderHeaderDetailView(views.DetailView):
