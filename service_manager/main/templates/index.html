@@ -4,7 +4,7 @@
 
     {#    <div class="jumbotron">#}
     {% if not request.user.is_anonymous %}
-        <h1>Hello, {{ request.user }}!</h1>
+        <h1>Hello, {{ request.user.profile.full_name }}!</h1>
     {% endif %}
     <div class="jumbotron mt-5">
         <div class="absolute">

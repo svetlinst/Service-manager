@@ -25,30 +25,31 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'index' %}">Home<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'service_orders_list_pending_service' %}">Pending Service</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'service_orders_list_serviced' %}">Completed Service</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'customers_list' %}">Customers</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Manage
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{% url 'assets_list' %}">Assets</a>
-                    <a class="dropdown-item" href="{% url 'materials_list' %}">Material</a>
-                </div>
-            </li>
+            {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'service_orders_list_pending_service' %}">Pending Service</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'service_orders_list_serviced' %}">Completed Service</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'customers_list' %}">Customers</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Manage
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'assets_list' %}">Assets</a>
+                        <a class="dropdown-item" href="{% url 'materials_list' %}">Material</a>
+                    </div>
+                </li>
+            {% endif %}
         </ul>
         <div class="d-flex">
             {% if request.user.is_anonymous %}
                 <a class="btn btn-light ms-3" href="{% url 'login_user' %}">Login</a>
-
             {% else %}
                 <a class="btn btn-light ms-3" href="{% url 'logout_user' %}">Logout</a>
             {% endif %}
