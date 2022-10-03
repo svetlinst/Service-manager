@@ -3,6 +3,7 @@
 {% block content %}
 
     {#    <div class="jumbotron">#}
+    <h1>Hello user: {{ request.user }}</h1>
     <div class="jumbotron mt-5">
         <div class="absolute">
             <h1 class="display-4">Hello, world!</h1>
@@ -12,7 +13,9 @@
             <hr class="my-4">
             <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
             <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'register_user' %}" role="button">Register</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'login_user' %}" role="button">LogIn</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'logout_user' %}" role="button">Logout</a>
             </p>
         </div>
     </div>

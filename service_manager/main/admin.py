@@ -1,8 +1,14 @@
 from django.contrib import admin
 
+from service_manager.accounts.models import Profile, AppUser
 from service_manager.main.models import Customer, CustomerType, CustomerRepresentative, CustomerDepartment, Asset, \
-    AssetCategory, Brand, CustomerAsset, Employee, Role, Material, MaterialCategory, ServiceOrderHeader, \
+    AssetCategory, Brand, CustomerAsset, Material, MaterialCategory, ServiceOrderHeader, \
     ServiceOrderDetail
+
+
+@admin.register(AppUser)
+class AppUserAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(Customer)
@@ -45,14 +51,9 @@ class CustomerAssetAdmin(admin.ModelAdmin):
     list_display = ['customer', 'asset', 'serial_number', 'product_number']
 
 
-@admin.register(Employee)
-class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ['user']
-
-
-@admin.register(Role)
-class RoleAdmin(admin.ModelAdmin):
-    pass
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ['first_name']
 
 
 @admin.register(Material)
@@ -73,4 +74,3 @@ class ServiceOrderHeaderAdmin(admin.ModelAdmin):
 @admin.register(ServiceOrderDetail)
 class ServiceOrderDetailAdmin(admin.ModelAdmin):
     list_display = ['service_order', 'material', 'quantity', 'discount']
-

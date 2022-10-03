@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.core.validators import EmailValidator
 from django.db import models
 
+from service_manager.accounts.models import Profile
+
 
 class BaseAuditEntity(models.Model):
     created_on = models.DateTimeField(
@@ -215,30 +217,30 @@ class CustomerAsset(BaseAuditEntity):
         ordering = ('asset__category__name', 'asset__brand__name', 'asset__model_name', 'serial_number',)
 
 
-class Role(BaseAuditEntity):
-    NAME_MAX_LENGTH = 20
-
-    name = models.CharField(
-        max_length=NAME_MAX_LENGTH,
-    )
-
-    def __str__(self):
-        return self.name
-
-
-class Employee(BaseAuditEntity):
-    role = models.ManyToManyField(
-        Role,
-    )
-
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        primary_key=False,
-    )
-
-    def __str__(self):
-        return f'{self.user.first_name} {self.user.last_name}'
+# class Role(BaseAuditEntity):
+#     NAME_MAX_LENGTH = 20
+#
+#     name = models.CharField(
+#         max_length=NAME_MAX_LENGTH,
+#     )
+#
+#     def __str__(self):
+#         return self.name
+#
+#
+# class Employee(BaseAuditEntity):
+#     role = models.ManyToManyField(
+#         Role,
+#     )
+#
+#     user = models.OneToOneField(
+#         User,
+#         on_delete=models.CASCADE,
+#         primary_key=False,
+#     )
+#
+#     def __str__(self):
+#         return f'{self.user.first_name} {self.user.last_name}'
 
 
 class MaterialCategory(BaseAuditEntity):
@@ -303,7 +305,7 @@ class ServiceOrderHeader(BaseAuditEntity):
     )
 
     serviced_by = models.ForeignKey(
-        Employee,
+        Profile,
         on_delete=models.CASCADE,
         related_name='serviced_by',
         null=True,
@@ -321,7 +323,7 @@ class ServiceOrderHeader(BaseAuditEntity):
     )
 
     completed_by = models.ForeignKey(
-        Employee,
+        Profile,
         on_delete=models.CASCADE,
         related_name='completed_by',
         null=True,
@@ -390,7 +392,7 @@ class ServiceOrderNote(BaseAuditEntity):
     note = models.TextField()
 
     created_by = models.ForeignKey(
-        Employee,
+        Profile,
         on_delete=models.CASCADE,
     )
 

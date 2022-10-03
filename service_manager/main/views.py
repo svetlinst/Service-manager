@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 import django.views.generic as views
 from django.urls import reverse_lazy
 from django.db.models import Q
+from django.contrib.auth import mixins as auth_mixins
 
 from service_manager.main.forms import EditCustomerForm, CreateCustomerForm, CreateAssetForm, EditAssetForm, \
     CreateMaterialForm, EditMaterialForm, CreateCustomerAssetForm, EditCustomerAssetForm, CreateServiceOrderHeaderForm, \
@@ -18,7 +19,7 @@ def get_index(request):
     return render(request, 'index.html')
 
 
-class CustomersListView(views.ListView):
+class CustomersListView(auth_mixins.LoginRequiredMixin, views.ListView):
     model = Customer
     template_name = 'customer/customers.html'
     ordering = ('name',)
