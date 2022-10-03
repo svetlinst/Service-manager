@@ -33,7 +33,7 @@ class CustomersListView(auth_mixins.LoginRequiredMixin, views.ListView):
         return queryset
 
 
-class EditCustomerView(views.UpdateView):
+class EditCustomerView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = Customer
     form_class = EditCustomerForm
     template_name = 'customer/customer_edit.html'
@@ -63,72 +63,72 @@ class EditCustomerView(views.UpdateView):
         return context
 
 
-class CreateCustomerView(views.CreateView):
+class CreateCustomerView(auth_mixins.LoginRequiredMixin, views.CreateView):
     model = Customer
     form_class = CreateCustomerForm
     template_name = 'customer/customer_create.html'
     success_url = reverse_lazy('customers_list')
 
 
-class DeleteCustomerView(views.DeleteView):
+class DeleteCustomerView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = Customer
     template_name = 'customer/customer_delete.html'
     success_url = reverse_lazy('customers_list')
 
 
-class AssetsListView(views.ListView):
+class AssetsListView(auth_mixins.LoginRequiredMixin, views.ListView):
     model = Asset
     template_name = 'asset/assets.html'
     ordering = ('category', 'brand', 'model_name', 'model_number')
 
 
-class CreateAssetView(views.CreateView):
+class CreateAssetView(auth_mixins.LoginRequiredMixin, views.CreateView):
     model = Asset
     form_class = CreateAssetForm
     template_name = 'asset/asset_create.html'
     success_url = reverse_lazy('assets_list')
 
 
-class EditAssetView(views.UpdateView):
+class EditAssetView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = Asset
     form_class = EditAssetForm
     template_name = 'asset/asset_edit.html'
     success_url = reverse_lazy('assets_list')
 
 
-class DeleteAssetView(views.DeleteView):
+class DeleteAssetView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = Asset
     template_name = 'asset/asset_delete.html'
     success_url = reverse_lazy('assets_list')
 
 
-class MaterialsListView(views.ListView):
+class MaterialsListView(auth_mixins.LoginRequiredMixin, views.ListView):
     model = Material
     template_name = 'material/materials.html'
     ordering = ('category', 'name')
 
 
-class CreateMaterialView(views.CreateView):
+class CreateMaterialView(auth_mixins.LoginRequiredMixin, views.CreateView):
     model = Material
     form_class = CreateMaterialForm
     template_name = 'material/material_create.html'
     success_url = reverse_lazy('materials_list')
 
 
-class EditMaterialView(views.UpdateView):
+class EditMaterialView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = Material
     form_class = EditMaterialForm
     template_name = 'material/material_edit.html'
     success_url = reverse_lazy('materials_list')
 
 
-class DeleteMaterialView(views.DeleteView):
+class DeleteMaterialView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = Material
     template_name = 'material/material_delete.html'
     success_url = reverse_lazy('materials_list')
 
 
-class CreateCustomerAssetView(views.CreateView):
+class CreateCustomerAssetView(auth_mixins.LoginRequiredMixin, views.CreateView):
     model = CustomerAsset
     form_class = CreateCustomerAssetForm
     template_name = 'customer_asset/customer_asset_create.html'
@@ -154,7 +154,7 @@ class CreateCustomerAssetView(views.CreateView):
         return context
 
 
-class EditCustomerAssetView(views.UpdateView):
+class EditCustomerAssetView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = CustomerAsset
     form_class = EditCustomerAssetForm
     template_name = 'customer_asset/customer_asset_edit.html'
@@ -163,7 +163,7 @@ class EditCustomerAssetView(views.UpdateView):
         return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
 
 
-class DeleteCustomerAssetView(views.DeleteView):
+class DeleteCustomerAssetView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = CustomerAsset
     template_name = 'customer_asset/customer_asset_delete.html'
 
@@ -171,7 +171,7 @@ class DeleteCustomerAssetView(views.DeleteView):
         return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
 
 
-class ServiceOrderHeaderPendingServiceListView(views.ListView):
+class ServiceOrderHeaderPendingServiceListView(auth_mixins.LoginRequiredMixin, views.ListView):
     model = ServiceOrderHeader
     template_name = 'service_order_header/list_views/service_orders_service.html'
     ordering = ('created_on', 'customer')
@@ -189,13 +189,13 @@ class ServiceOrderHeaderServicedListView(ServiceOrderHeaderPendingServiceListVie
         return ServiceOrderHeader.objects.filter(is_serviced=True).prefetch_related(*self.RELATED_ENTITIES)
 
 
-class ServiceOrderHeaderDetailView(views.DetailView):
+class ServiceOrderHeaderDetailView(auth_mixins.LoginRequiredMixin, views.DetailView):
     model = ServiceOrderHeader
     template_name = 'service_order_header/core/service_order_details.html'
     context_object_name = 'service_order_header'
 
 
-class CreateServiceOrderHeader(views.CreateView):
+class CreateServiceOrderHeader(auth_mixins.LoginRequiredMixin, views.CreateView):
     model = ServiceOrderHeader
     form_class = CreateServiceOrderHeaderForm
     template_name = 'service_order_header/core/service_order_create.html'
@@ -232,29 +232,29 @@ class CreateServiceOrderHeader(views.CreateView):
         return context
 
 
-class DeleteServiceOrderHeaderView(views.DeleteView):
+class DeleteServiceOrderHeaderView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = ServiceOrderHeader
     template_name = 'service_order_header/core/service_order_delete.html'
     success_url = reverse_lazy('service_orders_list')
 
 
-def load_customer_representatives(request):
-    customer = request.GET.get('customer', None)
-    if customer:
-        customer_representatives = CustomerRepresentative.objects.filter(customer=customer)
-        context = {
-            'customer_representatives': customer_representatives,
-        }
-        return render(request, 'partial/customer_representatives.html', context)
+# def load_customer_representatives(request):
+#     customer = request.GET.get('customer', None)
+#     if customer:
+#         customer_representatives = CustomerRepresentative.objects.filter(customer=customer)
+#         context = {
+#             'customer_representatives': customer_representatives,
+#         }
+#         return render(request, 'partial/customer_representatives.html', context)
 
 
-class CustomerRepresentativesListView(views.ListView):
+class CustomerRepresentativesListView(auth_mixins.LoginRequiredMixin, views.ListView):
     model = CustomerRepresentative
     template_name = 'customer_representatives/customer_representatives.html'
     ordering = ('first_name', 'last_name')
 
 
-class CreateCustomerRepresentativeView(views.CreateView):
+class CreateCustomerRepresentativeView(auth_mixins.LoginRequiredMixin, views.CreateView):
     model = CustomerRepresentative
     template_name = 'customer_representatives/customer_representatives_create.html'
     form_class = CreateCustomerRepresentativeForm
@@ -280,7 +280,7 @@ class CreateCustomerRepresentativeView(views.CreateView):
         return context
 
 
-class EditCustomerRepresentativeView(views.UpdateView):
+class EditCustomerRepresentativeView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = CustomerRepresentative
     template_name = 'customer_representatives/customer_representative_edit.html'
     form_class = EditCustomerRepresentativeForm
@@ -289,7 +289,7 @@ class EditCustomerRepresentativeView(views.UpdateView):
         return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
 
 
-class DeleteCustomerRepresentativeView(views.DeleteView):
+class DeleteCustomerRepresentativeView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = CustomerRepresentative
     template_name = 'customer_representatives/customer_representative_delete.html'
 
@@ -297,7 +297,7 @@ class DeleteCustomerRepresentativeView(views.DeleteView):
         return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
 
 
-class CreateServiceOrderDetailView(views.CreateView):
+class CreateServiceOrderDetailView(auth_mixins.LoginRequiredMixin, views.CreateView):
     model = ServiceOrderDetail
     template_name = 'service_order_detail/service_order_details_create.html'
     form_class = CreateServiceOrderDetailForm
@@ -329,7 +329,7 @@ class CreateServiceOrderDetailView(views.CreateView):
         return reverse_lazy('service_orders_list')
 
 
-class EditServiceOrderDetailView(views.UpdateView):
+class EditServiceOrderDetailView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = ServiceOrderDetail
     template_name = 'service_order_detail/service_order_detail_edit.html'
     form_class = EditServiceOrderDetailForm
@@ -341,13 +341,13 @@ class EditServiceOrderDetailView(views.UpdateView):
         return reverse_lazy('service_orders_list')
 
 
-class ServiceOrderDetailsListView(views.ListView):
+class ServiceOrderDetailsListView(auth_mixins.LoginRequiredMixin, views.ListView):
     model = ServiceOrderDetail
     template_name = 'service_order_detail/service_order_details.html'
     ordering = ('material', 'quantity',)
 
 
-class DeleteServiceOrderDetailView(views.DeleteView):
+class DeleteServiceOrderDetailView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = ServiceOrderDetail
     template_name = 'service_order_detail/service_order_detail_delete.html'
 
@@ -361,19 +361,19 @@ class DeleteServiceOrderDetailView(views.DeleteView):
 def complete_service_order(request, pk):
     service_order_header = ServiceOrderHeader.objects.get(pk=pk)
     service_order_header.is_serviced = True
-    service_order_header.serviced_by = request.user.employee
+    service_order_header.serviced_by = request.user
     service_order_header.serviced_on = datetime.datetime.now()
     service_order_header.save()
 
     return redirect('service_orders_list')
 
 
-class CustomerDepartmentsListView(views.ListView):
+class CustomerDepartmentsListView(auth_mixins.LoginRequiredMixin, views.ListView):
     model = CustomerDepartment
     template_name = 'customer_department/customer_departments.html'
 
 
-class CreateCustomerDepartmentView(views.CreateView):
+class CreateCustomerDepartmentView(auth_mixins.LoginRequiredMixin, views.CreateView):
     model = CustomerDepartment
     template_name = 'customer_department/customer_department_create.html'
     form_class = CreateCustomerDepartmentForm
@@ -404,7 +404,7 @@ class CreateCustomerDepartmentView(views.CreateView):
         return context
 
 
-class EditCustomerDepartmentView(views.UpdateView):
+class EditCustomerDepartmentView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = CustomerDepartment
     template_name = 'customer_department/customer_department_edit.html'
     form_class = CreateCustomerDepartmentForm
@@ -416,7 +416,7 @@ class EditCustomerDepartmentView(views.UpdateView):
         return reverse_lazy('customers_list')
 
 
-class DeleteCustomerDepartmentView(views.DeleteView):
+class DeleteCustomerDepartmentView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = CustomerDepartment
     template_name = 'customer_department/customer_department_delete.html'
 
@@ -427,7 +427,7 @@ class DeleteCustomerDepartmentView(views.DeleteView):
         return reverse_lazy('customers_list')
 
 
-class CreateServiceOrderNoteView(views.CreateView):
+class CreateServiceOrderNoteView(auth_mixins.LoginRequiredMixin, views.CreateView):
     model = ServiceOrderNote
     template_name = 'service_order_note/service_order_note_create.html'
     form_class = CreateServiceOrderNoteForm
@@ -460,12 +460,12 @@ class CreateServiceOrderNoteView(views.CreateView):
         return go_to_next
 
 
-class ServiceOrderNotesListView(views.ListView):
+class ServiceOrderNotesListView(auth_mixins.LoginRequiredMixin, views.ListView):
     model = ServiceOrderNote
     template_name = 'service_order_note/service_order_notes.html'
 
 
-class EditServiceOrderNoteView(views.UpdateView):
+class EditServiceOrderNoteView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = ServiceOrderNote
     template_name = 'service_order_note/service_order_note_edit.html'
     form_class = CreateServiceOrderNoteForm
@@ -475,7 +475,7 @@ class EditServiceOrderNoteView(views.UpdateView):
         return go_to_next
 
 
-class DeleteServiceOrderNoteView(views.DeleteView):
+class DeleteServiceOrderNoteView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = ServiceOrderNote
     template_name = 'service_order_note/service_order_note_delete.html'
 
