@@ -21,7 +21,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mx-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'index' %}">Home<span class="sr-only">(current)</span></a>
             </li>
@@ -45,6 +45,14 @@
                 </div>
             </li>
         </ul>
+        <div class="d-flex">
+            {% if request.user.is_anonymous %}
+                <a class="btn btn-light ms-3" href="{% url 'login_user' %}">Login</a>
+
+            {% else %}
+                <a class="btn btn-light ms-3" href="{% url 'logout_user' %}">Logout</a>
+            {% endif %}
+        </div>
     </div>
 </nav>
 <!-- End Nav Bar -->

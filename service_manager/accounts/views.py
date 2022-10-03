@@ -15,6 +15,7 @@ class RegisterView(views.CreateView):
 
 class LoginUserView(auth_views.LoginView):
     template_name = 'login_user.html'
+    form_class = LoginForm
 
     def get_success_url(self):
         next_url = self.request.GET.get('next', None)

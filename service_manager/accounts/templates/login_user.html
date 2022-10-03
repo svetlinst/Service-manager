@@ -1,8 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-    <form method="post" action="{% url 'login_user' %}?next={{ next }}">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit" class="btn btn-primary">LogIn</button>
-    </form>
+    <div class="form-group mb-2">
+        <div class="row justify-content-center my-2">
+            <form method="post" action="{% url 'login_user' %}?next={{ next }}">
+                {% csrf_token %}
+                {{ form }}
+                <div class="row justify-content-center my-2">
+                    <button type="submit" class="btn btn-primary ">LogIn</button>
+                </div>
+                <div class="row justify-content-center my-2">
+                    <a type="submit" href="{% url 'register_user' %}" class="link-primary">Register</a>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}
