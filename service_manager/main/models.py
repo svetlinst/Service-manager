@@ -217,32 +217,6 @@ class CustomerAsset(BaseAuditEntity):
         ordering = ('asset__category__name', 'asset__brand__name', 'asset__model_name', 'serial_number',)
 
 
-# class Role(BaseAuditEntity):
-#     NAME_MAX_LENGTH = 20
-#
-#     name = models.CharField(
-#         max_length=NAME_MAX_LENGTH,
-#     )
-#
-#     def __str__(self):
-#         return self.name
-#
-#
-# class Employee(BaseAuditEntity):
-#     role = models.ManyToManyField(
-#         Role,
-#     )
-#
-#     user = models.OneToOneField(
-#         User,
-#         on_delete=models.CASCADE,
-#         primary_key=False,
-#     )
-#
-#     def __str__(self):
-#         return f'{self.user.first_name} {self.user.last_name}'
-
-
 class MaterialCategory(BaseAuditEntity):
     NAME_MAX_LENGTH = 20
 

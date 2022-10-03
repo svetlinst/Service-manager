@@ -2,7 +2,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render
 import django.views.generic as views
 from django.urls import reverse_lazy
-from django.contrib.auth import views as auth_views
+from django.contrib.auth import views as auth_views, login
 
 from service_manager.accounts.forms import RegisterForm, LoginForm
 
@@ -11,6 +11,11 @@ class RegisterView(views.CreateView):
     form_class = RegisterForm
     template_name = 'register_user.html'
     success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        login(self.request, self.object)
+        return result
 
 
 class LoginUserView(auth_views.LoginView):
