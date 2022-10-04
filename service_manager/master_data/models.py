@@ -13,9 +13,6 @@ class CustomerType(BaseAuditEntity):
     def __str__(self):
         return self.name
 
-    # class Meta:
-    #     db_table = 'main_customer_type'
-
 
 class Brand(BaseAuditEntity):
     NAME_MAX_LENGTH = 100
@@ -42,7 +39,6 @@ class AssetCategory(BaseAuditEntity):
         return self.name
 
     class Meta:
-        # db_table = 'main_asset_category'
         ordering = ('name',)
 
 

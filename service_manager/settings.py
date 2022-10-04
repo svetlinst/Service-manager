@@ -45,6 +45,7 @@ THIRD_PARTY_APPS = (
 PROJECT_APPS = (
     'service_manager.main',
     'service_manager.accounts',
+    'service_manager.customers',
     'service_manager.master_data',
 )
 
