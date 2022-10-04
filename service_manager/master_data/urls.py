@@ -3,7 +3,8 @@ from django.urls import path
 from service_manager.master_data.views import AssetsListView, CreateAssetView, EditAssetView, DeleteAssetView, \
     MaterialsListView, CreateMaterialView, EditMaterialView, DeleteMaterialView, MaterialCategoriesListView, \
     EditMaterialCategoryView, DeleteMaterialCategoryView, CreateMaterialCategoryView, BrandsListView, CreateBrandView, \
-    EditBrandView, DeleteBrandView
+    EditBrandView, DeleteBrandView, AssetCategoriesListView, CreateAssetCategoryView, EditAssetCategoryView, \
+    DeleteAssetCategoryView
 
 urlpatterns = [
     path('assets/', AssetsListView.as_view(), name='assets_list'),
@@ -22,4 +23,8 @@ urlpatterns = [
     path('brands/create/', CreateBrandView.as_view(), name='create_brand'),
     path('brands/<int:pk>/', EditBrandView.as_view(), name='edit_brand'),
     path('brands/delete/<int:pk>/', DeleteBrandView.as_view(), name='delete_brand'),
+    path('asset_cateogries/', AssetCategoriesListView.as_view(), name='asset_categories_list'),
+    path('asset_categories/create/', CreateAssetCategoryView.as_view(), name='create_asset_category'),
+    path('asset_categories/<int:pk>/', EditAssetCategoryView.as_view(), name='edit_asset_category'),
+    path('asset_categories/delete/<int:pk>/', DeleteAssetCategoryView.as_view(), name='delete_asset_category'),
 ]

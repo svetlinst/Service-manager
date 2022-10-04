@@ -4,8 +4,8 @@ from django.contrib.auth import mixins as auth_mixins
 
 from service_manager.core.views import BootstrapFormViewMixin
 from service_manager.master_data.forms import CreateAssetForm, EditAssetForm, CreateMaterialForm, EditMaterialForm, \
-    EditMaterialCategoryForm, EditBrandForm
-from service_manager.master_data.models import Asset, Material, MaterialCategory, Brand
+    EditMaterialCategoryForm, EditBrandForm, EditAssetCategoryForm
+from service_manager.master_data.models import Asset, Material, MaterialCategory, Brand, AssetCategory
 
 
 class AssetsListView(auth_mixins.LoginRequiredMixin, views.ListView):
@@ -110,3 +110,29 @@ class DeleteBrandView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = Brand
     template_name = 'brands/brand_delete.html'
     success_url = reverse_lazy('brands_list')
+
+
+class AssetCategoriesListView(auth_mixins.LoginRequiredMixin, views.ListView):
+    model = AssetCategory
+    template_name = 'asset_category/asset_categories.html'
+    ordering = ('name',)
+
+
+class CreateAssetCategoryView(auth_mixins.LoginRequiredMixin, BootstrapFormViewMixin, views.CreateView):
+    model = AssetCategory
+    fields = '__all__'
+    template_name = 'asset_category/asset_category_create.html'
+    success_url = reverse_lazy('asset_categories_list')
+
+
+class EditAssetCategoryView(auth_mixins.LoginRequiredMixin, views.UpdateView):
+    model = AssetCategory
+    form_class = EditAssetCategoryForm
+    template_name = 'asset_category/asset_category_edit.html'
+    success_url = reverse_lazy('asset_categories_list')
+
+
+class DeleteAssetCategoryView(auth_mixins.LoginRequiredMixin, views.DeleteView):
+    model = AssetCategory
+    template_name = 'asset_category/asset_category_delete.html'
+    success_url = reverse_lazy('asset_categories_list')
