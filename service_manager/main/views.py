@@ -94,16 +94,6 @@ class CreateServiceOrderDetailView(auth_mixins.LoginRequiredMixin, views.CreateV
     template_name = 'service_order_detail/service_order_details_create.html'
     form_class = CreateServiceOrderDetailForm
 
-    def get_initial(self):
-        service_order_id = self.kwargs['order_id']
-
-        if service_order_id:
-            self.initial.update({
-                'service_order': service_order_id,
-            })
-
-        return super().get_initial()
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -114,11 +104,18 @@ class CreateServiceOrderDetailView(auth_mixins.LoginRequiredMixin, views.CreateV
 
         return context
 
-    def get_success_url(self):
+    def form_valid(self, form):
         service_order_header_id = self.kwargs['order_id']
-        if service_order_header_id:
-            return reverse_lazy('create_service_order_detail', kwargs={'order_id': service_order_header_id})
-        return reverse_lazy('service_orders_list')
+        service_order_header = ServiceOrderHeader.objects.filter(pk=service_order_header_id).get()
+        service_order_detail = ServiceOrderDetail(
+            quantity=form.cleaned_data['quantity'],
+            discount=form.cleaned_data['discount'],
+            material=form.cleaned_data['material'],
+            service_order=service_order_header,
+        )
+        service_order_detail.save()
+
+        return redirect('create_service_order_detail', service_order_header_id)
 
 
 class EditServiceOrderDetailView(auth_mixins.LoginRequiredMixin, views.UpdateView):
