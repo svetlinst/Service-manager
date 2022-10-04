@@ -1,6 +1,7 @@
 from django import forms
 
-from service_manager.master_data.models import Asset, Material
+from service_manager.core.forms import BootstrapFormMixin
+from service_manager.master_data.models import Asset, Material, MaterialCategory
 
 
 class CreateAssetForm(forms.ModelForm):
@@ -46,3 +47,9 @@ class CreateMaterialForm(forms.ModelForm):
 
 class EditMaterialForm(CreateMaterialForm):
     pass
+
+
+class EditMaterialCategoryForm(BootstrapFormMixin, forms.ModelForm):
+    class Meta:
+        model = MaterialCategory
+        fields = '__all__'
