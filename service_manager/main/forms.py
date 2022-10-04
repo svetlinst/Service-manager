@@ -1,27 +1,14 @@
 from django import forms
 
+from service_manager.core.forms import BootstrapFormMixin
 from service_manager.customers.models import Customer, CustomerAsset, CustomerRepresentative, CustomerDepartment
 from service_manager.main.models import ServiceOrderHeader, ServiceOrderDetail, ServiceOrderNote
 
 
-class CreateServiceOrderHeaderForm(forms.ModelForm):
+class CreateServiceOrderHeaderForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = ServiceOrderHeader
-        fields = ('customer', 'customer_asset', 'department', 'handed_over_by',)
-        widgets = {
-            'customer': forms.Select(
-                attrs={'class': 'form-control'},
-            ),
-            'customer_asset': forms.Select(
-                attrs={'class': 'form-control', 'id': 'customer_asset_id'},
-            ),
-            'department': forms.Select(
-                attrs={'class': 'form-control'},
-            ),
-            'handed_over_by': forms.Select(
-                attrs={'class': 'form-control'},
-            ),
-        }
+        fields = ('customer', 'customer_asset', 'department', 'handed_over_by', 'accepted_by',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -36,29 +23,17 @@ class CreateServiceOrderHeaderForm(forms.ModelForm):
 
         self.fields['customer'].disabled = True
         self.fields['customer_asset'].disabled = True
+        self.fields['accepted_by'].disabled = True
 
 
-class EditServiceOrderDetailForm(forms.ModelForm):
+class EditServiceOrderDetailForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = ServiceOrderDetail
         fields = ('service_order', 'material', 'quantity', 'discount')
-        widgets = {
-            'service_order': forms.HiddenInput(
-                attrs={'class': 'form-control'},
-            ),
-            'material': forms.Select(
-                attrs={'class': 'form-control'},
-            ),
-            'quantity': forms.NumberInput(
-                attrs={'class': 'form-control'},
-            ),
-            'discount': forms.NumberInput(
-                attrs={'class': 'form-control'},
-            ),
-        }
+        # fields = ('service_order', 'material', 'quantity', 'discount')
 
 
-class CreateServiceOrderDetailForm(forms.ModelForm):
+class CreateServiceOrderDetailForm(BootstrapFormMixin, forms.ModelForm):
     class Meta(EditServiceOrderDetailForm.Meta):
         model = ServiceOrderDetail
 
@@ -73,21 +48,10 @@ class CreateServiceOrderDetailForm(forms.ModelForm):
             self.fields['service_order'].queryset = ServiceOrderHeader.objects.filter(pk=service_order_id)
 
 
-class CreateServiceOrderNoteForm(forms.ModelForm):
+class CreateServiceOrderNoteForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = ServiceOrderNote
         fields = ('service_order', 'created_by', 'note',)
-        widgets = {
-            'service_order': forms.Select(
-                attrs={'class': 'form-control'},
-            ),
-            'note': forms.Textarea(
-                attrs={'class': 'form-control'},
-            ),
-            'created_by': forms.Select(
-                attrs={'class': 'form-control'},
-            ),
-        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -97,3 +61,4 @@ class CreateServiceOrderNoteForm(forms.ModelForm):
             self.fields['service_order'].queryset = ServiceOrderHeader.objects.filter(pk=service_order_id)
 
         self.fields['service_order'].disabled = True
+        self.fields['created_by'].disabled = True

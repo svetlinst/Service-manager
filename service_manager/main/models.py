@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from service_manager.accounts.models import Profile
+from service_manager.accounts.models import Profile, AppUser
 from service_manager.core.models import BaseAuditEntity
 from service_manager.customers.models import Customer, CustomerAsset, CustomerRepresentative, CustomerDepartment
 from service_manager.master_data.models import CustomerType, Asset, Material
@@ -39,8 +39,16 @@ class ServiceOrderHeader(BaseAuditEntity):
         default=False,
     )
 
+    accepted_by = models.ForeignKey(
+        AppUser,
+        on_delete=models.CASCADE,
+        related_name='accepted_by',
+        null=True,
+        blank=True
+    )
+
     serviced_by = models.ForeignKey(
-        Profile,
+        AppUser,
         on_delete=models.CASCADE,
         related_name='serviced_by',
         null=True,
@@ -58,7 +66,7 @@ class ServiceOrderHeader(BaseAuditEntity):
     )
 
     completed_by = models.ForeignKey(
-        Profile,
+        AppUser,
         on_delete=models.CASCADE,
         related_name='completed_by',
         null=True,
@@ -121,7 +129,7 @@ class ServiceOrderNote(BaseAuditEntity):
     note = models.TextField()
 
     created_by = models.ForeignKey(
-        Profile,
+        AppUser,
         on_delete=models.CASCADE,
     )
 

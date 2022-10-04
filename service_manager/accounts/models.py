@@ -25,6 +25,9 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
     objects = AppUserManager()
 
+    def __str__(self):
+        return self.email
+
 
 class Profile(models.Model):
     FIRST_NAME_MAX_LENGTH = 20

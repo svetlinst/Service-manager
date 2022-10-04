@@ -58,6 +58,13 @@ class CreateServiceOrderHeader(auth_mixins.LoginRequiredMixin, views.CreateView)
             self.initial.update({
                 'customer_asset': customer_asset_id,
             })
+
+        user = self.request.user
+
+        if user:
+            self.initial.update({
+                'accepted_by': user,
+            })
         return super().get_initial()
 
     def get_context_data(self, **kwargs):
@@ -79,7 +86,7 @@ class CreateServiceOrderHeader(auth_mixins.LoginRequiredMixin, views.CreateView)
 class DeleteServiceOrderHeaderView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = ServiceOrderHeader
     template_name = 'service_order_header/core/service_order_delete.html'
-    success_url = reverse_lazy('service_orders_list')
+    success_url = reverse_lazy('service_orders_list_pending_service')
 
 
 class CreateServiceOrderDetailView(auth_mixins.LoginRequiredMixin, views.CreateView):
@@ -150,7 +157,7 @@ def complete_service_order(request, pk):
     service_order_header.serviced_on = datetime.datetime.now()
     service_order_header.save()
 
-    return redirect('service_orders_list')
+    return redirect('service_orders_list_pending_service')
 
 
 class CreateServiceOrderNoteView(auth_mixins.LoginRequiredMixin, views.CreateView):
@@ -159,7 +166,6 @@ class CreateServiceOrderNoteView(auth_mixins.LoginRequiredMixin, views.CreateVie
     form_class = CreateServiceOrderNoteForm
 
     def get_initial(self):
-        # todo: Add the user as created by
         user = self.request.user
 
         service_order_header_id = self.kwargs['order_id']
@@ -167,6 +173,11 @@ class CreateServiceOrderNoteView(auth_mixins.LoginRequiredMixin, views.CreateVie
         if service_order_header_id:
             self.initial.update({
                 'service_order': service_order_header_id,
+            })
+
+        if user:
+            self.initial.update({
+                'created_by': user,
             })
 
         return super().get_initial()
