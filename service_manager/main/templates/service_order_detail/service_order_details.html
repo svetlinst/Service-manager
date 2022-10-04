@@ -15,7 +15,9 @@
             <th scope="col">Discount</th>
             <th scope="col">Unit Price</th>
             <th scope="col">Total Amount</th>
-            <th scope="col">Action</th>
+            {% if not service_order_header.is_serviced %}
+                <th scope="col">Action</th>
+            {% endif %}
 
         </tr>
         </thead>
@@ -31,19 +33,24 @@
                     <td>{{ service_order_detail.discount|floatformat:"1" }}%</td>
                     <td>{{ service_order_detail.discounted_price|floatformat:"2" }}</td>
                     <td>{{ service_order_detail.total_amount|floatformat:"2" }}</td>
-                    <td>
-                        <a class="btn btn-outline-primary btn-sm"
-                           href="{% url 'edit_service_order_detail' service_order_header.pk service_order_detail.id %}"
-                           role="button">Edit</a>
-                        <a class="btn btn-outline-danger btn-sm"
-                           href="{% url 'delete_service_order_detail' service_order_header.id service_order_detail.id %}"
-                           role="button">Delete</a>
-                    </td>
+                    {% if not service_order_header.is_serviced %}
+                        <td>
+
+                            <a class="btn btn-outline-primary btn-sm"
+                               href="{% url 'edit_service_order_detail' service_order_header.pk service_order_detail.id %}"
+                               role="button">Edit</a>
+                            <a class="btn btn-outline-danger btn-sm"
+                               href="{% url 'delete_service_order_detail' service_order_header.id service_order_detail.id %}"
+                               role="button">Delete</a>
+
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         {% endif %}
         </tbody>
     </table>
+    {#    Finish service#}
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -62,6 +69,26 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
                     <a class="btn btn-sm btn-success" href="{% url 'complete_service_order' service_order_header.pk %}">Confirm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{#    Rollback#}
+    <div class="modal fade" id="rollback_modal" tabindex="-1" role="dialog" aria-labelledby="rollback_modal_label"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Rollback Service Order with
+                        ID: {{ service_order_header.pk }}?</h5>
+                </div>
+                <div class="modal-body">
+                    <p class="my-0">Please, confirm</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                    <a class="btn btn-sm btn-success" href="{% url 'rollback_service_order' service_order_header.pk %}">Rollback</a>
                 </div>
             </div>
         </div>

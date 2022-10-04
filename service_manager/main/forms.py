@@ -58,3 +58,5 @@ class CreateServiceOrderNoteForm(BootstrapFormMixin, forms.ModelForm):
 
         self.fields['service_order'].disabled = True
         self.fields['created_by'].disabled = True
+
+

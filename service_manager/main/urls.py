@@ -6,7 +6,7 @@ from service_manager.main.views import get_index, ServiceOrderHeaderPendingServi
     CreateServiceOrderHeader, CreateServiceOrderDetailView, ServiceOrderDetailsListView, \
     EditServiceOrderDetailView, DeleteServiceOrderDetailView, complete_service_order, CreateServiceOrderNoteView, \
     ServiceOrderNotesListView, EditServiceOrderNoteView, DeleteServiceOrderNoteView, DeleteServiceOrderHeaderView, \
-    ServiceOrderHeaderServicedListView
+    ServiceOrderHeaderServicedListView, handover_service_order, rollback_service_order
 
 urlpatterns = [
                   path('', get_index, name='index'),
@@ -40,4 +40,6 @@ urlpatterns = [
                        name='edit_service_order_note'),
                   path('service_order/<int:order_id>/service_note/delete/<int:pk>/',
                        DeleteServiceOrderNoteView.as_view(), name='delete_service_order_note'),
+                  path('service_order/<int:order_id>/handover/', handover_service_order, name='handover_service_order'),
+                  path('service_order/<int:pk>/rollback/', rollback_service_order, name='rollback_service_order'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

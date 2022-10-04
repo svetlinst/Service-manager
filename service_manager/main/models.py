@@ -22,6 +22,8 @@ class ServiceOrderHeader(BaseAuditEntity):
         CustomerRepresentative,
         on_delete=models.CASCADE,
         related_name='handed_by_customer_representative',
+        null=True,
+        blank=True,
     )
 
     department = models.ForeignKey(

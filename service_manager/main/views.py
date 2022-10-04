@@ -216,3 +216,25 @@ class DeleteServiceOrderNoteView(auth_mixins.LoginRequiredMixin, views.DeleteVie
     def get_success_url(self):
         go_to_next = self.request.POST.get('next', '/')
         return go_to_next
+
+
+def rollback_service_order(request, pk):
+    service_order_header = ServiceOrderHeader.objects.get(pk=pk)
+    service_order_header.is_serviced = False
+    service_order_header.serviced_by = None
+    service_order_header.serviced_on = None
+    service_order_header.save()
+
+    return redirect('service_orders_list_pending_service')
+
+
+def handover_service_order(request, pk):
+    service_order_header = ServiceOrderHeader.objects.get(pk=pk)
+    service_order_header.is_completed = True
+    service_order_header.completed_by = request.user
+    service_order_header.completed_on = datetime.datetime.now()
+    service_order_header.save()
+
+    return redirect('service_orders_list_pending_service')
+
+
