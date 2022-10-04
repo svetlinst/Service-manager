@@ -4,8 +4,8 @@ from django.contrib.auth import mixins as auth_mixins
 
 from service_manager.core.views import BootstrapFormViewMixin
 from service_manager.master_data.forms import CreateAssetForm, EditAssetForm, CreateMaterialForm, EditMaterialForm, \
-    EditMaterialCategoryForm
-from service_manager.master_data.models import Asset, Material, MaterialCategory
+    EditMaterialCategoryForm, EditBrandForm
+from service_manager.master_data.models import Asset, Material, MaterialCategory, Brand
 
 
 class AssetsListView(auth_mixins.LoginRequiredMixin, views.ListView):
@@ -63,7 +63,7 @@ class DeleteMaterialView(auth_mixins.LoginRequiredMixin, views.DeleteView):
 class MaterialCategoriesListView(auth_mixins.LoginRequiredMixin, views.ListView):
     model = MaterialCategory
     template_name = 'material_category/material_categories.html'
-    ordering = ('-name',)
+    ordering = ('name',)
 
 
 class CreateMaterialCategoryView(auth_mixins.LoginRequiredMixin, BootstrapFormViewMixin, views.CreateView):
@@ -84,3 +84,29 @@ class DeleteMaterialCategoryView(auth_mixins.LoginRequiredMixin, views.DeleteVie
     model = MaterialCategory
     template_name = 'material_category/material_category_delete.html'
     success_url = reverse_lazy('material_categories_list')
+
+
+class BrandsListView(auth_mixins.LoginRequiredMixin, views.ListView):
+    model = Brand
+    template_name = 'brands/brands.html'
+    ordering = ('name',)
+
+
+class CreateBrandView(auth_mixins.LoginRequiredMixin, BootstrapFormViewMixin, views.CreateView):
+    model = Brand
+    fields = '__all__'
+    template_name = 'brands/brand_create.html'
+    success_url = reverse_lazy('brands_list')
+
+
+class EditBrandView(auth_mixins.LoginRequiredMixin, views.UpdateView):
+    model = Brand
+    form_class = EditBrandForm
+    template_name = 'brands/brand_edit.html'
+    success_url = reverse_lazy('brands_list')
+
+
+class DeleteBrandView(auth_mixins.LoginRequiredMixin, views.DeleteView):
+    model = Brand
+    template_name = 'brands/brand_delete.html'
+    success_url = reverse_lazy('brands_list')
