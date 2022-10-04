@@ -4,8 +4,7 @@ from django.urls import path
 
 from service_manager.main import views
 from service_manager.main.views import get_index, CustomersListView, EditCustomerView, CreateCustomerView, \
-    AssetsListView, CreateAssetView, EditAssetView, DeleteAssetView, DeleteCustomerView, MaterialsListView, \
-    CreateMaterialView, EditMaterialView, DeleteMaterialView, CreateCustomerAssetView, EditCustomerAssetView, \
+    DeleteCustomerView, CreateCustomerAssetView, EditCustomerAssetView, \
     DeleteCustomerAssetView, ServiceOrderHeaderPendingServiceListView, ServiceOrderHeaderDetailView, \
     CreateServiceOrderHeader, \
     CustomerRepresentativesListView, CreateCustomerRepresentativeView, EditCustomerRepresentativeView, \
@@ -20,15 +19,7 @@ urlpatterns = [
                   path('customers/', CustomersListView.as_view(), name='customers_list'),
                   path('customers/<int:pk>/', EditCustomerView.as_view(), name='edit_customer'),
                   path('customers/create/', CreateCustomerView.as_view(), name='create_customer'),
-                  path('assets/', AssetsListView.as_view(), name='assets_list'),
-                  path('assets/create/', CreateAssetView.as_view(), name='create_asset'),
-                  path('asset/<int:pk>/', EditAssetView.as_view(), name='edit_asset'),
-                  path('asset/delete/<int:pk>/', DeleteAssetView.as_view(), name='delete_asset'),
                   path('customer/delete/<int:pk>', DeleteCustomerView.as_view(), name='delete_customer'),
-                  path('materials/', MaterialsListView.as_view(), name='materials_list'),
-                  path('materials/create/', CreateMaterialView.as_view(), name='create_material'),
-                  path('material/<int:pk>/', EditMaterialView.as_view(), name='edit_material'),
-                  path('material/delete/<int:pk>/', DeleteMaterialView.as_view(), name='delete_material'),
                   path('customer/<int:customer_id>/customer_asset/create/', CreateCustomerAssetView.as_view(),
                        name='create_customer_asset'),
                   path('customer/<int:customer_id>/customer_asset/<int:pk>/', EditCustomerAssetView.as_view(),
@@ -45,8 +36,6 @@ urlpatterns = [
                        name='create_service_order'),
                   path('service_order/delete/<int:pk>/', DeleteServiceOrderHeaderView.as_view(),
                        name='delete_service_order'),
-                  # path('ajax/load_customer_represenatives/', views.load_customer_representatives,
-                  #      name='ajax_load_customer_representatives'),
                   path('customer/<int:customer_id>/customer_representatives/',
                        CustomerRepresentativesListView.as_view(),
                        name='customer_representatives_list'),

@@ -2,8 +2,9 @@ from django.contrib import admin
 
 from service_manager.accounts.models import Profile, AppUser
 from service_manager.main.models import Customer, CustomerType, CustomerRepresentative, CustomerDepartment, Asset, \
-    AssetCategory, Brand, CustomerAsset, Material, MaterialCategory, ServiceOrderHeader, \
+    CustomerAsset, Material, ServiceOrderHeader, \
     ServiceOrderDetail
+from service_manager.master_data.models import AssetCategory, Brand, MaterialCategory
 
 
 @admin.register(AppUser)

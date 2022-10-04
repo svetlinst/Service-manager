@@ -7,11 +7,11 @@ from django.urls import reverse_lazy
 from django.db.models import Q
 from django.contrib.auth import mixins as auth_mixins
 
-from service_manager.main.forms import EditCustomerForm, CreateCustomerForm, CreateAssetForm, EditAssetForm, \
-    CreateMaterialForm, EditMaterialForm, CreateCustomerAssetForm, EditCustomerAssetForm, CreateServiceOrderHeaderForm, \
+from service_manager.main.forms import EditCustomerForm, CreateCustomerForm, \
+    CreateCustomerAssetForm, EditCustomerAssetForm, CreateServiceOrderHeaderForm, \
     EditCustomerRepresentativeForm, CreateCustomerRepresentativeForm, CreateServiceOrderDetailForm, \
     EditServiceOrderDetailForm, CreateCustomerDepartmentForm, CreateServiceOrderNoteForm
-from service_manager.main.models import Customer, Asset, Material, CustomerAsset, ServiceOrderHeader, \
+from service_manager.main.models import Customer, CustomerAsset, ServiceOrderHeader, \
     CustomerRepresentative, ServiceOrderDetail, CustomerDepartment, ServiceOrderNote
 
 
@@ -74,58 +74,6 @@ class DeleteCustomerView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = Customer
     template_name = 'customer/customer_delete.html'
     success_url = reverse_lazy('customers_list')
-
-
-class AssetsListView(auth_mixins.LoginRequiredMixin, views.ListView):
-    model = Asset
-    template_name = 'asset/assets.html'
-    ordering = ('category', 'brand', 'model_name', 'model_number')
-
-
-class CreateAssetView(auth_mixins.LoginRequiredMixin, views.CreateView):
-    model = Asset
-    form_class = CreateAssetForm
-    template_name = 'asset/asset_create.html'
-    success_url = reverse_lazy('assets_list')
-
-
-class EditAssetView(auth_mixins.LoginRequiredMixin, views.UpdateView):
-    model = Asset
-    form_class = EditAssetForm
-    template_name = 'asset/asset_edit.html'
-    success_url = reverse_lazy('assets_list')
-
-
-class DeleteAssetView(auth_mixins.LoginRequiredMixin, views.DeleteView):
-    model = Asset
-    template_name = 'asset/asset_delete.html'
-    success_url = reverse_lazy('assets_list')
-
-
-class MaterialsListView(auth_mixins.LoginRequiredMixin, views.ListView):
-    model = Material
-    template_name = 'material/materials.html'
-    ordering = ('category', 'name')
-
-
-class CreateMaterialView(auth_mixins.LoginRequiredMixin, views.CreateView):
-    model = Material
-    form_class = CreateMaterialForm
-    template_name = 'material/material_create.html'
-    success_url = reverse_lazy('materials_list')
-
-
-class EditMaterialView(auth_mixins.LoginRequiredMixin, views.UpdateView):
-    model = Material
-    form_class = EditMaterialForm
-    template_name = 'material/material_edit.html'
-    success_url = reverse_lazy('materials_list')
-
-
-class DeleteMaterialView(auth_mixins.LoginRequiredMixin, views.DeleteView):
-    model = Material
-    template_name = 'material/material_delete.html'
-    success_url = reverse_lazy('materials_list')
 
 
 class CreateCustomerAssetView(auth_mixins.LoginRequiredMixin, views.CreateView):
@@ -236,16 +184,6 @@ class DeleteServiceOrderHeaderView(auth_mixins.LoginRequiredMixin, views.DeleteV
     model = ServiceOrderHeader
     template_name = 'service_order_header/core/service_order_delete.html'
     success_url = reverse_lazy('service_orders_list')
-
-
-# def load_customer_representatives(request):
-#     customer = request.GET.get('customer', None)
-#     if customer:
-#         customer_representatives = CustomerRepresentative.objects.filter(customer=customer)
-#         context = {
-#             'customer_representatives': customer_representatives,
-#         }
-#         return render(request, 'partial/customer_representatives.html', context)
 
 
 class CustomerRepresentativesListView(auth_mixins.LoginRequiredMixin, views.ListView):

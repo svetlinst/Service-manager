@@ -3,33 +3,8 @@ from django.core.validators import EmailValidator
 from django.db import models
 
 from service_manager.accounts.models import Profile
-
-
-class BaseAuditEntity(models.Model):
-    created_on = models.DateTimeField(
-        auto_now_add=True,
-    )
-
-    updated_on = models.DateTimeField(
-        auto_now=True,
-    )
-
-    class Meta:
-        abstract = True
-
-
-class CustomerType(BaseAuditEntity):
-    NAME_MAX_LENGTH = 50
-
-    name = models.CharField(
-        max_length=NAME_MAX_LENGTH,
-    )
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        db_table = 'main_customer_type'
+from service_manager.core.models import BaseAuditEntity
+from service_manager.master_data.models import CustomerType, Asset, Material
 
 
 class Customer(BaseAuditEntity):
@@ -128,61 +103,6 @@ class CustomerDepartment(BaseAuditEntity):
         ordering = ('name',)
 
 
-class Brand(BaseAuditEntity):
-    NAME_MAX_LENGTH = 100
-
-    name = models.CharField(
-        max_length=NAME_MAX_LENGTH,
-    )
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        ordering = ('name',)
-
-
-class AssetCategory(BaseAuditEntity):
-    NAME_MAX_LENGTH = 100
-
-    name = models.CharField(
-        max_length=NAME_MAX_LENGTH,
-    )
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        db_table = 'main_asset_category'
-        ordering = ('name',)
-
-
-class Asset(BaseAuditEntity):
-    MODEL_NUMBER_MAX_LENGTH = 20
-    MODEL_NAME_MAX_LENGTH = 100
-
-    model_number = models.CharField(
-        max_length=MODEL_NUMBER_MAX_LENGTH,
-    )
-
-    model_name = models.CharField(
-        max_length=MODEL_NAME_MAX_LENGTH,
-    )
-
-    brand = models.ForeignKey(
-        Brand,
-        on_delete=models.CASCADE,
-    )
-
-    category = models.ForeignKey(
-        AssetCategory,
-        on_delete=models.CASCADE,
-    )
-
-    def __str__(self):
-        return f'{self.category}---{self.brand.name}---{self.model_number}---{self.model_name}'
-
-
 class CustomerAsset(BaseAuditEntity):
     SERIAL_NUMBER_MAX_LENGTH = 20
     PRODUCT_NUMBER_MAX_LENGTH = 20
@@ -215,35 +135,6 @@ class CustomerAsset(BaseAuditEntity):
     class Meta:
         db_table = 'main_customer_asset'
         ordering = ('asset__category__name', 'asset__brand__name', 'asset__model_name', 'serial_number',)
-
-
-class MaterialCategory(BaseAuditEntity):
-    NAME_MAX_LENGTH = 20
-
-    name = models.CharField(
-        max_length=NAME_MAX_LENGTH,
-    )
-
-    def __str__(self):
-        return self.name
-
-
-class Material(BaseAuditEntity):
-    NAME_MAX_LENGTH = 100
-
-    name = models.CharField(
-        max_length=NAME_MAX_LENGTH,
-    )
-
-    price = models.FloatField()
-
-    category = models.ForeignKey(
-        MaterialCategory,
-        on_delete=models.CASCADE,
-    )
-
-    def __str__(self):
-        return f'{self.name} ({str(self.category)})'
 
 
 class ServiceOrderHeader(BaseAuditEntity):
