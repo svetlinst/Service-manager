@@ -27,25 +27,39 @@
             </li>
             {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'service_orders_list_pending_service' %}">Pending Service</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'service_orders_list_serviced' %}">Completed Service</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{% url 'customers_list' %}">Customers</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Orders
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkOrders">
+                        <a class="dropdown-item" href="{% url 'service_orders_list_pending_service' %}">Pending
+                            Service</a>
+                        <a class="dropdown-item" href="{% url 'service_orders_list_serviced' %}">Service Completed</a>
+                    </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         Manage
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkMasterData">
                         <a class="dropdown-item" href="{% url 'assets_list' %}">Assets</a>
                         <a class="dropdown-item" href="{% url 'asset_categories_list' %}">Asset Categories</a>
                         <a class="dropdown-item" href="{% url 'brands_list' %}">Brands</a>
                         <a class="dropdown-item" href="{% url 'materials_list' %}">Material</a>
                         <a class="dropdown-item" href="{% url 'material_categories_list' %}">Material Categories</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Reports
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkReports">
+                        <a class="dropdown-item" href="{% url 'service_orders_list_pending_service' %}">Finished Orders</a>
                     </div>
                 </li>
             {% endif %}
@@ -54,6 +68,7 @@
             {% if request.user.is_anonymous %}
                 <a class="btn btn-light ms-3" href="{% url 'login_user' %}">Login</a>
             {% else %}
+                <a class="btn btn-light ms-3" href="{% url 'logout_user' %}">Profile</a>
                 <a class="btn btn-light ms-3" href="{% url 'logout_user' %}">Logout</a>
             {% endif %}
         </div>
