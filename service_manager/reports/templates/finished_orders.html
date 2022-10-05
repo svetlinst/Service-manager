@@ -4,6 +4,7 @@
     {#    Filter results#}
     <div class="container-fluid">
         <form class="form-inline" method="GET" action="">
+            {% csrf_token %}
             <label class="m-2" for="from_date">From:</label>
             <input class="form-control m-2" id="from_date" name="from" width="250" type="date" required/>
             <i class="fa fa-calendar" aria-hidden="true"></i>
