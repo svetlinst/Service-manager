@@ -1,4 +1,24 @@
 {% block content %}
+    <div class="row">
+        <div class="col-md-9 my-3">
+            <form class="form" method="GET" action="">
+                <div class="input-group my-3">
+                    <input type="search" class="form-control rounded" placeholder="Search Departments"
+                           aria-label="Search"
+                           aria-describedby="search-addon" name="departments"/>
+                    <button type="submit" class="btn btn-outline-primary"
+                            href="#">
+                        search
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3 text-right align-self-center my-3">
+            <a href="{% url 'create_customer_department' object.pk %}"
+               class="btn btn-success">Add
+                Department</a>
+        </div>
+    </div>
     <table class="table table-striped text-center">
         <thead>
         <tr>
@@ -8,33 +28,14 @@
         </tr>
         </thead>
         <tbody>
-        <div class="row">
-            <div class="col-md-9 my-3">
-                <form class="form" method="GET" action="">
-                    <div class="input-group my-3">
-                        <input type="search" class="form-control rounded" placeholder="Search Departments"
-                               aria-label="Search"
-                               aria-describedby="search-addon" name="departments"/>
-                        <button type="submit" class="btn btn-outline-primary"
-                                href="#">
-                            search
-                        </button>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-3 text-right align-self-center my-3">
-                <a href="{% url 'create_customer_department' object.pk %}"
-                   class="btn btn-success">Add
-                    Department</a>
-            </div>
-        </div>
         {% if customer_departments %}
             {% for department in customer_departments %}
                 <tr>
                     <td>{{ department.id }}</td>
                     <td>{{ department.name }}</td>
                     <td>
-                        <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_customer_department' department.customer.pk department.pk %}"
+                        <a class="btn btn-outline-primary btn-sm"
+                           href="{% url 'edit_customer_department' department.customer.pk department.pk %}"
                            role="button">Edit</a>
                         <a class="btn btn-outline-danger btn-sm"
                            href="{% url 'delete_customer_department' department.customer.pk department.pk %}"

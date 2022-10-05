@@ -1,35 +1,69 @@
-{% extends 'base.html' %}
 {% block content %}
-    <div class="row my-md-2">
-        <div class="col-md-12 text-right">
-            <a href="{% url 'create_customer_asset' object.pk %}" class="btn btn-success">Create New Asset</a>
+    <div class="row">
+        <div class="col-md-9 my-3">
+            <form class="form" method="GET" action="">
+                <div class="input-group my-3">
+                    <input type="search" class="form-control rounded" placeholder="Search Assets"
+                           aria-label="Search"
+                           aria-describedby="search-addon" name="search_value"/>
+                    <button type="submit" class="btn btn-outline-primary"
+                            href="#">
+                        search
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3 text-right align-self-center my-3">
+            <a href="{% url 'create_customer_asset' object.pk %}" class="btn btn-success">Add
+                Asset</a>
         </div>
     </div>
     <table class="table table-striped text-center">
         <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Asset</th>
+            <th scope="col">Category</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Model Name</th>
+            <th scope="col">Model Number</th>
             <th scope="col">Serial Number</th>
             <th scope="col">Product Number</th>
             <th scope="col">Action</th>
         </tr>
         </thead>
         <tbody>
-        {% if object_list %}
-            {% for customer_asset in object_list %}
+
+        {% if customer_assets %}
+            {% for asset in customer_assets %}
                 <tr>
-                    <td>{{ customer_asset.id }}</td>
-                    <td>{{ customer_asset.asset }}</td>
-                    <td>{{ customer_asset.serial_number }}</td>
-                    <td>{{ customer_asset.product_number }}</td>
+                    <td>{{ asset.id }}</td>
+                    <td>{{ asset.asset.category }}</td>
+                    <td>{{ asset.asset.brand.name }}</td>
+                    <td>{{ asset.asset.model_name }}</td>
+                    <td>{{ asset.asset.model_number }}</td>
+                    <td>{{ asset.serial_number }}</td>
+                    <td>{{ asset.product_number }}</td>
                     <td>
-                        <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_customer_asset' customer_asset.customer.id customer_asset.pk %}"
+                        <a class="btn btn-outline-success btn-sm"
+                           href="{% url 'create_service_order' asset.customer.id asset.pk %}"
+                           role="button">Create Order</a>
+                        <a class="btn btn-outline-primary btn-sm"
+                           href="{% url 'edit_customer_asset' asset.customer.id asset.id %}"
                            role="button">Edit</a>
-                        <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_customer_asset' customer_asset.customer.id customer_asset.pk%}" role="button">Delete</a>
+                        <a class="btn btn-outline-danger btn-sm"
+                           href="{% url 'delete_customer_asset' asset.customer.id asset.id %}"
+                           role="button">Delete</a>
                     </td>
                 </tr>
             {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="100%">
+                    <p>
+                        No records matching your search
+                    </p>
+                </td>
+            </tr>
         {% endif %}
         </tbody>
     </table>

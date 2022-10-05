@@ -3,10 +3,12 @@ from django.urls import path
 from service_manager.customers.views import CustomersListView, EditCustomerView, CreateCustomerView, DeleteCustomerView, \
     CreateCustomerAssetView, EditCustomerAssetView, DeleteCustomerAssetView, CustomerRepresentativesListView, \
     CreateCustomerRepresentativeView, EditCustomerRepresentativeView, DeleteCustomerRepresentativeView, \
-    CustomerDepartmentsListView, CreateCustomerDepartmentView, EditCustomerDepartmentView, DeleteCustomerDepartmentView
+    CustomerDepartmentsListView, CreateCustomerDepartmentView, EditCustomerDepartmentView, DeleteCustomerDepartmentView, \
+    CustomerDetailView
 
 urlpatterns = [
     path('', CustomersListView.as_view(), name='customers_list'),
+    path('detail/<int:pk>/', CustomerDetailView.as_view(), name='customer_detail'),
     path('<int:pk>/', EditCustomerView.as_view(), name='edit_customer'),
     path('create/', CreateCustomerView.as_view(), name='create_customer'),
     path('delete/<int:pk>', DeleteCustomerView.as_view(), name='delete_customer'),

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="d-block mt-5" style="background-color: #d7d5d5; padding:2%">
+        <h2 class='text-center'>Customer Information</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <p><u>Name:</u> {{ object.name }}</p>
+                <p><u>Type:</u> {{ object.type.name }}</p>
+                <p><u>VAT:</u> {{ object.vat }}</p>
+            </div>
+            <div class="col-sm-6">
+                <p><u>Email:</u> {{ object.email_address }}</p>
+                <p><u>Phone:</u> {{ object.phone_number }}</p>
+                <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_customer' object.id %}"
+                   role="button">Edit</a>
+            </div>
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs">
+
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+
+    </ul>
+
+    {#    Table with Assets assigned to the customer#}
+    <h2 class='text-center'>Customer Assets</h2>
+    {% include 'customer_asset/customer_assets.html' %}
+
+    {#    Table with Customer Representatives#}
+    <h2 class='text-center'>Customer Representatives</h2>
+    {% include 'customer_representatives/customer_representatives.html' %}
+
+    {#    Table with Customer Departments#}
+    <h2 class='text-center'>Customer Departments</h2>
+    {% include 'customer_department/customer_departments.html' %}
+{% endblock %}

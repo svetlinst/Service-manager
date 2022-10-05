@@ -23,11 +23,18 @@ class CustomersListView(auth_mixins.LoginRequiredMixin, views.ListView):
         return queryset
 
 
+class CustomerDetailView(auth_mixins.LoginRequiredMixin, views.DetailView):
+    model = Customer
+    template_name = 'customer/customer_detail.html'
+
+
 class EditCustomerView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = Customer
     form_class = EditCustomerForm
     template_name = 'customer/customer_edit.html'
-    success_url = reverse_lazy('customers_list')
+
+    def get_success_url(self):
+        return reverse_lazy('customer_detail', kwargs={'pk': self.kwargs['pk']})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
