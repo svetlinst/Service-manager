@@ -47,6 +47,7 @@ PROJECT_APPS = (
     'service_manager.accounts',
     'service_manager.customers',
     'service_manager.master_data',
+    'service_manager.reports',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS

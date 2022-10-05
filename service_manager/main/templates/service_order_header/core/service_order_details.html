@@ -27,7 +27,7 @@
                 <a class="btn btn-outline-success btn-lg" href="#" data-toggle="modal" data-target="#exampleModal">Complete
                     Service</a>
             </div>
-        {% else %}
+        {% elif not service_order_header.is_completed %}
             <div class="col-md-12 text-right align-self-center my-3">
                 <a class="btn btn-outline-warning btn-lg" href="#" data-toggle="modal"
                    data-target="#rollback_modal">Rollback
@@ -39,6 +39,7 @@
     </div>
 
     {#    Service order notes actions#}
+    {% if not service_order_header.is_completed %}
     <div class="row">
         <div class="col-md-3 text-right align-self-center my-3">
             <a href="{% url 'create_service_order_note' service_order_header.pk %}?next={{ request.path|urlencode }}"
@@ -46,6 +47,8 @@
                 Note</a>
         </div>
     </div>
+    {% endif %}
+    <h2>Notes</h2>
     {% include 'service_order_note/service_order_notes.html' %}
     {% block sod_create %}
 

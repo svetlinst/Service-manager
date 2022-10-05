@@ -22,4 +22,5 @@ urlpatterns = [
     path('customers/', include('service_manager.customers.urls')),
     path('master_data/', include('service_manager.master_data.urls')),
     path('accounts/', include('service_manager.accounts.urls')),
+    path('reports/', include('service_manager.reports.urls')),
 ]
