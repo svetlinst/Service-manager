@@ -1,5 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
+    <h1 class='text-center'>Finished Orders</h1>
+    {#    Filter results#}
+    <div class="container-fluid">
+        <form class="form-inline" method="GET" action="">
+            <label class="m-2" for="from_date">From:</label>
+            <input class="form-control m-2" id="from_date" name="from" width="250" type="date" required/>
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <label class="m-2" for="to_date">To:</label>
+            <input class="form-control m-2" id="to_date" name="to" width="250" type="date" required/>
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <button type="submit" class="btn btn-outline-primary m-2" href="{% url 'customers_list' %}">filter
+            </button>
+        </form>
+    </div>
     <table class="table table-striped text-center">
         <thead>
         <tr>
