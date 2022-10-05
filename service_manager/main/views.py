@@ -1,12 +1,13 @@
 import datetime
 
+from django.db.models import Q
 from django.shortcuts import render, redirect
 import django.views.generic as views
 from django.urls import reverse_lazy
 from django.contrib.auth import mixins as auth_mixins
 
 from service_manager.main.forms import CreateServiceOrderHeaderForm, CreateServiceOrderDetailForm, \
-    EditServiceOrderDetailForm, CreateServiceOrderNoteForm
+    EditServiceOrderDetailForm, CreateServiceOrderNoteForm, HandoverServiceOrderForm
 from service_manager.main.models import Customer, CustomerAsset, ServiceOrderHeader, ServiceOrderDetail, \
     ServiceOrderNote
 
@@ -30,7 +31,8 @@ class ServiceOrderHeaderServicedListView(ServiceOrderHeaderPendingServiceListVie
     ordering = ('serviced_on', 'customer')
 
     def get_queryset(self):
-        return ServiceOrderHeader.objects.filter(is_serviced=True).prefetch_related(*self.RELATED_ENTITIES)
+        return ServiceOrderHeader.objects.filter(Q(is_serviced=True) & Q(is_completed=False)).prefetch_related(
+            *self.RELATED_ENTITIES)
 
 
 class ServiceOrderHeaderDetailView(auth_mixins.LoginRequiredMixin, views.DetailView):
@@ -228,13 +230,28 @@ def rollback_service_order(request, pk):
     return redirect('service_orders_list_pending_service')
 
 
-def handover_service_order(request, pk):
-    service_order_header = ServiceOrderHeader.objects.get(pk=pk)
-    service_order_header.is_completed = True
-    service_order_header.completed_by = request.user
-    service_order_header.completed_on = datetime.datetime.now()
-    service_order_header.save()
+class HandoverServiceOrderView(auth_mixins.LoginRequiredMixin, views.UpdateView):
+    model = ServiceOrderHeader
+    form_class = HandoverServiceOrderForm
+    template_name = 'service_order_header/core/service_order_handover.html'
+    success_url = reverse_lazy('service_orders_list_serviced')
 
-    return redirect('service_orders_list_pending_service')
+    def get_initial(self):
+        service_order_header_id = self.kwargs['pk']
 
+        if service_order_header_id:
+            self.initial.update({
+                'service_order': service_order_header_id,
+            })
 
+        return super().get_initial()
+
+    def form_valid(self, form):
+        service_order_header_id = self.kwargs['pk']
+        service_order_header = ServiceOrderHeader.objects.filter(pk=service_order_header_id).get()
+        service_order_header.is_completed = True
+        service_order_header.completed_by = self.request.user
+        service_order_header.completed_on = datetime.datetime.now()
+        service_order_header.save()
+
+        return redirect('service_orders_list_pending_service')

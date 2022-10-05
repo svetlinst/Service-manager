@@ -32,7 +32,7 @@
                 <a class="btn btn-outline-warning btn-lg" href="#" data-toggle="modal"
                    data-target="#rollback_modal">Rollback
                     Order</a>
-                <a class="btn btn-outline-success btn-lg" href="#" data-toggle="modal" data-target="#exampleModal">Finalize
+                <a class="btn btn-outline-success btn-lg" href="{% url 'handover_service_order' service_order_header.id %}" >Finalize
                     Order</a>
             </div>
         {% endif %}

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="post" id="service_order_form" action="{% url 'handover_service_order' object.pk %}">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+{% endblock %}
