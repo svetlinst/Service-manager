@@ -17,31 +17,42 @@
         </div>
     </div>
 
-    <ul class="nav nav-tabs">
+    <div id="category_tabs">
+        <ul class="nav nav-tabs">
 
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link active" id="test"
+                   href="{% url 'customer_detail' object.pk %}?show_assets">Assets</a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   href="{% url 'customer_detail' object.pk %}?show_representatives">Representatives</a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'customer_detail' object.pk %}?show_departments">Departments</a>
+            </li>
 
-    </ul>
+        </ul>
+    </div>
 
-    {#    Table with Assets assigned to the customer#}
-    <h2 class='text-center'>Customer Assets</h2>
-    {% include 'customer_asset/customer_assets.html' %}
+    {% if 'show_assets' in request.GET %}
+        {% include 'customer_asset/customer_assets.html' %}
+    {% elif 'show_representatives' in request.GET %}
+        {% include 'customer_representatives/customer_representatives.html' %}
+    {% elif 'show_departments' in request.GET %}
+        {% include 'customer_department/customer_departments.html' %}
+    {% endif %}
+    <script>
+        let triggerTabList = [].slice.call(document.querySelectorAll('#category_tabs a'))
+        triggerTabList.forEach(function (triggerEl) {
+            let tabTrigger = new bootstrap.Tab(triggerEl)
 
-    {#    Table with Customer Representatives#}
-    <h2 class='text-center'>Customer Representatives</h2>
-    {% include 'customer_representatives/customer_representatives.html' %}
-
-    {#    Table with Customer Departments#}
-    <h2 class='text-center'>Customer Departments</h2>
-    {% include 'customer_department/customer_departments.html' %}
+            triggerEl.addEventListener('click', function (event) {
+                event.preventDefault()
+                tabTrigger.show()
+            })
+        })
+    </script>
 {% endblock %}

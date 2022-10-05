@@ -27,15 +27,6 @@ class CustomerDetailView(auth_mixins.LoginRequiredMixin, views.DetailView):
     model = Customer
     template_name = 'customer/customer_detail.html'
 
-
-class EditCustomerView(auth_mixins.LoginRequiredMixin, views.UpdateView):
-    model = Customer
-    form_class = EditCustomerForm
-    template_name = 'customer/customer_edit.html'
-
-    def get_success_url(self):
-        return reverse_lazy('customer_detail', kwargs={'pk': self.kwargs['pk']})
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         customer = context['customer']
@@ -60,6 +51,15 @@ class EditCustomerView(auth_mixins.LoginRequiredMixin, views.UpdateView):
         return context
 
 
+class EditCustomerView(auth_mixins.LoginRequiredMixin, views.UpdateView):
+    model = Customer
+    form_class = EditCustomerForm
+    template_name = 'customer/customer_edit.html'
+
+    def get_success_url(self):
+        return reverse_lazy('customer_detail', kwargs={'pk': self.kwargs['pk']})
+
+
 class CreateCustomerView(auth_mixins.LoginRequiredMixin, views.CreateView):
     model = Customer
     form_class = CreateCustomerForm
@@ -79,7 +79,7 @@ class CreateCustomerAssetView(auth_mixins.LoginRequiredMixin, views.CreateView):
     template_name = 'customer_asset/customer_asset_create.html'
 
     def get_success_url(self):
-        return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
+        return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
 
     def get_initial(self):
         customer_id = self.kwargs['customer_id']
@@ -105,7 +105,7 @@ class EditCustomerAssetView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     template_name = 'customer_asset/customer_asset_edit.html'
 
     def get_success_url(self):
-        return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
+        return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
 
 
 class DeleteCustomerAssetView(auth_mixins.LoginRequiredMixin, views.DeleteView):
@@ -113,7 +113,7 @@ class DeleteCustomerAssetView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     template_name = 'customer_asset/customer_asset_delete.html'
 
     def get_success_url(self):
-        return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
+        return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
 
 
 class CustomerRepresentativesListView(auth_mixins.LoginRequiredMixin, views.ListView):
@@ -136,7 +136,7 @@ class CreateCustomerRepresentativeView(auth_mixins.LoginRequiredMixin, views.Cre
         return super().get_initial()
 
     def get_success_url(self):
-        return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
+        return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -154,7 +154,7 @@ class EditCustomerRepresentativeView(auth_mixins.LoginRequiredMixin, views.Updat
     form_class = EditCustomerRepresentativeForm
 
     def get_success_url(self):
-        return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
+        return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
 
 
 class DeleteCustomerRepresentativeView(auth_mixins.LoginRequiredMixin, views.DeleteView):
@@ -162,7 +162,7 @@ class DeleteCustomerRepresentativeView(auth_mixins.LoginRequiredMixin, views.Del
     template_name = 'customer_representatives/customer_representative_delete.html'
 
     def get_success_url(self):
-        return reverse_lazy('edit_customer', kwargs={'pk': self.object.customer.pk})
+        return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
 
 
 class CustomerDepartmentsListView(auth_mixins.LoginRequiredMixin, views.ListView):
@@ -188,7 +188,7 @@ class CreateCustomerDepartmentView(auth_mixins.LoginRequiredMixin, views.CreateV
     def get_success_url(self):
         customer_id = self.kwargs['customer_id']
         if customer_id:
-            return reverse_lazy('edit_customer', kwargs={'pk': customer_id})
+            return reverse_lazy('customer_detail', kwargs={'pk': customer_id})
         return reverse_lazy('customers_list')
 
     def get_context_data(self, **kwargs):
@@ -209,7 +209,7 @@ class EditCustomerDepartmentView(auth_mixins.LoginRequiredMixin, views.UpdateVie
     def get_success_url(self):
         customer_id = self.kwargs['customer_id']
         if customer_id:
-            return reverse_lazy('edit_customer', kwargs={'pk': customer_id})
+            return reverse_lazy('customer_detail', kwargs={'pk': customer_id})
         return reverse_lazy('customers_list')
 
 
@@ -220,5 +220,5 @@ class DeleteCustomerDepartmentView(auth_mixins.LoginRequiredMixin, views.DeleteV
     def get_success_url(self):
         customer_id = self.kwargs['customer_id']
         if customer_id:
-            return reverse_lazy('edit_customer', kwargs={'pk': customer_id})
+            return reverse_lazy('customer_detail', kwargs={'pk': customer_id})
         return reverse_lazy('customers_list')
