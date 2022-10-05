@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <form method="post" action="{% url 'register_user' %}">
+    <form method="post" action="{% url 'register_user'%}">
         {% csrf_token %}
         {{ form }}
         <button type="submit" class="btn btn-primary">Register</button>
