@@ -17,28 +17,8 @@
         </div>
     </div>
 
-    {#    <div id="category_tabs">#}
-    {#        <ul class="nav nav-tabs">#}
-    {##}
-    {#            <li class="nav-item">#}
-    {#                <a class="nav-link active" id="test"#}
-    {#                   href="{% url 'customer_detail' object.pk %}?show_assets">Assets</a>#}
-    {#            </li>#}
-    {##}
-    {#            <li class="nav-item">#}
-    {#                <a class="nav-link"#}
-    {#                   href="{% url 'customer_detail' object.pk %}?show_representatives">Representatives</a>#}
-    {#            </li>#}
-    {##}
-    {#            <li class="nav-item">#}
-    {#                <a class="nav-link" href="{% url 'customer_detail' object.pk %}?show_departments">Departments</a>#}
-    {#            </li>#}
-    {##}
-    {#        </ul>#}
-    {#    </div>#}
-
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link {% if 'show_assets' in request.GET %} active {% endif %}" href="{% url 'customer_detail' object.pk %}?show_assets" role="tab"
+        <a class="nav-item nav-link {% if not request.GET %} active {% endif %}" href="{% url 'customer_detail' object.pk %}" role="tab"
            aria-selected="true">Assets</a>
         <a class="nav-item nav-link {% if 'show_representatives' in request.GET %} active {% endif %}" href="{% url 'customer_detail' object.pk %}?show_representatives" role="tab"
            aria-selected="false">Representatives</a>
@@ -46,7 +26,7 @@
            aria-selected="false">Departments</a>
     </div>
 
-    {% if 'show_assets' in request.GET %}
+    {% if not request.GET %}
         {% include 'customer_asset/customer_assets.html' %}
     {% elif 'show_representatives' in request.GET %}
         {% include 'customer_representatives/customer_representatives.html' %}

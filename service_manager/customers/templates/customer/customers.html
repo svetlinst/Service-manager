@@ -42,7 +42,7 @@
                     <td>{{ customer.phone_number }}</td>
                     <td>
                         <a class="btn btn-outline-primary btn-sm"
-                           href="{% url 'customer_detail' customer.id %}?show_assets"
+                           href="{% url 'customer_detail' customer.id %}"
                            role="button">Manage</a>
                         <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_customer' customer.id %}"
                            role="button">Delete</a>
