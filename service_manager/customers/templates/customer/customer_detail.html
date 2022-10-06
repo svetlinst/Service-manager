@@ -20,10 +20,12 @@
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link {% if not request.GET %} active {% endif %}" href="{% url 'customer_detail' object.pk %}" role="tab"
            aria-selected="true">Assets</a>
+    {% if object.type.name == 'Business' %}
         <a class="nav-item nav-link {% if 'show_representatives' in request.GET %} active {% endif %}" href="{% url 'customer_detail' object.pk %}?show_representatives" role="tab"
            aria-selected="false">Representatives</a>
         <a class="nav-item nav-link {% if 'show_departments' in request.GET %} active {% endif %}" href="{% url 'customer_detail' object.pk %}?show_departments" role="tab"
            aria-selected="false">Departments</a>
+    {% endif %}
     </div>
 
     {% if not request.GET %}
