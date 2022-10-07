@@ -22,12 +22,14 @@
                     <td>{{ note.created_on }}</td>
                     {% if not service_order_header.is_completed %}
                         <td>
-                            <a class="btn btn-outline-primary btn-sm"
-                               href="{% url 'edit_service_order_note' note.service_order.id note.pk %}?next={{ request.path|urlencode }}"
-                               role="button">Edit</a>
-                            <a class="btn btn-outline-danger btn-sm"
-                               href="{% url 'delete_service_order_note' note.service_order.id note.pk %}?next={{ request.path|urlencode }}"
-                               role="button">Delete</a>
+                            {% if request.user == note.created_by %}
+                                <a class="btn btn-outline-primary btn-sm"
+                                   href="{% url 'edit_service_order_note' note.service_order.id note.pk %}?next={{ request.path|urlencode }}"
+                                   role="button">Edit</a>
+                                <a class="btn btn-outline-danger btn-sm"
+                                   href="{% url 'delete_service_order_note' note.service_order.id note.pk %}?next={{ request.path|urlencode }}"
+                                   role="button">Delete</a>
+                            {% endif %}
                         </td>
                     {% endif %}
                 </tr>
