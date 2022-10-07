@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="d-block mt-5" style="background-color: #d7d5d5; padding:2%">
-        <h2 class='text-center'>Customer Information</h2>
+    <div class="d-block mt-5 rounded-lg bg-light mb-3" style="padding:2%">
+        <h2 class='text-center text-secondary'>Customer Information</h2>
         <div class="row">
             <div class="col-sm-6">
                 <p><u>Name:</u> {{ object.name }}</p>
@@ -17,22 +17,27 @@
         </div>
     </div>
 
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link {% if not request.GET %} active {% endif %}" href="{% url 'customer_detail' object.pk %}" role="tab"
-           aria-selected="true">Assets</a>
-    {% if object.type.name == 'Business' %}
-        <a class="nav-item nav-link {% if 'show_representatives' in request.GET %} active {% endif %}" href="{% url 'customer_detail' object.pk %}?show_representatives" role="tab"
-           aria-selected="false">Representatives</a>
-        <a class="nav-item nav-link {% if 'show_departments' in request.GET %} active {% endif %}" href="{% url 'customer_detail' object.pk %}?show_departments" role="tab"
-           aria-selected="false">Departments</a>
-    {% endif %}
-    </div>
+    <div class="d-block mt-5 rounded-lg bg-light mb-3" style="padding:2%">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link {% if not request.GET or 'show_assets' in request.GET %} active {% endif %}"
+               href="{% url 'customer_detail' object.pk %}" role="tab"
+               aria-selected="true">Assets</a>
+            {% if object.type.name == 'Business' %}
+                <a class="nav-item nav-link {% if 'show_representatives' in request.GET %} active {% endif %}"
+                   href="{% url 'customer_detail' object.pk %}?show_representatives" role="tab"
+                   aria-selected="false">Representatives</a>
+                <a class="nav-item nav-link {% if 'show_departments' in request.GET %} active {% endif %}"
+                   href="{% url 'customer_detail' object.pk %}?show_departments" role="tab"
+                   aria-selected="false">Departments</a>
+            {% endif %}
+        </div>
 
-    {% if not request.GET %}
-        {% include 'customer_asset/customer_assets.html' %}
-    {% elif 'show_representatives' in request.GET %}
-        {% include 'customer_representatives/customer_representatives.html' %}
-    {% elif 'show_departments' in request.GET %}
-        {% include 'customer_department/customer_departments.html' %}
-    {% endif %}
+        {% if not request.GET or 'show_assets' in request.GET %}
+            {% include 'customer_asset/customer_assets.html' %}
+        {% elif 'show_representatives' in request.GET %}
+            {% include 'customer_representatives/customer_representatives.html' %}
+        {% elif 'show_departments' in request.GET %}
+            {% include 'customer_department/customer_departments.html' %}
+        {% endif %}
+    </div>
 {% endblock %}
