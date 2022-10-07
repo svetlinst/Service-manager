@@ -1,7 +1,7 @@
 from django.urls import path
 
-from service_manager.customers.views import CustomersListView, EditCustomerView, CreateCustomerView, DeleteCustomerView, \
-    CreateCustomerAssetView, EditCustomerAssetView, DeleteCustomerAssetView, \
+from service_manager.customers.views import CustomersListView, EditCustomerView, CreateCustomerView, \
+    DeleteCustomerView, CreateCustomerAssetView, EditCustomerAssetView, DeleteCustomerAssetView, \
     CreateCustomerRepresentativeView, EditCustomerRepresentativeView, DeleteCustomerRepresentativeView, \
     CreateCustomerDepartmentView, EditCustomerDepartmentView, DeleteCustomerDepartmentView, \
     CustomerDetailView

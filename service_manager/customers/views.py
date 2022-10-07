@@ -7,6 +7,7 @@ from service_manager.customers.forms import EditCustomerForm, CreateCustomerForm
     EditCustomerAssetForm, CreateCustomerRepresentativeForm, EditCustomerRepresentativeForm, \
     CreateCustomerDepartmentForm
 from service_manager.customers.models import Customer, CustomerAsset, CustomerRepresentative, CustomerDepartment
+from service_manager.main.models import ServiceOrderHeader
 
 
 class CustomersListView(auth_mixins.LoginRequiredMixin, views.ListView):
@@ -47,6 +48,11 @@ class CustomerDetailView(auth_mixins.LoginRequiredMixin, views.DetailView):
         department_search = self.request.GET.get('departments', None)
         if department_search:
             context['customer_departments'] = customer.customerdepartment_set.filter(name__icontains=department_search)
+
+        customer_open_service_orders = ServiceOrderHeader.objects.filter(customer_id=customer.id, is_completed=False)
+        assets_being_serviced = [x.customer_asset for x in customer_open_service_orders.all()]
+
+        context['assets_being_serviced'] = assets_being_serviced
 
         return context
 
