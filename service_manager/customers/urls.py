@@ -1,9 +1,9 @@
 from django.urls import path
 
 from service_manager.customers.views import CustomersListView, EditCustomerView, CreateCustomerView, DeleteCustomerView, \
-    CreateCustomerAssetView, EditCustomerAssetView, DeleteCustomerAssetView, CustomerRepresentativesListView, \
+    CreateCustomerAssetView, EditCustomerAssetView, DeleteCustomerAssetView, \
     CreateCustomerRepresentativeView, EditCustomerRepresentativeView, DeleteCustomerRepresentativeView, \
-    CustomerDepartmentsListView, CreateCustomerDepartmentView, EditCustomerDepartmentView, DeleteCustomerDepartmentView, \
+    CreateCustomerDepartmentView, EditCustomerDepartmentView, DeleteCustomerDepartmentView, \
     CustomerDetailView
 
 urlpatterns = [
@@ -16,15 +16,12 @@ urlpatterns = [
     path('<int:customer_id>/customer_asset/<int:pk>/', EditCustomerAssetView.as_view(), name='edit_customer_asset'),
     path('<int:customer_id>/customer_asset/delete/<int:pk>/', DeleteCustomerAssetView.as_view(),
          name='delete_customer_asset'),
-    path('<int:customer_id>/customer_representatives/', CustomerRepresentativesListView.as_view(),
-         name='customer_representatives_list'),
     path('<int:customer_id>/customer_representative/create/', CreateCustomerRepresentativeView.as_view(),
          name='create_customer_representative'),
     path('<int:customer_id>/customer_representative/<int:pk>/', EditCustomerRepresentativeView.as_view(),
          name='edit_customer_representative'),
     path('<int:customer_id>/customer_representative/delete/<int:pk>/', DeleteCustomerRepresentativeView.as_view(),
          name='delete_customer_representative'),
-    path('<int:customer_id>/customer_departments/', CustomerDepartmentsListView.as_view(), name='customer_department'),
     path('<int:customer_id>/customer_department/create/', CreateCustomerDepartmentView.as_view(),
          name='create_customer_department'),
     path('<int:customer_id>/customer_department/edit/<int:pk>/', EditCustomerDepartmentView.as_view(),

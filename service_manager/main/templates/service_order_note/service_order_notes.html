@@ -20,6 +20,7 @@
                     <td>{{ note.note }}</td>
                     <td>{{ note.created_by }}</td>
                     <td>{{ note.created_on }}</td>
+                    {# Allow only the creator of the given note to edit\delete it #}
                     {% if not service_order_header.is_completed %}
                         <td>
                             {% if request.user == note.created_by %}

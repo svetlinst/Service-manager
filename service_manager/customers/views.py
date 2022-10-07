@@ -116,12 +116,6 @@ class DeleteCustomerAssetView(auth_mixins.LoginRequiredMixin, views.DeleteView):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
 
 
-class CustomerRepresentativesListView(auth_mixins.LoginRequiredMixin, views.ListView):
-    model = CustomerRepresentative
-    template_name = 'customer_representatives/customer_representatives.html'
-    ordering = ('first_name', 'last_name')
-
-
 class CreateCustomerRepresentativeView(auth_mixins.LoginRequiredMixin, views.CreateView):
     model = CustomerRepresentative
     template_name = 'customer_representatives/customer_representatives_create.html'
@@ -163,11 +157,6 @@ class DeleteCustomerRepresentativeView(auth_mixins.LoginRequiredMixin, views.Del
 
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
-
-
-class CustomerDepartmentsListView(auth_mixins.LoginRequiredMixin, views.ListView):
-    model = CustomerDepartment
-    template_name = 'customer_department/customer_departments.html'
 
 
 class CreateCustomerDepartmentView(auth_mixins.LoginRequiredMixin, views.CreateView):
