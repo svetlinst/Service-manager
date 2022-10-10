@@ -1,55 +1,58 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2 class='text-center'>Customers</h2>
-    <div class="row">
-        <div class="col-md-9 my-3">
-            <form class="form" method="GET" action="">
-                <div class="input-group my-3">
-                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                           aria-describedby="search-addon" name="search_value"/>
-                    <button type="submit" class="btn btn-outline-primary" href="{% url 'customers_list' %}">search
-                    </button>
-                </div>
-            </form>
+    <div class="d-block mt-5 rounded-lg bg-light mb-3" style="padding:2%">
+        <h2 class='text-center text-secondary'>Customers</h2>
+        <div class="row">
+            <div class="col-md-9 my-3">
+                <form class="form" method="GET" action="">
+                    <div class="input-group my-3">
+                        <input type="search" class="form-control rounded mr-3" placeholder="Search" aria-label="Search"
+                               aria-describedby="search-addon" name="search_value"/>
+                        <button type="submit" class="btn btn-outline-primary" href="{% url 'customers_list' %}">search
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3 text-right align-self-center my-3">
+                <a href="{% url 'create_customer' %}" class="btn btn-success btn-md">Create</a>
+            </div>
         </div>
-        <div class="col-md-3 text-right align-self-center my-3">
-            <a href="{% url 'create_customer' %}" class="btn btn-success btn-md">Create</a>
-        </div>
+        <table class="table table-striped text-center">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Type</th>
+                <th scope="col">VAT</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            {% if object_list %}
+                {% for customer in object_list %}
+                    <tr>
+                        <td>{{ customer.id }}</td>
+                        <td>{{ customer.name }}</td>
+                        <td>{{ customer.type }}</td>
+                        <td>{{ customer.vat }}</td>
+                        <td>{{ customer.email_address }}</td>
+                        <td>{{ customer.phone_number }}</td>
+                        <td>
+                            <a class="btn btn-outline-primary btn-sm"
+                               href="{% url 'customer_detail' customer.id %}"
+                               role="button">Manage</a>
+                            <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_customer' customer.id %}"
+                               role="button">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
     </div>
-    <table class="table table-striped text-center">
-        <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Type</th>
-            <th scope="col">VAT</th>
-            <th scope="col">E-mail</th>
-            <th scope="col">Phone Number</th>
-            <th scope="col">Action</th>
-        </tr>
-        </thead>
-        <tbody>
 
-
-        {% if object_list %}
-            {% for customer in object_list %}
-                <tr>
-                    <td>{{ customer.id }}</td>
-                    <td>{{ customer.name }}</td>
-                    <td>{{ customer.type }}</td>
-                    <td>{{ customer.vat }}</td>
-                    <td>{{ customer.email_address }}</td>
-                    <td>{{ customer.phone_number }}</td>
-                    <td>
-                        <a class="btn btn-outline-primary btn-sm"
-                           href="{% url 'customer_detail' customer.id %}"
-                           role="button">Manage</a>
-                        <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_customer' customer.id %}"
-                           role="button">Delete</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        {% endif %}
-        </tbody>
-    </table>
 {% endblock %}

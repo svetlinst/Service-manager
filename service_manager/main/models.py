@@ -87,6 +87,15 @@ class ServiceOrderHeader(BaseAuditEntity):
     def total_amount_due(self):
         return f'{sum([x.total_amount for x in self.serviceorderdetail_set.all()]):.2f}'
 
+    @property
+    def status(self):
+        if not self.serviced_on:
+            return 'New'
+        if not self.completed_on:
+            return 'Serviced'
+        if self.completed_on:
+            return 'Completed'
+
     def __str__(self):
         return f'{str(self.customer)}--{str(self.customer_asset)}'
 
