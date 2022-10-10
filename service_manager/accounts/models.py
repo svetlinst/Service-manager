@@ -23,10 +23,17 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
     USERNAME_FIELD = 'email'
 
+    @property
+    def profile_full_name(self):
+        profile = Profile.objects.filter(pk=self.pk)
+        if profile:
+            return profile[0].full_name
+        return self.email
+
     objects = AppUserManager()
 
     def __str__(self):
-        return self.email
+        return self.profile_full_name
 
 
 class Profile(models.Model):

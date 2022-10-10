@@ -133,8 +133,10 @@
                 </div>
             </div>
         {% endif %}
-        <h2>Notes</h2>
-        {% include 'service_order_note/service_order_notes.html' %}
+        {% if service_order_header.serviceordernote_set.all %}
+            <h2>Notes</h2>
+            {% include 'service_order_note/service_order_notes.html' %}
+        {% endif %}
         {% block sod_create %}
 
         {% endblock %}

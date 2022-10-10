@@ -93,7 +93,7 @@ class CustomerDepartment(BaseAuditEntity):
     )
 
     def __str__(self):
-        return f'{str(self.customer)} {self.name}'
+        return f'{self.name}'
 
     class Meta:
         ordering = ('name',)
