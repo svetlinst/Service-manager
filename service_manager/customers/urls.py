@@ -4,7 +4,7 @@ from service_manager.customers.views import CustomersListView, EditCustomerView,
     DeleteCustomerView, CreateCustomerAssetView, EditCustomerAssetView, DeleteCustomerAssetView, \
     CreateCustomerRepresentativeView, EditCustomerRepresentativeView, DeleteCustomerRepresentativeView, \
     CreateCustomerDepartmentView, EditCustomerDepartmentView, DeleteCustomerDepartmentView, \
-    CustomerDetailView
+    CustomerDetailView, CustomerAssetDetailView
 
 urlpatterns = [
     path('', CustomersListView.as_view(), name='customers_list'),
@@ -13,6 +13,8 @@ urlpatterns = [
     path('create/', CreateCustomerView.as_view(), name='create_customer'),
     path('delete/<int:pk>', DeleteCustomerView.as_view(), name='delete_customer'),
     path('<int:customer_id>/customer_asset/create/', CreateCustomerAssetView.as_view(), name='create_customer_asset'),
+    path('<int:customer_id>/customer_asset/detail/<int:pk>/', CustomerAssetDetailView.as_view(),
+         name='customer_asset_detail'),
     path('<int:customer_id>/customer_asset/<int:pk>/', EditCustomerAssetView.as_view(), name='edit_customer_asset'),
     path('<int:customer_id>/customer_asset/delete/<int:pk>/', DeleteCustomerAssetView.as_view(),
          name='delete_customer_asset'),

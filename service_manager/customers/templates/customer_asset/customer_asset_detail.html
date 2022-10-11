@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="d-block mt-5 rounded-lg bg-light my-3" style="padding:2%">
+        <h2 class='text-center text-secondary mb-3'>Customer</h2>
+        <div class="row text-left">
+            <div class="col-sm-4">
+                <p class="text-primary"><b class="text-dark">Name: </b>{{ object.customer.name }}</p>
+            </div>
+            <div class="col-sm-4">
+                <p class="text-primary"><b class="text-dark">Email: </b>{{ object.customer.email_address }}</p>
+            </div>
+            <div class="col-sm-4">
+                <p class="text-primary"><b class="text-dark">Phone: </b>{{ object.customer.phone_number }}</p>
+            </div>
+        </div>
+
+        <h2 class='text-center text-secondary mb-3'>Asset</h2>
+        <div class="row text-left">
+            <div class="col-sm-4">
+                <p class="text-primary"><b class="text-dark">Category: </b>{{ object.asset.category.name }}</p>
+            </div>
+            <div class="col-sm-4">
+                <p class="text-primary"><b class="text-dark">Brand: </b>{{ object.asset.brand.name }}</p>
+            </div>
+            <div class="col-sm-4">
+                <p class="text-primary"><b class="text-dark">Model Name: </b>{{ object.asset.model_name }}</p>
+            </div>
+        </div>
+
+        <div class="row text-left">
+            <div class="col-sm-4">
+                <p class="text-primary"><b class="text-dark">Model Number: </b>{{ object.asset.model_number }}</p>
+            </div>
+            <div class="col-sm-4">
+                <p class="text-primary"><b class="text-dark">Serial Number: </b>{{ object.serial_number }}</p>
+            </div>
+            <div class="col-sm-4">
+                <p class="text-primary"><b class="text-dark">Product Number: </b>{{ object.product_number }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-block mt-5 rounded-lg bg-light my-3" style="padding:2%">
+        <h2 class='text-center text-secondary mb-3'>Service History</h2>
+        <table class="table table-striped text-center">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Status</th>
+                <th scope="col">Accepted On</th>
+                <th scope="col">Serviced On</th>
+                <th scope="col">Completed On</th>
+                <th scope="col">Serviced By</th>
+                <th scope="col">Amount Due</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if service_orders.all %}
+                {% for service_order_header in service_orders %}
+                    <tr>
+                        <td>{{ service_order_header.id }}</td>
+                        <td>{{ service_order_header.status }}</td>
+                        <td>{{ service_order_header.created_on }}</td>
+                        <td>{{ service_order_header.serviced_on|default_if_none:"" }}</td>
+                        <td>{{ service_order_header.completed_on|default_if_none:"" }}</td>
+                        <td>{{ service_order_header.serviced_by|default_if_none:"" }}</td>
+                        <td>{{ service_order_header.total_amount_due|default_if_none:"" }}</td>
+                        <td class="text-right"><a class="btn btn-outline-info btn-sm"
+                           href="{% url 'detail_service_order' service_order_header.id %}"
+                           role="button">Detail</a></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

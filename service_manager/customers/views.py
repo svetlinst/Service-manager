@@ -105,6 +105,18 @@ class CreateCustomerAssetView(auth_mixins.LoginRequiredMixin, views.CreateView):
         return context
 
 
+class CustomerAssetDetailView(views.DetailView):
+    model = CustomerAsset
+    template_name = 'customer_asset/customer_asset_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        service_orders = ServiceOrderHeader.objects.filter(customer_asset_id=self.object.pk).order_by('-created_on')
+        context['service_orders'] = service_orders
+        return context
+
+
 class EditCustomerAssetView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = CustomerAsset
     form_class = EditCustomerAssetForm
