@@ -8,6 +8,29 @@ from service_manager.master_data.models import CustomerType, Asset, Material
 
 
 class ServiceOrderHeader(BaseAuditEntity):
+    problem_description = models.TextField(
+        null=False,
+        blank=False,
+    )
+
+    is_serviced = models.BooleanField(
+        default=False,
+    )
+
+    is_completed = models.BooleanField(
+        default=False,
+    )
+
+    serviced_on = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
+    completed_on = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
     customer = models.ForeignKey(
         Customer,
         on_delete=models.CASCADE,
@@ -18,14 +41,6 @@ class ServiceOrderHeader(BaseAuditEntity):
         on_delete=models.CASCADE,
     )
 
-    handed_over_by = models.ForeignKey(
-        CustomerRepresentative,
-        on_delete=models.CASCADE,
-        related_name='handed_by_customer_representative',
-        null=True,
-        blank=True,
-    )
-
     department = models.ForeignKey(
         CustomerDepartment,
         on_delete=models.CASCADE,
@@ -33,12 +48,12 @@ class ServiceOrderHeader(BaseAuditEntity):
         blank=True,
     )
 
-    is_serviced = models.BooleanField(
-        default=False,
-    )
-
-    is_completed = models.BooleanField(
-        default=False,
+    handed_over_by = models.ForeignKey(
+        CustomerRepresentative,
+        on_delete=models.CASCADE,
+        related_name='handed_by_customer_representative',
+        null=True,
+        blank=True,
     )
 
     accepted_by = models.ForeignKey(
@@ -55,16 +70,6 @@ class ServiceOrderHeader(BaseAuditEntity):
         related_name='serviced_by',
         null=True,
         blank=True
-    )
-
-    serviced_on = models.DateTimeField(
-        null=True,
-        blank=True,
-    )
-
-    completed_on = models.DateTimeField(
-        null=True,
-        blank=True,
     )
 
     completed_by = models.ForeignKey(
