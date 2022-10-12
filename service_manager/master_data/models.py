@@ -1,6 +1,7 @@
 from django.db import models
 
-from service_manager.core.models import BaseAuditEntity
+from service_manager.core.models import BaseAuditEntity, ActiveModel
+from service_manager.customers.managers import ActiveManager
 
 
 class CustomerType(BaseAuditEntity):
@@ -42,7 +43,7 @@ class AssetCategory(BaseAuditEntity):
         ordering = ('name',)
 
 
-class Asset(BaseAuditEntity):
+class Asset(ActiveModel, BaseAuditEntity):
     MODEL_NUMBER_MAX_LENGTH = 20
     MODEL_NAME_MAX_LENGTH = 100
 

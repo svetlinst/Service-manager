@@ -2,6 +2,7 @@ from django import forms
 
 from service_manager.core.forms import BootstrapFormMixin
 from service_manager.customers.models import Customer, CustomerAsset, CustomerRepresentative, CustomerDepartment
+from service_manager.master_data.models import Asset
 
 
 class EditCustomerForm(BootstrapFormMixin, forms.ModelForm):
@@ -18,6 +19,8 @@ class CreateCustomerAssetForm(BootstrapFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['customer'].disabled = True
+        self.fields['asset'].queryset = Asset.objects.all()
+        pass
 
     class Meta:
         model = CustomerAsset

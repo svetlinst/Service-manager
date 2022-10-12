@@ -8,6 +8,7 @@ from service_manager.customers.forms import EditCustomerForm, CreateCustomerForm
     CreateCustomerDepartmentForm
 from service_manager.customers.models import Customer, CustomerAsset, CustomerRepresentative, CustomerDepartment
 from service_manager.main.models import ServiceOrderHeader
+from service_manager.master_data.models import Asset
 
 
 class CustomersListView(auth_mixins.LoginRequiredMixin, views.ListView):

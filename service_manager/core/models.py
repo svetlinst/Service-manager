@@ -1,5 +1,7 @@
 from django.db import models
 
+from service_manager.customers.managers import ActiveManager
+
 
 class BaseAuditEntity(models.Model):
     created_on = models.DateTimeField(
@@ -12,3 +14,15 @@ class BaseAuditEntity(models.Model):
 
     class Meta:
         abstract = True
+
+
+class ActiveModel(models.Model):
+    active = models.BooleanField(default=True,)
+    objects = ActiveManager()
+
+    class Meta:
+        abstract = True
+
+    def delete(self):
+        self.active = False
+        self.save()

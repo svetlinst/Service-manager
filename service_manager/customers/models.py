@@ -1,11 +1,11 @@
 from django.core.validators import EmailValidator
 from django.db import models
 
-from service_manager.core.models import BaseAuditEntity
+from service_manager.core.models import BaseAuditEntity, ActiveModel
 from service_manager.master_data.models import Asset, CustomerType
 
 
-class Customer(BaseAuditEntity):
+class Customer(BaseAuditEntity, ActiveModel):
     NAME_MAX_LENGTH = 100
     VAT_MAX_LENGTH = 20
     EMAIL_MAX_LENGTH = 254
