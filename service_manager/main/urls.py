@@ -6,7 +6,7 @@ from service_manager.main.views import get_index, ServiceOrderHeaderPendingServi
     CreateServiceOrderHeader, CreateServiceOrderDetailView, ServiceOrderDetailsListView, \
     EditServiceOrderDetailView, DeleteServiceOrderDetailView, complete_service_order, CreateServiceOrderNoteView, \
     ServiceOrderNotesListView, EditServiceOrderNoteView, DeleteServiceOrderNoteView, DeleteServiceOrderHeaderView, \
-    ServiceOrderHeaderServicedListView, rollback_service_order, HandoverServiceOrderView
+    ServiceOrderHeaderServicedListView, rollback_service_order, HandoverServiceOrderView, ServiceOrderNoteDetailView
 
 urlpatterns = [
                   path('', get_index, name='index'),
@@ -36,10 +36,13 @@ urlpatterns = [
                        name='create_service_order_note'),
                   path('service_order/<int:order_id>/service_notes/', ServiceOrderNotesListView.as_view(),
                        name='service_order_notes'),
+                  path('service_order/<int:order_id>/detail/<int:pk>/', ServiceOrderNoteDetailView.as_view(),
+                       name='service_order_note_detail'),
                   path('service_order/<int:order_id>/service_note/edit/<int:pk>/', EditServiceOrderNoteView.as_view(),
                        name='edit_service_order_note'),
                   path('service_order/<int:order_id>/service_note/delete/<int:pk>/',
                        DeleteServiceOrderNoteView.as_view(), name='delete_service_order_note'),
-                  path('service_order/<int:pk>/handover/', HandoverServiceOrderView.as_view(), name='handover_service_order'),
+                  path('service_order/<int:pk>/handover/', HandoverServiceOrderView.as_view(),
+                       name='handover_service_order'),
                   path('service_order/<int:pk>/rollback/', rollback_service_order, name='rollback_service_order'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

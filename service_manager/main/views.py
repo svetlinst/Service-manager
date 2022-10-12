@@ -201,6 +201,11 @@ class ServiceOrderNotesListView(auth_mixins.LoginRequiredMixin, views.ListView):
     template_name = 'service_order_note/service_order_notes.html'
 
 
+class ServiceOrderNoteDetailView(auth_mixins.LoginRequiredMixin, views.DetailView):
+    model = ServiceOrderNote
+    template_name = 'service_order_note/service_order_note_detail.html'
+
+
 class EditServiceOrderNoteView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = ServiceOrderNote
     template_name = 'service_order_note/service_order_note_edit.html'
