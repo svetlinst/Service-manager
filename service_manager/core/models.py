@@ -17,7 +17,7 @@ class BaseAuditEntity(models.Model):
 
 
 class ActiveModel(models.Model):
-    active = models.BooleanField(default=True,)
+    active = models.BooleanField(default=True, )
     objects = ActiveManager()
 
     class Meta:

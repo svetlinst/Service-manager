@@ -7,7 +7,7 @@ from service_manager.customers.models import Customer, CustomerAsset, CustomerRe
 from service_manager.master_data.models import CustomerType, Asset, Material
 
 
-class ServiceOrderHeader(BaseAuditEntity, ActiveModel):
+class ServiceOrderHeader(ActiveModel, BaseAuditEntity):
     problem_description = models.TextField(
         null=False,
         blank=False,
@@ -105,7 +105,7 @@ class ServiceOrderHeader(BaseAuditEntity, ActiveModel):
         return f'{str(self.customer)}--{str(self.customer_asset)}'
 
 
-class ServiceOrderDetail(BaseAuditEntity, ActiveModel):
+class ServiceOrderDetail(ActiveModel, BaseAuditEntity):
     quantity = models.FloatField()
     discount = models.FloatField()
 
@@ -141,7 +141,7 @@ class ServiceOrderDetail(BaseAuditEntity, ActiveModel):
         return self.discounted_price * self.quantity
 
 
-class ServiceOrderNote(BaseAuditEntity, ActiveModel):
+class ServiceOrderNote(ActiveModel, BaseAuditEntity):
     note = models.TextField()
 
     created_by = models.ForeignKey(

@@ -3,7 +3,7 @@ from django.db import models
 from service_manager.core.models import BaseAuditEntity, ActiveModel
 
 
-class CustomerType(BaseAuditEntity, ActiveModel):
+class CustomerType(ActiveModel, BaseAuditEntity):
     NAME_MAX_LENGTH = 50
 
     name = models.CharField(
@@ -14,7 +14,7 @@ class CustomerType(BaseAuditEntity, ActiveModel):
         return self.name
 
 
-class Brand(BaseAuditEntity, ActiveModel):
+class Brand(ActiveModel, BaseAuditEntity):
     NAME_MAX_LENGTH = 100
 
     name = models.CharField(
@@ -68,7 +68,7 @@ class Asset(ActiveModel, BaseAuditEntity):
         return f'{self.category}---{self.brand.name}---{self.model_number}---{self.model_name}'
 
 
-class MaterialCategory(BaseAuditEntity, ActiveModel):
+class MaterialCategory(ActiveModel, BaseAuditEntity):
     NAME_MAX_LENGTH = 20
 
     name = models.CharField(
@@ -79,7 +79,7 @@ class MaterialCategory(BaseAuditEntity, ActiveModel):
         return self.name
 
 
-class Material(BaseAuditEntity, ActiveModel):
+class Material(ActiveModel, BaseAuditEntity):
     NAME_MAX_LENGTH = 100
 
     name = models.CharField(

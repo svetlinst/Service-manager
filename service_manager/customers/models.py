@@ -5,7 +5,7 @@ from service_manager.core.models import BaseAuditEntity, ActiveModel
 from service_manager.master_data.models import Asset, CustomerType
 
 
-class Customer(BaseAuditEntity, ActiveModel):
+class Customer(ActiveModel, BaseAuditEntity):
     NAME_MAX_LENGTH = 100
     VAT_MAX_LENGTH = 20
     EMAIL_MAX_LENGTH = 254
@@ -41,7 +41,7 @@ class Customer(BaseAuditEntity, ActiveModel):
         return self.name
 
 
-class CustomerRepresentative(BaseAuditEntity, ActiveModel):
+class CustomerRepresentative(ActiveModel, BaseAuditEntity):
     FIRST_NAME_MAX_LENGTH = 20
     LAST_NAME_MAX_LENGTH = 20
     EMAIL_ADDRESS_MAX_LENGTH = 254
@@ -80,7 +80,7 @@ class CustomerRepresentative(BaseAuditEntity, ActiveModel):
         ordering = ('first_name', 'last_name',)
 
 
-class CustomerDepartment(BaseAuditEntity, ActiveModel):
+class CustomerDepartment(ActiveModel, BaseAuditEntity):
     NAME_MAX_LENGTH = 100
 
     name = models.CharField(
@@ -99,7 +99,7 @@ class CustomerDepartment(BaseAuditEntity, ActiveModel):
         ordering = ('name',)
 
 
-class CustomerAsset(BaseAuditEntity, ActiveModel):
+class CustomerAsset(ActiveModel, BaseAuditEntity):
     SERIAL_NUMBER_MAX_LENGTH = 20
     PRODUCT_NUMBER_MAX_LENGTH = 20
 
