@@ -1,10 +1,9 @@
 from django.db import models
 
 from service_manager.core.models import BaseAuditEntity, ActiveModel
-from service_manager.customers.managers import ActiveManager
 
 
-class CustomerType(BaseAuditEntity):
+class CustomerType(BaseAuditEntity, ActiveModel):
     NAME_MAX_LENGTH = 50
 
     name = models.CharField(
@@ -15,7 +14,7 @@ class CustomerType(BaseAuditEntity):
         return self.name
 
 
-class Brand(BaseAuditEntity):
+class Brand(BaseAuditEntity, ActiveModel):
     NAME_MAX_LENGTH = 100
 
     name = models.CharField(
@@ -29,7 +28,7 @@ class Brand(BaseAuditEntity):
         ordering = ('name',)
 
 
-class AssetCategory(BaseAuditEntity):
+class AssetCategory(ActiveModel, BaseAuditEntity):
     NAME_MAX_LENGTH = 100
 
     name = models.CharField(
@@ -69,7 +68,7 @@ class Asset(ActiveModel, BaseAuditEntity):
         return f'{self.category}---{self.brand.name}---{self.model_number}---{self.model_name}'
 
 
-class MaterialCategory(BaseAuditEntity):
+class MaterialCategory(BaseAuditEntity, ActiveModel):
     NAME_MAX_LENGTH = 20
 
     name = models.CharField(
@@ -80,7 +79,7 @@ class MaterialCategory(BaseAuditEntity):
         return self.name
 
 
-class Material(BaseAuditEntity):
+class Material(BaseAuditEntity, ActiveModel):
     NAME_MAX_LENGTH = 100
 
     name = models.CharField(

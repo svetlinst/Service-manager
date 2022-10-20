@@ -41,7 +41,7 @@ class Customer(BaseAuditEntity, ActiveModel):
         return self.name
 
 
-class CustomerRepresentative(BaseAuditEntity):
+class CustomerRepresentative(BaseAuditEntity, ActiveModel):
     FIRST_NAME_MAX_LENGTH = 20
     LAST_NAME_MAX_LENGTH = 20
     EMAIL_ADDRESS_MAX_LENGTH = 254
@@ -80,7 +80,7 @@ class CustomerRepresentative(BaseAuditEntity):
         ordering = ('first_name', 'last_name',)
 
 
-class CustomerDepartment(BaseAuditEntity):
+class CustomerDepartment(BaseAuditEntity, ActiveModel):
     NAME_MAX_LENGTH = 100
 
     name = models.CharField(
@@ -99,7 +99,7 @@ class CustomerDepartment(BaseAuditEntity):
         ordering = ('name',)
 
 
-class CustomerAsset(BaseAuditEntity):
+class CustomerAsset(BaseAuditEntity, ActiveModel):
     SERIAL_NUMBER_MAX_LENGTH = 20
     PRODUCT_NUMBER_MAX_LENGTH = 20
 

@@ -2,12 +2,12 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from service_manager.accounts.models import Profile, AppUser
-from service_manager.core.models import BaseAuditEntity
+from service_manager.core.models import BaseAuditEntity, ActiveModel
 from service_manager.customers.models import Customer, CustomerAsset, CustomerRepresentative, CustomerDepartment
 from service_manager.master_data.models import CustomerType, Asset, Material
 
 
-class ServiceOrderHeader(BaseAuditEntity):
+class ServiceOrderHeader(BaseAuditEntity, ActiveModel):
     problem_description = models.TextField(
         null=False,
         blank=False,
@@ -105,7 +105,7 @@ class ServiceOrderHeader(BaseAuditEntity):
         return f'{str(self.customer)}--{str(self.customer_asset)}'
 
 
-class ServiceOrderDetail(BaseAuditEntity):
+class ServiceOrderDetail(BaseAuditEntity, ActiveModel):
     quantity = models.FloatField()
     discount = models.FloatField()
 
@@ -141,7 +141,7 @@ class ServiceOrderDetail(BaseAuditEntity):
         return self.discounted_price * self.quantity
 
 
-class ServiceOrderNote(BaseAuditEntity):
+class ServiceOrderNote(BaseAuditEntity, ActiveModel):
     note = models.TextField()
 
     created_by = models.ForeignKey(

@@ -5,6 +5,10 @@ from service_manager.master_data.models import Asset, Material, MaterialCategory
 
 
 class CreateAssetForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['category'].queryset = AssetCategory.objects.all()
+
     class Meta:
         model = Asset
         fields = '__all__'
