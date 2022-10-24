@@ -11,7 +11,7 @@ class CreateAssetForm(forms.ModelForm):
 
     class Meta:
         model = Asset
-        fields = '__all__'
+        fields = ('category', 'brand', 'model_name', 'model_number')
         widgets = {
             'model_name': forms.TextInput(
                 attrs={'class': 'form-control'},
@@ -35,7 +35,7 @@ class EditAssetForm(CreateAssetForm):
 class CreateMaterialForm(forms.ModelForm):
     class Meta:
         model = Material
-        fields = '__all__'
+        fields = ('category', 'name', 'price',)
         widgets = {
             'name': forms.TextInput(
                 attrs={'class': 'form-control'},

@@ -68,7 +68,7 @@ class MaterialCategoriesListView(auth_mixins.LoginRequiredMixin, views.ListView)
 
 class CreateMaterialCategoryView(auth_mixins.LoginRequiredMixin, BootstrapFormViewMixin, views.CreateView):
     model = MaterialCategory
-    fields = '__all__'
+    fields = ('name', )
     template_name = 'material_category/material_category_create.html'
     success_url = reverse_lazy('material_categories_list')
 
@@ -94,7 +94,7 @@ class BrandsListView(auth_mixins.LoginRequiredMixin, views.ListView):
 
 class CreateBrandView(auth_mixins.LoginRequiredMixin, BootstrapFormViewMixin, views.CreateView):
     model = Brand
-    fields = '__all__'
+    fields = ('name', )
     template_name = 'brands/brand_create.html'
     success_url = reverse_lazy('brands_list')
 
@@ -120,7 +120,7 @@ class AssetCategoriesListView(auth_mixins.LoginRequiredMixin, views.ListView):
 
 class CreateAssetCategoryView(auth_mixins.LoginRequiredMixin, BootstrapFormViewMixin, views.CreateView):
     model = AssetCategory
-    fields = '__all__'
+    fields = ('name', )
     template_name = 'asset_category/asset_category_create.html'
     success_url = reverse_lazy('asset_categories_list')
 

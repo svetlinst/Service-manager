@@ -8,7 +8,7 @@ from service_manager.master_data.models import Asset
 class EditCustomerForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = Customer
-        fields = '__all__'
+        fields = ('type', 'name', 'vat', 'email_address', 'phone_number')
 
 
 class CreateCustomerForm(EditCustomerForm):
