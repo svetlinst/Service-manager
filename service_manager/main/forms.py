@@ -42,17 +42,7 @@ class CreateServiceOrderDetailForm(BootstrapFormMixin, forms.ModelForm):
 class CreateServiceOrderNoteForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = ServiceOrderNote
-        fields = ('service_order', 'created_by', 'note',)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        if 'service_order' in self.initial:
-            service_order_id = int(self.initial['service_order'])
-            self.fields['service_order'].queryset = ServiceOrderHeader.objects.filter(pk=service_order_id)
-
-        self.fields['service_order'].disabled = True
-        self.fields['created_by'].disabled = True
+        fields = ('note',)
 
 
 class HandoverServiceOrderForm(BootstrapFormMixin, forms.ModelForm):

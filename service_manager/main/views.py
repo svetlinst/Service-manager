@@ -177,23 +177,6 @@ class CreateServiceOrderNoteView(auth_mixins.LoginRequiredMixin, views.CreateVie
     template_name = 'service_order_note/service_order_note_create.html'
     form_class = CreateServiceOrderNoteForm
 
-    def get_initial(self):
-        user = self.request.user
-
-        service_order_header_id = self.kwargs['order_id']
-
-        if service_order_header_id:
-            self.initial.update({
-                'service_order': service_order_header_id,
-            })
-
-        if user:
-            self.initial.update({
-                'created_by': user,
-            })
-
-        return super().get_initial()
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -207,6 +190,17 @@ class CreateServiceOrderNoteView(auth_mixins.LoginRequiredMixin, views.CreateVie
     def get_success_url(self):
         go_to_next = self.request.POST.get('next', '/')
         return go_to_next
+
+    def form_valid(self, form):
+        service_order_id = self.kwargs['order_id']
+        service_order_header = ServiceOrderHeader.objects.get(pk=service_order_id)
+
+        note = form.save(commit=False)
+        note.service_order = service_order_header
+        note.created_by = self.request.user
+        note.save()
+
+        return super().form_valid(form)
 
 
 class ServiceOrderNotesListView(auth_mixins.LoginRequiredMixin, views.ListView):
