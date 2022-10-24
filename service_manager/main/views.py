@@ -27,9 +27,11 @@ class ServiceOrderHeaderPendingServiceListView(auth_mixins.LoginRequiredMixin, v
         return queryset.filter(is_serviced=False).prefetch_related(*self.RELATED_ENTITIES)
 
 
-class ServiceOrderHeaderServicedListView(ServiceOrderHeaderPendingServiceListView):
+class ServiceOrderHeaderServicedListView(auth_mixins.LoginRequiredMixin, views.ListView):
+    model = ServiceOrderHeader
     template_name = 'service_order_header/list_views/service_orders_complete.html'
     ordering = ('serviced_on', 'customer')
+    RELATED_ENTITIES = ['serviceordernote_set', 'serviceorderdetail_set', ]
 
     def get_queryset(self):
         queryset = super().get_queryset()
