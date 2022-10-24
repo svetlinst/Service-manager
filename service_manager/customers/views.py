@@ -141,14 +141,6 @@ class CreateCustomerRepresentativeView(auth_mixins.LoginRequiredMixin, views.Cre
     template_name = 'customer_representatives/customer_representatives_create.html'
     form_class = CreateCustomerRepresentativeForm
 
-    # def get_initial(self):
-    #     customer_id = self.kwargs['customer_id']
-    #     if customer_id:
-    #         self.initial.update({
-    #             'customer': customer_id,
-    #         })
-    #     return super().get_initial()
-
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
 
@@ -193,16 +185,6 @@ class CreateCustomerDepartmentView(auth_mixins.LoginRequiredMixin, views.CreateV
     template_name = 'customer_department/customer_department_create.html'
     form_class = CreateCustomerDepartmentForm
 
-    def get_initial(self):
-        customer_id = self.kwargs['customer_id']
-
-        if customer_id:
-            self.initial.update({
-                'customer': customer_id,
-            })
-
-        return super().get_initial()
-
     def get_success_url(self):
         customer_id = self.kwargs['customer_id']
         if customer_id:
@@ -217,6 +199,16 @@ class CreateCustomerDepartmentView(auth_mixins.LoginRequiredMixin, views.CreateV
             customer = Customer.objects.prefetch_related('customerdepartment_set').filter(pk=customer_id).get()
             context['customer'] = customer
         return context
+
+    def form_valid(self, form):
+        customer_id = self.kwargs['customer_id']
+        customer = Customer.objects.get(pk=customer_id)
+
+        customer_department = form.save(commit=False)
+        customer_department.customer = customer
+
+        customer_department.save()
+        return super().form_valid(form)
 
 
 class EditCustomerDepartmentView(auth_mixins.LoginRequiredMixin, views.UpdateView):
