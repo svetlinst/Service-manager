@@ -119,6 +119,7 @@ class CreateServiceOrderDetailView(auth_mixins.LoginRequiredMixin, views.CreateV
         return context
 
     def form_valid(self, form):
+        # todo: refactor this
         service_order_header_id = self.kwargs['order_id']
         service_order_header = ServiceOrderHeader.objects.filter(pk=service_order_header_id).get()
         service_order_detail = ServiceOrderDetail(

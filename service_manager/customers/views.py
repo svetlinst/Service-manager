@@ -8,7 +8,6 @@ from service_manager.customers.forms import EditCustomerForm, CreateCustomerForm
     CreateCustomerDepartmentForm
 from service_manager.customers.models import Customer, CustomerAsset, CustomerRepresentative, CustomerDepartment
 from service_manager.main.models import ServiceOrderHeader
-from service_manager.master_data.models import Asset
 
 
 class CustomersListView(auth_mixins.LoginRequiredMixin, views.ListView):
@@ -88,13 +87,15 @@ class CreateCustomerAssetView(auth_mixins.LoginRequiredMixin, views.CreateView):
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
 
-    def get_initial(self):
+    def form_valid(self, form):
         customer_id = self.kwargs['customer_id']
-        if customer_id:
-            self.initial.update({
-                'customer': customer_id,
-            })
-        return super().get_initial()
+        customer = Customer.objects.get(pk=customer_id)
+
+        customer_asset = form.save(commit=False)
+        customer_asset.customer = customer
+
+        customer_asset.save()
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

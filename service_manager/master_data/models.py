@@ -65,7 +65,7 @@ class Asset(ActiveModel, BaseAuditEntity):
     )
 
     def __str__(self):
-        return f'{self.category}---{self.brand.name}---{self.model_number}---{self.model_name}'
+        return f'{self.brand} {self.model_name} {self.model_number} ({self.category})'
 
 
 class MaterialCategory(ActiveModel, BaseAuditEntity):

@@ -18,13 +18,12 @@ class CreateCustomerForm(EditCustomerForm):
 class CreateCustomerAssetForm(BootstrapFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['customer'].disabled = True
         self.fields['asset'].queryset = Asset.objects.all()
         pass
 
     class Meta:
         model = CustomerAsset
-        fields = ('customer', 'asset', 'serial_number', 'product_number')
+        fields = ('asset', 'serial_number', 'product_number')
 
 
 class EditCustomerAssetForm(BootstrapFormMixin, forms.ModelForm):
