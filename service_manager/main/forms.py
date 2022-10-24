@@ -16,16 +16,9 @@ class CreateServiceOrderHeaderForm(BootstrapFormMixin, forms.ModelForm):
 
         if 'customer' in self.initial:
             customer_id = int(self.initial['customer'])
-            # self.fields['customer'].queryset = Customer.objects.filter(pk=customer_id)
-            # self.fields['customer_asset'].queryset = CustomerAsset.objects.filter(customer=customer_id)
             self.fields['handed_over_by'].queryset = CustomerRepresentative.objects.filter(
                 customer=customer_id)
             self.fields['department'].queryset = CustomerDepartment.objects.filter(customer=customer_id)
-            pass
-
-        # self.fields['customer'].disabled = True
-        # self.fields['customer_asset'].disabled = True
-        # self.fields['accepted_by'].disabled = True
 
 
 class EditServiceOrderDetailForm(BootstrapFormMixin, forms.ModelForm):

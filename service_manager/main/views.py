@@ -84,6 +84,18 @@ class CreateServiceOrderHeader(auth_mixins.LoginRequiredMixin, views.CreateView)
 
         return context
 
+    def form_valid(self, form):
+        customer_id = self.kwargs['customer_id']
+        customer_asset_id = self.kwargs['asset_id']
+
+        service_order = form.save(commit=False)
+        service_order.accepted_by = self.request.user
+        service_order.customer = Customer.objects.get(pk=customer_id)
+        service_order.customer_asset = CustomerAsset.objects.get(pk=customer_asset_id)
+
+        service_order.save()
+        return super().form_valid(form)
+
 
 class DeleteServiceOrderHeaderView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = ServiceOrderHeader
