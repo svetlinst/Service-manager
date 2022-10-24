@@ -39,13 +39,13 @@ class EditCustomerRepresentativeForm(BootstrapFormMixin, forms.ModelForm):
 
 
 class CreateCustomerRepresentativeForm(BootstrapFormMixin, forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['customer'].disabled = True
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['customer'].disabled = True
 
     class Meta:
         model = CustomerRepresentative
-        fields = ('customer', 'first_name', 'last_name', 'email_address', 'phone_number')
+        fields = ('first_name', 'last_name', 'email_address', 'phone_number')
 
 
 class CreateCustomerDepartmentForm(BootstrapFormMixin, forms.ModelForm):

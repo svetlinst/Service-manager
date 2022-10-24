@@ -141,13 +141,13 @@ class CreateCustomerRepresentativeView(auth_mixins.LoginRequiredMixin, views.Cre
     template_name = 'customer_representatives/customer_representatives_create.html'
     form_class = CreateCustomerRepresentativeForm
 
-    def get_initial(self):
-        customer_id = self.kwargs['customer_id']
-        if customer_id:
-            self.initial.update({
-                'customer': customer_id,
-            })
-        return super().get_initial()
+    # def get_initial(self):
+    #     customer_id = self.kwargs['customer_id']
+    #     if customer_id:
+    #         self.initial.update({
+    #             'customer': customer_id,
+    #         })
+    #     return super().get_initial()
 
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
@@ -160,6 +160,15 @@ class CreateCustomerRepresentativeView(auth_mixins.LoginRequiredMixin, views.Cre
             customer = Customer.objects.prefetch_related('customerrepresentative_set').filter(pk=customer_id).get()
             context['customer'] = customer
         return context
+
+    def form_valid(self, form):
+        customer_id = self.kwargs['customer_id']
+        customer = Customer.objects.get(pk=customer_id)
+        customer_representative = form.save(commit=False)
+
+        customer_representative.customer = customer
+        customer_representative.save()
+        return super().form_valid(form)
 
 
 class EditCustomerRepresentativeView(auth_mixins.LoginRequiredMixin, views.UpdateView):
