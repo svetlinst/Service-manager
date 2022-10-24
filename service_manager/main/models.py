@@ -94,6 +94,8 @@ class ServiceOrderHeader(ActiveModel, BaseAuditEntity):
 
     @property
     def status(self):
+        if not self.active:
+            return 'Deleted'
         if not self.serviced_on:
             return 'New'
         if not self.completed_on:

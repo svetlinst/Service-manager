@@ -27,3 +27,8 @@ class ActiveManager(models.Manager):
 
     # def get_queryset(self):
     #     return super().get_queryset().filter(active=True)
+
+
+class AllRecordsQuerySet(models.QuerySet):
+    def all(self):
+        return self.all()

@@ -1,6 +1,6 @@
 from django.db import models
 
-from service_manager.customers.managers import ActiveManager
+from service_manager.customers.managers import ActiveManager, AllRecordsQuerySet
 
 
 class BaseAuditEntity(models.Model):
@@ -19,6 +19,7 @@ class BaseAuditEntity(models.Model):
 class ActiveModel(models.Model):
     active = models.BooleanField(default=True, )
     objects = ActiveManager()
+    all_records = AllRecordsQuerySet.as_manager()
 
     class Meta:
         abstract = True

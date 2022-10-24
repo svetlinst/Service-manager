@@ -53,7 +53,7 @@ class HandoverServiceOrderForm(BootstrapFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        service_order_id = int(self.initial['service_order'])
-        service_order_header = ServiceOrderHeader.objects.filter(pk=service_order_id).get()
+        service_order_id = self.initial['service_order']
+        service_order_header = ServiceOrderHeader.objects.get(pk=service_order_id)
         representatives = CustomerRepresentative.objects.filter(customer_id=service_order_header.customer_id)
         self.fields['handed_over_to'].queryset = representatives

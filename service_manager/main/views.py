@@ -3,7 +3,7 @@ import datetime
 from django.db.models import Q
 from django.shortcuts import render, redirect
 import django.views.generic as views
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth import mixins as auth_mixins
 
 from service_manager.main.forms import CreateServiceOrderHeaderForm, CreateServiceOrderDetailForm, \
@@ -23,7 +23,8 @@ class ServiceOrderHeaderPendingServiceListView(auth_mixins.LoginRequiredMixin, v
     RELATED_ENTITIES = ['serviceordernote_set', 'serviceorderdetail_set', ]
 
     def get_queryset(self):
-        return ServiceOrderHeader.objects.filter(is_serviced=False).prefetch_related(*self.RELATED_ENTITIES)
+        queryset = super().get_queryset()
+        return queryset.filter(is_serviced=False).prefetch_related(*self.RELATED_ENTITIES)
 
 
 class ServiceOrderHeaderServicedListView(ServiceOrderHeaderPendingServiceListView):
@@ -31,14 +32,18 @@ class ServiceOrderHeaderServicedListView(ServiceOrderHeaderPendingServiceListVie
     ordering = ('serviced_on', 'customer')
 
     def get_queryset(self):
-        return ServiceOrderHeader.objects.filter(Q(is_serviced=True) & Q(is_completed=False)).prefetch_related(
-            *self.RELATED_ENTITIES)
+        queryset = super().get_queryset()
+        return queryset.filter(Q(is_serviced=True) & Q(is_completed=False)).prefetch_related(*self.RELATED_ENTITIES)
 
 
 class ServiceOrderHeaderDetailView(auth_mixins.LoginRequiredMixin, views.DetailView):
     model = ServiceOrderHeader
     template_name = 'service_order_header/core/service_order_details.html'
     context_object_name = 'service_order_header'
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = ServiceOrderHeader.all_records.all()
+        return queryset
 
 
 class CreateServiceOrderHeader(auth_mixins.LoginRequiredMixin, views.CreateView):
@@ -108,29 +113,29 @@ class CreateServiceOrderDetailView(auth_mixins.LoginRequiredMixin, views.CreateV
     template_name = 'service_order_detail/service_order_details_create.html'
     form_class = CreateServiceOrderDetailForm
 
+    def get_success_url(self):
+        service_order_header_id = self.kwargs['order_id']
+        return reverse_lazy('create_service_order_detail', kwargs={'order_id': service_order_header_id})
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         service_order_header_id = self.kwargs['order_id']
         if service_order_header_id:
             context['service_order_header'] = ServiceOrderHeader.objects.prefetch_related(
-                'serviceorderdetail_set').filter(pk=int(service_order_header_id)).get()
+                'serviceorderdetail_set').get(pk=int(service_order_header_id))
 
         return context
 
     def form_valid(self, form):
-        # todo: refactor this
         service_order_header_id = self.kwargs['order_id']
-        service_order_header = ServiceOrderHeader.objects.filter(pk=service_order_header_id).get()
-        service_order_detail = ServiceOrderDetail(
-            quantity=form.cleaned_data['quantity'],
-            discount=form.cleaned_data['discount'],
-            material=form.cleaned_data['material'],
-            service_order=service_order_header,
-        )
+        service_order_header = ServiceOrderHeader.objects.get(pk=service_order_header_id)
+        service_order_detail = form.save(commit=False)
+
+        service_order_detail.service_order = service_order_header
         service_order_detail.save()
 
-        return redirect('create_service_order_detail', service_order_header_id)
+        return super().form_valid(form)
 
 
 class EditServiceOrderDetailView(auth_mixins.LoginRequiredMixin, views.UpdateView):
@@ -246,7 +251,7 @@ class HandoverServiceOrderView(auth_mixins.LoginRequiredMixin, views.UpdateView)
     model = ServiceOrderHeader
     form_class = HandoverServiceOrderForm
     template_name = 'service_order_header/core/service_order_handover.html'
-    success_url = reverse_lazy('service_orders_list_serviced')
+    success_url = reverse_lazy('service_orders_list_pending_service')
 
     def get_initial(self):
         service_order_header_id = self.kwargs['pk']
@@ -259,11 +264,11 @@ class HandoverServiceOrderView(auth_mixins.LoginRequiredMixin, views.UpdateView)
         return super().get_initial()
 
     def form_valid(self, form):
-        service_order_header_id = self.kwargs['pk']
-        service_order_header = ServiceOrderHeader.objects.filter(pk=service_order_header_id).get()
-        service_order_header.is_completed = True
-        service_order_header.completed_by = self.request.user
-        service_order_header.completed_on = datetime.datetime.now()
-        service_order_header.save()
+        service_oder = form.save(commit=False)
 
-        return redirect('service_orders_list_pending_service')
+        service_oder.is_completed = True
+        service_oder.completed_by = self.request.user
+        service_oder.completed_on = datetime.datetime.now()
+        service_oder.save()
+
+        return super().form_valid(form)
