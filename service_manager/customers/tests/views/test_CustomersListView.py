@@ -28,7 +28,7 @@ class CustomersListViewTests(TestCase):
 
         self.assertRedirects(response, '/accounts/login/?next=/customers/')
 
-    def test_get__when_searching_for_customers__expect_correct(self):
+    def test_get__when_searching_for_customers__expect_context_to_contain_one_profile(self):
         user_data = {
             'email': 'dev@dev.com',
             'password': 'dev',
@@ -56,7 +56,7 @@ class CustomersListViewTests(TestCase):
         customers = response.context['object_list']
         self.assertEqual(len(customers), 1)
 
-    def test_get__when_not_performing_search_expect_correct(self):
+    def test_get__when_not_performing_search__expect_context_to_contain_two_records(self):
         user_data = {
             'email': 'dev@dev.com',
             'password': 'dev',
@@ -79,3 +79,32 @@ class CustomersListViewTests(TestCase):
 
         customers = response.context['object_list']
         self.assertEqual(len(customers), 2)
+
+    def test_get__when_search_matches_vat__expect_one_record(self):
+        user_data = {
+            'email': 'dev@dev.com',
+            'password': 'dev',
+        }
+        UserModel.objects.create_user(**user_data)
+        self.client.login(**user_data)
+
+        data = {
+            'search_value': '99',
+        }
+
+        customer_type = CustomerType.objects.create(name='Business')
+
+        customers_to_create = (
+            Customer(name='Customer Nametest', vat='12345678990', email_address='test@test.com',
+                     phone_number='123456789',
+                     type=customer_type),
+            Customer(name='Customer Name', vat='12345678900', email_address='test2@test.com', phone_number='123456789',
+                     type=customer_type),
+        )
+
+        Customer.objects.bulk_create(customers_to_create)
+
+        response = self.client.get(reverse('customers_list'), data=data)
+
+        customers = response.context['object_list']
+        self.assertEqual(len(customers), 1)
