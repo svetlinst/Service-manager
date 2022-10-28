@@ -2,8 +2,9 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
-from service_manager.customers.models import Customer, CustomerRepresentative
-from service_manager.master_data.models import CustomerType
+from service_manager.customers.models import Customer, CustomerRepresentative, CustomerAsset
+from service_manager.main.models import ServiceOrderHeader
+from service_manager.master_data.models import CustomerType, AssetCategory, Brand, Asset
 
 UserModel = get_user_model()
 
@@ -50,21 +51,60 @@ class CustomerDetailViewTests(TestCase):
             customer=first_customer,
         )
 
+        category = AssetCategory.objects.create(
+            name='PC',
+        )
+
+        brand = Brand.objects.create(
+            name='HP',
+        )
+
+        first_asset = Asset.objects.create(
+            category=category,
+            brand=brand,
+            model_name='Envy 01',
+            model_number='007',
+        )
+
+        second_asset = Asset.objects.create(
+            category=category,
+            brand=brand,
+            model_name='Z-Book',
+            model_number='1020',
+        )
+
+        CustomerAsset.objects.create(
+            asset=first_asset,
+            customer=first_customer,
+            serial_number='SN001',
+            product_number='PN001',
+        )
+
+        CustomerAsset.objects.create(
+            asset=second_asset,
+            customer=first_customer,
+            serial_number='SNtest001',
+            product_number='PNtest001',
+        )
+
     def test_get__when_user_is_logged__expect_correct_template(self):
         self.client.login(**self.USER_DATA)
-
-        response = self.client.get(reverse('customer_detail', kwargs={'pk': 1}))
+        customer = Customer.objects.first()
+        response = self.client.get(reverse('customer_detail', kwargs={'pk': customer.pk}))
 
         self.assertTemplateUsed(response, 'customer/customer_detail.html')
 
     def test_get__when_user_is_not_logged_expect_redirect(self):
-        response = self.client.get(reverse('customer_detail', kwargs={'pk': 1}))
+        customer = Customer.objects.first()
+        response = self.client.get(reverse('customer_detail', kwargs={'pk': customer.pk}))
 
-        self.assertRedirects(response, '/accounts/login/?next=/customers/detail/1/')
+        self.assertRedirects(response, f'/accounts/login/?next=/customers/detail/{customer.pk}/')
 
     def test_get__when_filter_is_not_used__expect_two_representatives(self):
         self.client.login(**self.USER_DATA)
-        response = self.client.get(reverse('customer_detail', kwargs={'pk': 1}))
+        customer = Customer.objects.first()
+
+        response = self.client.get(reverse('customer_detail', kwargs={'pk': customer.pk}))
 
         representatives = response.context['customer_representatives']
 
@@ -72,8 +112,99 @@ class CustomerDetailViewTests(TestCase):
 
     def test_get__when_filter_is_not_used__expect_zero_representatives(self):
         self.client.login(**self.USER_DATA)
-        response = self.client.get(reverse('customer_detail', kwargs={'pk': 2}))
+        customer = Customer.objects.all()[1]
+
+        response = self.client.get(reverse('customer_detail', kwargs={'pk': customer.pk}))
 
         representatives = response.context['customer_representatives']
 
         self.assertEqual(len(representatives), 0)
+
+    def test_get__when_filter_is_used__expect_one_representative(self):
+        self.client.login(**self.USER_DATA)
+        customer = Customer.objects.first()
+
+        data = {
+            'representative': 'ohn',
+        }
+
+        response = self.client.get(reverse('customer_detail', kwargs={'pk': customer.pk}), data=data)
+
+        representatives = response.context['customer_representatives']
+
+        self.assertEqual(len(representatives), 1)
+
+    def test_get__when_filter_is_used__expect_zero_representative(self):
+        self.client.login(**self.USER_DATA)
+        customer = Customer.objects.first()
+        data = {
+            'representative': 'zzz',
+        }
+
+        response = self.client.get(reverse('customer_detail', kwargs={'pk': customer.pk}), data=data)
+
+        representatives = response.context['customer_representatives']
+
+        self.assertEqual(len(representatives), 0)
+
+    def test_get__when_filter_is_not_used__expect_two_assets(self):
+        self.client.login(**self.USER_DATA)
+        customer = Customer.objects.first()
+        response = self.client.get(reverse('customer_detail', kwargs={'pk': customer.pk}))
+
+        customer_assets = response.context['customer_assets']
+
+        self.assertEqual(len(customer_assets), 2)
+
+    def test_get__when_customer_has_no_assets__expect_zero_assets(self):
+        self.client.login(**self.USER_DATA)
+        customer = Customer.objects.all()[1]
+        response = self.client.get(reverse('customer_detail', kwargs={'pk': customer.pk}))
+
+        customer_assets = response.context['customer_assets']
+
+        self.assertEqual(len(customer_assets), 0)
+
+    def test_get__when_customer_has_two_assets_with_filter__expect_one_asset(self):
+        self.client.login(**self.USER_DATA)
+        customer = Customer.objects.first()
+
+        data = {
+            'search_value': 'sntest',
+        }
+
+        response = self.client.get(reverse('customer_detail', kwargs={'pk': customer.pk}), data=data)
+
+        customer_assets = response.context['customer_assets']
+
+        self.assertEqual(len(customer_assets), 1)
+
+    def test_get__when_customer_has_assets_do_not_meet_search_criteria__expect_zero_assets(self):
+        self.client.login(**self.USER_DATA)
+        customer = Customer.objects.first()
+        data = {
+            'search_value': 'z',
+        }
+
+        response = self.client.get(reverse('customer_detail', kwargs={'pk': customer.pk}), data=data)
+
+        customer_assets = response.context['customer_assets']
+
+        self.assertEqual(len(customer_assets), 0)
+
+    def test_get__when_asset_is_being_serviced__expect_correct_status(self):
+        self.client.login(**self.USER_DATA)
+        customer = Customer.objects.prefetch_related('customerasset_set').first()
+        customer_assets = CustomerAsset.objects.filter(customer=customer)
+
+        ServiceOrderHeader.objects.create(
+            customer=customer,
+            customer_asset=customer_assets.first(),
+            problem_description='Some description',
+        )
+
+        response = self.client.get(reverse('customer_detail', kwargs={'pk': customer.pk}))
+
+        assets_being_serviced = response.context['assets_being_serviced']
+
+        self.assertEqual(len(assets_being_serviced), 1)
