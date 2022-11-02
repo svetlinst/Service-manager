@@ -107,7 +107,7 @@ class CreateCustomerAssetView(auth_mixins.LoginRequiredMixin, views.CreateView):
         return context
 
 
-class CustomerAssetDetailView(views.DetailView):
+class CustomerAssetDetailView(auth_mixins.LoginRequiredMixin, views.DetailView):
     model = CustomerAsset
     template_name = 'customer_asset/customer_asset_detail.html'
 
