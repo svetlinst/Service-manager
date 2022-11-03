@@ -54,7 +54,6 @@ class CreateCustomerRepresentativeTests(TestCase):
 
         customer = Customer.objects.first()
         data = {
-            # 'customer': customer.pk,
             'first_name': 'John',
             'last_name': 'Doe',
             'email_address': 'john@doe.com',
