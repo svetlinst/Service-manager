@@ -55,7 +55,7 @@ class CustomerRepresentative(ActiveModel, BaseAuditEntity):
         max_length=LAST_NAME_MAX_LENGTH,
     )
 
-    email_address = models.CharField(
+    email_address = models.EmailField(
         max_length=EMAIL_ADDRESS_MAX_LENGTH,
         validators=(
             EmailValidator,

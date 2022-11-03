@@ -149,7 +149,7 @@ class CreateCustomerRepresentativeView(auth_mixins.LoginRequiredMixin, views.Cre
 
         customer_id = self.kwargs['customer_id']
         if customer_id:
-            customer = Customer.objects.prefetch_related('customerrepresentative_set').filter(pk=customer_id).get()
+            customer = Customer.objects.prefetch_related('customerrepresentative_set').get(pk=customer_id)
             context['customer'] = customer
         return context
 
