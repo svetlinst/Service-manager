@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
-from service_manager.customers.models import Customer, CustomerRepresentative, CustomerAsset
+from service_manager.customers.models import Customer, CustomerRepresentative, CustomerAsset, CustomerDepartment
 from service_manager.main.models import ServiceOrderHeader
 from service_manager.master_data.models import CustomerType, AssetCategory, Brand, Asset
 
@@ -85,6 +85,16 @@ class CustomerDetailViewTests(TestCase):
             customer=first_customer,
             serial_number='SNtest001',
             product_number='PNtest001',
+        )
+
+        CustomerDepartment.objects.create(
+            customer=first_customer,
+            name='Accounting',
+        )
+
+        CustomerDepartment.objects.create(
+            customer=first_customer,
+            name='Human Resources',
         )
 
     def test_get__when_user_is_logged__expect_correct_template(self):
@@ -208,3 +218,48 @@ class CustomerDetailViewTests(TestCase):
         assets_being_serviced = response.context['assets_being_serviced']
 
         self.assertEqual(len(assets_being_serviced), 1)
+
+    def test_get__when_filter_is_not_used__expect_two_departments(self):
+        self.client.login(**self.USER_DATA)
+        customer = Customer.objects.first()
+        response = self.client.get(reverse('customer_detail', kwargs={'pk': customer.pk}))
+
+        customer_departments = response.context['customer_departments']
+
+        self.assertEqual(len(customer_departments), 2)
+
+    def test_get__when_customer_has_no_departments__expect_zero_departments(self):
+        self.client.login(**self.USER_DATA)
+        customer = Customer.objects.all()[1]
+        response = self.client.get(reverse('customer_detail', kwargs={'pk': customer.pk}))
+
+        customer_departments = response.context['customer_departments']
+
+        self.assertEqual(len(customer_departments), 0)
+
+    def test_get__when_customer_has_two_departments_with_filter__expect_one_department(self):
+        self.client.login(**self.USER_DATA)
+        customer = Customer.objects.first()
+
+        data = {
+            'departments': ' ',
+        }
+
+        response = self.client.get(reverse('customer_detail', kwargs={'pk': customer.pk}), data=data)
+
+        customer_departments = response.context['customer_departments']
+
+        self.assertEqual(len(customer_departments), 1)
+
+    def test_get__when_customer_has_departments_do_not_meet_search_criteria__expect_zero_departments(self):
+        self.client.login(**self.USER_DATA)
+        customer = Customer.objects.first()
+        data = {
+            'departments': 'z',
+        }
+
+        response = self.client.get(reverse('customer_detail', kwargs={'pk': customer.pk}), data=data)
+
+        customer_departments = response.context['customer_departments']
+
+        self.assertEqual(len(customer_departments), 0)
