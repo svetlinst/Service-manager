@@ -43,9 +43,9 @@ class ServiceOrderHeaderDetailView(auth_mixins.LoginRequiredMixin, views.DetailV
     template_name = 'service_order_header/core/service_order_details.html'
     context_object_name = 'service_order_header'
 
-    def get_queryset(self, *args, **kwargs):
-        queryset = ServiceOrderHeader.all_records.all()
-        return queryset
+    # def get_queryset(self, *args, **kwargs):
+    #     queryset = ServiceOrderHeader.all_records.all()
+    #     return queryset
 
 
 class CreateServiceOrderHeader(auth_mixins.LoginRequiredMixin, views.CreateView):
