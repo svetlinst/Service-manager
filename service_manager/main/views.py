@@ -63,7 +63,7 @@ class CreateServiceOrderHeader(auth_mixins.LoginRequiredMixin, views.CreateView)
             self.initial.update({
                 'customer': customer_id,
             })
-        if customer_id:
+        if customer_asset_id:
             self.initial.update({
                 'customer_asset': customer_asset_id,
             })
