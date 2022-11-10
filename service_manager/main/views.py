@@ -58,22 +58,11 @@ class CreateServiceOrderHeader(auth_mixins.LoginRequiredMixin, views.CreateView)
 
     def get_initial(self):
         customer_id = self.kwargs['customer_id']
-        customer_asset_id = self.kwargs['asset_id']
         if customer_id:
             self.initial.update({
                 'customer': customer_id,
             })
-        if customer_asset_id:
-            self.initial.update({
-                'customer_asset': customer_asset_id,
-            })
 
-        user = self.request.user
-
-        if user:
-            self.initial.update({
-                'accepted_by': user,
-            })
         return super().get_initial()
 
     def get_context_data(self, **kwargs):
@@ -83,10 +72,10 @@ class CreateServiceOrderHeader(auth_mixins.LoginRequiredMixin, views.CreateView)
         customer_asset_id = self.kwargs['asset_id']
 
         if customer_id:
-            customer = Customer.objects.filter(pk=customer_id).get()
+            customer = Customer.objects.get(pk=customer_id)
             context['customer'] = customer
         if customer_asset_id:
-            customer_asset = CustomerAsset.objects.filter(pk=customer_asset_id).get()
+            customer_asset = CustomerAsset.objects.get(pk=customer_asset_id)
             context['customer_asset'] = customer_asset
 
         return context
