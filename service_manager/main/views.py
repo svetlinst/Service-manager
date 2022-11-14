@@ -43,9 +43,11 @@ class ServiceOrderHeaderDetailView(auth_mixins.LoginRequiredMixin, views.DetailV
     template_name = 'service_order_header/core/service_order_details.html'
     context_object_name = 'service_order_header'
 
-    # def get_queryset(self, *args, **kwargs):
-    #     queryset = ServiceOrderHeader.all_records.all()
-    #     return queryset
+    # Override the queryset in order to include the deleted SOHs
+    # This is needed when showing the service history of a given Customer Asset
+    def get_queryset(self, *args, **kwargs):
+        queryset = ServiceOrderHeader.all_records.all()
+        return queryset
 
 
 class CreateServiceOrderHeader(auth_mixins.LoginRequiredMixin, views.CreateView):
