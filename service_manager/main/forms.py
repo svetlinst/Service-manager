@@ -8,8 +8,16 @@ from service_manager.main.models import ServiceOrderHeader, ServiceOrderDetail, 
 class CreateServiceOrderHeaderForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = ServiceOrderHeader
-        fields = ('department', 'handed_over_by', 'problem_description',)
+        fields = ('department', 'handed_over_by', 'send_emails', 'problem_description',)
         # fields = ('customer', 'customer_asset', 'department', 'handed_over_by', 'accepted_by', 'problem_description',)
+
+        widgets = {
+            'send_emails': forms.CheckboxInput(
+                attrs={
+                    'class': 'form-check-input',
+                },
+            ),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

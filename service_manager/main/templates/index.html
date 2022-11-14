@@ -6,7 +6,7 @@
     {% if not request.user.is_anonymous %}
         <h1>Hello, {{ request.user.profile.full_name }}!</h1>
     {% endif %}
-    <div class="jumbotron mt-5">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
         <div class="absolute">
             <h1 class="display-4">Hello, world!</h1>
             <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention

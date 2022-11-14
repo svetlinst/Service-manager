@@ -31,6 +31,12 @@ class ServiceOrderHeader(ActiveModel, BaseAuditEntity):
         blank=True,
     )
 
+    send_emails = models.BooleanField(
+        default=True,
+        null=False,
+        blank=False,
+    )
+
     customer = models.ForeignKey(
         Customer,
         on_delete=models.CASCADE,

@@ -113,13 +113,13 @@
         <div class="row">
             {% if not service_order_header.is_serviced %}
                 <div class="col-md-12 text-right align-self-center">
-                    <a class="btn btn-outline-success btn-" href="#" data-toggle="modal" data-target="#exampleModal">Complete
+                    <a class="btn btn-outline-success btn-" href="#" data-bs-toggle="modal" data-bs-target="#complete_order_modal">Complete
                         Service</a>
                 </div>
             {% elif not service_order_header.is_completed %}
                 <div class="col-md-12 text-right align-self-center my-3">
-                    <a class="btn btn-outline-warning btn" href="#" data-toggle="modal"
-                       data-target="#rollback_modal">Rollback
+                    <a class="btn btn-outline-warning btn" href="#" data-bs-toggle="modal"
+                       data-bs-target="#rollback_modal">Rollback
                         Order</a>
                     <a class="btn btn-outline-success btn"
                        href="{% url 'handover_service_order' service_order_header.id %}">Finalize
