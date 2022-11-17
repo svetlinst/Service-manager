@@ -9,7 +9,6 @@ class CreateServiceOrderHeaderForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = ServiceOrderHeader
         fields = ('department', 'handed_over_by', 'send_emails', 'problem_description',)
-        # fields = ('customer', 'customer_asset', 'department', 'handed_over_by', 'accepted_by', 'problem_description',)
 
         widgets = {
             'send_emails': forms.CheckboxInput(

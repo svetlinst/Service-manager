@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
     <div class="d-block mt-5 rounded-lg bg-light mb-3" style="padding:2%">
-        <h2 class='text-center text-secondary'>Customers</h2>
+        <h2 class='text-center text-secondary'>{% trans 'Customers' %}</h2>
         <div class="row">
             <div class="col-md-9 my-3">
                 <form class="form" method="GET" action="">

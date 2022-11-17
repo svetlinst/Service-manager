@@ -3,6 +3,7 @@ from django.db import models
 
 from service_manager.core.models import BaseAuditEntity, ActiveModel
 from service_manager.master_data.models import Asset, CustomerType
+from django.utils.translation import gettext_lazy as _
 
 
 class Customer(ActiveModel, BaseAuditEntity):
@@ -12,16 +13,19 @@ class Customer(ActiveModel, BaseAuditEntity):
     PHONE_NUMBER_MAX_LENGTH = 20
 
     name = models.CharField(
+        _('name'),
         max_length=NAME_MAX_LENGTH,
     )
 
     vat = models.CharField(
+        _('vat'),
         max_length=VAT_MAX_LENGTH,
         null=True,
         blank=True,
     )
 
     email_address = models.EmailField(
+        _('email_address'),
         max_length=EMAIL_MAX_LENGTH,
         validators=(
             EmailValidator,
@@ -29,6 +33,7 @@ class Customer(ActiveModel, BaseAuditEntity):
     )
 
     phone_number = models.CharField(
+        _('phone_number'),
         max_length=PHONE_NUMBER_MAX_LENGTH,
     )
 

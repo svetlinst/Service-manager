@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,4 +23,5 @@ urlpatterns = [
     path('master_data/', include('service_manager.master_data.urls')),
     path('accounts/', include('service_manager.accounts.urls')),
     path('reports/', include('service_manager.reports.urls')),
+    re_path(r'^rosetta/', include('rosetta.urls'))
 ]
