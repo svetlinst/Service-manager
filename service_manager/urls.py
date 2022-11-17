@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from django.conf.urls.i18n import i18n_patterns
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('service_manager.main.urls')),
     path('customers/', include('service_manager.customers.urls')),
@@ -24,4 +25,4 @@ urlpatterns = [
     path('accounts/', include('service_manager.accounts.urls')),
     path('reports/', include('service_manager.reports.urls')),
     re_path(r'^rosetta/', include('rosetta.urls'))
-]
+)
