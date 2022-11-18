@@ -95,7 +95,7 @@
             {% if request.user.is_anonymous %}
                 <a class="btn btn-light ms-3" href="{% url 'login_user' %}">Login</a>
             {% else %}
-                <a class="btn btn-light ms-3" href="{% url 'edit_profile'  request.user.pk %}">Profile</a>
+                <a class="btn btn-light ms-3" href="{% url 'edit_profile'  request.user.profile.pk %}">Profile</a>
                 <a class="btn btn-light ms-3" href="{% url 'logout_user' %}">Logout</a>
             {% endif %}
         </div>
