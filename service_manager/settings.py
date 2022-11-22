@@ -13,6 +13,7 @@ import os.path
 from pathlib import Path
 from decouple import config
 from django.utils.translation import gettext_lazy as _
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from django.urls import reverse_lazy
@@ -23,12 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-#rd5#&fxa6fcu)j8scxc#pp#o_sq23nfhj9izdw7#2_29#%6^="
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ.get('DEBUG'))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ')
 
 # Application definition
 DJANGO_APPS = (
@@ -91,12 +92,12 @@ WSGI_APPLICATION = "service_manager.wsgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sm_db',
-        'USER': 'postgres',
-        'PASSWORD': '1123QwER',
-        'HOST': '127.0.0.1',
-        'PORT': '5432'
+        'ENGINE': os.environ.get('DB_ENGINE'),
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT'),
     }
 }
 
@@ -139,10 +140,11 @@ LOCALE_PATHS = [
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-# STATICFILES_DIRS = [
-#     BASE_DIR / 'staticfiles',
-# ]
+STATICFILES_DIRS = [
+    BASE_DIR / 'staticfiles',
+]
+
+STATIC_ROOT = '/tmp/service_manager/staticfiles'
 
 MEDIA_ROOT = BASE_DIR / 'media/'
 MEDIA_URL = '/media/'
