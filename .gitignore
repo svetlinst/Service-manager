@@ -134,3 +134,6 @@ dmypy.json
 # Docker files
 docker-compose.local.yml
 docker-compose.prod.yml
+
+/staticfiles/
+/postgresql
