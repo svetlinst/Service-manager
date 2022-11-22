@@ -15,7 +15,6 @@ def send_successful_service_order_creation_email(service_order_id):
     }
 
     message = render_to_string('email_templates/service_order_created.html', context)
-
     send_mail(
         subject='Hello',
         message=None,

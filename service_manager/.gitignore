@@ -103,6 +103,7 @@ celerybeat.pid
 
 # Environments
 envs/.env
+envs/.env.local
 envs/.env.prod
 .venv
 env/
@@ -130,7 +131,3 @@ dmypy.json
 .pyre/
 .idea
 .DS_Store
-
-# Docker files
-docker-compose.local.yml
-docker-compose.prod.yml
