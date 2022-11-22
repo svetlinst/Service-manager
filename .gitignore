@@ -131,9 +131,5 @@ dmypy.json
 .idea
 .DS_Store
 
-# Docker files
-docker-compose.local.yml
-docker-compose.prod.yml
-
 /staticfiles/
 /postgresql
