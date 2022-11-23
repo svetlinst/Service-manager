@@ -31,6 +31,8 @@ DEBUG = bool(os.environ.get('DEBUG'))
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ')
 
+CSRF_TRUSTED_ORIGINS = [f'https://{x}' for x in ALLOWED_HOSTS]
+
 # Application definition
 DJANGO_APPS = (
     "django.contrib.admin",
