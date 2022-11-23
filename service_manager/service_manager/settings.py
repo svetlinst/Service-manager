@@ -184,8 +184,8 @@ AUTH_USER_MODEL = 'accounts.AppUser'
 LOGIN_URL = reverse_lazy('login_user')
 LOGOUT_REDIRECT_URL = reverse_lazy('index')
 
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND')
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
