@@ -10,10 +10,12 @@ from service_manager.customers.models import Customer, CustomerAsset, CustomerRe
 from service_manager.main.models import ServiceOrderHeader
 
 
-class CustomersListView(auth_mixins.LoginRequiredMixin, views.ListView):
+class CustomersListView(auth_mixins.PermissionRequiredMixin, views.ListView):
     model = Customer
     template_name = 'customer/customers.html'
     ordering = ('name',)
+
+    permission_required = 'customers.view_customer'
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -24,9 +26,11 @@ class CustomersListView(auth_mixins.LoginRequiredMixin, views.ListView):
         return queryset
 
 
-class CustomerDetailView(auth_mixins.LoginRequiredMixin, views.DetailView):
+class CustomerDetailView(auth_mixins.PermissionRequiredMixin, views.DetailView):
     model = Customer
     template_name = 'customer/customer_detail.html'
+
+    permission_required = 'customers.view_customer'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -57,32 +61,40 @@ class CustomerDetailView(auth_mixins.LoginRequiredMixin, views.DetailView):
         return context
 
 
-class EditCustomerView(auth_mixins.LoginRequiredMixin, views.UpdateView):
+class EditCustomerView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
     model = Customer
     form_class = EditCustomerForm
     template_name = 'customer/customer_edit.html'
+
+    permission_required = ('customers.view_customer', 'customers.change_customer')
 
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.kwargs['pk']})
 
 
-class CreateCustomerView(auth_mixins.LoginRequiredMixin, views.CreateView):
+class CreateCustomerView(auth_mixins.PermissionRequiredMixin, views.CreateView):
     model = Customer
     form_class = CreateCustomerForm
     template_name = 'customer/customer_create.html'
     success_url = reverse_lazy('customers_list')
 
+    permission_required = 'customers.add_customer'
 
-class DeleteCustomerView(auth_mixins.LoginRequiredMixin, views.DeleteView):
+
+class DeleteCustomerView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
     model = Customer
     template_name = 'customer/customer_delete.html'
     success_url = reverse_lazy('customers_list')
 
+    permission_required = ('customers.view_customer', 'customers.change_customer')
 
-class CreateCustomerAssetView(auth_mixins.LoginRequiredMixin, views.CreateView):
+
+class CreateCustomerAssetView(auth_mixins.PermissionRequiredMixin, views.CreateView):
     model = CustomerAsset
     form_class = CreateCustomerAssetForm
     template_name = 'customer_asset/customer_asset_create.html'
+
+    permission_required = 'customers.add_customer_asset'
 
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
@@ -107,9 +119,11 @@ class CreateCustomerAssetView(auth_mixins.LoginRequiredMixin, views.CreateView):
         return context
 
 
-class CustomerAssetDetailView(auth_mixins.LoginRequiredMixin, views.DetailView):
+class CustomerAssetDetailView(auth_mixins.PermissionRequiredMixin, views.DetailView):
     model = CustomerAsset
     template_name = 'customer_asset/customer_asset_detail.html'
+
+    permission_required = 'customers.view_customer_asset'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -119,27 +133,33 @@ class CustomerAssetDetailView(auth_mixins.LoginRequiredMixin, views.DetailView):
         return context
 
 
-class EditCustomerAssetView(auth_mixins.LoginRequiredMixin, views.UpdateView):
+class EditCustomerAssetView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
     model = CustomerAsset
     form_class = EditCustomerAssetForm
     template_name = 'customer_asset/customer_asset_edit.html'
 
+    permission_required = ('customers.view_customer_asset', 'customers.change_customer_asset')
+
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
 
 
-class DeleteCustomerAssetView(auth_mixins.LoginRequiredMixin, views.DeleteView):
+class DeleteCustomerAssetView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
     model = CustomerAsset
     template_name = 'customer_asset/customer_asset_delete.html'
 
+    permission_required = ('customers.view_customer_asset', 'customers.change_customer_asset')
+
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
 
 
-class CreateCustomerRepresentativeView(auth_mixins.LoginRequiredMixin, views.CreateView):
+class CreateCustomerRepresentativeView(auth_mixins.PermissionRequiredMixin, views.CreateView):
     model = CustomerRepresentative
     template_name = 'customer_representatives/customer_representatives_create.html'
     form_class = CreateCustomerRepresentativeForm
+
+    permission_required = 'customers.add_customer_representative'
 
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
@@ -163,27 +183,33 @@ class CreateCustomerRepresentativeView(auth_mixins.LoginRequiredMixin, views.Cre
         return super().form_valid(form)
 
 
-class EditCustomerRepresentativeView(auth_mixins.LoginRequiredMixin, views.UpdateView):
+class EditCustomerRepresentativeView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
     model = CustomerRepresentative
     template_name = 'customer_representatives/customer_representative_edit.html'
     form_class = EditCustomerRepresentativeForm
 
+    permission_required = ('customers.view_customer_representative', 'customers.change_customer_representative')
+
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
 
 
-class DeleteCustomerRepresentativeView(auth_mixins.LoginRequiredMixin, views.DeleteView):
+class DeleteCustomerRepresentativeView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
     model = CustomerRepresentative
     template_name = 'customer_representatives/customer_representative_delete.html'
 
+    permission_required = ('customers.view_customer_representative', 'customers.change_customer_representative')
+
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
 
 
-class CreateCustomerDepartmentView(auth_mixins.LoginRequiredMixin, views.CreateView):
+class CreateCustomerDepartmentView(auth_mixins.PermissionRequiredMixin, views.CreateView):
     model = CustomerDepartment
     template_name = 'customer_department/customer_department_create.html'
     form_class = CreateCustomerDepartmentForm
+
+    permission_required = 'customers.add_customer_department'
 
     def get_success_url(self):
         customer_id = self.kwargs['customer_id']
@@ -211,10 +237,12 @@ class CreateCustomerDepartmentView(auth_mixins.LoginRequiredMixin, views.CreateV
         return super().form_valid(form)
 
 
-class EditCustomerDepartmentView(auth_mixins.LoginRequiredMixin, views.UpdateView):
+class EditCustomerDepartmentView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
     model = CustomerDepartment
     template_name = 'customer_department/customer_department_edit.html'
     form_class = CreateCustomerDepartmentForm
+
+    permission_required = ('customers.view_customer_department', 'customers.change_customer_department')
 
     def get_success_url(self):
         customer_id = self.kwargs['customer_id']
@@ -223,9 +251,11 @@ class EditCustomerDepartmentView(auth_mixins.LoginRequiredMixin, views.UpdateVie
         return reverse_lazy('customers_list')
 
 
-class DeleteCustomerDepartmentView(auth_mixins.LoginRequiredMixin, views.DeleteView):
+class DeleteCustomerDepartmentView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
     model = CustomerDepartment
     template_name = 'customer_department/customer_department_delete.html'
+
+    permission_required = ('customers.view_customer_department', 'customers.change_customer_department')
 
     def get_success_url(self):
         customer_id = self.kwargs['customer_id']

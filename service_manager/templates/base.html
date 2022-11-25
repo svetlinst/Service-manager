@@ -31,9 +31,11 @@
                 <a class="nav-link" href="{% url 'index' %}">Home<span class="sr-only">(current)</span></a>
             </li>
             {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'customers_list' %}">Customers</a>
-                </li>
+                {% if perms.customers.view_customer %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'customers_list' %}">Customers</a>
+                    </li>
+                {% endif %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" role="button" href="#" id="navbarDropdownMenuLink"
                        data-bs-toggle="dropdown" aria-expanded="false">
