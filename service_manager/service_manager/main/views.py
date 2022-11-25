@@ -23,7 +23,7 @@ class ServiceOrderHeaderPendingServiceListView(auth_mixins.PermissionRequiredMix
     ordering = ('created_on', 'customer')
     RELATED_ENTITIES = ['serviceordernote_set', 'serviceorderdetail_set', ]
 
-    permission_required = 'main.view_service_order_header'
+    permission_required = 'main.view_serviceorderheader'
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -36,7 +36,7 @@ class ServiceOrderHeaderServicedListView(auth_mixins.PermissionRequiredMixin, vi
     ordering = ('serviced_on', 'customer')
     RELATED_ENTITIES = ['serviceordernote_set', 'serviceorderdetail_set', ]
 
-    permission_required = 'main.view_service_order_header'
+    permission_required = 'main.view_serviceorderheader'
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -48,7 +48,7 @@ class ServiceOrderHeaderDetailView(auth_mixins.PermissionRequiredMixin, views.De
     template_name = 'service_order_header/core/service_order_details.html'
     context_object_name = 'service_order_header'
 
-    permission_required = 'main.view_service_order_header'
+    permission_required = 'main.view_serviceorderheader'
 
     # Override the queryset in order to include the (soft) deleted SOHs
     # This is needed when showing the service history of a given Customer Asset
@@ -62,7 +62,7 @@ class CreateServiceOrderHeader(auth_mixins.PermissionRequiredMixin, views.Create
     form_class = CreateServiceOrderHeaderForm
     template_name = 'service_order_header/core/service_order_create.html'
 
-    permission_required = 'main.add_service_order_header'
+    permission_required = 'main.add_serviceorderheader'
 
     def get_success_url(self):
         return reverse_lazy('detail_service_order', kwargs={'pk': self.object.id})
@@ -109,7 +109,7 @@ class DeleteServiceOrderHeaderView(auth_mixins.PermissionRequiredMixin, views.De
     template_name = 'service_order_header/core/service_order_delete.html'
     success_url = reverse_lazy('service_orders_list_pending_service')
 
-    permission_required = 'main.change_service_order_header'
+    permission_required = 'main.change_serviceorderheader'
 
 
 class CreateServiceOrderDetailView(auth_mixins.PermissionRequiredMixin, views.CreateView):
@@ -117,7 +117,7 @@ class CreateServiceOrderDetailView(auth_mixins.PermissionRequiredMixin, views.Cr
     template_name = 'service_order_detail/service_order_details_create.html'
     form_class = CreateServiceOrderDetailForm
 
-    permission_required = 'main.add_service_order_detail'
+    permission_required = 'main.add_serviceorderdetail'
 
     def get_success_url(self):
         service_order_header_id = self.kwargs['order_id']
@@ -149,7 +149,7 @@ class EditServiceOrderDetailView(auth_mixins.PermissionRequiredMixin, views.Upda
     template_name = 'service_order_detail/service_order_detail_edit.html'
     form_class = EditServiceOrderDetailForm
 
-    permission_required = 'main.change_service_order_detail'
+    permission_required = 'main.change_serviceorderdetail'
 
     def get_success_url(self):
         service_order_header_id = self.kwargs['order_id']
@@ -163,14 +163,14 @@ class ServiceOrderDetailsListView(auth_mixins.PermissionRequiredMixin, views.Lis
     template_name = 'service_order_detail/service_order_details.html'
     ordering = ('material', 'quantity',)
 
-    permission_required = 'main.view_service_order_detail'
+    permission_required = 'main.view_serviceorderdetail'
 
 
 class DeleteServiceOrderDetailView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
     model = ServiceOrderDetail
     template_name = 'service_order_detail/service_order_detail_delete.html'
 
-    permission_required = 'main.change_service_order_detail'
+    permission_required = 'main.change_serviceorderdetail'
 
     def get_success_url(self):
         service_order_header_id = self.kwargs['order_id']
@@ -179,7 +179,7 @@ class DeleteServiceOrderDetailView(auth_mixins.PermissionRequiredMixin, views.De
         return reverse_lazy('service_orders_list')
 
 
-@permission_required('main.change_service_order_header')
+@permission_required('main.change_serviceorderheader')
 def complete_service_order(request, pk):
     service_order_header = ServiceOrderHeader.objects.get(pk=pk)
     service_order_header.is_serviced = True
@@ -195,7 +195,7 @@ class CreateServiceOrderNoteView(auth_mixins.PermissionRequiredMixin, views.Crea
     template_name = 'service_order_note/service_order_note_create.html'
     form_class = CreateServiceOrderNoteForm
 
-    permission_required = 'main.add_service_order_note'
+    permission_required = 'main.add_serviceordernote'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -227,14 +227,14 @@ class ServiceOrderNotesListView(auth_mixins.PermissionRequiredMixin, views.ListV
     model = ServiceOrderNote
     template_name = 'service_order_note/service_order_notes.html'
 
-    permission_required = 'main.view_service_order_note'
+    permission_required = 'main.view_serviceordernote'
 
 
 class ServiceOrderNoteDetailView(auth_mixins.PermissionRequiredMixin, views.DetailView):
     model = ServiceOrderNote
     template_name = 'service_order_note/service_order_note_detail.html'
 
-    permission_required = 'main.view_service_order_note'
+    permission_required = 'main.view_serviceordernote'
 
 
 class EditServiceOrderNoteView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
@@ -242,7 +242,7 @@ class EditServiceOrderNoteView(auth_mixins.PermissionRequiredMixin, views.Update
     template_name = 'service_order_note/service_order_note_edit.html'
     form_class = CreateServiceOrderNoteForm
 
-    permission_required = 'main.change_service_order_note'
+    permission_required = 'main.change_serviceordernote'
 
     def get_success_url(self):
         go_to_next = self.request.POST.get('next', '/')
@@ -253,14 +253,14 @@ class DeleteServiceOrderNoteView(auth_mixins.PermissionRequiredMixin, views.Dele
     model = ServiceOrderNote
     template_name = 'service_order_note/service_order_note_delete.html'
 
-    permission_required = 'main.change_service_order_note'
+    permission_required = 'main.change_serviceordernote'
 
     def get_success_url(self):
         go_to_next = self.request.POST.get('next', '/')
         return go_to_next
 
 
-@permission_required('main.change_service_order_header')
+@permission_required('main.change_serviceorderheader')
 def rollback_service_order(request, pk):
     service_order_header = ServiceOrderHeader.objects.get(pk=pk)
     service_order_header.is_serviced = False
@@ -277,7 +277,7 @@ class HandoverServiceOrderView(auth_mixins.PermissionRequiredMixin, views.Update
     template_name = 'service_order_header/core/service_order_handover.html'
     success_url = reverse_lazy('service_orders_list_pending_service')
 
-    permission_required = 'main.change_service_order_header'
+    permission_required = 'main.change_serviceorderheader'
 
     def get_initial(self):
         service_order_header_id = self.kwargs['pk']

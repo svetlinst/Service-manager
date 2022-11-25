@@ -81,7 +81,7 @@ class MaterialCategoriesListView(auth_mixins.PermissionRequiredMixin, views.List
     template_name = 'material_category/material_categories.html'
     ordering = ('name',)
 
-    permission_required = 'master_data.view_material_category'
+    permission_required = 'master_data.view_materialcategory'
 
 
 class CreateMaterialCategoryView(auth_mixins.PermissionRequiredMixin, BootstrapFormViewMixin, views.CreateView):
@@ -90,7 +90,7 @@ class CreateMaterialCategoryView(auth_mixins.PermissionRequiredMixin, BootstrapF
     template_name = 'material_category/material_category_create.html'
     success_url = reverse_lazy('material_categories_list')
 
-    permission_required = 'master_data.add_material_category'
+    permission_required = 'master_data.add_materialcategory'
 
 
 class EditMaterialCategoryView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
@@ -99,7 +99,7 @@ class EditMaterialCategoryView(auth_mixins.PermissionRequiredMixin, views.Update
     template_name = 'material_category/material_category_edit.html'
     success_url = reverse_lazy('material_categories_list')
 
-    permission_required = 'master_data.change_material_category'
+    permission_required = 'master_data.change_materialcategory'
 
 
 class DeleteMaterialCategoryView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
@@ -107,7 +107,7 @@ class DeleteMaterialCategoryView(auth_mixins.PermissionRequiredMixin, views.Dele
     template_name = 'material_category/material_category_delete.html'
     success_url = reverse_lazy('material_categories_list')
 
-    permission_required = 'master_data.change_material_category'
+    permission_required = 'master_data.change_materialcategory'
 
 
 class BrandsListView(auth_mixins.PermissionRequiredMixin, views.ListView):
@@ -149,7 +149,7 @@ class AssetCategoriesListView(auth_mixins.PermissionRequiredMixin, views.ListVie
     template_name = 'asset_category/asset_categories.html'
     ordering = ('name',)
 
-    permission_required = 'master_data.view_asset_category'
+    permission_required = 'master_data.view_assetcategory'
 
 
 class CreateAssetCategoryView(auth_mixins.PermissionRequiredMixin, BootstrapFormViewMixin, views.CreateView):
@@ -158,7 +158,7 @@ class CreateAssetCategoryView(auth_mixins.PermissionRequiredMixin, BootstrapForm
     template_name = 'asset_category/asset_category_create.html'
     success_url = reverse_lazy('asset_categories_list')
 
-    permission_required = 'master_data.add_asset_category'
+    permission_required = 'master_data.add_assetcategory'
 
 
 class EditAssetCategoryView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
@@ -167,7 +167,7 @@ class EditAssetCategoryView(auth_mixins.PermissionRequiredMixin, views.UpdateVie
     template_name = 'asset_category/asset_category_edit.html'
     success_url = reverse_lazy('asset_categories_list')
 
-    permission_required = 'master_data.change_asset_category'
+    permission_required = 'master_data.change_assetcategory'
 
 
 class DeleteAssetCategoryView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
@@ -175,4 +175,4 @@ class DeleteAssetCategoryView(auth_mixins.PermissionRequiredMixin, views.DeleteV
     template_name = 'asset_category/asset_category_delete.html'
     success_url = reverse_lazy('asset_categories_list')
 
-    permission_required = 'master_data.change_asset_category'
+    permission_required = 'master_data.change_assetcategory'

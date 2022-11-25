@@ -94,7 +94,7 @@ class CreateCustomerAssetView(auth_mixins.PermissionRequiredMixin, views.CreateV
     form_class = CreateCustomerAssetForm
     template_name = 'customer_asset/customer_asset_create.html'
 
-    permission_required = 'customers.add_customer_asset'
+    permission_required = 'customers.add_customerasset'
 
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
@@ -123,7 +123,7 @@ class CustomerAssetDetailView(auth_mixins.PermissionRequiredMixin, views.DetailV
     model = CustomerAsset
     template_name = 'customer_asset/customer_asset_detail.html'
 
-    permission_required = 'customers.view_customer_asset'
+    permission_required = 'customers.view_customerasset'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -138,7 +138,7 @@ class EditCustomerAssetView(auth_mixins.PermissionRequiredMixin, views.UpdateVie
     form_class = EditCustomerAssetForm
     template_name = 'customer_asset/customer_asset_edit.html'
 
-    permission_required = ('customers.view_customer_asset', 'customers.change_customer_asset')
+    permission_required = ('customers.view_customer_asset', 'customers.change_customerasset')
 
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
@@ -148,7 +148,7 @@ class DeleteCustomerAssetView(auth_mixins.PermissionRequiredMixin, views.DeleteV
     model = CustomerAsset
     template_name = 'customer_asset/customer_asset_delete.html'
 
-    permission_required = ('customers.view_customer_asset', 'customers.change_customer_asset')
+    permission_required = ('customers.view_customer_asset', 'customers.change_customerasset')
 
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
@@ -159,7 +159,7 @@ class CreateCustomerRepresentativeView(auth_mixins.PermissionRequiredMixin, view
     template_name = 'customer_representatives/customer_representatives_create.html'
     form_class = CreateCustomerRepresentativeForm
 
-    permission_required = 'customers.add_customer_representative'
+    permission_required = 'customers.add_customerrepresentative'
 
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
@@ -188,7 +188,7 @@ class EditCustomerRepresentativeView(auth_mixins.PermissionRequiredMixin, views.
     template_name = 'customer_representatives/customer_representative_edit.html'
     form_class = EditCustomerRepresentativeForm
 
-    permission_required = ('customers.view_customer_representative', 'customers.change_customer_representative')
+    permission_required = ('customers.view_customer_representative', 'customers.change_customerrepresentative')
 
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
@@ -198,7 +198,7 @@ class DeleteCustomerRepresentativeView(auth_mixins.PermissionRequiredMixin, view
     model = CustomerRepresentative
     template_name = 'customer_representatives/customer_representative_delete.html'
 
-    permission_required = ('customers.view_customer_representative', 'customers.change_customer_representative')
+    permission_required = ('customers.view_customer_representative', 'customers.change_customerrepresentative')
 
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
@@ -209,7 +209,7 @@ class CreateCustomerDepartmentView(auth_mixins.PermissionRequiredMixin, views.Cr
     template_name = 'customer_department/customer_department_create.html'
     form_class = CreateCustomerDepartmentForm
 
-    permission_required = 'customers.add_customer_department'
+    permission_required = 'customers.add_customerdepartment'
 
     def get_success_url(self):
         customer_id = self.kwargs['customer_id']
@@ -242,7 +242,7 @@ class EditCustomerDepartmentView(auth_mixins.PermissionRequiredMixin, views.Upda
     template_name = 'customer_department/customer_department_edit.html'
     form_class = CreateCustomerDepartmentForm
 
-    permission_required = ('customers.view_customer_department', 'customers.change_customer_department')
+    permission_required = ('customers.view_customer_department', 'customers.change_customerdepartment')
 
     def get_success_url(self):
         customer_id = self.kwargs['customer_id']
@@ -255,7 +255,7 @@ class DeleteCustomerDepartmentView(auth_mixins.PermissionRequiredMixin, views.De
     model = CustomerDepartment
     template_name = 'customer_department/customer_department_delete.html'
 
-    permission_required = ('customers.view_customer_department', 'customers.change_customer_department')
+    permission_required = ('customers.view_customer_department', 'customers.change_customerdepartment')
 
     def get_success_url(self):
         customer_id = self.kwargs['customer_id']
