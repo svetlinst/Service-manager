@@ -66,9 +66,13 @@
                         <td>{{ service_order_header.completed_on|default_if_none:"" }}</td>
                         <td>{{ service_order_header.serviced_by|default_if_none:"" }}</td>
                         <td>{{ service_order_header.total_amount_due|default_if_none:"" }}</td>
-                        <td class="text-right"><a class="btn btn-outline-info btn-sm"
-                           href="{% url 'detail_service_order' service_order_header.id %}"
-                           role="button">Detail</a></td>
+                        <td class="text-right">
+                            {% if perms.main.view_serviceorderheader %}
+                                <a class="btn btn-outline-info btn-sm"
+                                   href="{% url 'detail_service_order' service_order_header.id %}"
+                                   role="button">Detail</a>
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
             {% endif %}
