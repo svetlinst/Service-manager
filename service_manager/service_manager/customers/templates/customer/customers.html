@@ -9,14 +9,17 @@
                     <div class="input-group my-3">
                         <input type="search" class="form-control rounded mr-3" placeholder="Search" aria-label="Search"
                                aria-describedby="search-addon" name="search_value"/>
-                        <button type="submit" class="btn btn-outline-primary" href="{% url 'customers_list' %}">{% trans 'search'%}
+                        <button type="submit" class="btn btn-outline-primary"
+                                href="{% url 'customers_list' %}">{% trans 'search' %}
                         </button>
                     </div>
                 </form>
             </div>
-            <div class="col-md-3 text-right align-self-center my-3">
-                <a href="{% url 'create_customer' %}" class="btn btn-success btn-md">{% trans 'Create' %}</a>
-            </div>
+            {% if perms.customers.add_customer %}
+                <div class="col-md-3 text-right align-self-center my-3">
+                    <a href="{% url 'create_customer' %}" class="btn btn-success btn-md">{% trans 'Create' %}</a>
+                </div>
+            {% endif %}
         </div>
         <table class="table table-striped text-center">
             <thead>
@@ -43,11 +46,13 @@
                         <td>{{ customer.email_address }}</td>
                         <td>{{ customer.phone_number }}</td>
                         <td>
-                            <a class="btn btn-outline-primary btn-sm"
-                               href="{% url 'customer_detail' customer.id %}"
-                               role="button">{% trans 'Manage' %}</a>
-                            <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_customer' customer.id %}"
-                               role="button">{% trans 'Delete' %}</a>
+                            {% if perms.customers.change_customer %}
+                                <a class="btn btn-outline-primary btn-sm"
+                                   href="{% url 'customer_detail' customer.id %}"
+                                   role="button">{% trans 'Manage' %}</a>
+                                <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_customer' customer.id %}"
+                                   role="button">{% trans 'Delete' %}</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
