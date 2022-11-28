@@ -62,6 +62,7 @@ class Profile(models.Model):
     app_user = models.OneToOneField(
         AppUser,
         on_delete=models.CASCADE,
+        primary_key=True,
     )
 
     @property
