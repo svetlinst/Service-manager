@@ -11,8 +11,10 @@
             <div class="col-sm-6">
                 <p><u>Email:</u> {{ object.email_address }}</p>
                 <p><u>Phone:</u> {{ object.phone_number }}</p>
-                <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_customer' object.id %}"
-                   role="button">Edit</a>
+                {% if perms.customers.change_customer %}
+                    <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_customer' object.id %}"
+                       role="button">Edit</a>
+                {% endif %}
             </div>
         </div>
     </div>

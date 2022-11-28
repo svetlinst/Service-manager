@@ -14,11 +14,13 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-3 text-right align-self-center my-3">
-            <a href="{% url 'create_customer_department' object.pk %}"
-               class="btn btn-success">Add
-                Department</a>
-        </div>
+        {% if perms.customers.add_customerdepartment %}
+            <div class="col-md-3 text-right align-self-center my-3">
+                <a href="{% url 'create_customer_department' object.pk %}"
+                   class="btn btn-success">Add
+                    Department</a>
+            </div>
+        {% endif %}
     </div>
     <table class="table table-striped text-center">
         <thead>
@@ -35,12 +37,14 @@
                     <td>{{ department.id }}</td>
                     <td>{{ department.name }}</td>
                     <td>
-                        <a class="btn btn-outline-primary btn-sm"
-                           href="{% url 'edit_customer_department' department.customer.pk department.pk %}"
-                           role="button">Edit</a>
-                        <a class="btn btn-outline-danger btn-sm"
-                           href="{% url 'delete_customer_department' department.customer.pk department.pk %}"
-                           role="button">Delete</a>
+                        {% if perms.customers.change_customerdepartment %}
+                            <a class="btn btn-outline-primary btn-sm"
+                               href="{% url 'edit_customer_department' department.customer.pk department.pk %}"
+                               role="button">Edit</a>
+                            <a class="btn btn-outline-danger btn-sm"
+                               href="{% url 'delete_customer_department' department.customer.pk department.pk %}"
+                               role="button">Delete</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

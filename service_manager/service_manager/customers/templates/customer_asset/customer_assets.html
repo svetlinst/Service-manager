@@ -15,8 +15,10 @@
             </form>
         </div>
         <div class="col-md-3 text-right align-self-center my-3">
-            <a href="{% url 'create_customer_asset' object.pk %}" class="btn btn-success">Add
-                Asset</a>
+            {% if perms.customers.add_customerasset %}
+                <a href="{% url 'create_customer_asset' object.pk %}" class="btn btn-success">Add
+                    Asset</a>
+            {% endif %}
         </div>
     </div>
     <table class="table table-striped text-center">
@@ -45,23 +47,33 @@
                     <td>{{ asset.serial_number }}</td>
                     <td>{{ asset.product_number }}</td>
                     <td class="text-right">
-                        {% if not asset in assets_being_serviced %}
-                            <a class="btn btn-outline-success btn-sm"
-                               href="{% url 'create_service_order' asset.customer.id asset.pk %}"
-                               role="button">Create Order</a>
-                        {% else %}
-                            <i class="fa fa-cogs" title="In Service" aria-hidden="true"></i>
-                            <span class="tooltip-text">In Service</span>
+
+                        {% if perms.main.add_serviceorderheader %}
+                            {% if not asset in assets_being_serviced %}
+                                <a class="btn btn-outline-success btn-sm"
+                                   href="{% url 'create_service_order' asset.customer.id asset.pk %}"
+                                   role="button">Create Order</a>
+                            {% else %}
+                                <i class="fa fa-cogs" title="In Service" aria-hidden="true"></i>
+                                <span class="tooltip-text">In Service</span>
+                            {% endif %}
                         {% endif %}
-                        <a class="btn btn-outline-info btn-sm"
-                           href="{% url 'customer_asset_detail' asset.customer.id asset.id %}"
-                           role="button">Detail</a>
-                        <a class="btn btn-outline-primary btn-sm"
-                           href="{% url 'edit_customer_asset' asset.customer.id asset.id %}"
-                           role="button">Edit</a>
-                        <a class="btn btn-outline-danger btn-sm"
-                           href="{% url 'delete_customer_asset' asset.customer.id asset.id %}"
-                           role="button">Delete</a>
+
+                        {% if perms.customers.view_customerasset %}
+                            <a class="btn btn-outline-info btn-sm"
+                               href="{% url 'customer_asset_detail' asset.customer.id asset.id %}"
+                               role="button">Detail</a>
+                        {% endif %}
+
+                        {% if perms.customers.change_customerasset %}
+                            <a class="btn btn-outline-primary btn-sm"
+                               href="{% url 'edit_customer_asset' asset.customer.id asset.id %}"
+                               role="button">Edit</a>
+                            <a class="btn btn-outline-danger btn-sm"
+                               href="{% url 'delete_customer_asset' asset.customer.id asset.id %}"
+                               role="button">Delete</a>
+                        {% endif %}
+
                     </td>
                 </tr>
             {% endfor %}

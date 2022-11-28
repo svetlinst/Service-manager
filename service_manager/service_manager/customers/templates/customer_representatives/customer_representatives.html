@@ -14,10 +14,12 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-3 text-right align-self-center my-3">
-            <a href="{% url 'create_customer_representative' object.pk %}" class="btn btn-success">Add
-                Representative</a>
-        </div>
+        {% if perms.customers.add_customerrepresentative %}
+            <div class="col-md-3 text-right align-self-center my-3">
+                <a href="{% url 'create_customer_representative' object.pk %}" class="btn btn-success">Add
+                    Representative</a>
+            </div>
+        {% endif %}
     </div>
     <table class="table table-striped text-center">
         <thead>
@@ -40,12 +42,14 @@
                     <td>{{ rep.email_address }}</td>
                     <td>{{ rep.phone_number }}</td>
                     <td>
-                        <a class="btn btn-outline-primary btn-sm"
-                           href="{% url 'edit_customer_representative' rep.customer.id rep.id %}"
-                           role="button">Edit</a>
-                        <a class="btn btn-outline-danger btn-sm"
-                           href="{% url 'delete_customer_representative' rep.customer.id rep.id %}"
-                           role="button">Delete</a>
+                        {% if perms.customers.change_customerrepresentative %}
+                            <a class="btn btn-outline-primary btn-sm"
+                               href="{% url 'edit_customer_representative' rep.customer.id rep.id %}"
+                               role="button">Edit</a>
+                            <a class="btn btn-outline-danger btn-sm"
+                               href="{% url 'delete_customer_representative' rep.customer.id rep.id %}"
+                               role="button">Delete</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
