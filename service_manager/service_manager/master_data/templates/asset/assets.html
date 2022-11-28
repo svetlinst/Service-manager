@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="row my-md-2">
-        <div class="col-md-12 text-right">
-            <a href="{% url 'create_asset' %}" class="btn btn-success">Create</a>
-        </div>
+        {% if perms.master_data.add_asset %}
+            <div class="col-md-12 text-right">
+                <a href="{% url 'create_asset' %}" class="btn btn-success">Create</a>
+            </div>
+        {% endif %}
     </div>
     <table class="table table-striped text-center">
         <thead>
@@ -26,9 +28,12 @@
                     <td>{{ asset.model_name }}</td>
                     <td>{{ asset.model_number }}</td>
                     <td>
-                        <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_asset' asset.id %}"
-                           role="button">Edit</a>
-                        <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_asset' asset.id %}" role="button">Delete</a>
+                        {% if perms.master_data.change_asset %}
+                            <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_asset' asset.id %}"
+                               role="button">Edit</a>
+                            <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_asset' asset.id %}"
+                               role="button">Delete</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

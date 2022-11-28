@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="row my-md-2">
-        <div class="col-md-12 text-right">
-            <a href="{% url 'create_asset_category' %}" class="btn btn-success">Create</a>
-        </div>
+        {% if perms.master_data.add_assetcategory %}
+            <div class="col-md-12 text-right">
+                <a href="{% url 'create_asset_category' %}" class="btn btn-success">Create</a>
+            </div>
+        {% endif %}
     </div>
     <table class="table table-striped text-center">
         <thead>
@@ -20,9 +22,13 @@
                     <td>{{ asset_category.id }}</td>
                     <td>{{ asset_category.name }}</td>
                     <td>
-                        <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_asset_category' asset_category.id %}"
-                           role="button">Edit</a>
-                        <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_asset_category' asset_category.id %}" role="button">Delete</a>
+                        {% if perms.master_data.change_assetcategory %}
+                            <a class="btn btn-outline-primary btn-sm"
+                               href="{% url 'edit_asset_category' asset_category.id %}"
+                               role="button">Edit</a>
+                            <a class="btn btn-outline-danger btn-sm"
+                               href="{% url 'delete_asset_category' asset_category.id %}" role="button">Delete</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

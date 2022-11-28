@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="row my-md-2">
-        <div class="col-md-12 text-right">
-            <a href="{% url 'create_material' %}" class="btn btn-success">Create</a>
-        </div>
+        {% if perms.master_data.add_material %}
+            <div class="col-md-12 text-right">
+                <a href="{% url 'create_material' %}" class="btn btn-success">Create</a>
+            </div>
+        {% endif %}
     </div>
     <table class="table table-striped text-center">
         <thead>
@@ -24,9 +26,12 @@
                     <td>{{ material.name }}</td>
                     <td>{{ material.price }}</td>
                     <td>
-                        <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_material' material.id %}"
-                           role="button">Edit</a>
-                        <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_material' material.id %}" role="button">Delete</a>
+                        {% if perms.master_data.change_material %}
+                            <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_material' material.id %}"
+                               role="button">Edit</a>
+                            <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_material' material.id %}"
+                               role="button">Delete</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
