@@ -34,15 +34,16 @@
                         <td>{{ service_order.created_on }}</td>
                         <td>{{ service_order.serviced_on }}</td>
                         <td>
-                            <a class="btn btn-outline-info btn-sm"
-                               href="{% url 'detail_service_order' service_order.id %}"
-                               role="button">Detail</a>
                             {% if perms.main.change_serviceorderheader %}
-                                <a class="btn btn-outline-danger btn-sm"
-                                   href="{% url 'delete_service_order' service_order.id %}"
-                                   role="button">Delete</a>
+                                <a class="btn btn-outline-info btn-sm"
+                                   href="{% url 'detail_service_order' service_order.id %}"
+                                   role="button">Detail</a>
+                                {% if perms.main.change_serviceorderheader %}
+                                    <a class="btn btn-outline-danger btn-sm"
+                                       href="{% url 'delete_service_order' service_order.id %}"
+                                       role="button">Delete</a>
+                                {% endif %}
                             {% endif %}
-
                     </tr>
                 {% endfor %}
             {% endif %}
