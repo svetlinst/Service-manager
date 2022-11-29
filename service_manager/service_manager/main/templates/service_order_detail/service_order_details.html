@@ -35,14 +35,14 @@
                     <td>{{ service_order_detail.total_amount|floatformat:"2" }}</td>
                     {% if not service_order_header.is_serviced %}
                         <td>
-
-                            <a class="btn btn-outline-primary btn-sm"
-                               href="{% url 'edit_service_order_detail' service_order_header.pk service_order_detail.id %}"
-                               role="button">Edit</a>
-                            <a class="btn btn-outline-danger btn-sm"
-                               href="{% url 'delete_service_order_detail' service_order_header.id service_order_detail.id %}"
-                               role="button">Delete</a>
-
+                            {% if perms.main.change_serviceorderdetail %}
+                                <a class="btn btn-outline-primary btn-sm"
+                                   href="{% url 'edit_service_order_detail' service_order_header.pk service_order_detail.id %}"
+                                   role="button">Edit</a>
+                                <a class="btn btn-outline-danger btn-sm"
+                                   href="{% url 'delete_service_order_detail' service_order_header.id service_order_detail.id %}"
+                                   role="button">Delete</a>
+                            {% endif %}
                         </td>
                     {% endif %}
                 </tr>
@@ -68,12 +68,15 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
-                    <a class="btn btn-sm btn-success" href="{% url 'complete_service_order' service_order_header.pk %}">Confirm</a>
+                    {% if perms.main.change_serviceorderdetail %}
+                        <a class="btn btn-sm btn-success"
+                           href="{% url 'complete_service_order' service_order_header.pk %}">Confirm</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
-{#    Rollback#}
+    {#    Rollback#}
     <div class="modal fade" id="rollback_modal" tabindex="-1" role="dialog" aria-labelledby="rollback_modal_label"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -84,11 +87,13 @@
                 </div>
                 <div class="modal-body">
                     <p class="my-0">Please, confirm</p>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
-                    <a class="btn btn-sm btn-success" href="{% url 'rollback_service_order' service_order_header.pk %}">Rollback</a>
+                    {% if perms.main.change_serviceorderheader %}
+                        <a class="btn btn-sm btn-success"
+                           href="{% url 'rollback_service_order' service_order_header.pk %}">Rollback</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

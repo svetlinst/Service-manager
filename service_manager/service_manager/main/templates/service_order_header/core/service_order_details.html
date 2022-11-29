@@ -108,34 +108,40 @@
     </div>
 
     {#    Action menu bar#}
-    {#    todo: restrict the below actions to the respective roles#}
     <div class="d-block rounded-lg bg-light" style="padding:2%">
         <div class="row">
             {% if not service_order_header.is_serviced %}
                 <div class="col-md-12 text-right align-self-center">
-                    <a class="btn btn-outline-success btn-" href="#" data-bs-toggle="modal" data-bs-target="#complete_order_modal">Complete
-                        Service</a>
+                    {% if perms.main.change_serviceorderdetail %}
+                        <a class="btn btn-outline-success btn-" href="#" data-bs-toggle="modal"
+                           data-bs-target="#complete_order_modal">Complete
+                            Service</a>
+                    {% endif %}
                 </div>
             {% elif not service_order_header.is_completed %}
-                <div class="col-md-12 text-right align-self-center my-3">
-                    <a class="btn btn-outline-warning btn" href="#" data-bs-toggle="modal"
-                       data-bs-target="#rollback_modal">Rollback
-                        Order</a>
-                    <a class="btn btn-outline-success btn"
-                       href="{% url 'handover_service_order' service_order_header.id %}">Finalize
-                        Order</a>
-                </div>
+                {% if perms.main.change_serviceorderheader %}
+                    <div class="col-md-12 text-right align-self-center my-3">
+                        <a class="btn btn-outline-warning btn" href="#" data-bs-toggle="modal"
+                           data-bs-target="#rollback_modal">Rollback
+                            Order</a>
+                        <a class="btn btn-outline-success btn"
+                           href="{% url 'handover_service_order' service_order_header.id %}">Finalize
+                            Order</a>
+                    </div>
+                {% endif %}
             {% endif %}
         </div>
 
         {#    Service order notes actions#}
         {% if not service_order_header.is_completed %}
             <div class="row">
-                <div class="col-md-3 text-right align-self-center my-3">
-                    <a href="{% url 'create_service_order_note' service_order_header.pk %}?next={{ request.path|urlencode }}"
-                       class="btn btn-success">Add
-                        Note</a>
-                </div>
+                {% if perms.main.add_serviceordernote %}
+                    <div class="col-md-3 text-right align-self-center my-3">
+                        <a href="{% url 'create_service_order_note' service_order_header.pk %}?next={{ request.path|urlencode }}"
+                           class="btn btn-success">Add
+                            Note</a>
+                    </div>
+                {% endif %}
             </div>
         {% endif %}
         {% if service_order_header.serviceordernote_set.all %}

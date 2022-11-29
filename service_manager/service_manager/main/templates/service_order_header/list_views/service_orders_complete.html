@@ -37,11 +37,12 @@
                             <a class="btn btn-outline-info btn-sm"
                                href="{% url 'detail_service_order' service_order.id %}"
                                role="button">Detail</a>
-                            {#                    todo: allow only certain roles to delete#}
+                            {% if perms.main.change_serviceorderheader %}
+                                <a class="btn btn-outline-danger btn-sm"
+                                   href="{% url 'delete_service_order' service_order.id %}"
+                                   role="button">Delete</a>
+                            {% endif %}
 
-                            <a class="btn btn-outline-danger btn-sm"
-                               href="{% url 'delete_service_order' service_order.id %}"
-                               role="button">Delete</a>
                     </tr>
                 {% endfor %}
             {% endif %}
