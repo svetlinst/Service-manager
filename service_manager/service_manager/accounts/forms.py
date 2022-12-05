@@ -60,3 +60,7 @@ class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
         model = Profile
         fields = ('first_name', 'last_name', 'phone_number')
 
+
+class PasswordResetForm(BootstrapFormMixin, auth_forms.PasswordResetForm):
+    pass
+

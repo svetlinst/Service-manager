@@ -21,6 +21,10 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
     )
 
+    is_active = models.BooleanField(
+        default=True,
+    )
+
     USERNAME_FIELD = 'email'
 
     @property
