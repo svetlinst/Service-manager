@@ -143,9 +143,13 @@ LOCALE_PATHS = [
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'staticfiles',
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'staticfiles',
+# ]
+
+STATICFILES_DIRS = (
+    BASE_DIR / 'static',
+)
 
 STATIC_ROOT = '/tmp/service_manager/staticfiles'
 

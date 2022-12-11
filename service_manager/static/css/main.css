@@ -1,7 +1,21 @@
+body {
+    background-image: url('/static/background.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+nav .logo {
+    height: 50px;
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
+}
+
 /*body {*/
-/*    background-image: url('/static/background.jpg');*/
-/*    -webkit-background-size: cover;*/
-/*    -moz-background-size: cover;*/
-/*    -o-background-size: cover;*/
+/*    background: linear-gradient(rgba(0, 0, 0, 0.76), rgba(0, 0, 0, 0.5)), url('/static/background.tif');*/
+/*    background-attachment: fixed;*/
 /*    background-size: cover;*/
 /*}*/
