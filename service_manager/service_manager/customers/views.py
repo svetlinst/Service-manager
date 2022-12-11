@@ -14,8 +14,18 @@ class CustomersListView(auth_mixins.PermissionRequiredMixin, views.ListView):
     model = Customer
     template_name = 'customer/customers.html'
     ordering = ('name',)
+    paginate_by = 3
 
     permission_required = 'customers.view_customer'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        request = self.request.GET.copy()
+        params = request.pop('page', True) and request.urlencode()
+        context['params'] = params
+
+        return context
 
     def get_queryset(self):
         queryset = super().get_queryset()
