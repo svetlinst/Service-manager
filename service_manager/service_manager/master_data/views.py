@@ -1,4 +1,5 @@
 import django.views.generic as views
+from django.db.models import Q
 from django.urls import reverse_lazy
 from django.contrib.auth import mixins as auth_mixins
 
@@ -13,7 +14,26 @@ class AssetsListView(auth_mixins.PermissionRequiredMixin, views.ListView):
     template_name = 'asset/assets.html'
     ordering = ('category', 'brand', 'model_name', 'model_number')
 
+    paginate_by = 3
+
     permission_required = 'master_data.view_asset'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        request = self.request.GET.copy()
+        params = request.pop('page', True) and request.urlencode()
+        context['params'] = params
+
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        search_text = self.request.GET.get('search_value', None)
+        if search_text:
+            queryset = queryset.filter(Q(model_name__icontains=search_text) | Q(model_number__icontains=search_text))
+        return queryset
 
 
 class CreateAssetView(auth_mixins.PermissionRequiredMixin, views.CreateView):
@@ -86,7 +106,7 @@ class MaterialCategoriesListView(auth_mixins.PermissionRequiredMixin, views.List
 
 class CreateMaterialCategoryView(auth_mixins.PermissionRequiredMixin, BootstrapFormViewMixin, views.CreateView):
     model = MaterialCategory
-    fields = ('name', )
+    fields = ('name',)
     template_name = 'material_category/material_category_create.html'
     success_url = reverse_lazy('material_categories_list')
 
@@ -120,7 +140,7 @@ class BrandsListView(auth_mixins.PermissionRequiredMixin, views.ListView):
 
 class CreateBrandView(auth_mixins.PermissionRequiredMixin, BootstrapFormViewMixin, views.CreateView):
     model = Brand
-    fields = ('name', )
+    fields = ('name',)
     template_name = 'brands/brand_create.html'
     success_url = reverse_lazy('brands_list')
 
@@ -154,7 +174,7 @@ class AssetCategoriesListView(auth_mixins.PermissionRequiredMixin, views.ListVie
 
 class CreateAssetCategoryView(auth_mixins.PermissionRequiredMixin, BootstrapFormViewMixin, views.CreateView):
     model = AssetCategory
-    fields = ('name', )
+    fields = ('name',)
     template_name = 'asset_category/asset_category_create.html'
     success_url = reverse_lazy('asset_categories_list')
 

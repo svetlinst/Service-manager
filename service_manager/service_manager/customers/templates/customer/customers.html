@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
-    <ul class="d-block mt-5 rounded-lg bg-light mb-3" style="padding:2%">
+    <div class="d-block mt-5 rounded-lg bg-light mb-3" style="padding:2%">
         <h2 class='text-center text-secondary'>{% trans 'Customers' %}</h2>
         <div class="row">
             <div class="col-md-8">
@@ -20,7 +20,7 @@
             </div>
             {% if perms.customers.add_customer %}
                 <div class="col-md-2 text-right align-self-center">
-                    <a href="{% url 'create_customer' %}" class="btn btn-success btn-md">{% trans 'Create New' %}</a>
+                    <a href="{% url 'create_customer' %}" class="btn btn-success btn-md float-end">{% trans 'Create New' %}</a>
                 </div>
             {% endif %}
         </div>
@@ -62,23 +62,7 @@
             {% endif %}
             </tbody>
         </table>
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-                <a class="page-link" href="?page=1&{{ params }}">&laquo; first</a>
-                <a class="page-link" href="?page={{ page_obj.previous_page_number }}&{{ params }}">previous</a>
-            {% endif %}
-
-            {% if page_obj.paginator.num_pages > 1 %}
-                <a class="page-link" style="margin-left: 5px; margin-right: 5px">{{ page_obj.number }}
-                    of {{ page_obj.paginator.num_pages }}</a>
-            {% endif %}
-
-
-            {% if page_obj.has_next %}
-                <a class="page-link" href="?page={{ page_obj.next_page_number }}&{{ params }}">next</a>
-                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&{{ params }}">last &raquo;</a>
-            {% endif %}
-        </ul>
-    </ul>
+        {% include 'partials/paginator.html' %}
+    </div>
 
 {% endblock %}

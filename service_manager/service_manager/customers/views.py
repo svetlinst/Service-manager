@@ -14,7 +14,7 @@ class CustomersListView(auth_mixins.PermissionRequiredMixin, views.ListView):
     model = Customer
     template_name = 'customer/customers.html'
     ordering = ('name',)
-    paginate_by = 3
+    paginate_by = 10
 
     permission_required = 'customers.view_customer'
 
