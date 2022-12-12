@@ -1,4 +1,5 @@
 {% load permissions %}
+{% load active_tabs %}
 {% load i18n %}
 {% load static %}
 <!DOCTYPE html>
@@ -22,115 +23,122 @@
 <!-- Nav Bar -->
 <nav class="navbar navbar-expand-md navbar-light sticky-top bg-light ">
     <a class="navbar-brand" href="{% url 'index' %}"><img src="/static/logo.png" class="logo" alt="logo"></a>
-    {#    <a class="navbar-brand" href="#">Service Manager</a>#}
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav mx-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'index' %}">Home<span class="sr-only">(current)</span></a>
-            </li>
-            {% if request.user.is_authenticated %}
+    {% with request.resolver_match.url_name as url_name %}
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link {% if url_name == 'index' %}active{% endif %}" href="{% url 'index' %}">Home<span class="sr-only">(current)</span></a>
+                </li>
+                {% if request.user.is_authenticated %}
 
-                {% if perms.customers.view_customer %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'customers_list' %}">Customers</a>
-                    </li>
+                    {% if perms.customers.view_customer %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if url_name|is_active_nav_link:'customers' %}active{% endif %}"
+                               href="{% url 'customers_list' %}">Customers</a>
+                        </li>
+                    {% endif %}
+
+                    {% if perms.main.view_serviceorderheader %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {% if url_name|is_active_nav_link:'main' %}active{% endif %}"
+                               role="button" href="#" id="navbarDropdownMenuLink"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Orders
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkOrders">
+                                <a class="dropdown-item" href="{% url 'service_orders_list_pending_service' %}">Pending
+                                    Service</a>
+                                <a class="dropdown-item" href="{% url 'service_orders_list_serviced' %}">Service
+                                    Completed</a>
+                            </div>
+                        </li>
+                    {% endif %}
+
+                    {% if request.user|user_has_master_data_permissions %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {% if url_name|is_active_nav_link:'master_data' %}active{% endif %}"
+                               href="#" id="navbarDropdownMenuLink"
+                               data-bs-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                Manage
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkMasterData">
+                                {% if perms.master_data.view_asset %}
+                                    <a class="dropdown-item" href="{% url 'assets_list' %}">Assets</a>
+                                {% endif %}
+                                {% if perms.master_data.view_assetcategory %}
+                                    <a class="dropdown-item" href="{% url 'asset_categories_list' %}">Asset
+                                        Categories</a>
+                                {% endif %}
+                                {% if perms.master_data.view_brand %}
+                                    <a class="dropdown-item" href="{% url 'brands_list' %}">Brands</a>
+                                {% endif %}
+                                {% if perms.master_data.view_material %}
+                                    <a class="dropdown-item" href="{% url 'materials_list' %}">Material</a>
+                                {% endif %}
+                                {% if perms.master_data.view_materialcategory %}
+                                    <a class="dropdown-item" href="{% url 'material_categories_list' %}">Material
+                                        Categories</a>
+                                {% endif %}
+                            </div>
+                        </li>
+                    {% endif %}
+
+                    {% if perms.main.view_serviceorderheader %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {% if url_name|is_active_nav_link:'reports' %}active{% endif %}"
+                               href="#" id="navbarDropdownMenuLink"
+                               data-bs-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                Reports
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkReports">
+                                <a class="dropdown-item" href="{% url 'finished_orders' %}">Finished Orders</a>
+                            </div>
+                        </li>
+                    {% endif %}
+
                 {% endif %}
+            </ul>
 
-                {% if perms.main.view_serviceorderheader %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" role="button" href="#" id="navbarDropdownMenuLink"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            Orders
+            {#        Language selection#}
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    {% trans 'Language' %}
+                </a>
+                <div class="dropdown-menu">
+                    {% for language in languages %}
+                        <a href="/{{ language.code }}/{{ request.get_full_path|slice:"4:" }}"
+                                {% if language.code == LANGUAGE_CODE %} class="dropdown-item active" {% else %}
+                           class="dropdown-item"{% endif %}>
+                            {{ language.name_local }}
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkOrders">
-                            <a class="dropdown-item" href="{% url 'service_orders_list_pending_service' %}">Pending
-                                Service</a>
-                            <a class="dropdown-item" href="{% url 'service_orders_list_serviced' %}">Service
-                                Completed</a>
-                        </div>
-                    </li>
-                {% endif %}
-
-                {% if request.user|user_has_master_data_permissions %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                           data-bs-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            Manage
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkMasterData">
-                            {% if perms.master_data.view_asset %}
-                                <a class="dropdown-item" href="{% url 'assets_list' %}">Assets</a>
-                            {% endif %}
-                            {% if perms.master_data.view_assetcategory %}
-                                <a class="dropdown-item" href="{% url 'asset_categories_list' %}">Asset Categories</a>
-                            {% endif %}
-                            {% if perms.master_data.view_brand %}
-                                <a class="dropdown-item" href="{% url 'brands_list' %}">Brands</a>
-                            {% endif %}
-                            {% if perms.master_data.view_material %}
-                                <a class="dropdown-item" href="{% url 'materials_list' %}">Material</a>
-                            {% endif %}
-                            {% if perms.master_data.view_materialcategory %}
-                                <a class="dropdown-item" href="{% url 'material_categories_list' %}">Material
-                                    Categories</a>
-                            {% endif %}
-                        </div>
-                    </li>
-                {% endif %}
-
-                {% if perms.main.view_serviceorderheader %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                           data-bs-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            Reports
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkReports">
-                            <a class="dropdown-item" href="{% url 'finished_orders' %}">Finished Orders</a>
-                        </div>
-                    </li>
-                {% endif %}
-
-            {% endif %}
-        </ul>
-
-        {#        Language selection#}
-        {% get_current_language as LANGUAGE_CODE %}
-        {% get_available_languages as LANGUAGES %}
-        {% get_language_info_list for LANGUAGES as languages %}
-        <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false">
-                {% trans 'Language' %}
-            </a>
-            <div class="dropdown-menu">
-                {% for language in languages %}
-                    <a href="/{{ language.code }}/{{ request.get_full_path|slice:"4:" }}"
-                            {% if language.code == LANGUAGE_CODE %} class="dropdown-item active" {% else %}
-                       class="dropdown-item"{% endif %}>
-                        {{ language.name_local }}
-                    </a>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
+
+            {#    Authentication#}
+            <div class="d-flex">
+                {% if request.user.is_anonymous %}
+                    <a class="btn btn-light ms-3" href="{% url 'login_user' %}">Login</a>
+                {% else %}
+                    <a class="btn btn-light ms-3" href="{% url 'edit_profile'  request.user.profile.pk %}">Profile</a>
+                    <a class="btn btn-light ms-3" href="{% url 'logout_user' %}">Logout</a>
+                {% endif %}
+            </div>
+
+
         </div>
+    {% endwith %}
 
-        {#    Authentication#}
-        <div class="d-flex">
-            {% if request.user.is_anonymous %}
-                <a class="btn btn-light ms-3" href="{% url 'login_user' %}">Login</a>
-            {% else %}
-                <a class="btn btn-light ms-3" href="{% url 'edit_profile'  request.user.profile.pk %}">Profile</a>
-                <a class="btn btn-light ms-3" href="{% url 'logout_user' %}">Logout</a>
-            {% endif %}
-        </div>
-
-
-    </div>
 </nav>
 <!-- End Nav Bar -->
 
@@ -160,4 +168,5 @@
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
 </html>
