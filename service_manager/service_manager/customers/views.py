@@ -148,7 +148,7 @@ class EditCustomerAssetView(auth_mixins.PermissionRequiredMixin, views.UpdateVie
     form_class = EditCustomerAssetForm
     template_name = 'customer_asset/customer_asset_edit.html'
 
-    permission_required = ('customers.view_customer_asset', 'customers.change_customerasset')
+    permission_required = ('customers.view_customerasset', 'customers.change_customerasset')
 
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
@@ -158,7 +158,7 @@ class DeleteCustomerAssetView(auth_mixins.PermissionRequiredMixin, views.DeleteV
     model = CustomerAsset
     template_name = 'customer_asset/customer_asset_delete.html'
 
-    permission_required = ('customers.view_customer_asset', 'customers.change_customerasset')
+    permission_required = ('customers.view_customerasset', 'customers.change_customerasset')
 
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
