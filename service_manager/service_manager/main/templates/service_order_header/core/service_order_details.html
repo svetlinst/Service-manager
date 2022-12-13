@@ -1,109 +1,109 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="d-block mt-5 rounded-lg bg-light mb-3" style="padding:2%">
+    <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:0.5%">
         <h4 class='text-center text-secondary'>Customer Information</h4>
         <div class="row text-left">
             <div class="col">
-                <p class="text-primary"><b class="text-dark">Name: </b>{{ service_order_header.customer.name }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">Name: </b>{{ service_order_header.customer.name }}</p>
             </div>
             <div class="col">
-                <p class="text-primary"><b class="text-dark">Type: </b>{{ service_order_header.customer.type }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">Type: </b>{{ service_order_header.customer.type }}</p>
             </div>
             <div class="col">
-                <p class="text-primary"><b class="text-dark">VAT: </b>{{ service_order_header.customer.vat }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">VAT: </b>{{ service_order_header.customer.vat }}</p>
             </div>
         </div>
         <div class="row text-left">
             <div class="col">
-                <p class="text-primary"><b
+                <p class="text-primary mb-0"><b
                         class="text-dark">Email: </b>{{ service_order_header.customer.email_address }}</p>
             </div>
             <div class="col">
-                <p class="text-primary"><b class="text-dark">Phone: </b>{{ service_order_header.customer.phone_number }}
+                <p class="text-primary mb-0"><b class="text-dark">Phone: </b>{{ service_order_header.customer.phone_number }}
                 </p>
             </div>
             <div class="col">
-                <p class="text-primary"><b
+                <p class="text-primary mb-0"><b
                         class="text-dark">Department: </b>{{ service_order_header.department|default_if_none:"" }}</p>
             </div>
         </div>
-        <h4 class='text-center text-secondary mt-3'>Asset Information</h4>
+        <h4 class='text-center text-secondary mt-1'>Asset Information</h4>
         <div class="row text-left">
             <div class="col">
-                <p class="text-primary"><b
+                <p class="text-primary mb-0"><b
                         class="text-dark">Category: </b>{{ service_order_header.customer_asset.asset.category }}</p>
             </div>
             <div class="col">
-                <p class="text-primary"><b
+                <p class="text-primary mb-0"><b
                         class="text-dark">Brand: </b>{{ service_order_header.customer_asset.asset.brand }}</p>
             </div>
             <div class="col">
-                <p class="text-primary"><b class="text-dark">Model
+                <p class="text-primary mb-0"><b class="text-dark">Model
                     Name: </b>{{ service_order_header.customer_asset.asset.model_name }}</p>
             </div>
         </div>
         <div class="row text-left">
             <div class="col">
-                <p class="text-primary"><b class="text-dark">Model
+                <p class="text-primary mb-0"><b class="text-dark">Model
                     Number: </b>{{ service_order_header.customer_asset.asset.model_number }}</p>
             </div>
             <div class="col">
-                <p class="text-primary"><b class="text-dark">Serial
+                <p class="text-primary mb-0"><b class="text-dark">Serial
                     Number: </b>{{ service_order_header.customer_asset.serial_number }}</p>
             </div>
             <div class="col">
-                <p class="text-primary"><b class="text-dark">Product
+                <p class="text-primary mb-0"><b class="text-dark">Product
                     Number: </b>{{ service_order_header.customer_asset.product_number }}</p>
             </div>
         </div>
-        <h4 class='text-center text-secondary mt-3'>Order Information</h4>
+        <h4 class='text-center text-secondary mt-1'>Order Information</h4>
         <div class="row text-left">
             <div class="col-sm-4">
-                <p class="text-primary"><b class="text-dark">Handed over
+                <p class="text-primary mb-0"><b class="text-dark">Handed over
                     by: </b>{{ service_order_header.handed_over_by|default_if_none:"" }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary"><b class="text-dark">Accepted
+                <p class="text-primary mb-0"><b class="text-dark">Accepted
                     by: </b>{{ service_order_header.accepted_by }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary"><b class="text-dark">Accepted
+                <p class="text-primary mb-0"><b class="text-dark">Accepted
                     on: </b>{{ service_order_header.created_on }}</p>
             </div>
         </div>
         <div class="row text-left">
             <div class="col-sm-4">
-                <p class="text-primary"><b class="text-dark">Status: </b>{{ service_order_header.status }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">Status: </b>{{ service_order_header.status }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary"><b class="text-dark">Serviced
+                <p class="text-primary mb-0"><b class="text-dark">Serviced
                     by: </b>{{ service_order_header.serviced_by|default_if_none:"" }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary"><b class="text-dark">Serviced
+                <p class="text-primary mb-0"><b class="text-dark">Serviced
                     on: </b>{{ service_order_header.serviced_on|default_if_none:"" }}</p>
             </div>
         </div>
         <div class="row text-left">
             <div class="col-sm-4">
-                <p class="text-primary"><b class="text-dark">Handed over
+                <p class="text-primary mb-0"><b class="text-dark">Handed over
                     to: </b>{{ service_order_header.handed_over_to|default_if_none:"" }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary"><b class="text-dark">Completed
+                <p class="text-primary mb-0"><b class="text-dark">Completed
                     by: </b>{{ service_order_header.completed_by|default_if_none:"" }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary"><b class="text-dark">Completed
+                <p class="text-primary mb-0"><b class="text-dark">Completed
                     on: </b>{{ service_order_header.completed_on|default_if_none:"" }}</p>
             </div>
         </div>
     </div>
 
     {#    Problem description#}
-    <div class="d-block rounded-lg bg-light mb-3" style="padding:2%">
-        <h4 class='text-center text-secondary mt-3'>Problem Description</h4>
+    <div class="d-block rounded-lg bg-light mb-1" style="padding:0.5%">
+        <h4 class='text-center text-secondary mt-1'>Problem Description</h4>
         <div class="text-left"><i>{{ service_order_header.problem_description }}</i></div>
     </div>
 
@@ -113,7 +113,7 @@
             {% if not service_order_header.is_serviced %}
                 <div class="col-md-12 text-right align-self-center">
                     {% if perms.main.change_serviceorderdetail %}
-                        <a class="btn btn-outline-success btn-" href="#" data-bs-toggle="modal"
+                        <a class="btn btn-outline-success float-end" href="#" data-bs-toggle="modal"
                            data-bs-target="#complete_order_modal">Complete
                             Service</a>
                     {% endif %}
@@ -121,10 +121,10 @@
             {% elif not service_order_header.is_completed %}
                 {% if perms.main.change_serviceorderheader %}
                     <div class="col-md-12 text-right align-self-center my-3">
-                        <a class="btn btn-outline-warning btn" href="#" data-bs-toggle="modal"
+                        <a class="btn btn-outline-warning float-end" href="#" data-bs-toggle="modal"
                            data-bs-target="#rollback_modal">Rollback
                             Order</a>
-                        <a class="btn btn-outline-success btn"
+                        <a class="btn btn-outline-success float-end"
                            href="{% url 'handover_service_order' service_order_header.id %}">Finalize
                             Order</a>
                     </div>
@@ -136,9 +136,9 @@
         {% if not service_order_header.is_completed %}
             <div class="row">
                 {% if perms.main.add_serviceordernote %}
-                    <div class="col-md-3 text-right align-self-center my-3">
+                    <div class="col-md-12 text-right align-self-center my-1">
                         <a href="{% url 'create_service_order_note' service_order_header.pk %}?next={{ request.path|urlencode }}"
-                           class="btn btn-success">Add
+                           class="btn btn-success float-end">Add
                             Note</a>
                     </div>
                 {% endif %}
