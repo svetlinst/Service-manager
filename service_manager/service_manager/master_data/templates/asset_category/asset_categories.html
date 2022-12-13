@@ -1,38 +1,59 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
-    <div class="row my-md-2">
-        {% if perms.master_data.add_assetcategory %}
-            <div class="col-md-12 text-right">
-                <a href="{% url 'create_asset_category' %}" class="btn btn-success">Create</a>
-            </div>
-        {% endif %}
+    <div class="d-block mt-5 rounded-lg bg-light mb-3" style="padding:2%">
+        <h2 class='text-center text-secondary'>{% trans 'Asset Categories' %}</h2>
+        <div class="row my-md-2">
+            {% if perms.master_data.add_assetcategory %}
+                <div class="col-md-8">
+                    <form class="form" method="GET" action="">
+                        <div class="input-group my-3">
+                            <input type="search" class="form-control rounded mr-3" placeholder="Search"
+                                   aria-label="Search"
+                                   aria-describedby="search-addon" name="search_value"/>
+                            <button type="submit" class="btn btn-outline-primary"
+                                    href="{% url 'asset_categories_list' %}">{% trans 'search' %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2 text-left align-self-center">
+                    <a href="{% url 'asset_categories_list' %}"
+                       class="btn btn-outline-warning btn-md">{% trans 'clear' %}</a>
+                </div>
+                <div class="col-md-2 text-right align-self-center">
+                    <a href="{% url 'create_asset_category' %}" class="btn btn-success btn-md float-end">Create New</a>
+                </div>
+            {% endif %}
+        </div>
+        <table class="table table-striped text-center">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if object_list %}
+                {% for asset_category in object_list %}
+                    <tr>
+                        <td>{{ asset_category.id }}</td>
+                        <td>{{ asset_category.name }}</td>
+                        <td>
+                            {% if perms.master_data.change_assetcategory %}
+                                <a class="btn btn-outline-primary btn-sm"
+                                   href="{% url 'edit_asset_category' asset_category.id %}"
+                                   role="button">Edit</a>
+                                <a class="btn btn-outline-danger btn-sm"
+                                   href="{% url 'delete_asset_category' asset_category.id %}" role="button">Delete</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+        {% include 'partials/paginator.html' %}
     </div>
-    <table class="table table-striped text-center">
-        <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% if object_list %}
-            {% for asset_category in object_list %}
-                <tr>
-                    <td>{{ asset_category.id }}</td>
-                    <td>{{ asset_category.name }}</td>
-                    <td>
-                        {% if perms.master_data.change_assetcategory %}
-                            <a class="btn btn-outline-primary btn-sm"
-                               href="{% url 'edit_asset_category' asset_category.id %}"
-                               role="button">Edit</a>
-                            <a class="btn btn-outline-danger btn-sm"
-                               href="{% url 'delete_asset_category' asset_category.id %}" role="button">Delete</a>
-                        {% endif %}
-                    </td>
-                </tr>
-            {% endfor %}
-        {% endif %}
-        </tbody>
-    </table>
 {% endblock %}
