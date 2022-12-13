@@ -211,7 +211,7 @@ class DeleteCustomerRepresentativeView(auth_mixins.PermissionRequiredMixin, view
     permission_required = ('customers.view_customerrepresentative', 'customers.change_customerrepresentative')
 
     def get_success_url(self):
-        return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
+        return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk}) + '?show_representatives'
 
 
 class CreateCustomerDepartmentView(auth_mixins.PermissionRequiredMixin, views.CreateView):
@@ -224,7 +224,7 @@ class CreateCustomerDepartmentView(auth_mixins.PermissionRequiredMixin, views.Cr
     def get_success_url(self):
         customer_id = self.kwargs['customer_id']
         if customer_id:
-            return reverse_lazy('customer_detail', kwargs={'pk': customer_id})
+            return reverse_lazy('customer_detail', kwargs={'pk': customer_id}) + '?show_departments'
         return reverse_lazy('customers_list')
 
     def get_context_data(self, **kwargs):
@@ -257,7 +257,7 @@ class EditCustomerDepartmentView(auth_mixins.PermissionRequiredMixin, views.Upda
     def get_success_url(self):
         customer_id = self.kwargs['customer_id']
         if customer_id:
-            return reverse_lazy('customer_detail', kwargs={'pk': customer_id})
+            return reverse_lazy('customer_detail', kwargs={'pk': customer_id}) + '?show_departments'
         return reverse_lazy('customers_list')
 
 
@@ -270,5 +270,5 @@ class DeleteCustomerDepartmentView(auth_mixins.PermissionRequiredMixin, views.De
     def get_success_url(self):
         customer_id = self.kwargs['customer_id']
         if customer_id:
-            return reverse_lazy('customer_detail', kwargs={'pk': customer_id})
+            return reverse_lazy('customer_detail', kwargs={'pk': customer_id}) + '?show_departments'
         return reverse_lazy('customers_list')
