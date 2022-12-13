@@ -1,10 +1,18 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
-    <form method="post" action="{% url "edit_customer_representative" object.customer.id object.pk %}">
-        {% csrf_token %}
-        {{ form }}
-        <div class="my-3">
-            <button type="submit" class="btn btn-primary">Update</button>
+    <h1 class="text-center">{% trans 'Edit customer representative' %}</h1>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <form method="post"
+                  action="{% url "edit_customer_representative" object.customer.id object.pk %}">
+                {% csrf_token %}
+                {{ form }}
+                <a class="btn btn-secondary mt-1 float-start" href="javascript:history.back()">Back</a>
+                <button type="submit" class="btn btn-primary mt-1 float-end">Update</button>
+            </form>
         </div>
-    </form>
+        <div class="col-lg-3"></div>
+    </div>
 {% endblock %}
