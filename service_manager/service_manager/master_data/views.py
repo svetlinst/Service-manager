@@ -135,7 +135,26 @@ class BrandsListView(auth_mixins.PermissionRequiredMixin, views.ListView):
     template_name = 'brands/brands.html'
     ordering = ('name',)
 
+    paginate_by = 10
+
     permission_required = 'master_data.view_brand'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        request = self.request.GET.copy()
+        params = request.pop('page', True) and request.urlencode()
+        context['params'] = params
+
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        search_text = self.request.GET.get('search_value', None)
+        if search_text:
+            queryset = queryset.filter(name__icontains=search_text)
+        return queryset
 
 
 class CreateBrandView(auth_mixins.PermissionRequiredMixin, BootstrapFormViewMixin, views.CreateView):
