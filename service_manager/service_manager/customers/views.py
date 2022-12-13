@@ -198,7 +198,7 @@ class EditCustomerRepresentativeView(auth_mixins.PermissionRequiredMixin, views.
     template_name = 'customer_representatives/customer_representative_edit.html'
     form_class = EditCustomerRepresentativeForm
 
-    permission_required = ('customers.view_customer_representative', 'customers.change_customerrepresentative')
+    permission_required = ('customers.view_customerrepresentative', 'customers.change_customerrepresentative')
 
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
@@ -208,7 +208,7 @@ class DeleteCustomerRepresentativeView(auth_mixins.PermissionRequiredMixin, view
     model = CustomerRepresentative
     template_name = 'customer_representatives/customer_representative_delete.html'
 
-    permission_required = ('customers.view_customer_representative', 'customers.change_customerrepresentative')
+    permission_required = ('customers.view_customerrepresentative', 'customers.change_customerrepresentative')
 
     def get_success_url(self):
         return reverse_lazy('customer_detail', kwargs={'pk': self.object.customer.pk})
