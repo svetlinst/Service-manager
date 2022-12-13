@@ -67,6 +67,25 @@ class MaterialsListView(auth_mixins.PermissionRequiredMixin, views.ListView):
     template_name = 'material/materials.html'
     ordering = ('category', 'name')
 
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        request = self.request.GET.copy()
+        params = request.pop('page', True) and request.urlencode()
+        context['params'] = params
+
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        search_text = self.request.GET.get('search_value', None)
+        if search_text:
+            queryset = queryset.filter(Q(name__icontains=search_text) | Q(category__name__icontains=search_text))
+        return queryset
+
     permission_required = 'master_data.view_material'
 
 
@@ -101,7 +120,26 @@ class MaterialCategoriesListView(auth_mixins.PermissionRequiredMixin, views.List
     template_name = 'material_category/material_categories.html'
     ordering = ('name',)
 
+    paginate_by = 10
+
     permission_required = 'master_data.view_materialcategory'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        request = self.request.GET.copy()
+        params = request.pop('page', True) and request.urlencode()
+        context['params'] = params
+
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        search_text = self.request.GET.get('search_value', None)
+        if search_text:
+            queryset = queryset.filter(name__icontains=search_text)
+        return queryset
 
 
 class CreateMaterialCategoryView(auth_mixins.PermissionRequiredMixin, BootstrapFormViewMixin, views.CreateView):
