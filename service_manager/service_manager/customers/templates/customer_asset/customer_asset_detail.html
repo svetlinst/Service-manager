@@ -1,47 +1,50 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="d-block mt-5 rounded-lg bg-light my-3" style="padding:2%">
-        <h2 class='text-center text-secondary mb-3'>Customer</h2>
+    <div class="d-block mt-3 rounded-lg bg-light" style="padding:0.5%">
+        <div class="text-center">
+            <h4 class='d-inline text-secondary mb-3'>Customer</h4>
+            <a class="btn btn-secondary mt-1 float-end" href="javascript:history.back()">Back</a>
+        </div>
         <div class="row text-left">
             <div class="col-sm-4">
-                <p class="text-primary"><b class="text-dark">Name: </b>{{ object.customer.name }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">Name: </b>{{ object.customer.name }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary"><b class="text-dark">Email: </b>{{ object.customer.email_address }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">Email: </b>{{ object.customer.email_address }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary"><b class="text-dark">Phone: </b>{{ object.customer.phone_number }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">Phone: </b>{{ object.customer.phone_number }}</p>
             </div>
         </div>
 
-        <h2 class='text-center text-secondary mb-3'>Asset</h2>
+        <h4 class='text-center text-secondary mb-3'>Asset</h4>
         <div class="row text-left">
             <div class="col-sm-4">
-                <p class="text-primary"><b class="text-dark">Category: </b>{{ object.asset.category.name }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">Category: </b>{{ object.asset.category.name }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary"><b class="text-dark">Brand: </b>{{ object.asset.brand.name }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">Brand: </b>{{ object.asset.brand.name }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary"><b class="text-dark">Model Name: </b>{{ object.asset.model_name }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">Model Name: </b>{{ object.asset.model_name }}</p>
             </div>
         </div>
 
         <div class="row text-left">
             <div class="col-sm-4">
-                <p class="text-primary"><b class="text-dark">Model Number: </b>{{ object.asset.model_number }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">Model Number: </b>{{ object.asset.model_number }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary"><b class="text-dark">Serial Number: </b>{{ object.serial_number }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">Serial Number: </b>{{ object.serial_number }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary"><b class="text-dark">Product Number: </b>{{ object.product_number }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">Product Number: </b>{{ object.product_number }}</p>
             </div>
         </div>
     </div>
 
-    <div class="d-block mt-5 rounded-lg bg-light my-3" style="padding:2%">
-        <h2 class='text-center text-secondary mb-3'>Service History</h2>
+    <div class="d-block mt-2 rounded-lg bg-light" style="padding:0.5%">
+        <h4 class='text-center text-secondary mb-1'>Service History</h4>
         <table class="table table-striped text-center">
             <thead>
             <tr>
@@ -75,9 +78,16 @@
                         </td>
                     </tr>
                 {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="100%">
+                        <p>
+                            <i>No Service History available for this asset.</i>
+                        </p>
+                    </td>
+                </tr>
             {% endif %}
             </tbody>
         </table>
     </div>
-
 {% endblock %}
