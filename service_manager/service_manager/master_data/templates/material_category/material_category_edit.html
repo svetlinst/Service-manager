@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
-    <form method="post" action="{% url "edit_material_category" object.pk %}">
-        {% csrf_token %}
-        {{ form }}
-        <div>
-            <button type="submit" class="btn btn-primary">Edit</button>
+    <h1 class="text-center">{% trans 'Edit material category' %}</h1>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <form method="post" action="{% url "edit_material_category" object.pk %}">
+                {% csrf_token %}
+                {{ form }}
+                <a class="btn btn-secondary mt-1 float-start" href="javascript:history.back()">Back</a>
+                <button type="submit" class="btn btn-primary mt-1 float-end">Edit</button>
+            </form>
         </div>
-    </form>
+    </div>
 {% endblock %}

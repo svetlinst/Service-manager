@@ -56,16 +56,16 @@ class EditMaterialForm(CreateMaterialForm):
 class EditMaterialCategoryForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = MaterialCategory
-        fields = '__all__'
+        fields = ('name',)
 
 
 class EditBrandForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = Brand
-        fields = '__all__'
+        fields = ('name',)
 
 
 class EditAssetCategoryForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = AssetCategory
-        fields = '__all__'
+        fields = ('name',)
