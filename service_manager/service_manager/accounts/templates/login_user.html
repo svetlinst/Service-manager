@@ -1,20 +1,28 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
+    <h1 class="text-center">{% trans 'Login' %}</h1>
     <div class="form-group mb-2">
         <div class="row justify-content-center my-2">
-            <form method="post" action="{% url 'login_user' %}?next={{ next }}">
-                {% csrf_token %}
-                {{ form }}
-                <div class="row justify-content-center my-2">
-                    <button type="submit" class="btn btn-primary ">LogIn</button>
-                </div>
-                <div class="row justify-content-center my-2">
-                    <a type="submit" href="{% url 'password_reset' %}" class="link-primary">Password Reset</a>
-                </div>
-                <div class="row justify-content-center my-2">
-                    <a type="submit" href="{% url 'register_user' %}" class="link-primary">Register</a>
-                </div>
-            </form>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <form method="post" action="{% url 'login_user' %}?next={{ next }}">
+                    {% csrf_token %}
+                    {{ form }}
+                    <div class="text-center mt-2">
+                        <button type="submit" class="btn btn-primary">{% trans 'Log In' %}</button>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a type="submit" href="{% url 'password_reset' %}"
+                           class="link-primary">{% trans 'Password Reset' %}</a>
+                    </div>
+                    <div class="text-center my-1">
+                        <a type="submit" href="{% url 'register_user' %}"
+                           class="link-primary">{% trans 'Register' %}</a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4"></div>
         </div>
     </div>
 {% endblock %}

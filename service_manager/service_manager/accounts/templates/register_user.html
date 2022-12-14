@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
-    <form method="post" action="{% url 'register_user'%}">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit" class="btn btn-primary">Register</button>
-    </form>
+    <h1 class="text-center">{% trans 'Register user' %}</h1>
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <form method="post" action="{% url 'register_user' %}">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit" class="btn btn-primary float-end">{% trans 'Register' %}</button>
+            </form>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
 {% endblock %}
