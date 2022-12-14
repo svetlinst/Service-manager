@@ -11,6 +11,7 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         unique=True,
         null=False,
         blank=False,
+        verbose_name=_('email'),
     )
 
     is_staff = models.BooleanField(
@@ -19,7 +20,6 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
     date_joined = models.DateTimeField(
         auto_now_add=True,
-
     )
 
     is_active = models.BooleanField(

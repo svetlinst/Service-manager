@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-14 22:42+0200\n"
+"POT-Creation-Date: 2022-12-14 23:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: service_manager/accounts/models.py:14
+msgid "email"
+msgstr ""
 
 #: service_manager/accounts/models.py:50 service_manager/customers/models.py:57
 msgid "first_name"
@@ -32,6 +36,30 @@ msgstr ""
 
 #: service_manager/accounts/models.py:74
 msgid "app_user"
+msgstr ""
+
+#: service_manager/accounts/templates/edit_profile.html:4
+msgid "Edit profile"
+msgstr ""
+
+#: service_manager/accounts/templates/edit_profile.html:11
+#: service_manager/customers/templates/customer/customer_create.html:12
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:12
+#: service_manager/customers/templates/customer_asset/customer_asset_edit.html:13
+#: service_manager/customers/templates/customer_department/customer_department_create.html:12
+#: service_manager/customers/templates/customer_department/customer_department_edit.html:12
+#: service_manager/customers/templates/customer_representatives/customer_representatives_create.html:12
+#: service_manager/main/templates/service_order_detail/service_order_detail_edit.html:12
+#: service_manager/main/templates/service_order_header/core/service_order_create.html:22
+#: service_manager/main/templates/service_order_header/core/service_order_handover.html:12
+#: service_manager/main/templates/service_order_note/service_order_note_create.html:12
+#: service_manager/main/templates/service_order_note/service_order_note_edit.html:13
+#: service_manager/master_data/templates/asset/asset_create.html:12
+#: service_manager/master_data/templates/asset_category/asset_category_create.html:12
+#: service_manager/master_data/templates/brands/brand_create.html:12
+#: service_manager/master_data/templates/material/material_create.html:12
+#: service_manager/master_data/templates/material_category/material_category_create.html:12
+msgid "Save"
 msgstr ""
 
 #: service_manager/accounts/templates/login_user.html:4 templates/base.html:127
@@ -182,25 +210,6 @@ msgstr ""
 #: service_manager/master_data/templates/material_category/material_category_edit.html:11
 #: templates/403.html:5
 msgid "Back"
-msgstr ""
-
-#: service_manager/customers/templates/customer/customer_create.html:12
-#: service_manager/customers/templates/customer_asset/customer_asset_create.html:12
-#: service_manager/customers/templates/customer_asset/customer_asset_edit.html:13
-#: service_manager/customers/templates/customer_department/customer_department_create.html:12
-#: service_manager/customers/templates/customer_department/customer_department_edit.html:12
-#: service_manager/customers/templates/customer_representatives/customer_representatives_create.html:12
-#: service_manager/main/templates/service_order_detail/service_order_detail_edit.html:12
-#: service_manager/main/templates/service_order_header/core/service_order_create.html:22
-#: service_manager/main/templates/service_order_header/core/service_order_handover.html:12
-#: service_manager/main/templates/service_order_note/service_order_note_create.html:12
-#: service_manager/main/templates/service_order_note/service_order_note_edit.html:13
-#: service_manager/master_data/templates/asset/asset_create.html:12
-#: service_manager/master_data/templates/asset_category/asset_category_create.html:12
-#: service_manager/master_data/templates/brands/brand_create.html:12
-#: service_manager/master_data/templates/material/material_create.html:12
-#: service_manager/master_data/templates/material_category/material_category_create.html:12
-msgid "Save"
 msgstr ""
 
 #: service_manager/customers/templates/customer/customer_delete.html:6
