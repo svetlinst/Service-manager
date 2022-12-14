@@ -1,35 +1,37 @@
+{% load i18n %}
 {% block content %}
     <div class="row">
         <div class="col-md-9 my-3">
             <form class="form" method="GET" action="">
                 <div class="input-group my-3">
-                    <input type="search" class="form-control rounded  mr-3" placeholder="Search Representatives"
+                    <input type="search" class="form-control rounded  mr-3"
+                           placeholder="{% trans 'Search Representatives' %}"
                            aria-label="Search"
                            aria-describedby="search-addon" name="representative"/>
                     <input type="hidden" id="show_reps" name="show_representatives" value="t">
                     <button type="submit" class="btn btn-outline-primary"
                             href="#">
-                        search
+                        {% trans 'search' %}
                     </button>
                 </div>
             </form>
         </div>
         {% if perms.customers.add_customerrepresentative %}
             <div class="col-md-3 text-right align-self-center my-3">
-                <a href="{% url 'create_customer_representative' object.pk %}" class="btn btn-success float-end">Add
-                    Representative</a>
+                <a href="{% url 'create_customer_representative' object.pk %}"
+                   class="btn btn-success float-end">{% trans 'Add Representative' %}</a>
             </div>
         {% endif %}
     </div>
     <table class="table table-striped text-center">
         <thead>
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">E-mail Address</th>
-            <th scope="col">Phone Number</th>
-            <th scope="col">Action</th>
+            <th scope="col">{% trans 'ID' %}</th>
+            <th scope="col">{% trans 'First Name' %}</th>
+            <th scope="col">{% trans 'Last Name' %}</th>
+            <th scope="col">{% trans 'E-mail Address' %}</th>
+            <th scope="col">{% trans 'Phone Number' %}</th>
+            <th scope="col">{% trans 'Action' %}</th>
         </tr>
         </thead>
         <tbody>
@@ -45,10 +47,10 @@
                         {% if perms.customers.change_customerrepresentative %}
                             <a class="btn btn-outline-primary btn-sm"
                                href="{% url 'edit_customer_representative' rep.customer.id rep.id %}"
-                               role="button">Edit</a>
+                               role="button">{% trans 'Edit' %}</a>
                             <a class="btn btn-outline-danger btn-sm"
                                href="{% url 'delete_customer_representative' rep.customer.id rep.id %}"
-                               role="button">Delete</a>
+                               role="button">{% trans 'Delete' %}</a>
                         {% endif %}
                     </td>
                 </tr>
@@ -57,7 +59,7 @@
             <tr>
                 <td colspan="100%">
                     <p>
-                        No records matching your search
+                        {% trans 'No records matching your search' %}
                     </p>
                 </td>
             </tr>

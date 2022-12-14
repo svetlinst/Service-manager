@@ -1,61 +1,62 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
     <div class="d-block mt-3 rounded-lg bg-light" style="padding:0.5%">
         <div class="text-center">
-            <h4 class='d-inline text-secondary mb-3'>Customer</h4>
-            <a class="btn btn-secondary mt-1 float-end" href="javascript:history.back()">Back</a>
+            <h4 class='d-inline text-secondary mb-3'>{% trans 'Customer' %}</h4>
+            <a class="btn btn-secondary mt-1 float-end" href="javascript:history.back()">{% trans 'Back' %}</a>
         </div>
         <div class="row text-left">
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">Name: </b>{{ object.customer.name }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Name' %}: </b>{{ object.customer.name }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">Email: </b>{{ object.customer.email_address }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Email' %}: </b>{{ object.customer.email_address }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">Phone: </b>{{ object.customer.phone_number }}</p>
-            </div>
-        </div>
-
-        <h4 class='text-center text-secondary mb-3'>Asset</h4>
-        <div class="row text-left">
-            <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">Category: </b>{{ object.asset.category.name }}</p>
-            </div>
-            <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">Brand: </b>{{ object.asset.brand.name }}</p>
-            </div>
-            <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">Model Name: </b>{{ object.asset.model_name }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Phone' %}: </b>{{ object.customer.phone_number }}</p>
             </div>
         </div>
 
+        <h4 class='text-center text-secondary mb-3'>{% trans 'Asset' %}</h4>
         <div class="row text-left">
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">Model Number: </b>{{ object.asset.model_number }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Category' %}: </b>{{ object.asset.category.name }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">Serial Number: </b>{{ object.serial_number }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Brand' %}: </b>{{ object.asset.brand.name }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">Product Number: </b>{{ object.product_number }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Model Name' %}: </b>{{ object.asset.model_name }}</p>
+            </div>
+        </div>
+
+        <div class="row text-left">
+            <div class="col-sm-4">
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Model Number' %}: </b>{{ object.asset.model_number }}</p>
+            </div>
+            <div class="col-sm-4">
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Serial Number' %}: </b>{{ object.serial_number }}</p>
+            </div>
+            <div class="col-sm-4">
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Product Number' %}: </b>{{ object.product_number }}</p>
             </div>
         </div>
     </div>
 
     <div class="d-block mt-2 rounded-lg bg-light" style="padding:0.5%">
-        <h4 class='text-center text-secondary mb-1'>Service History</h4>
+        <h4 class='text-center text-secondary mb-1'>{% trans 'Service History' %}</h4>
         <table class="table table-striped text-center">
             <thead>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Status</th>
-                <th scope="col">Accepted On</th>
-                <th scope="col">Serviced On</th>
-                <th scope="col">Completed On</th>
-                <th scope="col">Serviced By</th>
-                <th scope="col">Amount Due</th>
-                <th scope="col">Action</th>
+                <th scope="col">{% trans 'ID' %}</th>
+                <th scope="col">{% trans 'Status' %}</th>
+                <th scope="col">{% trans 'Accepted On' %}</th>
+                <th scope="col">{% trans 'Serviced On' %}</th>
+                <th scope="col">{% trans 'Completed On' %}</th>
+                <th scope="col">{% trans 'Serviced By' %}</th>
+                <th scope="col">{% trans 'Amount Due' %}</th>
+                <th scope="col">{% trans 'Action' %}</th>
             </tr>
             </thead>
             <tbody>
@@ -73,7 +74,7 @@
                             {% if perms.main.view_serviceorderheader %}
                                 <a class="btn btn-outline-info btn-sm"
                                    href="{% url 'detail_service_order' service_order_header.id %}"
-                                   role="button">Detail</a>
+                                   role="button">{% trans 'Detail' %}</a>
                             {% endif %}
                         </td>
                     </tr>
@@ -82,7 +83,7 @@
                 <tr>
                     <td colspan="100%">
                         <p>
-                            <i>No Service History available for this asset.</i>
+                            <i>{% blocktrans %}No Service History available for this asset.{% endblocktrans %}</i>
                         </p>
                     </td>
                 </tr>

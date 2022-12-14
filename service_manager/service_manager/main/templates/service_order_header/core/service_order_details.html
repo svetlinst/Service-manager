@@ -1,111 +1,107 @@
 {% extends 'base.html' %}
 {% load common_tags %}
-
+{% load i18n %}
 {% block content %}
     <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:0.5%">
-        <h4 class='text-center text-secondary'>Customer Information</h4>
+        <h4 class='text-center text-secondary'>{% trans 'Customer Information' %}</h4>
         <div class="row text-left">
             <div class="col">
-                <p class="text-primary mb-0"><b class="text-dark">Name: </b>{{ service_order_header.customer.name }}</p>
+                <p class="text-primary mb-0"><b
+                        class="text-dark">{% trans 'Name' %}: </b>{{ service_order_header.customer.name }}</p>
             </div>
             <div class="col">
-                <p class="text-primary mb-0"><b class="text-dark">Type: </b>{{ service_order_header.customer.type }}</p>
+                <p class="text-primary mb-0"><b
+                        class="text-dark">{% trans 'Type' %}: </b>{{ service_order_header.customer.type }}</p>
             </div>
             <div class="col">
-                <p class="text-primary mb-0"><b class="text-dark">VAT: </b>{{ service_order_header.customer.vat }}</p>
+                <p class="text-primary mb-0"><b
+                        class="text-dark">{% trans 'VAT' %}: </b>{{ service_order_header.customer.vat }}</p>
             </div>
         </div>
         <div class="row text-left">
             <div class="col">
                 <p class="text-primary mb-0"><b
-                        class="text-dark">Email: </b>{{ service_order_header.customer.email_address }}</p>
+                        class="text-dark">{% trans 'Email' %}: </b>{{ service_order_header.customer.email_address }}</p>
             </div>
             <div class="col">
                 <p class="text-primary mb-0"><b
-                        class="text-dark">Phone: </b>{{ service_order_header.customer.phone_number }}
+                        class="text-dark">{% trans 'Phone' %}: </b>{{ service_order_header.customer.phone_number }}
                 </p>
             </div>
             <div class="col">
                 <p class="text-primary mb-0"><b
-                        class="text-dark">Department: </b>{{ service_order_header.department|default_if_none:"" }}</p>
+                        class="text-dark">{% trans 'Department' %}: </b>{{ service_order_header.department|default_if_none:"" }}
+                </p>
             </div>
         </div>
-        <h4 class='text-center text-secondary mt-1'>Asset Information</h4>
+        <h4 class='text-center text-secondary mt-1'>{% trans 'Asset Information' %}</h4>
         <div class="row text-left">
             <div class="col">
                 <p class="text-primary mb-0"><b
-                        class="text-dark">Category: </b>{{ service_order_header.customer_asset.asset.category }}</p>
+                        class="text-dark">{% trans 'Category' %}: </b>{{ service_order_header.customer_asset.asset.category }}
+                </p>
             </div>
             <div class="col">
                 <p class="text-primary mb-0"><b
-                        class="text-dark">Brand: </b>{{ service_order_header.customer_asset.asset.brand }}</p>
+                        class="text-dark">{% trans 'Brand' %}: </b>{{ service_order_header.customer_asset.asset.brand }}
+                </p>
             </div>
             <div class="col">
-                <p class="text-primary mb-0"><b class="text-dark">Model
-                    Name: </b>{{ service_order_header.customer_asset.asset.model_name }}</p>
+                <p class="text-primary mb-0"><b
+                        class="text-dark">{% trans 'Model Name' %}: </b>{{ service_order_header.customer_asset.asset.model_name }}
+                </p>
             </div>
         </div>
         <div class="row text-left">
             <div class="col">
-                <p class="text-primary mb-0"><b class="text-dark">Model
-                    Number: </b>{{ service_order_header.customer_asset.asset.model_number }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Model Number' %}: </b>{{ service_order_header.customer_asset.asset.model_number }}</p>
             </div>
             <div class="col">
-                <p class="text-primary mb-0"><b class="text-dark">Serial
-                    Number: </b>{{ service_order_header.customer_asset.serial_number }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Serial Number' %}: </b>{{ service_order_header.customer_asset.serial_number }}</p>
             </div>
             <div class="col">
-                <p class="text-primary mb-0"><b class="text-dark">Product
-                    Number: </b>{{ service_order_header.customer_asset.product_number }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Product Number' %}: </b>{{ service_order_header.customer_asset.product_number }}</p>
             </div>
         </div>
-        <h4 class='text-center text-secondary mt-1'>Order Information</h4>
+        <h4 class='text-center text-secondary mt-1'>{% trans 'Order Information' %}</h4>
         <div class="row text-left">
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">Handed over
-                    by: </b>{{ service_order_header.handed_over_by|default_if_none:"" }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Handed over by' %}: </b>{{ service_order_header.handed_over_by|default_if_none:"" }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">Accepted
-                    by: </b>{{ service_order_header.accepted_by }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Accepted by' %}: </b>{{ service_order_header.accepted_by }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">Accepted
-                    on: </b>{{ service_order_header.created_on }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Accepted on' %}: </b>{{ service_order_header.created_on }}</p>
             </div>
         </div>
         <div class="row text-left">
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">Status: </b>{{ service_order_header.status }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Status' %}: </b>{{ service_order_header.status }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">Serviced
-                    by: </b>{{ service_order_header.serviced_by|default_if_none:"" }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Serviced by' %}: </b>{{ service_order_header.serviced_by|default_if_none:"" }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">Serviced
-                    on: </b>{{ service_order_header.serviced_on|default_if_none:"" }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Serviced on' %}: </b>{{ service_order_header.serviced_on|default_if_none:"" }}</p>
             </div>
         </div>
         <div class="row text-left">
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">Handed over
-                    to: </b>{{ service_order_header.handed_over_to|default_if_none:"" }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Handed over to' %}: </b>{{ service_order_header.handed_over_to|default_if_none:"" }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">Completed
-                    by: </b>{{ service_order_header.completed_by|default_if_none:"" }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Completed by' %}: </b>{{ service_order_header.completed_by|default_if_none:"" }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">Completed
-                    on: </b>{{ service_order_header.completed_on|default_if_none:"" }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Completed on' %}: </b>{{ service_order_header.completed_on|default_if_none:"" }}</p>
             </div>
         </div>
     </div>
 
     {#    Problem description#}
     <div class="d-block rounded-lg bg-light mb-1" style="padding:0.5%">
-        <h4 class='text-center text-secondary mt-1'>Problem Description</h4>
+        <h4 class='text-center text-secondary mt-1'>{% trans 'Problem Description' %}</h4>
         <div class="text-left"><i>{{ service_order_header.problem_description }}</i></div>
     </div>
 
@@ -115,12 +111,11 @@
             <div class="row">
                 <div class="col-md-12 text-right align-self-center my-1">
                     <div class="text-center">
-                        <h4 class='text-secondary d-inline'>Notes</h4>
+                        <h4 class='text-secondary d-inline'>{% trans 'Notes' %}</h4>
                         {% if not service_order_header.is_completed %}
                             {% if perms.main.add_serviceordernote %}
                                 <a href="{% url 'create_service_order_note' service_order_header.pk %}?next={{ request.path|urlencode }}"
-                                   class="btn btn-success float-end">Add
-                                    Note</a>
+                                   class="btn btn-success float-end">{% trans 'Add Note' %}</a>
                             {% endif %}
                         {% endif %}
                     </div>
@@ -130,7 +125,7 @@
                 {% include 'service_order_note/service_order_notes.html' %}
             {% else %}
                 <div class="text-center">
-                    <p><i>Click on the "Add Note" button to create a note.</i></p>
+                    <p><i>{% blocktrans %}Click on the "Add Note" button to create a note.{% endblocktrans %}</i></p>
                 </div>
             {% endif %}
         </div>
@@ -143,19 +138,16 @@
                 <div class="col-md-12 text-right align-self-center">
                     {% if perms.main.change_serviceorderdetail %}
                         <a class="btn btn-outline-success float-end" href="#" data-bs-toggle="modal"
-                           data-bs-target="#complete_order_modal">Complete
-                            Service</a>
+                           data-bs-target="#complete_order_modal">{% trans 'Complete Service' %}</a>
                     {% endif %}
                 </div>
             {% elif not service_order_header.is_completed %}
                 {% if perms.main.change_serviceorderheader %}
                     <div class="col-md-12 text-right align-self-center my-3">
                         <a class="btn btn-outline-warning float-end" href="#" data-bs-toggle="modal"
-                           data-bs-target="#rollback_modal">Rollback
-                            Order</a>
+                           data-bs-target="#rollback_modal">{% trans 'Rollback Order' %}</a>
                         <a class="btn btn-outline-success float-end me-2"
-                           href="{% url 'handover_service_order' service_order_header.id %}">Finalize
-                            Order</a>
+                           href="{% url 'handover_service_order' service_order_header.id %}">{% trans 'Finalize Order' %}</a>
                     </div>
                 {% endif %}
             {% endif %}

@@ -1,21 +1,22 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
     <div class="d-block mt-5 rounded-lg bg-light my-3" style="padding:2%">
-        <h2 class='text-center text-secondary mb-3'>Completed Service Orders</h2>
+        <h2 class='text-center text-secondary mb-3'>{% trans 'Completed Service Orders' %}</h2>
         <table class="table table-striped text-center">
             <thead>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Category</th>
-                <th scope="col">Brand</th>
-                <th scope="col">Model Name</th>
-                <th scope="col">Model Number</th>
-                <th scope="col">Serial Number</th>
-                <th scope="col">Product Number</th>
-                <th scope="col">Accepted On</th>
-                <th scope="col">Serviced On</th>
-                <th scope="col">Action</th>
+                <th scope="col">{% trans 'ID' %}</th>
+                <th scope="col">{% trans 'Name' %}</th>
+                <th scope="col">{% trans 'Category' %}</th>
+                <th scope="col">{% trans 'Brand' %}</th>
+                <th scope="col">{% trans 'Model Name' %}</th>
+                <th scope="col">{% trans 'Model Number' %}</th>
+                <th scope="col">{% trans 'Serial Number' %}</th>
+                <th scope="col">{% trans 'Product Number' %}</th>
+                <th scope="col">{% trans 'Accepted On' %}</th>
+                <th scope="col">{% trans 'Serviced On' %}</th>
+                <th scope="col">{% trans 'Action' %}</th>
 
             </tr>
             </thead>
@@ -37,11 +38,11 @@
                             {% if perms.main.change_serviceorderheader %}
                                 <a class="btn btn-outline-info btn-sm"
                                    href="{% url 'detail_service_order' service_order.id %}"
-                                   role="button">Detail</a>
+                                   role="button">{% trans 'Detail' %}</a>
                                 {% if perms.main.change_serviceorderheader %}
                                     <a class="btn btn-outline-danger btn-sm"
                                        href="{% url 'delete_service_order' service_order.id %}"
-                                       role="button">Delete</a>
+                                       role="button">{% trans 'Delete' %}</a>
                                 {% endif %}
                             {% endif %}
                     </tr>

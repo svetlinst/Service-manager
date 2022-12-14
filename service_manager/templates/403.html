@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
-    <h1>You don't have permission to view this page!</h1>
-    <a class="btn btn-secondary mt-1 float-start" href="javascript:history.back()">Back</a>
+    <h1>{% blocktrans %}You don't have permission to view this page!{% endblocktrans %}</h1>
+    <a class="btn btn-secondary mt-1 float-start" href="javascript:history.back()">{% trans 'Back' %}</a>
 {% endblock %}

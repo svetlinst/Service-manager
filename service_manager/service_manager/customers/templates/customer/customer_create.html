@@ -8,7 +8,7 @@
             <form method="post" action="{% url 'create_customer' %}">
                 {% csrf_token %}
                 {{ form }}
-                <a class="btn btn-secondary mt-1 float-start" href="javascript:history.back()">Back</a>
+                <a class="btn btn-secondary mt-1 float-start" href="javascript:history.back()">{% trans 'Back' %}</a>
                 <button type="submit" class="btn btn-primary mt-1 float-end">{% trans 'Save' %}</button>
             </form>
         </div>

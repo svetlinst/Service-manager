@@ -1,37 +1,38 @@
+{% load i18n %}
 {% block content %}
     <div class="row">
         <div class="col-md-9 my-3">
             <form class="form" method="GET" action="">
                 <div class="input-group my-3">
-                    <input type="search" class="form-control rounded mr-3" placeholder="Search Assets"
+                    <input type="search" class="form-control rounded mr-3" placeholder="{% trans 'Search Assets' %}"
                            aria-label="Search"
                            aria-describedby="search-addon" name="search_value"/>
                     <input type="hidden" id="show_assets" name="show_assets" value="t">
                     <button type="submit" class="btn btn-outline-primary"
                             href="#">
-                        search
+                        {% trans 'search' %}
                     </button>
                 </div>
             </form>
         </div>
         <div class="col-md-3 text-right align-self-center my-3">
             {% if perms.customers.add_customerasset %}
-                <a href="{% url 'create_customer_asset' object.pk %}" class="btn btn-success float-end">Add
-                    Asset</a>
+                <a href="{% url 'create_customer_asset' object.pk %}"
+                   class="btn btn-success float-end">{% trans 'Add Asset' %}</a>
             {% endif %}
         </div>
     </div>
     <table class="table table-striped text-center">
         <thead>
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Category</th>
-            <th scope="col">Brand</th>
-            <th scope="col">Model Name</th>
-            <th scope="col">Model Number</th>
-            <th scope="col">Serial Number</th>
-            <th scope="col">Product Number</th>
-            <th scope="col">Action</th>
+            <th scope="col">{% trans 'ID' %}</th>
+            <th scope="col">{% trans 'Category' %}</th>
+            <th scope="col">{% trans 'Brand' %}</th>
+            <th scope="col">{% trans 'Model Name' %}</th>
+            <th scope="col">{% trans 'Model Number' %}</th>
+            <th scope="col">{% trans 'Serial Number' %}</th>
+            <th scope="col">{% trans 'Product Number' %}</th>
+            <th scope="col">{% trans 'Action' %}</th>
         </tr>
         </thead>
         <tbody>
@@ -52,28 +53,27 @@
                             {% if not asset in assets_being_serviced %}
                                 <a class="btn btn-outline-success btn-sm"
                                    href="{% url 'create_service_order' asset.customer.id asset.pk %}"
-                                   role="button">Create Order</a>
+                                   role="button">{% trans 'Create Order' %}</a>
                             {% else %}
                                 <i class="fa fa-cogs" title="In Service" aria-hidden="true"></i>
-                                <span class="tooltip-text">In Service</span>
+                                <span class="tooltip-text">{% trans 'In Service' %}</span>
                             {% endif %}
                         {% endif %}
 
                         {% if perms.customers.view_customerasset %}
                             <a class="btn btn-outline-info btn-sm"
                                href="{% url 'customer_asset_detail' asset.customer.id asset.id %}"
-                               role="button">Detail</a>
+                               role="button">{% trans 'Detail' %}</a>
                         {% endif %}
 
                         {% if perms.customers.change_customerasset %}
                             <a class="btn btn-outline-primary btn-sm"
                                href="{% url 'edit_customer_asset' asset.customer.id asset.id %}"
-                               role="button">Edit</a>
+                               role="button">{% trans 'Edit' %}</a>
                             <a class="btn btn-outline-danger btn-sm"
                                href="{% url 'delete_customer_asset' asset.customer.id asset.id %}"
-                               role="button">Delete</a>
+                               role="button">{% trans 'Delete' %}</a>
                         {% endif %}
-
                     </td>
                 </tr>
             {% endfor %}
@@ -81,7 +81,7 @@
             <tr>
                 <td colspan="100%">
                     <p>
-                        No records matching your search
+                        {% trans 'No records matching your search' %}
                     </p>
                 </td>
             </tr>

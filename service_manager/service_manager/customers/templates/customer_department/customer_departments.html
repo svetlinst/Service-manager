@@ -1,15 +1,17 @@
+{% load i18n %}
 {% block content %}
     <div class="row">
         <div class="col-md-9 my-3">
             <form class="form" method="GET" action="">
                 <div class="input-group my-3">
-                    <input type="search" class="form-control rounded  mr-3" placeholder="Search Departments"
+                    <input type="search" class="form-control rounded  mr-3"
+                           placeholder="{% trans 'Search Departments' %}"
                            aria-label="Search"
                            aria-describedby="search-addon" name="departments"/>
                     <input type="hidden" id="show_deps" name="show_departments" value="t">
                     <button type="submit" class="btn btn-outline-primary"
                             href="#">
-                        search
+                        {% trans 'search' %}
                     </button>
                 </div>
             </form>
@@ -17,17 +19,16 @@
         {% if perms.customers.add_customerdepartment %}
             <div class="col-md-3 text-right align-self-center my-3">
                 <a href="{% url 'create_customer_department' object.pk %}"
-                   class="btn btn-success float-end">Add
-                    Department</a>
+                   class="btn btn-success float-end">{% trans 'Add Department' %}</a>
             </div>
         {% endif %}
     </div>
     <table class="table table-striped text-center">
         <thead>
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Action</th>
+            <th scope="col">{% trans 'ID' %}</th>
+            <th scope="col">{% trans 'Name' %}</th>
+            <th scope="col">{% trans 'Action' %}</th>
         </tr>
         </thead>
         <tbody>
@@ -40,10 +41,10 @@
                         {% if perms.customers.change_customerdepartment %}
                             <a class="btn btn-outline-primary btn-sm"
                                href="{% url 'edit_customer_department' department.customer.pk department.pk %}"
-                               role="button">Edit</a>
+                               role="button">{% trans 'Edit' %}</a>
                             <a class="btn btn-outline-danger btn-sm"
                                href="{% url 'delete_customer_department' department.customer.pk department.pk %}"
-                               role="button">Delete</a>
+                               role="button">{% trans 'Delete' %}</a>
                         {% endif %}
                     </td>
                 </tr>
@@ -52,7 +53,7 @@
             <tr>
                 <td colspan="100%">
                     <p>
-                        No records matching your search
+                        {% trans 'No records matching your search' %}
                     </p>
                 </td>
             </tr>

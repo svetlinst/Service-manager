@@ -1,22 +1,23 @@
+{% load i18n %}
 {% block content %}
     <div class="row">
         <div class="col-md-9 my-1">
-            <h2> Total Amount Due: {{ service_order_header.total_amount_due }}</h2>
+            <h2>{% blocktrans %}Total Amount Due: {{ service_order_header.total_amount_due }}{% endblocktrans %}</h2>
         </div>
     </div>
     <table class="table table-striped text-center">
         <thead>
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Material Name</th>
-            <th scope="col">Category</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Discount</th>
-            <th scope="col">Unit Price</th>
-            <th scope="col">Total Amount</th>
+            <th scope="col">{% trans 'ID' %}</th>
+            <th scope="col">{% trans 'Material Name' %}</th>
+            <th scope="col">{% trans 'Category' %}</th>
+            <th scope="col">{% trans 'Price' %}</th>
+            <th scope="col">{% trans 'Quantity' %}</th>
+            <th scope="col">{% trans 'Discount' %}</th>
+            <th scope="col">{% trans 'Unit Price' %}</th>
+            <th scope="col">{% trans 'Total Amount' %}</th>
             {% if not service_order_header.is_serviced %}
-                <th scope="col">Action</th>
+                <th scope="col">{% trans 'Action' %}</th>
             {% endif %}
 
         </tr>
@@ -38,10 +39,10 @@
                             {% if perms.main.change_serviceorderdetail %}
                                 <a class="btn btn-outline-primary btn-sm"
                                    href="{% url 'edit_service_order_detail' service_order_header.pk service_order_detail.id %}"
-                                   role="button">Edit</a>
+                                   role="button">{% trans 'Edit' %}</a>
                                 <a class="btn btn-outline-danger btn-sm"
                                    href="{% url 'delete_service_order_detail' service_order_header.id service_order_detail.id %}"
-                                   role="button">Delete</a>
+                                   role="button">{% trans 'Delete' %}</a>
                             {% endif %}
                         </td>
                     {% endif %}
@@ -56,21 +57,21 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Complete Service Order with
-                        ID: {{ service_order_header.pk }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{% blocktrans %}Complete Service Order with
+                        ID:{% endblocktrans %} {{ service_order_header.pk }}</h5>
                 </div>
                 <div class="modal-body">
-                    <p class="my-0">Customer: {{ service_order_header.customer.name }}</p>
-                    <p class="my-0"> Asset Serial Number: {{ service_order_header.customer_asset.serial_number }}</p>
-                    <p class="my-0"> Asset Product Number: {{ service_order_header.customer_asset.product_number }}</p>
-                    <p class="my-2"><b>Total Amount Due: {{ service_order_header.total_amount_due }}</b></p>
+                    <p class="my-0">{% trans 'Customer' %}: {{ service_order_header.customer.name }}</p>
+                    <p class="my-0"> {% trans 'Asset Serial Number' %}: {{ service_order_header.customer_asset.serial_number }}</p>
+                    <p class="my-0"> {% trans 'Asset Product Number' %}: {{ service_order_header.customer_asset.product_number }}</p>
+                    <p class="my-2"><b>{% trans 'Total Amount Due' %}: {{ service_order_header.total_amount_due }}</b></p>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">{% trans 'Close' %}</button>
                     {% if perms.main.change_serviceorderdetail %}
                         <a class="btn btn-sm btn-success"
-                           href="{% url 'complete_service_order' service_order_header.pk %}">Confirm</a>
+                           href="{% url 'complete_service_order' service_order_header.pk %}">{% trans 'Confirm' %}</a>
                     {% endif %}
                 </div>
             </div>
@@ -82,17 +83,17 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Rollback Service Order with
-                        ID: {{ service_order_header.pk }}?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{% blocktrans %}Rollback Service Order with
+                        ID{% endblocktrans %}: {{ service_order_header.pk }}?</h5>
                 </div>
                 <div class="modal-body">
-                    <p class="my-0">Please, confirm</p>
+                    <p class="my-0">{% blocktrans %}Please, confirm{% endblocktrans %}</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">{% trans 'Close' %}</button>
                     {% if perms.main.change_serviceorderheader %}
                         <a class="btn btn-sm btn-success"
-                           href="{% url 'rollback_service_order' service_order_header.pk %}">Rollback</a>
+                           href="{% url 'rollback_service_order' service_order_header.pk %}">{% trans 'Rollback' %}</a>
                     {% endif %}
                 </div>
             </div>

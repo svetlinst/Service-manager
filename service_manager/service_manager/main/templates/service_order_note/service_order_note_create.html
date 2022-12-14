@@ -8,8 +8,8 @@
             <form method="post" action="{% url 'create_service_order_note' service_order.id %}">
                 {% csrf_token %}
                 {{ form }}
-                <a class="btn btn-secondary mt-1 float-start" href="javascript:history.back()">Back</a>
-                <button type="submit" class="btn btn-primary mt-1 float-end">Save</button>
+                <a class="btn btn-secondary mt-1 float-start" href="javascript:history.back()">{% trans 'Back' %}</a>
+                <button type="submit" class="btn btn-primary mt-1 float-end">{% trans 'Save' %}</button>
                 <input type="hidden" name="next" value="{{ request.GET.next }}">
             </form>
         </div>

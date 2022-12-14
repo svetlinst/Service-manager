@@ -31,14 +31,14 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link {% if url_name == 'index' %}active{% endif %}" href="{% url 'index' %}">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link {% if url_name == 'index' %}active{% endif %}" href="{% url 'index' %}">{% trans 'Home' %}<span class="sr-only">(current)</span></a>
                 </li>
                 {% if request.user.is_authenticated %}
 
                     {% if perms.customers.view_customer %}
                         <li class="nav-item">
                             <a class="nav-link {% if url_name|is_active_nav_link:'customers' %}active{% endif %}"
-                               href="{% url 'customers_list' %}">Customers</a>
+                               href="{% url 'customers_list' %}">{% trans 'Customers' %}</a>
                         </li>
                     {% endif %}
 
@@ -47,13 +47,11 @@
                             <a class="nav-link dropdown-toggle {% if url_name|is_active_nav_link:'main' %}active{% endif %}"
                                role="button" href="#" id="navbarDropdownMenuLink"
                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Orders
+                                {% trans 'Orders' %}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkOrders">
-                                <a class="dropdown-item" href="{% url 'service_orders_list_pending_service' %}">Pending
-                                    Service</a>
-                                <a class="dropdown-item" href="{% url 'service_orders_list_serviced' %}">Service
-                                    Completed</a>
+                                <a class="dropdown-item" href="{% url 'service_orders_list_pending_service' %}">{% trans 'Pending Service' %}</a>
+                                <a class="dropdown-item" href="{% url 'service_orders_list_serviced' %}">{% trans 'Service Completed' %}</a>
                             </div>
                         </li>
                     {% endif %}
@@ -64,25 +62,23 @@
                                href="#" id="navbarDropdownMenuLink"
                                data-bs-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
-                                Manage
+                                {% trans 'Manage' %}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkMasterData">
                                 {% if perms.master_data.view_asset %}
-                                    <a class="dropdown-item" href="{% url 'assets_list' %}">Assets</a>
+                                    <a class="dropdown-item" href="{% url 'assets_list' %}">{% trans 'Assets' %}</a>
                                 {% endif %}
                                 {% if perms.master_data.view_assetcategory %}
-                                    <a class="dropdown-item" href="{% url 'asset_categories_list' %}">Asset
-                                        Categories</a>
+                                    <a class="dropdown-item" href="{% url 'asset_categories_list' %}">{% trans 'Asset Categories' %}</a>
                                 {% endif %}
                                 {% if perms.master_data.view_brand %}
-                                    <a class="dropdown-item" href="{% url 'brands_list' %}">Brands</a>
+                                    <a class="dropdown-item" href="{% url 'brands_list' %}">{% trans 'Brands' %}</a>
                                 {% endif %}
                                 {% if perms.master_data.view_material %}
-                                    <a class="dropdown-item" href="{% url 'materials_list' %}">Material</a>
+                                    <a class="dropdown-item" href="{% url 'materials_list' %}">{% trans 'Material' %}</a>
                                 {% endif %}
                                 {% if perms.master_data.view_materialcategory %}
-                                    <a class="dropdown-item" href="{% url 'material_categories_list' %}">Material
-                                        Categories</a>
+                                    <a class="dropdown-item" href="{% url 'material_categories_list' %}">{% trans 'Material Categories' %}</a>
                                 {% endif %}
                             </div>
                         </li>
@@ -94,10 +90,10 @@
                                href="#" id="navbarDropdownMenuLink"
                                data-bs-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
-                                Reports
+                                {% trans 'Reports' %}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkReports">
-                                <a class="dropdown-item" href="{% url 'finished_orders' %}">Finished Orders</a>
+                                <a class="dropdown-item" href="{% url 'finished_orders' %}">{% trans 'Finished Orders' %}</a>
                             </div>
                         </li>
                     {% endif %}
@@ -128,10 +124,10 @@
             {#    Authentication#}
             <div class="d-flex">
                 {% if request.user.is_anonymous %}
-                    <a class="btn btn-light ms-3" href="{% url 'login_user' %}">Login</a>
+                    <a class="btn btn-light ms-3" href="{% url 'login_user' %}">{% trans 'Login' %}</a>
                 {% else %}
-                    <a class="btn btn-light ms-3" href="{% url 'edit_profile'  request.user.profile.pk %}">Profile</a>
-                    <a class="btn btn-light ms-3" href="{% url 'logout_user' %}">Logout</a>
+                    <a class="btn btn-light ms-3" href="{% url 'edit_profile'  request.user.profile.pk %}">{% trans 'Profile' %}</a>
+                    <a class="btn btn-light ms-3" href="{% url 'logout_user' %}">{% trans 'Logout' %}</a>
                 {% endif %}
             </div>
 

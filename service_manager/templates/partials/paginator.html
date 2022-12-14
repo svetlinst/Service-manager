@@ -1,17 +1,18 @@
+{% load i18n %}
 <ul class="pagination justify-content-center">
     {% if page_obj.has_previous %}
-        <a class="page-link" href="?page=1&{{ params }}">&laquo; first</a>
-        <a class="page-link" href="?page={{ page_obj.previous_page_number }}&{{ params }}">previous</a>
+        <a class="page-link" href="?page=1&{{ params }}">&laquo; {% trans 'first' %}</a>
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}&{{ params }}">{% trans 'previous' %}</a>
     {% endif %}
 
     {% if page_obj.paginator.num_pages > 1 %}
         <a class="page-link" style="margin-left: 5px; margin-right: 5px">{{ page_obj.number }}
-            of {{ page_obj.paginator.num_pages }}</a>
+            {% trans 'of' %} {{ page_obj.paginator.num_pages }}</a>
     {% endif %}
 
 
     {% if page_obj.has_next %}
-        <a class="page-link" href="?page={{ page_obj.next_page_number }}&{{ params }}">next</a>
-        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&{{ params }}">last &raquo;</a>
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}&{{ params }}">{% trans 'next' %}</a>
+        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&{{ params }}">{% trans 'last' %} &raquo;</a>
     {% endif %}
 </ul>

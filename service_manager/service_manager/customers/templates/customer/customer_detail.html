@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
     <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:2%">
         <div class="text-center mb-2">
-            <h2 class='text-secondary d-inline'>Customer Information</h2>
+            <h2 class='text-secondary d-inline'>{% trans 'Customer Information' %}</h2>
             {% if perms.customers.change_customer %}
                 <a class="btn btn-outline-primary btn-md float-end" href="{% url 'edit_customer' object.id %}"
-                   role="button">Edit</a>
+                   role="button">{% trans 'Edit' %}</a>
             {% endif %}
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <p class="text-primary mb-0"><b class="text-dark">Name: </b>{{ object.name }}</p>
-                <p class="text-primary mb-0"><b class="text-dark">Type: </b>{{ object.type.name }}</p>
-                <p class="text-primary mb-0"><b class="text-dark">VAT: </b>{{ object.vat }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Name' %}: </b>{{ object.name }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Type' %}: </b>{{ object.type.name }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'VAT' %}: </b>{{ object.vat }}</p>
             </div>
             <div class="col-sm-6">
-                <p class="text-primary mb-0"><b class="text-dark">Email: </b>{{ object.email_address }}</p>
-                <p class="text-primary mb-0"><b class="text-dark">Phone: </b>{{ object.phone_number }}</p>
-
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Email' %}: </b>{{ object.email_address }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Phone' %}: </b>{{ object.phone_number }}</p>
             </div>
         </div>
     </div>
@@ -26,14 +26,14 @@
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <a class="nav-item nav-link {% if not request.GET or 'show_assets' in request.GET %} active {% endif %}"
                href="{% url 'customer_detail' object.pk %}" role="tab"
-               aria-selected="true">Assets</a>
+               aria-selected="true">{% trans 'Assets' %}</a>
             {% if object.type.name == 'Business' %}
                 <a class="nav-item nav-link {% if 'show_representatives' in request.GET %} active {% endif %}"
                    href="{% url 'customer_detail' object.pk %}?show_representatives" role="tab"
-                   aria-selected="false">Representatives</a>
+                   aria-selected="false">{% trans 'Representatives' %}</a>
                 <a class="nav-item nav-link {% if 'show_departments' in request.GET %} active {% endif %}"
                    href="{% url 'customer_detail' object.pk %}?show_departments" role="tab"
-                   aria-selected="false">Departments</a>
+                   aria-selected="false">{% trans 'Departments' %}</a>
             {% endif %}
         </div>
 

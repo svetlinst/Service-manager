@@ -7,7 +7,7 @@
             <div class="col-md-8">
                 <form class="form" method="GET" action="">
                     <div class="input-group my-3">
-                        <input type="search" class="form-control rounded mr-3" placeholder="Search" aria-label="Search"
+                        <input type="search" class="form-control rounded mr-3" placeholder="{% trans 'Search' %}" aria-label="Search"
                                aria-describedby="search-addon" name="search_value"/>
                         <button type="submit" class="btn btn-outline-primary"
                                 href="{% url 'brands_list' %}">{% trans 'search' %}
@@ -20,16 +20,16 @@
             </div>
             {% if perms.master_data.add_brand %}
                 <div class="col-md-2 text-right align-self-center">
-                    <a href="{% url 'create_brand' %}" class="btn btn-success btn-md float-end">Create New</a>
+                    <a href="{% url 'create_brand' %}" class="btn btn-success btn-md float-end">{% trans 'Create New' %}</a>
                 </div>
             {% endif %}
         </div>
         <table class="table table-striped text-center">
             <thead>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Action</th>
+                <th scope="col">{% trans 'ID' %}</th>
+                <th scope="col">{% trans 'Name' %}</th>
+                <th scope="col">{% trans 'Action' %}</th>
             </tr>
             </thead>
             <tbody>
@@ -41,9 +41,9 @@
                         <td>
                             {% if perms.master_data.change_brand %}
                                 <a class="btn btn-outline-primary btn-sm" href="{% url 'edit_brand' brand.id %}"
-                                   role="button">Edit</a>
+                                   role="button">{% trans 'Edit' %}</a>
                                 <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_brand' brand.id %}"
-                                   role="button">Delete</a>
+                                   role="button">{% trans 'Delete' %}</a>
                             {% endif %}
                         </td>
                     </tr>
