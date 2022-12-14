@@ -3,7 +3,7 @@
 {% block content %}
     <div class="row">
         <div class="col-lg-12 text-center">
-            <h1>{% blocktrans %}Are you sure you want to delete Asset with SN: {{ object.serial_number }} and PN : {{ object.product_number }}?{% endblocktrans %}</h1>
+            <h1>{% blocktrans %}Are you sure you want to delete Asset with SN{% endblocktrans %}: {{ object.serial_number }} {% trans 'and PN'%}: {{ object.product_number }}?</h1>
             <div class="m-auto d-flex justify-content-center">
                 <div class="m-2">
                     <form method="post">

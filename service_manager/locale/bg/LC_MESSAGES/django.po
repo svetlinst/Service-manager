@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-17 11:16+0200\n"
-"PO-Revision-Date: 2022-11-17 09:18+0000\n"
-"Last-Translator: Anonymous User <dev2@dev.com>\n"
+"POT-Creation-Date: 2022-12-14 22:10+0200\n"
+"PO-Revision-Date: 2022-12-14 20:11+0000\n"
+"Last-Translator: Anonymous User <su@su.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,93 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: service_manager/accounts/templates/login_user.html:4
+#: templates/base.html:127
+msgid "Login"
+msgstr "Вход"
+
+#: service_manager/accounts/templates/login_user.html:13
+msgid "Log In"
+msgstr "Изход"
+
+#: service_manager/accounts/templates/login_user.html:17
+msgid "Password Reset"
+msgstr "Рестартиране на парола"
+
+#: service_manager/accounts/templates/login_user.html:21
+#: service_manager/accounts/templates/register_user.html:11
+msgid "Register"
+msgstr "Регистрация"
+
+#: service_manager/accounts/templates/password/password_reset.html:4
+#: service_manager/accounts/templates/password/password_reset_confirm.html:4
+msgid "Reset password"
+msgstr "Рестартиране на парола"
+
+#: service_manager/accounts/templates/password/password_reset.html:6
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll email "
+"instructions for setting a new one."
+msgstr ""
+"Забравена парола? Моля, въведете Вашия мейл адрес в полето отдолу. Ще Ви "
+"изпратим инструкции за създаване на нова парола."
+
+#: service_manager/accounts/templates/password/password_reset.html:13
+msgid "Send Email"
+msgstr "Изпрати имейл"
+
+#: service_manager/accounts/templates/password/password_reset_complete.html:4
+#: service_manager/accounts/templates/password/password_reset_done.html:4
+msgid "Reset Password"
+msgstr "Рестартиране на парола"
+
+#: service_manager/accounts/templates/password/password_reset_complete.html:5
+msgid "Your password has been changed."
+msgstr "Вашата парола беше актуализирана."
+
+#: service_manager/accounts/templates/password/password_reset_confirm.html:6
+msgid "Enter your new password"
+msgstr "Въведете Вашата нова парола"
+
+#: service_manager/accounts/templates/password/password_reset_confirm.html:13
+msgid "Confrim"
+msgstr "Потвърди"
+
+#: service_manager/accounts/templates/password/password_reset_done.html:5
+msgid ""
+"We have sent you reset password link on your email. Please Check Your Email."
+msgstr ""
+"Изпратихме ви линк за рестартиране на парола на Вашия имейл адрес. Моля, "
+"проверете Вашата поща."
+
+#: service_manager/accounts/templates/password/password_reset_email.html:2
+msgid ""
+"Hello, You're receiving this email because you requested a password reset "
+"for your user account at "
+msgstr ""
+"Здравейте, получвате този имейл, защото сте заявили смяна на парола за Вашия"
+" акаунт на"
+
+#: service_manager/accounts/templates/password/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr "Моля, отидете на следния адрес и създайте нова парола:"
+
+#: service_manager/accounts/templates/password/password_reset_email.html:9
+msgid "Thanks for using our site!"
+msgstr "Благодарим Ви, че използвате нашият сайт!"
+
+#: service_manager/accounts/templates/password/password_reset_email.html:11
+msgid "The Service Manager's team"
+msgstr "Екипът на Service Manager"
+
+#: service_manager/accounts/templates/password/password_reset_subject.txt:2
+msgid "Password reset on Service Manager"
+msgstr "Смяна на парола за Service Manager"
+
+#: service_manager/accounts/templates/register_user.html:4
+msgid "Register user"
+msgstr "Регистрирай потребител"
 
 #: service_manager/customers/models.py:16
 msgid "name"
@@ -40,65 +127,862 @@ msgid "Create new customer"
 msgstr "Създай нов клиент"
 
 #: service_manager/customers/templates/customer/customer_create.html:11
+#: service_manager/customers/templates/customer/customer_edit.html:11
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:11
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:7
+#: service_manager/customers/templates/customer_asset/customer_asset_edit.html:12
+#: service_manager/customers/templates/customer_department/customer_department_create.html:11
+#: service_manager/customers/templates/customer_department/customer_department_edit.html:11
+#: service_manager/customers/templates/customer_representatives/customer_representative_edit.html:12
+#: service_manager/customers/templates/customer_representatives/customer_representatives_create.html:11
+#: service_manager/main/templates/service_order_detail/service_order_detail_edit.html:11
+#: service_manager/main/templates/service_order_header/core/service_order_create.html:21
+#: service_manager/main/templates/service_order_header/core/service_order_handover.html:11
+#: service_manager/main/templates/service_order_note/service_order_note_create.html:11
+#: service_manager/main/templates/service_order_note/service_order_note_edit.html:12
+#: service_manager/master_data/templates/asset/asset_create.html:11
+#: service_manager/master_data/templates/asset/asset_edit.html:11
+#: service_manager/master_data/templates/asset_category/asset_category_create.html:11
+#: service_manager/master_data/templates/asset_category/asset_category_edit.html:12
+#: service_manager/master_data/templates/brands/brand_create.html:11
+#: service_manager/master_data/templates/brands/brand_edit.html:11
+#: service_manager/master_data/templates/material/material_create.html:11
+#: service_manager/master_data/templates/material/material_edit.html:11
+#: service_manager/master_data/templates/material_category/material_category_create.html:11
+#: service_manager/master_data/templates/material_category/material_category_edit.html:11
+#: templates/403.html:5
+msgid "Back"
+msgstr "Назад"
+
+#: service_manager/customers/templates/customer/customer_create.html:12
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:12
+#: service_manager/customers/templates/customer_asset/customer_asset_edit.html:13
+#: service_manager/customers/templates/customer_department/customer_department_create.html:12
+#: service_manager/customers/templates/customer_department/customer_department_edit.html:12
+#: service_manager/customers/templates/customer_representatives/customer_representatives_create.html:12
+#: service_manager/main/templates/service_order_detail/service_order_detail_edit.html:12
+#: service_manager/main/templates/service_order_header/core/service_order_create.html:22
+#: service_manager/main/templates/service_order_header/core/service_order_handover.html:12
+#: service_manager/main/templates/service_order_note/service_order_note_create.html:12
+#: service_manager/main/templates/service_order_note/service_order_note_edit.html:13
+#: service_manager/master_data/templates/asset/asset_create.html:12
+#: service_manager/master_data/templates/asset_category/asset_category_create.html:12
+#: service_manager/master_data/templates/brands/brand_create.html:12
+#: service_manager/master_data/templates/material/material_create.html:12
+#: service_manager/master_data/templates/material_category/material_category_create.html:12
 msgid "Save"
 msgstr "Запази"
 
-#: service_manager/customers/templates/customer/customers.html:5
-msgid "Customers"
-msgstr "Клиенти"
+#: service_manager/customers/templates/customer/customer_delete.html:6
+#: service_manager/customers/templates/customer_department/customer_department_delete.html:6
+#: service_manager/customers/templates/customer_representatives/customer_representative_delete.html:6
+#: service_manager/main/templates/service_order_detail/service_order_detail_delete.html:6
+#: service_manager/main/templates/service_order_header/core/service_order_delete.html:6
+#: service_manager/main/templates/service_order_note/service_order_note_delete.html:6
+#: service_manager/master_data/templates/asset/asset_delete.html:6
+#: service_manager/master_data/templates/asset_category/asset_category_delete.html:6
+#: service_manager/master_data/templates/brands/brand_delete.html:6
+#: service_manager/master_data/templates/material/material_delete.html:6
+#: service_manager/master_data/templates/material_category/material_category_delete.html:6
+msgid "Are you sure you want to delete"
+msgstr "Сигурни ли сте, че искате да изтриете"
 
-#: service_manager/customers/templates/customer/customers.html:12
-msgid "search"
-msgstr "търси"
+#: service_manager/customers/templates/customer/customer_delete.html:11
+#: service_manager/customers/templates/customer_asset/customer_asset_delete.html:11
+#: service_manager/customers/templates/customer_department/customer_department_delete.html:11
+#: service_manager/customers/templates/customer_representatives/customer_representative_delete.html:11
+#: service_manager/main/templates/service_order_detail/service_order_detail_delete.html:11
+#: service_manager/main/templates/service_order_detail/service_order_details.html:74
+#: service_manager/main/templates/service_order_header/core/service_order_delete.html:11
+#: service_manager/main/templates/service_order_note/service_order_note_delete.html:11
+#: service_manager/master_data/templates/asset/asset_delete.html:11
+#: service_manager/master_data/templates/asset_category/asset_category_delete.html:11
+#: service_manager/master_data/templates/brands/brand_delete.html:11
+#: service_manager/master_data/templates/material/material_delete.html:11
+#: service_manager/master_data/templates/material_category/material_category_delete.html:11
+msgid "Confirm"
+msgstr "Потвърди"
 
-#: service_manager/customers/templates/customer/customers.html:18
-msgid "Create"
-msgstr "Създай"
+#: service_manager/customers/templates/customer/customer_delete.html:15
+#: service_manager/customers/templates/customer_asset/customer_asset_delete.html:15
+#: service_manager/customers/templates/customer_department/customer_department_delete.html:15
+#: service_manager/customers/templates/customer_representatives/customer_representative_delete.html:15
+#: service_manager/main/templates/service_order_detail/service_order_detail_delete.html:15
+#: service_manager/main/templates/service_order_header/core/service_order_delete.html:15
+#: service_manager/main/templates/service_order_note/service_order_note_delete.html:16
+#: service_manager/master_data/templates/asset/asset_delete.html:15
+#: service_manager/master_data/templates/asset_category/asset_category_delete.html:15
+#: service_manager/master_data/templates/brands/brand_delete.html:15
+#: service_manager/master_data/templates/material/material_delete.html:15
+#: service_manager/master_data/templates/material_category/material_category_delete.html:15
+msgid "No, go back"
+msgstr "Върни се обратно"
 
-#: service_manager/customers/templates/customer/customers.html:24
-msgid "ID"
-msgstr "ИД"
+#: service_manager/customers/templates/customer/customer_detail.html:6
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:6
+msgid "Customer Information"
+msgstr "Информация за клиента"
 
-#: service_manager/customers/templates/customer/customers.html:25
+#: service_manager/customers/templates/customer/customer_detail.html:9
+#: service_manager/customers/templates/customer_asset/customer_assets.html:72
+#: service_manager/customers/templates/customer_department/customer_departments.html:44
+#: service_manager/customers/templates/customer_representatives/customer_representatives.html:50
+#: service_manager/main/templates/service_order_detail/service_order_details.html:42
+#: service_manager/main/templates/service_order_note/service_order_notes.html:32
+#: service_manager/master_data/templates/asset/asset_edit.html:12
+#: service_manager/master_data/templates/asset/assets.html:50
+#: service_manager/master_data/templates/asset_category/asset_categories.html:47
+#: service_manager/master_data/templates/asset_category/asset_category_edit.html:13
+#: service_manager/master_data/templates/brands/brand_edit.html:12
+#: service_manager/master_data/templates/brands/brands.html:44
+#: service_manager/master_data/templates/material/material_edit.html:12
+#: service_manager/master_data/templates/material/materials.html:48
+#: service_manager/master_data/templates/material_category/material_categories.html:46
+#: service_manager/master_data/templates/material_category/material_category_edit.html:12
+msgid "Edit"
+msgstr "Редактирай"
+
+#: service_manager/customers/templates/customer/customer_detail.html:14
+#: service_manager/customers/templates/customer/customers.html:31
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:11
+#: service_manager/customers/templates/customer_department/customer_departments.html:30
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:10
+#: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:10
+#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:10
+#: service_manager/master_data/templates/asset_category/asset_categories.html:33
+#: service_manager/master_data/templates/brands/brands.html:31
+#: service_manager/master_data/templates/material/materials.html:32
+#: service_manager/master_data/templates/material_category/material_categories.html:32
+#: service_manager/reports/templates/finished_orders.html:24
 msgid "Name"
 msgstr "Име"
 
-#: service_manager/customers/templates/customer/customers.html:26
+#: service_manager/customers/templates/customer/customer_detail.html:15
+#: service_manager/customers/templates/customer/customers.html:32
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:14
 msgid "Type"
 msgstr "Тип"
 
-#: service_manager/customers/templates/customer/customers.html:27
+#: service_manager/customers/templates/customer/customer_detail.html:16
+#: service_manager/customers/templates/customer/customers.html:33
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:18
 msgid "VAT"
 msgstr "ЕИК"
 
-#: service_manager/customers/templates/customer/customers.html:28
+#: service_manager/customers/templates/customer/customer_detail.html:19
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:14
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:24
+#, fuzzy
+#| msgid "E-mail"
+msgid "Email"
+msgstr "И-мейл адрес"
+
+#: service_manager/customers/templates/customer/customer_detail.html:20
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:17
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:28
+msgid "Phone"
+msgstr "Телефон"
+
+#: service_manager/customers/templates/customer/customer_detail.html:29
+#: service_manager/master_data/templates/asset/assets.html:5
+#: templates/base.html:69
+msgid "Assets"
+msgstr "Устройства"
+
+#: service_manager/customers/templates/customer/customer_detail.html:33
+msgid "Representatives"
+msgstr "Представители"
+
+#: service_manager/customers/templates/customer/customer_detail.html:36
+msgid "Departments"
+msgstr "Отдели"
+
+#: service_manager/customers/templates/customer/customer_edit.html:4
+msgid "Edit Customer"
+msgstr "Редактирай клиент"
+
+#: service_manager/customers/templates/customer/customer_edit.html:12
+#: service_manager/customers/templates/customer_representatives/customer_representative_edit.html:13
+msgid "Update"
+msgstr "Актуализирай"
+
+#: service_manager/customers/templates/customer/customers.html:5
+#: templates/base.html:41
+msgid "Customers"
+msgstr "Клиенти"
+
+#: service_manager/customers/templates/customer/customers.html:10
+#: service_manager/master_data/templates/asset/assets.html:10
+#: service_manager/master_data/templates/asset_category/asset_categories.html:11
+#: service_manager/master_data/templates/brands/brands.html:10
+#: service_manager/master_data/templates/material/materials.html:10
+#: service_manager/master_data/templates/material_category/material_categories.html:10
+msgid "Search"
+msgstr "Търси"
+
+#: service_manager/customers/templates/customer/customers.html:13
+#: service_manager/customers/templates/customer_asset/customer_assets.html:13
+#: service_manager/customers/templates/customer_department/customer_departments.html:14
+#: service_manager/customers/templates/customer_representatives/customer_representatives.html:14
+#: service_manager/master_data/templates/asset/assets.html:13
+#: service_manager/master_data/templates/asset_category/asset_categories.html:15
+#: service_manager/master_data/templates/brands/brands.html:13
+#: service_manager/master_data/templates/material/materials.html:13
+#: service_manager/master_data/templates/material_category/material_categories.html:13
+msgid "search"
+msgstr "търси"
+
+#: service_manager/customers/templates/customer/customers.html:19
+#: service_manager/master_data/templates/asset/assets.html:19
+#: service_manager/master_data/templates/asset_category/asset_categories.html:22
+#: service_manager/master_data/templates/brands/brands.html:19
+#: service_manager/master_data/templates/material/materials.html:19
+#: service_manager/master_data/templates/material_category/material_categories.html:20
+msgid "clear"
+msgstr "изчисти"
+
+#: service_manager/customers/templates/customer/customers.html:23
+#: service_manager/master_data/templates/asset/assets.html:23
+#: service_manager/master_data/templates/asset_category/asset_categories.html:25
+#: service_manager/master_data/templates/brands/brands.html:23
+#: service_manager/master_data/templates/material/materials.html:23
+#: service_manager/master_data/templates/material_category/material_categories.html:24
+msgid "Create New"
+msgstr "Създай нов"
+
+#: service_manager/customers/templates/customer/customers.html:30
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:52
+#: service_manager/customers/templates/customer_asset/customer_assets.html:28
+#: service_manager/customers/templates/customer_department/customer_departments.html:29
+#: service_manager/customers/templates/customer_representatives/customer_representatives.html:29
+#: service_manager/main/templates/service_order_detail/service_order_details.html:11
+#: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:9
+#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:9
+#: service_manager/main/templates/service_order_note/service_order_notes.html:6
+#: service_manager/master_data/templates/asset/assets.html:30
+#: service_manager/master_data/templates/asset_category/asset_categories.html:32
+#: service_manager/master_data/templates/brands/brands.html:30
+#: service_manager/master_data/templates/material/materials.html:30
+#: service_manager/master_data/templates/material_category/material_categories.html:31
+#: service_manager/reports/templates/finished_orders.html:23
+msgid "ID"
+msgstr "Номер"
+
+#: service_manager/customers/templates/customer/customers.html:34
 msgid "E-mail"
 msgstr "И-мейл адрес"
 
-#: service_manager/customers/templates/customer/customers.html:29
-#| msgid "phone_number"
+#: service_manager/customers/templates/customer/customers.html:35
+#: service_manager/customers/templates/customer_representatives/customer_representatives.html:33
 msgid "Phone Number"
 msgstr "Телефонен номер"
 
-#: service_manager/customers/templates/customer/customers.html:30
+#: service_manager/customers/templates/customer/customers.html:36
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:59
+#: service_manager/customers/templates/customer_asset/customer_assets.html:35
+#: service_manager/customers/templates/customer_department/customer_departments.html:31
+#: service_manager/customers/templates/customer_representatives/customer_representatives.html:34
+#: service_manager/main/templates/service_order_detail/service_order_details.html:20
+#: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:19
+#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:19
+#: service_manager/main/templates/service_order_note/service_order_notes.html:11
+#: service_manager/master_data/templates/asset/assets.html:35
+#: service_manager/master_data/templates/asset_category/asset_categories.html:34
+#: service_manager/master_data/templates/brands/brands.html:32
+#: service_manager/master_data/templates/material/materials.html:34
+#: service_manager/master_data/templates/material_category/material_categories.html:33
+#: service_manager/reports/templates/finished_orders.html:34
 msgid "Action"
 msgstr "Действие"
 
-#: service_manager/customers/templates/customer/customers.html:48
+#: service_manager/customers/templates/customer/customers.html:55
+#: templates/base.html:65
 msgid "Manage"
 msgstr "Управление"
 
-#: service_manager/customers/templates/customer/customers.html:50
+#: service_manager/customers/templates/customer/customers.html:57
+#: service_manager/customers/templates/customer_asset/customer_assets.html:75
+#: service_manager/customers/templates/customer_department/customer_departments.html:47
+#: service_manager/customers/templates/customer_representatives/customer_representatives.html:53
+#: service_manager/main/templates/service_order_detail/service_order_details.html:45
+#: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:45
+#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:48
+#: service_manager/main/templates/service_order_note/service_order_notes.html:35
+#: service_manager/master_data/templates/asset/assets.html:52
+#: service_manager/master_data/templates/asset_category/asset_categories.html:49
+#: service_manager/master_data/templates/brands/brands.html:46
+#: service_manager/master_data/templates/material/materials.html:50
+#: service_manager/master_data/templates/material_category/material_categories.html:49
 msgid "Delete"
 msgstr "Изтриване"
 
-#: service_manager/settings.py:129
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:4
+#, fuzzy
+#| msgid "Create new customer"
+msgid "Create new customer asset"
+msgstr "Създай нов клиент"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_delete.html:6
+#, fuzzy
+#| msgid "Are you sure you want to delete"
+msgid "Are you sure you want to delete Asset with SN"
+msgstr "Сигурни ли сте, че искате да изтриете"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_delete.html:6
+msgid "and PN"
+msgstr "и продуктов номер"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:6
+#: service_manager/main/templates/service_order_detail/service_order_details.html:64
+#, fuzzy
+#| msgid "Customers"
+msgid "Customer"
+msgstr "Клиенти"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:21
+msgid "Asset"
+msgstr "Устройство"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:24
+#: service_manager/customers/templates/customer_asset/customer_assets.html:29
+#: service_manager/main/templates/service_order_detail/service_order_details.html:13
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:41
+#: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:11
+#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:11
+#: service_manager/master_data/templates/asset/assets.html:31
+#: service_manager/master_data/templates/material/materials.html:31
+#: service_manager/reports/templates/finished_orders.html:25
+msgid "Category"
+msgstr "Категория"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:27
+#: service_manager/customers/templates/customer_asset/customer_assets.html:30
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:46
+#: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:12
+#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:12
+#: service_manager/master_data/templates/asset/assets.html:32
+#: service_manager/reports/templates/finished_orders.html:26
+msgid "Brand"
+msgstr "Марка"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:30
+#: service_manager/customers/templates/customer_asset/customer_assets.html:31
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:51
+#: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:13
+#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:13
+#: service_manager/master_data/templates/asset/assets.html:33
+#: service_manager/reports/templates/finished_orders.html:27
+msgid "Model Name"
+msgstr "Име на модел"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:36
+#: service_manager/customers/templates/customer_asset/customer_assets.html:32
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:57
+#: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:14
+#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:14
+#: service_manager/master_data/templates/asset/assets.html:34
+#: service_manager/reports/templates/finished_orders.html:28
+msgid "Model Number"
+msgstr "Номер на модел"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:39
+#: service_manager/customers/templates/customer_asset/customer_assets.html:33
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:60
+#: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:15
+#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:15
+#: service_manager/reports/templates/finished_orders.html:29
+msgid "Serial Number"
+msgstr "Сериен номер"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:42
+#: service_manager/customers/templates/customer_asset/customer_assets.html:34
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:63
+#: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:16
+#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:16
+#: service_manager/reports/templates/finished_orders.html:30
+msgid "Product Number"
+msgstr "Продуктов номер"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:48
+msgid "Service History"
+msgstr "Сервизна история"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:53
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:80
+msgid "Status"
+msgstr "Статус"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:54
+#: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:17
+#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:17
+#: service_manager/reports/templates/finished_orders.html:31
+msgid "Accepted On"
+msgstr "Приет на"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:55
+#: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:18
+#: service_manager/reports/templates/finished_orders.html:32
+msgid "Serviced On"
+msgstr "Обслужен на"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:56
+msgid "Completed On"
+msgstr "Завършен на"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:57
+msgid "Serviced By"
+msgstr "Обслужен от"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:58
+msgid "Amount Due"
+msgstr "Дължима стойност"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:77
+#: service_manager/customers/templates/customer_asset/customer_assets.html:66
+#: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:41
+#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:44
+#: service_manager/reports/templates/finished_orders.html:56
+msgid "Detail"
+msgstr "Детайли"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:86
+msgid "No Service History available for this asset."
+msgstr "Това устройство няма съществуваща сервизна история."
+
+#: service_manager/customers/templates/customer_asset/customer_asset_edit.html:4
+msgid "Edit customer asset"
+msgstr "Промени клиентско устройство"
+
+#: service_manager/customers/templates/customer_asset/customer_assets.html:7
+msgid "Search Assets"
+msgstr "Търси устройство"
+
+#: service_manager/customers/templates/customer_asset/customer_assets.html:21
+msgid "Add Asset"
+msgstr "Добави устройство"
+
+#: service_manager/customers/templates/customer_asset/customer_assets.html:56
+msgid "Create Order"
+msgstr "Създай поръчка"
+
+#: service_manager/customers/templates/customer_asset/customer_assets.html:59
+msgid "In Service"
+msgstr "В сервиза"
+
+#: service_manager/customers/templates/customer_asset/customer_assets.html:84
+#: service_manager/customers/templates/customer_department/customer_departments.html:56
+#: service_manager/customers/templates/customer_representatives/customer_representatives.html:62
+msgid "No records matching your search"
+msgstr "Няма намерени резултати"
+
+#: service_manager/customers/templates/customer_department/customer_department_create.html:4
+msgid "Create new customer department"
+msgstr "Създай нов клиентски отдел"
+
+#: service_manager/customers/templates/customer_department/customer_department_edit.html:4
+msgid "Edit customer department"
+msgstr "Редактирай клиентски отдел"
+
+#: service_manager/customers/templates/customer_department/customer_departments.html:8
+msgid "Search Departments"
+msgstr "Търси отдели"
+
+#: service_manager/customers/templates/customer_department/customer_departments.html:22
+msgid "Add Department"
+msgstr "Добави отдел"
+
+#: service_manager/customers/templates/customer_representatives/customer_representative_edit.html:4
+msgid "Edit customer representative"
+msgstr "Редактирай клиентски представители"
+
+#: service_manager/customers/templates/customer_representatives/customer_representatives.html:8
+msgid "Search Representatives"
+msgstr "Търси представители"
+
+#: service_manager/customers/templates/customer_representatives/customer_representatives.html:22
+msgid "Add Representative"
+msgstr "Добави представител"
+
+#: service_manager/customers/templates/customer_representatives/customer_representatives.html:30
+msgid "First Name"
+msgstr "Име"
+
+#: service_manager/customers/templates/customer_representatives/customer_representatives.html:31
+msgid "Last Name"
+msgstr "Фамилия"
+
+#: service_manager/customers/templates/customer_representatives/customer_representatives.html:32
+msgid "E-mail Address"
+msgstr "И-мейл адрес"
+
+#: service_manager/customers/templates/customer_representatives/customer_representatives_create.html:4
+msgid "Create new customer representative"
+msgstr "Създай нов клиентски представител"
+
+#: service_manager/main/templates/index.html:7
+msgid "Hello"
+msgstr "Здравей"
+
+#: service_manager/main/templates/service_order_detail/service_order_detail_edit.html:4
+msgid "Edit service order detail"
+msgstr "Редактирай детайл на сервизна поръчка"
+
+#: service_manager/main/templates/service_order_detail/service_order_details.html:5
+#: service_manager/main/templates/service_order_detail/service_order_details.html:67
+msgid "Total Amount Due"
+msgstr "Общо дължима сума"
+
+#: service_manager/main/templates/service_order_detail/service_order_details.html:12
+msgid "Material Name"
+msgstr "Име на материал"
+
+#: service_manager/main/templates/service_order_detail/service_order_details.html:14
+#: service_manager/master_data/templates/material/materials.html:33
+msgid "Price"
+msgstr "Цена"
+
+#: service_manager/main/templates/service_order_detail/service_order_details.html:15
+msgid "Quantity"
+msgstr "Количество"
+
+#: service_manager/main/templates/service_order_detail/service_order_details.html:16
+msgid "Discount"
+msgstr "Отстъпка"
+
+#: service_manager/main/templates/service_order_detail/service_order_details.html:17
+msgid "Unit Price"
+msgstr "Единична цена"
+
+#: service_manager/main/templates/service_order_detail/service_order_details.html:18
+msgid "Total Amount"
+msgstr "Обща стойност"
+
+#: service_manager/main/templates/service_order_detail/service_order_details.html:60
+msgid ""
+"Complete Service Order with\n"
+"                        ID:"
+msgstr "Завърши сервизна поръчка с номер:"
+
+#: service_manager/main/templates/service_order_detail/service_order_details.html:65
+msgid "Asset Serial Number"
+msgstr "Сериен номер на устройство"
+
+#: service_manager/main/templates/service_order_detail/service_order_details.html:66
+msgid "Asset Product Number"
+msgstr "Продуктов номер на устройство"
+
+#: service_manager/main/templates/service_order_detail/service_order_details.html:71
+#: service_manager/main/templates/service_order_detail/service_order_details.html:93
+msgid "Close"
+msgstr "Затвори"
+
+#: service_manager/main/templates/service_order_detail/service_order_details.html:86
+msgid ""
+"Rollback Service Order with\n"
+"                        ID"
+msgstr "Върни обратно към сервиз проъчка с номер"
+
+#: service_manager/main/templates/service_order_detail/service_order_details.html:90
+msgid "Please, confirm"
+msgstr "Моля, потвърдете"
+
+#: service_manager/main/templates/service_order_detail/service_order_details.html:96
+msgid "Rollback"
+msgstr "Върни обратно към сервиз"
+
+#: service_manager/main/templates/service_order_detail/service_order_details_create.html:5
+msgid "Add Material"
+msgstr "Добавил материал"
+
+#: service_manager/main/templates/service_order_detail/service_order_details_create.html:12
+msgid "Add"
+msgstr "Добави"
+
+#: service_manager/main/templates/service_order_header/core/service_order_create.html:4
+msgid "Create new service order"
+msgstr "Създай нова сервизна поръчка"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:33
+msgid "Department"
+msgstr "Отдел"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:37
+msgid "Asset Information"
+msgstr "Информация за устройство"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:66
+msgid "Order Information"
+msgstr "Информация за поръчка"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:69
+msgid "Handed over by"
+msgstr "Предадена от"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:72
+msgid "Accepted by"
+msgstr "Приета от"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:75
+msgid "Accepted on"
+msgstr "Прета на"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:83
+msgid "Serviced by"
+msgstr "Обслужена от"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:86
+msgid "Serviced on"
+msgstr "Обслужена на"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:91
+msgid "Handed over to"
+msgstr "Предадена на"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:94
+msgid "Completed by"
+msgstr "Завършена от"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:97
+msgid "Completed on"
+msgstr "Завършена на"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:104
+msgid "Problem Description"
+msgstr "Описание на проблема"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:114
+msgid "Notes"
+msgstr "Бележки"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:118
+msgid "Add Note"
+msgstr "Добави бележка"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:128
+msgid "Click on the \"Add Note\" button to create a note."
+msgstr "Кликнете на бутон \"Добави бележка\" за да създадете бележка."
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:141
+msgid "Complete Service"
+msgstr "Завърши обслужване"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:148
+msgid "Rollback Order"
+msgstr "Върни обратно към сервиз"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:150
+msgid "Finalize Order"
+msgstr "Финализирай поръчка"
+
+#: service_manager/main/templates/service_order_header/core/service_order_handover.html:4
+msgid "Order handover"
+msgstr "Предаване на поръчка"
+
+#: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:5
+msgid "Completed Service Orders"
+msgstr "Обслужени поръчки"
+
+#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:5
+msgid "Pending Service Orders"
+msgstr "Поръчки в сервиз"
+
+#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:18
+msgid "Accepted By"
+msgstr "Приета от"
+
+#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:40
+msgid "Service"
+msgstr "Обслужване"
+
+#: service_manager/main/templates/service_order_note/service_order_note_create.html:4
+msgid "Create new note"
+msgstr "Създай нова бележка"
+
+#: service_manager/main/templates/service_order_note/service_order_note_detail.html:8
+msgid "Note Detail"
+msgstr "Детайли на бележка"
+
+#: service_manager/main/templates/service_order_note/service_order_note_detail.html:9
+msgid "Go Back"
+msgstr "Върни се обратно"
+
+#: service_manager/main/templates/service_order_note/service_order_note_detail.html:15
+#: service_manager/main/templates/service_order_note/service_order_notes.html:8
+msgid "Created By"
+msgstr "Създадена от"
+
+#: service_manager/main/templates/service_order_note/service_order_note_detail.html:18
+#: service_manager/main/templates/service_order_note/service_order_notes.html:9
+msgid "Created On"
+msgstr "Създадена на"
+
+#: service_manager/main/templates/service_order_note/service_order_note_detail.html:22
+#: service_manager/main/templates/service_order_note/service_order_notes.html:7
+msgid "Note"
+msgstr "Бележка"
+
+#: service_manager/main/templates/service_order_note/service_order_note_edit.html:4
+msgid "Edit note"
+msgstr "Редактирай бележка"
+
+#: service_manager/main/templates/service_order_note/service_order_notes.html:28
+msgid "View"
+msgstr "Виж"
+
+#: service_manager/master_data/templates/asset/asset_create.html:4
+msgid "Create asset"
+msgstr "Създай устройство"
+
+#: service_manager/master_data/templates/asset/asset_edit.html:4
+msgid "Edit asset"
+msgstr "Редактирай устройство"
+
+#: service_manager/master_data/templates/asset_category/asset_categories.html:5
+#: templates/base.html:72
+msgid "Asset Categories"
+msgstr "Категории устройства"
+
+#: service_manager/master_data/templates/asset_category/asset_category_create.html:4
+msgid "Create asset category"
+msgstr "Създах нова категория устройство"
+
+#: service_manager/master_data/templates/asset_category/asset_category_edit.html:4
+msgid "Edit asset category"
+msgstr "Редактирай категория устройство"
+
+#: service_manager/master_data/templates/brands/brand_create.html:4
+msgid "Create brand"
+msgstr "Създай марка"
+
+#: service_manager/master_data/templates/brands/brand_edit.html:4
+msgid "Edit brand"
+msgstr "Редактирай марка"
+
+#: service_manager/master_data/templates/brands/brands.html:5
+#: templates/base.html:75
+msgid "Brands"
+msgstr "Марки"
+
+#: service_manager/master_data/templates/material/material_create.html:4
+msgid "Create material"
+msgstr "Създай материал"
+
+#: service_manager/master_data/templates/material/material_edit.html:4
+msgid "Edit material"
+msgstr "Редактирай материал"
+
+#: service_manager/master_data/templates/material/materials.html:5
+msgid "Materials"
+msgstr "Материали"
+
+#: service_manager/master_data/templates/material_category/material_categories.html:5
+#: templates/base.html:81
+msgid "Material Categories"
+msgstr "Категории материали"
+
+#: service_manager/master_data/templates/material_category/material_category_create.html:4
+msgid "Create material cateogry"
+msgstr "Създай катгория материал"
+
+#: service_manager/master_data/templates/material_category/material_category_edit.html:4
+msgid "Edit material category"
+msgstr "Редактирай категория материал"
+
+#: service_manager/reports/templates/finished_orders.html:5
+msgid "Finished Service Orders"
+msgstr "Завършени сервизни поръчки"
+
+#: service_manager/reports/templates/finished_orders.html:10
+msgid "From"
+msgstr "От"
+
+#: service_manager/reports/templates/finished_orders.html:13
+msgid "To"
+msgstr "До"
+
+#: service_manager/reports/templates/finished_orders.html:16
+msgid "filter"
+msgstr "филтрирай"
+
+#: service_manager/reports/templates/finished_orders.html:33
+msgid "Returned On"
+msgstr "Върната на"
+
+#: service_manager/settings.py:133
 msgid "English"
 msgstr "Английски"
 
-#: service_manager/settings.py:130
+#: service_manager/settings.py:134
 msgid "Bulgarian"
 msgstr "Български"
+
+#: templates/403.html:4
+msgid "You don't have permission to view this page!"
+msgstr "Нямате достъп до тази страница!"
+
+#: templates/404.html:4
+msgid "Page not found"
+msgstr "Страницата не е открита"
+
+#: templates/base.html:34
+msgid "Home"
+msgstr "Начало"
+
+#: templates/base.html:50
+msgid "Orders"
+msgstr "Поръчки"
+
+#: templates/base.html:53
+msgid "Pending Service"
+msgstr "Поръчки в сервиз"
+
+#: templates/base.html:54
+msgid "Service Completed"
+msgstr "Обслужени поръчки"
+
+#: templates/base.html:78
+msgid "Material"
+msgstr "Материали"
+
+#: templates/base.html:93
+msgid "Reports"
+msgstr "Справки"
+
+#: templates/base.html:96
+msgid "Finished Orders"
+msgstr "Завършени поръчки"
+
+#: templates/base.html:111
+msgid "Language"
+msgstr "Език"
+
+#: templates/base.html:129
+msgid "Profile"
+msgstr "Профил"
+
+#: templates/base.html:130
+msgid "Logout"
+msgstr "Изход"
+
+#: templates/partials/paginator.html:4
+msgid "first"
+msgstr "първа"
+
+#: templates/partials/paginator.html:5
+msgid "previous"
+msgstr "предходна"
+
+#: templates/partials/paginator.html:10
+msgid "of"
+msgstr "от"
+
+#: templates/partials/paginator.html:15
+msgid "next"
+msgstr "следваща"
+
+#: templates/partials/paginator.html:16
+msgid "last"
+msgstr "последна"
 
 #~ msgid "type"
 #~ msgstr "Тип"
