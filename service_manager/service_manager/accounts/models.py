@@ -3,6 +3,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 
 from service_manager.accounts.managers import AppUserManager
+from django.utils.translation import gettext_lazy as _
 
 
 class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
@@ -46,18 +47,21 @@ class Profile(models.Model):
     PHONE_NUMBER_MAX_LENGTH = 20
 
     first_name = models.CharField(
+        _('first_name'),
         max_length=FIRST_NAME_MAX_LENGTH,
         null=False,
         blank=False,
     )
 
     last_name = models.CharField(
+        _('last_name'),
         max_length=LAST_NAME_MAX_LENGTH,
         null=False,
         blank=False,
     )
 
     phone_number = models.CharField(
+        _('phone_number'),
         max_length=PHONE_NUMBER_MAX_LENGTH,
         null=True,
         blank=True,
@@ -67,6 +71,7 @@ class Profile(models.Model):
         AppUser,
         on_delete=models.CASCADE,
         primary_key=True,
+        verbose_name=_('app_user'),
     )
 
     @property

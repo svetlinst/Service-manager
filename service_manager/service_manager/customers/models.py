@@ -40,6 +40,7 @@ class Customer(ActiveModel, BaseAuditEntity):
     type = models.ForeignKey(
         CustomerType,
         on_delete=models.CASCADE,
+        verbose_name=_('type'),
     )
 
     def __str__(self):
@@ -53,14 +54,17 @@ class CustomerRepresentative(ActiveModel, BaseAuditEntity):
     PHONE_NUMBER_MAX_LENGTH = 20
 
     first_name = models.CharField(
+        _('first_name'),
         max_length=FIRST_NAME_MAX_LENGTH,
     )
 
     last_name = models.CharField(
+        _('last_name'),
         max_length=LAST_NAME_MAX_LENGTH,
     )
 
     email_address = models.EmailField(
+        _('email_address'),
         max_length=EMAIL_ADDRESS_MAX_LENGTH,
         validators=(
             EmailValidator,
@@ -70,12 +74,14 @@ class CustomerRepresentative(ActiveModel, BaseAuditEntity):
     )
 
     phone_number = models.CharField(
+        _('phone_number'),
         max_length=PHONE_NUMBER_MAX_LENGTH,
     )
 
     customer = models.ForeignKey(
         Customer,
         on_delete=models.CASCADE,
+        verbose_name=_('customer'),
     )
 
     def __str__(self):
@@ -89,12 +95,14 @@ class CustomerDepartment(ActiveModel, BaseAuditEntity):
     NAME_MAX_LENGTH = 100
 
     name = models.CharField(
+        _('name'),
         max_length=NAME_MAX_LENGTH,
     )
 
     customer = models.ForeignKey(
         Customer,
         on_delete=models.CASCADE,
+        verbose_name=_('customer'),
     )
 
     def __str__(self):
@@ -109,12 +117,14 @@ class CustomerAsset(ActiveModel, BaseAuditEntity):
     PRODUCT_NUMBER_MAX_LENGTH = 20
 
     serial_number = models.CharField(
+        _('serial_number'),
         max_length=SERIAL_NUMBER_MAX_LENGTH,
         null=True,
         blank=True,
     )
 
     product_number = models.CharField(
+        _('serial_number'),
         max_length=PRODUCT_NUMBER_MAX_LENGTH,
         null=True,
         blank=True,
@@ -123,11 +133,13 @@ class CustomerAsset(ActiveModel, BaseAuditEntity):
     customer = models.ForeignKey(
         Customer,
         on_delete=models.CASCADE,
+        verbose_name=_('customer'),
     )
 
     asset = models.ForeignKey(
         Asset,
         on_delete=models.CASCADE,
+        verbose_name=_('asset'),
     )
 
     def __str__(self):

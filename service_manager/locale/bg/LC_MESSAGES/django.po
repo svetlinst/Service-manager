@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-14 22:10+0200\n"
-"PO-Revision-Date: 2022-12-14 20:11+0000\n"
+"POT-Creation-Date: 2022-12-14 22:42+0200\n"
+"PO-Revision-Date: 2022-12-14 20:47+0000\n"
 "Last-Translator: Anonymous User <su@su.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,6 +18,28 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: service_manager/accounts/models.py:50
+#: service_manager/customers/models.py:57
+#| msgid "First Name"
+msgid "first_name"
+msgstr "Име"
+
+#: service_manager/accounts/models.py:57
+#: service_manager/customers/models.py:62
+#| msgid "name"
+msgid "last_name"
+msgstr "Фамилия"
+
+#: service_manager/accounts/models.py:64
+#: service_manager/customers/models.py:36
+#: service_manager/customers/models.py:77
+msgid "phone_number"
+msgstr "Телефонен номер"
+
+#: service_manager/accounts/models.py:74
+msgid "app_user"
+msgstr "Потеребител"
 
 #: service_manager/accounts/templates/login_user.html:4
 #: templates/base.html:127
@@ -107,6 +129,12 @@ msgid "Register user"
 msgstr "Регистрирай потребител"
 
 #: service_manager/customers/models.py:16
+#: service_manager/customers/models.py:98
+#: service_manager/master_data/models.py:11
+#: service_manager/master_data/models.py:23
+#: service_manager/master_data/models.py:38
+#: service_manager/master_data/models.py:83
+#: service_manager/master_data/models.py:95
 msgid "name"
 msgstr "Име"
 
@@ -115,12 +143,31 @@ msgid "vat"
 msgstr "ЕИК"
 
 #: service_manager/customers/models.py:28
+#: service_manager/customers/models.py:67
 msgid "email_address"
 msgstr "И-мейл адрес"
 
-#: service_manager/customers/models.py:36
-msgid "phone_number"
-msgstr "Телефонен номер"
+#: service_manager/customers/models.py:43
+msgid "type"
+msgstr "Тип"
+
+#: service_manager/customers/models.py:84
+#: service_manager/customers/models.py:105
+#: service_manager/customers/models.py:136 service_manager/main/models.py:50
+#| msgid "Customers"
+msgid "customer"
+msgstr "Клиент"
+
+#: service_manager/customers/models.py:120
+#: service_manager/customers/models.py:127
+#| msgid "Serial Number"
+msgid "serial_number"
+msgstr "Сериен номер"
+
+#: service_manager/customers/models.py:142
+#| msgid "Asset"
+msgid "asset"
+msgstr "Устройство"
 
 #: service_manager/customers/templates/customer/customer_create.html:4
 msgid "Create new customer"
@@ -272,7 +319,6 @@ msgstr "ЕИК"
 #: service_manager/customers/templates/customer/customer_detail.html:19
 #: service_manager/customers/templates/customer_asset/customer_asset_detail.html:14
 #: service_manager/main/templates/service_order_header/core/service_order_details.html:24
-#, fuzzy
 #| msgid "E-mail"
 msgid "Email"
 msgstr "И-мейл адрес"
@@ -417,16 +463,14 @@ msgid "Delete"
 msgstr "Изтриване"
 
 #: service_manager/customers/templates/customer_asset/customer_asset_create.html:4
-#, fuzzy
 #| msgid "Create new customer"
 msgid "Create new customer asset"
 msgstr "Създай нов клиент"
 
 #: service_manager/customers/templates/customer_asset/customer_asset_delete.html:6
-#, fuzzy
 #| msgid "Are you sure you want to delete"
 msgid "Are you sure you want to delete Asset with SN"
-msgstr "Сигурни ли сте, че искате да изтриете"
+msgstr "Сигурни ли сте, че искате да изтриете устройство със сериен номер"
 
 #: service_manager/customers/templates/customer_asset/customer_asset_delete.html:6
 msgid "and PN"
@@ -434,10 +478,9 @@ msgstr "и продуктов номер"
 
 #: service_manager/customers/templates/customer_asset/customer_asset_detail.html:6
 #: service_manager/main/templates/service_order_detail/service_order_details.html:64
-#, fuzzy
 #| msgid "Customers"
 msgid "Customer"
-msgstr "Клиенти"
+msgstr "Клиент"
 
 #: service_manager/customers/templates/customer_asset/customer_asset_detail.html:21
 msgid "Asset"
@@ -618,6 +661,101 @@ msgstr "И-мейл адрес"
 #: service_manager/customers/templates/customer_representatives/customer_representatives_create.html:4
 msgid "Create new customer representative"
 msgstr "Създай нов клиентски представител"
+
+#: service_manager/main/models.py:13
+#| msgid "Problem Description"
+msgid "problem_description"
+msgstr "Описание на проблема"
+
+#: service_manager/main/models.py:19
+#| msgid "Service"
+msgid "is_serviced"
+msgstr "Обслужена"
+
+#: service_manager/main/models.py:24
+#| msgid "Service Completed"
+msgid "is_completed"
+msgstr "Завършена"
+
+#: service_manager/main/models.py:29
+#| msgid "Serviced on"
+msgid "serviced_on"
+msgstr "Обслужена на"
+
+#: service_manager/main/models.py:35
+#| msgid "Completed on"
+msgid "completed_on"
+msgstr "Завършена на"
+
+#: service_manager/main/models.py:41
+#| msgid "Send Email"
+msgid "send_emails"
+msgstr "Изпращай имейли"
+
+#: service_manager/main/models.py:56
+#| msgid "Edit customer asset"
+msgid "customer_asset"
+msgstr "Клиентско устройство"
+
+#: service_manager/main/models.py:64
+#| msgid "Department"
+msgid "department"
+msgstr "Отдел"
+
+#: service_manager/main/models.py:73
+#| msgid "Handed over by"
+msgid "handed_over_by"
+msgstr "Предадена от"
+
+#: service_manager/main/models.py:82
+#| msgid "Accepted by"
+msgid "accepted_by"
+msgstr "Приета от"
+
+#: service_manager/main/models.py:91
+#| msgid "Serviced by"
+msgid "serviced_by"
+msgstr "Обслужена от"
+
+#: service_manager/main/models.py:100
+#| msgid "Completed by"
+msgid "completed_by"
+msgstr "Завършена от"
+
+#: service_manager/main/models.py:109
+#| msgid "Handed over to"
+msgid "handed_over_to"
+msgstr "Предадена на"
+
+#: service_manager/main/models.py:132
+#| msgid "Quantity"
+msgid "quantity"
+msgstr "Количество"
+
+#: service_manager/main/models.py:133
+#| msgid "Discount"
+msgid "discount"
+msgstr "Отстъпка"
+
+#: service_manager/main/models.py:138 service_manager/main/models.py:181
+#| msgid "Create new service order"
+msgid "service_order"
+msgstr "Сервизна поръчка"
+
+#: service_manager/main/models.py:144
+#| msgid "Material"
+msgid "material"
+msgstr "Материал"
+
+#: service_manager/main/models.py:170
+#| msgid "Edit note"
+msgid "note"
+msgstr "Бележка"
+
+#: service_manager/main/models.py:175
+#| msgid "Created By"
+msgid "created_by"
+msgstr "Създадена от"
 
 #: service_manager/main/templates/index.html:7
 msgid "Hello"
@@ -829,6 +967,32 @@ msgstr "Редактирай бележка"
 msgid "View"
 msgstr "Виж"
 
+#: service_manager/master_data/models.py:54
+#| msgid "phone_number"
+msgid "model_number"
+msgstr "Номер на модел"
+
+#: service_manager/master_data/models.py:59
+#| msgid "Model Name"
+msgid "model_name"
+msgstr "Име на модел"
+
+#: service_manager/master_data/models.py:66
+#| msgid "Brand"
+msgid "brand"
+msgstr "Марка"
+
+#: service_manager/master_data/models.py:72
+#: service_manager/master_data/models.py:104
+#| msgid "Category"
+msgid "category"
+msgstr "Категория"
+
+#: service_manager/master_data/models.py:99
+#| msgid "Price"
+msgid "price"
+msgstr "Цена"
+
 #: service_manager/master_data/templates/asset/asset_create.html:4
 msgid "Create asset"
 msgstr "Създай устройство"
@@ -983,6 +1147,3 @@ msgstr "следваща"
 #: templates/partials/paginator.html:16
 msgid "last"
 msgstr "последна"
-
-#~ msgid "type"
-#~ msgstr "Тип"
