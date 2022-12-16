@@ -2,6 +2,9 @@ FROM python:3.10
 
 RUN apt update -y && apt upgrade -y
 
+RUN apt-get update && apt-get install -y \
+gettext \
+
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONBUFFERED 1
 
