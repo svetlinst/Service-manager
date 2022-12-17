@@ -7,10 +7,12 @@ from service_manager.main.views import get_index, ServiceOrderHeaderPendingServi
     CreateServiceOrderHeader, CreateServiceOrderDetailView, ServiceOrderDetailsListView, \
     EditServiceOrderDetailView, DeleteServiceOrderDetailView, complete_service_order, CreateServiceOrderNoteView, \
     ServiceOrderNotesListView, EditServiceOrderNoteView, DeleteServiceOrderNoteView, DeleteServiceOrderHeaderView, \
-    ServiceOrderHeaderServicedListView, rollback_service_order, HandoverServiceOrderView, ServiceOrderNoteDetailView
+    ServiceOrderHeaderServicedListView, rollback_service_order, HandoverServiceOrderView, ServiceOrderNoteDetailView, \
+    contact_us
 
 urlpatterns = [
                   path('', get_index, name='index'),
+                  path('contact_us/', contact_us, name='contact_us'),
                   path('service_orders/pending/', ServiceOrderHeaderPendingServiceListView.as_view(),
                        name='service_orders_list_pending_service'),
                   path('service_orders/serviced/', ServiceOrderHeaderServicedListView.as_view(),

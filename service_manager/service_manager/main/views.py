@@ -8,9 +8,10 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth import mixins as auth_mixins
 
 from service_manager.main.forms import CreateServiceOrderHeaderForm, CreateServiceOrderDetailForm, \
-    EditServiceOrderDetailForm, CreateServiceOrderNoteForm, HandoverServiceOrderForm
+    EditServiceOrderDetailForm, CreateServiceOrderNoteForm, HandoverServiceOrderForm, ContactForm
 from service_manager.main.models import Customer, CustomerAsset, ServiceOrderHeader, ServiceOrderDetail, \
     ServiceOrderNote
+from service_manager.main.tasks import send_contact_us_email
 
 
 def get_index(request):
@@ -298,3 +299,23 @@ class HandoverServiceOrderView(auth_mixins.PermissionRequiredMixin, views.Update
         service_oder.save()
 
         return super().form_valid(form)
+
+
+def contact_us(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            email_data = {
+                'first_name': form.cleaned_data['first_name'],
+                'last_name': form.cleaned_data['last_name'],
+                'email_address': form.cleaned_data['email_address'],
+                'message': form.cleaned_data['message'],
+            }
+            send_contact_us_email.delay(email_data)
+            return redirect('index')
+
+    form = ContactForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'contact_us.html', context)

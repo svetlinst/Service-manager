@@ -42,7 +42,6 @@
                        href="{% url 'index' %}">{% trans 'Home' %}<span class="sr-only">(current)</span></a>
                 </li>
                 {% if request.user.is_authenticated %}
-
                     {% if perms.customers.view_customer %}
                         <li class="nav-item">
                             <a class="nav-link {% if url_name|is_active_nav_link:'customers' %}active{% endif %}"
@@ -112,6 +111,10 @@
                         </li>
                     {% endif %}
                 {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link {% if url_name == 'contact_us' %}active{% endif %}"
+                       href="{% url 'contact_us' %}">{% trans 'Contact Us' %}<span class="sr-only">(current)</span></a>
+                </li>
             </ul>
 
             {#        Language selection#}

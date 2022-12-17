@@ -22,3 +22,15 @@ def send_successful_service_order_creation_email(service_order_id):
         from_email=settings.EMAIL_HOST_USER,
         recipient_list=[user_mail],
     )
+
+
+@shared_task()
+def send_contact_us_email(email_data):
+    message = render_to_string('email_templates/contact_us_mail_template.html', email_data)
+    send_mail(
+        subject='Support request @ ServiceManager',
+        message=None,
+        html_message=message,
+        from_email=settings.EMAIL_HOST_USER,
+        recipient_list=[settings.SUPPORT_EMAIL],
+    )

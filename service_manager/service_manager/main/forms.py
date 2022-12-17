@@ -64,3 +64,10 @@ class HandoverServiceOrderForm(BootstrapFormMixin, forms.ModelForm):
         service_order_header = ServiceOrderHeader.objects.get(pk=service_order_id)
         representatives = CustomerRepresentative.objects.filter(customer_id=service_order_header.customer_id)
         self.fields['handed_over_to'].queryset = representatives
+
+
+class ContactForm(BootstrapFormMixin, forms.Form):
+    first_name = forms.CharField(max_length=20)
+    last_name = forms.CharField(max_length=20)
+    email_address = forms.EmailField(max_length=200)
+    message = forms.CharField(widget=forms.Textarea, max_length=2000)

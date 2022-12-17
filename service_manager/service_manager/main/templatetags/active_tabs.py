@@ -13,6 +13,9 @@ GROUP_NAMES = {
     'master_data': master_data_url_patterns,
 }
 
+# todo: handle active tabl selection with JS
+COMMON_TABS = ['index', 'contact_us',]
+
 
 @register.filter(name='is_active_nav_link')
 def is_active_nav_link(url_path, tab_group_name):
@@ -20,7 +23,7 @@ def is_active_nav_link(url_path, tab_group_name):
 
     url_patterns = GROUP_NAMES[tab_group_name]
 
-    url_pattern_names = [x.name for x in url_patterns if x.name != 'index']
+    url_pattern_names = [x.name for x in url_patterns if x.name not in COMMON_TABS]
 
     if url_path in url_pattern_names:
         is_active = True

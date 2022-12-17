@@ -5,6 +5,8 @@
     {#    <div class="jumbotron">#}
     {% if not request.user.is_anonymous %}
         <h3 class="text-end">{% trans 'Hello' %}, {{ request.user.profile.full_name }}!</h3>
+    {% else %}
+        <h3 class="text-end"></h3>
     {% endif %}
 
     <div class="p-1 mb-4 bg-light rounded-3">
@@ -53,7 +55,7 @@
                 <p>{% blocktrans %}Not sure how the application works? No problem, just follow the link below and ask
                     your
                     questions!{% endblocktrans %}</p>
-                <button class="btn btn-outline-secondary">{% blocktrans %}I need Support{% endblocktrans %}</button>
+                <a class="btn btn-outline-secondary" href="{% url 'contact_us' %}">{% blocktrans %}I need Support{% endblocktrans %}</a>
             </div>
         </div>
     </div>
