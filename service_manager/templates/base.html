@@ -30,8 +30,16 @@
     {% with request.resolver_match.url_name as url_name %}
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mx-auto">
+                {% if request.user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{% url 'admin:index' %}">{% trans 'Admin Panel' %}<span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link {% if url_name == 'index' %}active{% endif %}" href="{% url 'index' %}">{% trans 'Home' %}<span class="sr-only">(current)</span></a>
+                    <a class="nav-link {% if url_name == 'index' %}active{% endif %}"
+                       href="{% url 'index' %}">{% trans 'Home' %}<span class="sr-only">(current)</span></a>
                 </li>
                 {% if request.user.is_authenticated %}
 
@@ -50,8 +58,10 @@
                                 {% trans 'Orders' %}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkOrders">
-                                <a class="dropdown-item" href="{% url 'service_orders_list_pending_service' %}">{% trans 'Pending Service' %}</a>
-                                <a class="dropdown-item" href="{% url 'service_orders_list_serviced' %}">{% trans 'Service Completed' %}</a>
+                                <a class="dropdown-item"
+                                   href="{% url 'service_orders_list_pending_service' %}">{% trans 'Pending Service' %}</a>
+                                <a class="dropdown-item"
+                                   href="{% url 'service_orders_list_serviced' %}">{% trans 'Service Completed' %}</a>
                             </div>
                         </li>
                     {% endif %}
@@ -69,16 +79,19 @@
                                     <a class="dropdown-item" href="{% url 'assets_list' %}">{% trans 'Assets' %}</a>
                                 {% endif %}
                                 {% if perms.master_data.view_assetcategory %}
-                                    <a class="dropdown-item" href="{% url 'asset_categories_list' %}">{% trans 'Asset Categories' %}</a>
+                                    <a class="dropdown-item"
+                                       href="{% url 'asset_categories_list' %}">{% trans 'Asset Categories' %}</a>
                                 {% endif %}
                                 {% if perms.master_data.view_brand %}
                                     <a class="dropdown-item" href="{% url 'brands_list' %}">{% trans 'Brands' %}</a>
                                 {% endif %}
                                 {% if perms.master_data.view_material %}
-                                    <a class="dropdown-item" href="{% url 'materials_list' %}">{% trans 'Material' %}</a>
+                                    <a class="dropdown-item"
+                                       href="{% url 'materials_list' %}">{% trans 'Material' %}</a>
                                 {% endif %}
                                 {% if perms.master_data.view_materialcategory %}
-                                    <a class="dropdown-item" href="{% url 'material_categories_list' %}">{% trans 'Material Categories' %}</a>
+                                    <a class="dropdown-item"
+                                       href="{% url 'material_categories_list' %}">{% trans 'Material Categories' %}</a>
                                 {% endif %}
                             </div>
                         </li>
@@ -93,11 +106,11 @@
                                 {% trans 'Reports' %}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkReports">
-                                <a class="dropdown-item" href="{% url 'finished_orders' %}">{% trans 'Finished Orders' %}</a>
+                                <a class="dropdown-item"
+                                   href="{% url 'finished_orders' %}">{% trans 'Finished Orders' %}</a>
                             </div>
                         </li>
                     {% endif %}
-
                 {% endif %}
             </ul>
 
@@ -126,7 +139,8 @@
                 {% if request.user.is_anonymous %}
                     <a class="btn btn-light ms-3" href="{% url 'login_user' %}">{% trans 'Login' %}</a>
                 {% else %}
-                    <a class="btn btn-light ms-3" href="{% url 'edit_profile'  request.user.profile.pk %}">{% trans 'Profile' %}</a>
+                    <a class="btn btn-light ms-3"
+                       href="{% url 'edit_profile'  request.user.profile.pk %}">{% trans 'Profile' %}</a>
                     <a class="btn btn-light ms-3" href="{% url 'logout_user' %}">{% trans 'Logout' %}</a>
                 {% endif %}
             </div>
