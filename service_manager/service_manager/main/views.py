@@ -12,6 +12,8 @@ from service_manager.main.forms import CreateServiceOrderHeaderForm, CreateServi
 from service_manager.main.models import Customer, CustomerAsset, ServiceOrderHeader, ServiceOrderDetail, \
     ServiceOrderNote
 from service_manager.main.tasks import send_contact_us_email
+from django.contrib import messages
+from django.utils.translation import gettext_lazy as _
 
 
 def get_index(request):
@@ -312,6 +314,7 @@ def contact_us(request):
                 'message': form.cleaned_data['message'],
             }
             send_contact_us_email.delay(email_data)
+            messages.success(request, _("The email message was sent."))
             return redirect('index')
 
     form = ContactForm()

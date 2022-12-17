@@ -20,6 +20,18 @@
     <script src="{% static 'js/main.js' %}"></script>
 </head>
 <body>
+
+{% for message in messages %}
+<div class="container-fluid p-0">
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+    <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+      <span aria-hidden="True">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+</div>
+{% endfor %}
+
 <!-- Nav Bar -->
 <nav class="navbar navbar-expand-md navbar-light sticky-top bg-light ">
     <a class="navbar-brand" href="{% url 'index' %}"><img src="/static/logo.png" class="logo" alt="logo"></a>
