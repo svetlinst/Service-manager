@@ -5,6 +5,7 @@ import django.views.generic as views
 from django.urls import reverse_lazy
 from django.contrib.auth import views as auth_views, login
 
+from service_manager import settings
 from service_manager.accounts.forms import RegisterForm, LoginForm, EditProfileForm, PasswordResetForm
 from service_manager.accounts.models import Profile
 
@@ -45,6 +46,7 @@ class EditProfileView(LoginRequiredMixin, views.UpdateView):
 class PasswordResetView(auth_views.PasswordResetView):
     template_name = 'password/password_reset.html'
     form_class = PasswordResetForm
+    from_email = settings.EMAIL_HOST_USER
     success_url = reverse_lazy('index')
     subject_template_name = 'password/password_reset_subject.txt'
     email_template_name = 'password/password_reset_email.html'
