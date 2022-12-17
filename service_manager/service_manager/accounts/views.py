@@ -1,12 +1,13 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import django.views.generic as views
 from django.urls import reverse_lazy
-from django.contrib.auth import views as auth_views, login
+from django.contrib.auth import views as auth_views, login, authenticate
 
 from service_manager import settings
-from service_manager.accounts.forms import RegisterForm, LoginForm, EditProfileForm, PasswordResetForm
+from service_manager.accounts.forms import RegisterForm, LoginForm, EditProfileForm, PasswordResetForm, \
+    PasswordResetSetPasswordForm
 from service_manager.accounts.models import Profile
 
 
@@ -58,6 +59,14 @@ class PasswordResetDoneView(auth_views.PasswordResetDoneView):
 
 class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
     template_name = 'password/password_reset_confirm.html'
+    form_class = PasswordResetSetPasswordForm
+
+    def form_valid(self, form):
+        form.save()
+        user = authenticate(email=form.user.email, password=form.cleaned_data['new_password1'])
+        login(self.request, user)
+
+        return redirect(self.success_url)
 
 
 class PasswordResetCompleteView(auth_views.PasswordResetCompleteView):

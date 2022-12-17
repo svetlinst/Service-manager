@@ -64,3 +64,6 @@ class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
 class PasswordResetForm(BootstrapFormMixin, auth_forms.PasswordResetForm):
     pass
 
+
+class PasswordResetSetPasswordForm(BootstrapFormMixin, auth_forms.SetPasswordForm):
+    pass
