@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, get_user_model
 import django.forms as forms
 
 from service_manager.accounts.models import Profile
+from service_manager.accounts.tasks import send_password_reset_email_async
 from service_manager.core.forms import BootstrapFormMixin
 from service_manager.core.validators import validate_digits_only
 
@@ -62,7 +63,16 @@ class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
 
 
 class PasswordResetForm(BootstrapFormMixin, auth_forms.PasswordResetForm):
-    pass
+    def send_mail(self, subject_template_name, email_template_name, context,
+                  from_email, to_email, html_email_template_name=None):
+        context['user'] = context['user'].id
+
+        send_password_reset_email_async.delay(
+            subject_template_name=subject_template_name,
+            email_template_name=email_template_name,
+            context=context, from_email=from_email, to_email=to_email,
+            html_email_template_name=html_email_template_name
+        )
 
 
 class PasswordResetSetPasswordForm(BootstrapFormMixin, auth_forms.SetPasswordForm):
