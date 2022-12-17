@@ -11,12 +11,12 @@ def send_successful_service_order_creation_email(service_order_id):
     service_order_header = ServiceOrderHeader.objects.get(pk=service_order_id)
     user_mail = service_order_header.customer.email_address
     context = {
-        'customer': service_order_header.customer,
+        'service_order': service_order_header,
     }
 
     message = render_to_string('email_templates/service_order_created.html', context)
     send_mail(
-        subject='Hello',
+        subject='New Service order @ ServiceManager',
         message=None,
         html_message=message,
         from_email=settings.EMAIL_HOST_USER,

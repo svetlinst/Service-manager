@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>Hello, {{ customer.name }}</h1>
-</body>
-</html>
+{% load i18n %}
+{% autoescape off %}
+<h1>{% blocktrans %} A new service order has been created at ServiceManager.net{% endblocktrans %}</h1>
+<p>{% trans 'Dear' %}, {{ service_order.customer.name }}.</p>
+<p>{% blocktrans %}Please, be kindly informed that a new service order has been created for the following
+    asset:{% endblocktrans %}</p>
+<p>{% trans 'Brand' %}: {{ service_order.customer_asset.asset.brand.name }}</p>
+<p>{% trans 'Model Name' %}: {{ service_order.customer_asset.asset.model_name }}</p>
+<p>{% trans 'Model Number' %}: {{ service_order.customer_asset.asset.model_number }}</p>
+<p>{% trans 'Serial Number' %}: {{ service_order.customer_asset.serial_number }}</p>
+<p>{% trans 'Product Number' %}: {{ service_order.customer_asset.product_number }}</p>
+<hr>
+<p>{% blocktrans %}The following service order has been created in our system{% endblocktrans %}
+    : {{ service_order.ik }}</p>
+<p>{% blocktrans %}Created on date{% endblocktrans %}: {{ service_order.created_on }}</p>
+<hr>
+{% if service_order.handedover_by %}
+    <p>{% blocktrans %}The device has been handed over by{% endblocktrans %} {{ service_order.handedover_by }}</p>
+{% endif %}
+<p>{% blocktrans %}We'll get back to you as soon as we make any progress with the resolution of your case.{% endblocktrans %}</p>
+
+{% trans "Thanks for using our site!" %}
+
+{% blocktrans %}The Service Manager's team{% endblocktrans %}
+
+{% endautoescape %}
