@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-14 23:07+0200\n"
+"POT-Creation-Date: 2022-12-18 07:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,16 +21,16 @@ msgstr ""
 msgid "email"
 msgstr ""
 
-#: service_manager/accounts/models.py:50 service_manager/customers/models.py:57
+#: service_manager/accounts/models.py:50 service_manager/customers/models.py:64
 msgid "first_name"
 msgstr ""
 
-#: service_manager/accounts/models.py:57 service_manager/customers/models.py:62
+#: service_manager/accounts/models.py:57 service_manager/customers/models.py:69
 msgid "last_name"
 msgstr ""
 
-#: service_manager/accounts/models.py:64 service_manager/customers/models.py:36
-#: service_manager/customers/models.py:77
+#: service_manager/accounts/models.py:64 service_manager/customers/models.py:40
+#: service_manager/customers/models.py:84
 msgid "phone_number"
 msgstr ""
 
@@ -62,7 +62,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: service_manager/accounts/templates/login_user.html:4 templates/base.html:127
+#: service_manager/accounts/templates/login_user.html:4 templates/base.html:155
 msgid "Login"
 msgstr ""
 
@@ -94,20 +94,20 @@ msgstr ""
 msgid "Send Email"
 msgstr ""
 
-#: service_manager/accounts/templates/password/password_reset_complete.html:4
+#: service_manager/accounts/templates/password/password_reset_complete.html:5
 #: service_manager/accounts/templates/password/password_reset_done.html:4
 msgid "Reset Password"
 msgstr ""
 
-#: service_manager/accounts/templates/password/password_reset_complete.html:5
+#: service_manager/accounts/templates/password/password_reset_complete.html:6
 msgid "Your password has been changed."
 msgstr ""
 
-#: service_manager/accounts/templates/password/password_reset_confirm.html:6
+#: service_manager/accounts/templates/password/password_reset_confirm.html:7
 msgid "Enter your new password"
 msgstr ""
 
-#: service_manager/accounts/templates/password/password_reset_confirm.html:13
+#: service_manager/accounts/templates/password/password_reset_confirm.html:14
 msgid "Confrim"
 msgstr ""
 
@@ -127,10 +127,14 @@ msgid "Please go to the following page and choose a new password:"
 msgstr ""
 
 #: service_manager/accounts/templates/password/password_reset_email.html:9
+#: templates/email_templates/contact_us_mail_template.html:8
+#: templates/email_templates/service_order_created.html:22
 msgid "Thanks for using our site!"
 msgstr ""
 
 #: service_manager/accounts/templates/password/password_reset_email.html:11
+#: templates/email_templates/contact_us_mail_template.html:9
+#: templates/email_templates/service_order_created.html:24
 msgid "The Service Manager's team"
 msgstr ""
 
@@ -142,8 +146,8 @@ msgstr ""
 msgid "Register user"
 msgstr ""
 
-#: service_manager/customers/models.py:16
-#: service_manager/customers/models.py:98
+#: service_manager/customers/models.py:17
+#: service_manager/customers/models.py:108
 #: service_manager/master_data/models.py:11
 #: service_manager/master_data/models.py:23
 #: service_manager/master_data/models.py:38
@@ -152,31 +156,31 @@ msgstr ""
 msgid "name"
 msgstr ""
 
-#: service_manager/customers/models.py:21
+#: service_manager/customers/models.py:22
 msgid "vat"
 msgstr ""
 
-#: service_manager/customers/models.py:28
-#: service_manager/customers/models.py:67
+#: service_manager/customers/models.py:32
+#: service_manager/customers/models.py:74
 msgid "email_address"
 msgstr ""
 
-#: service_manager/customers/models.py:43
+#: service_manager/customers/models.py:50
 msgid "type"
 msgstr ""
 
-#: service_manager/customers/models.py:84
-#: service_manager/customers/models.py:105
-#: service_manager/customers/models.py:136 service_manager/main/models.py:50
+#: service_manager/customers/models.py:94
+#: service_manager/customers/models.py:115
+#: service_manager/customers/models.py:146 service_manager/main/models.py:50
 msgid "customer"
 msgstr ""
 
-#: service_manager/customers/models.py:120
-#: service_manager/customers/models.py:127
+#: service_manager/customers/models.py:130
+#: service_manager/customers/models.py:137
 msgid "serial_number"
 msgstr ""
 
-#: service_manager/customers/models.py:142
+#: service_manager/customers/models.py:152
 msgid "asset"
 msgstr ""
 
@@ -322,7 +326,7 @@ msgstr ""
 
 #: service_manager/customers/templates/customer/customer_detail.html:29
 #: service_manager/master_data/templates/asset/assets.html:5
-#: templates/base.html:69
+#: templates/base.html:90
 msgid "Assets"
 msgstr ""
 
@@ -344,7 +348,7 @@ msgid "Update"
 msgstr ""
 
 #: service_manager/customers/templates/customer/customers.html:5
-#: templates/base.html:41
+#: templates/base.html:60
 msgid "Customers"
 msgstr ""
 
@@ -433,7 +437,7 @@ msgid "Action"
 msgstr ""
 
 #: service_manager/customers/templates/customer/customers.html:55
-#: templates/base.html:65
+#: templates/base.html:86
 msgid "Manage"
 msgstr ""
 
@@ -493,6 +497,7 @@ msgstr ""
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:12
 #: service_manager/master_data/templates/asset/assets.html:32
 #: service_manager/reports/templates/finished_orders.html:26
+#: templates/email_templates/service_order_created.html:7
 msgid "Brand"
 msgstr ""
 
@@ -503,6 +508,7 @@ msgstr ""
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:13
 #: service_manager/master_data/templates/asset/assets.html:33
 #: service_manager/reports/templates/finished_orders.html:27
+#: templates/email_templates/service_order_created.html:8
 msgid "Model Name"
 msgstr ""
 
@@ -513,6 +519,7 @@ msgstr ""
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:14
 #: service_manager/master_data/templates/asset/assets.html:34
 #: service_manager/reports/templates/finished_orders.html:28
+#: templates/email_templates/service_order_created.html:9
 msgid "Model Number"
 msgstr ""
 
@@ -522,6 +529,7 @@ msgstr ""
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:15
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:15
 #: service_manager/reports/templates/finished_orders.html:29
+#: templates/email_templates/service_order_created.html:10
 msgid "Serial Number"
 msgstr ""
 
@@ -531,6 +539,7 @@ msgstr ""
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:16
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:16
 #: service_manager/reports/templates/finished_orders.html:30
+#: templates/email_templates/service_order_created.html:11
 msgid "Product Number"
 msgstr ""
 
@@ -650,6 +659,14 @@ msgstr ""
 msgid "Create new customer representative"
 msgstr ""
 
+#: service_manager/customers/validators.py:7
+msgid "Please, enter digits only."
+msgstr ""
+
+#: service_manager/customers/validators.py:14
+msgid "The allowed characters are: +, space and digits."
+msgstr ""
+
 #: service_manager/main/models.py:13
 msgid "problem_description"
 msgstr ""
@@ -726,8 +743,82 @@ msgstr ""
 msgid "created_by"
 msgstr ""
 
+#: service_manager/main/templates/contact_us.html:4 templates/base.html:128
+msgid "Contact Us"
+msgstr ""
+
+#: service_manager/main/templates/contact_us.html:11
+msgid "Send Question"
+msgstr ""
+
 #: service_manager/main/templates/index.html:7
 msgid "Hello"
+msgstr ""
+
+#: service_manager/main/templates/index.html:14
+msgid "Welcome to Service Manager!"
+msgstr ""
+
+#: service_manager/main/templates/index.html:15
+msgid ""
+"The main goal of Service Manager web application is to streamline\n"
+"                the end-to-end\n"
+"                process of servicing customer assets."
+msgstr ""
+
+#: service_manager/main/templates/index.html:19
+msgid ""
+"Let's Get Down To\n"
+"                    Work!"
+msgstr ""
+
+#: service_manager/main/templates/index.html:23
+msgid ""
+"Let's Get Down\n"
+"                        To\n"
+"                        Work!"
+msgstr ""
+
+#: service_manager/main/templates/index.html:28
+#: service_manager/main/templates/index.html:33
+msgid ""
+"Let's Get Down\n"
+"                            To\n"
+"                            Work!"
+msgstr ""
+
+#: service_manager/main/templates/index.html:43
+msgid "Application documentation"
+msgstr ""
+
+#: service_manager/main/templates/index.html:44
+msgid ""
+"If you are wondering how the app works under the hood, just follow the link "
+"below and\n"
+"                    take a sneak\n"
+"                    peek the code in detail."
+msgstr ""
+
+#: service_manager/main/templates/index.html:48
+msgid ""
+"Take\n"
+"                        me to GitHub"
+msgstr ""
+
+#: service_manager/main/templates/index.html:54
+msgid "Contact the developer"
+msgstr ""
+
+#: service_manager/main/templates/index.html:55
+msgid ""
+"Not sure how the application works? No problem, just follow the link below "
+"and ask\n"
+"                    your\n"
+"                    questions!"
+msgstr ""
+
+#: service_manager/main/templates/index.html:58
+msgid "I need Support"
 msgstr ""
 
 #: service_manager/main/templates/service_order_detail/service_order_detail_edit.html:4
@@ -936,6 +1027,10 @@ msgstr ""
 msgid "View"
 msgstr ""
 
+#: service_manager/main/views.py:317
+msgid "The email message was sent."
+msgstr ""
+
 #: service_manager/master_data/models.py:54
 msgid "model_number"
 msgstr ""
@@ -966,7 +1061,7 @@ msgid "Edit asset"
 msgstr ""
 
 #: service_manager/master_data/templates/asset_category/asset_categories.html:5
-#: templates/base.html:72
+#: templates/base.html:94
 msgid "Asset Categories"
 msgstr ""
 
@@ -987,7 +1082,7 @@ msgid "Edit brand"
 msgstr ""
 
 #: service_manager/master_data/templates/brands/brands.html:5
-#: templates/base.html:75
+#: templates/base.html:97
 msgid "Brands"
 msgstr ""
 
@@ -1004,7 +1099,7 @@ msgid "Materials"
 msgstr ""
 
 #: service_manager/master_data/templates/material_category/material_categories.html:5
-#: templates/base.html:81
+#: templates/base.html:105
 msgid "Material Categories"
 msgstr ""
 
@@ -1052,44 +1147,97 @@ msgstr ""
 msgid "Page not found"
 msgstr ""
 
-#: templates/base.html:34
-msgid "Home"
-msgstr ""
-
-#: templates/base.html:50
-msgid "Orders"
-msgstr ""
-
-#: templates/base.html:53
-msgid "Pending Service"
+#: templates/base.html:48
+msgid "Admin Panel"
 msgstr ""
 
 #: templates/base.html:54
+msgid "Home"
+msgstr ""
+
+#: templates/base.html:69
+msgid "Orders"
+msgstr ""
+
+#: templates/base.html:73
+msgid "Pending Service"
+msgstr ""
+
+#: templates/base.html:75
 msgid "Service Completed"
 msgstr ""
 
-#: templates/base.html:78
+#: templates/base.html:101
 msgid "Material"
 msgstr ""
 
-#: templates/base.html:93
+#: templates/base.html:117
 msgid "Reports"
 msgstr ""
 
-#: templates/base.html:96
+#: templates/base.html:121
 msgid "Finished Orders"
 msgstr ""
 
-#: templates/base.html:111
+#: templates/base.html:139
 msgid "Language"
 msgstr ""
 
-#: templates/base.html:129
+#: templates/base.html:158
 msgid "Profile"
 msgstr ""
 
-#: templates/base.html:130
+#: templates/base.html:159
 msgid "Logout"
+msgstr ""
+
+#: templates/email_templates/contact_us_mail_template.html:3
+msgid " Support needed @ ServiceManager.net"
+msgstr ""
+
+#: templates/email_templates/contact_us_mail_template.html:4
+msgid "Requestor"
+msgstr ""
+
+#: templates/email_templates/contact_us_mail_template.html:5
+msgid "Email Address"
+msgstr ""
+
+#: templates/email_templates/contact_us_mail_template.html:6
+msgid "Message"
+msgstr ""
+
+#: templates/email_templates/service_order_created.html:3
+msgid " A new service order has been created at ServiceManager.net"
+msgstr ""
+
+#: templates/email_templates/service_order_created.html:4
+msgid "Dear"
+msgstr ""
+
+#: templates/email_templates/service_order_created.html:5
+msgid ""
+"Please, be kindly informed that a new service order has been created for the "
+"following\n"
+"    asset:"
+msgstr ""
+
+#: templates/email_templates/service_order_created.html:13
+msgid "The following service order has been created in our system"
+msgstr ""
+
+#: templates/email_templates/service_order_created.html:15
+msgid "Created on date"
+msgstr ""
+
+#: templates/email_templates/service_order_created.html:18
+msgid "The device has been handed over by"
+msgstr ""
+
+#: templates/email_templates/service_order_created.html:20
+msgid ""
+"We'll get back to you as soon as we make any progress with the resolution of "
+"your case."
 msgstr ""
 
 #: templates/partials/paginator.html:4

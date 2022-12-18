@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-14 23:07+0200\n"
-"PO-Revision-Date: 2022-12-14 21:08+0000\n"
+"POT-Creation-Date: 2022-12-18 07:09+0000\n"
+"PO-Revision-Date: 2022-12-18 07:18+0000\n"
 "Last-Translator: Anonymous User <su@su.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -20,23 +20,22 @@ msgstr ""
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
 #: service_manager/accounts/models.py:14
-#| msgid "Email"
 msgid "email"
 msgstr "И-мейл"
 
 #: service_manager/accounts/models.py:50
-#: service_manager/customers/models.py:57
+#: service_manager/customers/models.py:64
 msgid "first_name"
 msgstr "Име"
 
 #: service_manager/accounts/models.py:57
-#: service_manager/customers/models.py:62
+#: service_manager/customers/models.py:69
 msgid "last_name"
 msgstr "Фамилия"
 
 #: service_manager/accounts/models.py:64
-#: service_manager/customers/models.py:36
-#: service_manager/customers/models.py:77
+#: service_manager/customers/models.py:40
+#: service_manager/customers/models.py:84
 msgid "phone_number"
 msgstr "Телефонен номер"
 
@@ -45,7 +44,6 @@ msgid "app_user"
 msgstr "Потеребител"
 
 #: service_manager/accounts/templates/edit_profile.html:4
-#| msgid "Edit note"
 msgid "Edit profile"
 msgstr "Редактирай профил"
 
@@ -70,7 +68,7 @@ msgid "Save"
 msgstr "Запази"
 
 #: service_manager/accounts/templates/login_user.html:4
-#: templates/base.html:127
+#: templates/base.html:155
 msgid "Login"
 msgstr "Вход"
 
@@ -104,20 +102,20 @@ msgstr ""
 msgid "Send Email"
 msgstr "Изпрати имейл"
 
-#: service_manager/accounts/templates/password/password_reset_complete.html:4
+#: service_manager/accounts/templates/password/password_reset_complete.html:5
 #: service_manager/accounts/templates/password/password_reset_done.html:4
 msgid "Reset Password"
 msgstr "Рестартиране на парола"
 
-#: service_manager/accounts/templates/password/password_reset_complete.html:5
+#: service_manager/accounts/templates/password/password_reset_complete.html:6
 msgid "Your password has been changed."
 msgstr "Вашата парола беше актуализирана."
 
-#: service_manager/accounts/templates/password/password_reset_confirm.html:6
+#: service_manager/accounts/templates/password/password_reset_confirm.html:7
 msgid "Enter your new password"
 msgstr "Въведете Вашата нова парола"
 
-#: service_manager/accounts/templates/password/password_reset_confirm.html:13
+#: service_manager/accounts/templates/password/password_reset_confirm.html:14
 msgid "Confrim"
 msgstr "Потвърди"
 
@@ -141,10 +139,14 @@ msgid "Please go to the following page and choose a new password:"
 msgstr "Моля, отидете на следния адрес и създайте нова парола:"
 
 #: service_manager/accounts/templates/password/password_reset_email.html:9
+#: templates/email_templates/contact_us_mail_template.html:8
+#: templates/email_templates/service_order_created.html:22
 msgid "Thanks for using our site!"
 msgstr "Благодарим Ви, че използвате нашият сайт!"
 
 #: service_manager/accounts/templates/password/password_reset_email.html:11
+#: templates/email_templates/contact_us_mail_template.html:9
+#: templates/email_templates/service_order_created.html:24
 msgid "The Service Manager's team"
 msgstr "Екипът на Service Manager"
 
@@ -156,8 +158,8 @@ msgstr "Смяна на парола за Service Manager"
 msgid "Register user"
 msgstr "Регистрирай потребител"
 
-#: service_manager/customers/models.py:16
-#: service_manager/customers/models.py:98
+#: service_manager/customers/models.py:17
+#: service_manager/customers/models.py:108
 #: service_manager/master_data/models.py:11
 #: service_manager/master_data/models.py:23
 #: service_manager/master_data/models.py:38
@@ -166,31 +168,31 @@ msgstr "Регистрирай потребител"
 msgid "name"
 msgstr "Име"
 
-#: service_manager/customers/models.py:21
+#: service_manager/customers/models.py:22
 msgid "vat"
 msgstr "ЕИК"
 
-#: service_manager/customers/models.py:28
-#: service_manager/customers/models.py:67
+#: service_manager/customers/models.py:32
+#: service_manager/customers/models.py:74
 msgid "email_address"
 msgstr "И-мейл адрес"
 
-#: service_manager/customers/models.py:43
+#: service_manager/customers/models.py:50
 msgid "type"
 msgstr "Тип"
 
-#: service_manager/customers/models.py:84
-#: service_manager/customers/models.py:105
-#: service_manager/customers/models.py:136 service_manager/main/models.py:50
+#: service_manager/customers/models.py:94
+#: service_manager/customers/models.py:115
+#: service_manager/customers/models.py:146 service_manager/main/models.py:50
 msgid "customer"
 msgstr "Клиент"
 
-#: service_manager/customers/models.py:120
-#: service_manager/customers/models.py:127
+#: service_manager/customers/models.py:130
+#: service_manager/customers/models.py:137
 msgid "serial_number"
 msgstr "Сериен номер"
 
-#: service_manager/customers/models.py:142
+#: service_manager/customers/models.py:152
 msgid "asset"
 msgstr "Устройство"
 
@@ -336,7 +338,7 @@ msgstr "Телефон"
 
 #: service_manager/customers/templates/customer/customer_detail.html:29
 #: service_manager/master_data/templates/asset/assets.html:5
-#: templates/base.html:69
+#: templates/base.html:90
 msgid "Assets"
 msgstr "Устройства"
 
@@ -358,7 +360,7 @@ msgid "Update"
 msgstr "Актуализирай"
 
 #: service_manager/customers/templates/customer/customers.html:5
-#: templates/base.html:41
+#: templates/base.html:60
 msgid "Customers"
 msgstr "Клиенти"
 
@@ -447,7 +449,7 @@ msgid "Action"
 msgstr "Действие"
 
 #: service_manager/customers/templates/customer/customers.html:55
-#: templates/base.html:65
+#: templates/base.html:86
 msgid "Manage"
 msgstr "Управление"
 
@@ -507,6 +509,7 @@ msgstr "Категория"
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:12
 #: service_manager/master_data/templates/asset/assets.html:32
 #: service_manager/reports/templates/finished_orders.html:26
+#: templates/email_templates/service_order_created.html:7
 msgid "Brand"
 msgstr "Марка"
 
@@ -517,6 +520,7 @@ msgstr "Марка"
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:13
 #: service_manager/master_data/templates/asset/assets.html:33
 #: service_manager/reports/templates/finished_orders.html:27
+#: templates/email_templates/service_order_created.html:8
 msgid "Model Name"
 msgstr "Име на модел"
 
@@ -527,6 +531,7 @@ msgstr "Име на модел"
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:14
 #: service_manager/master_data/templates/asset/assets.html:34
 #: service_manager/reports/templates/finished_orders.html:28
+#: templates/email_templates/service_order_created.html:9
 msgid "Model Number"
 msgstr "Номер на модел"
 
@@ -536,6 +541,7 @@ msgstr "Номер на модел"
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:15
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:15
 #: service_manager/reports/templates/finished_orders.html:29
+#: templates/email_templates/service_order_created.html:10
 msgid "Serial Number"
 msgstr "Сериен номер"
 
@@ -545,6 +551,7 @@ msgstr "Сериен номер"
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:16
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:16
 #: service_manager/reports/templates/finished_orders.html:30
+#: templates/email_templates/service_order_created.html:11
 msgid "Product Number"
 msgstr "Продуктов номер"
 
@@ -664,6 +671,14 @@ msgstr "И-мейл адрес"
 msgid "Create new customer representative"
 msgstr "Създай нов клиентски представител"
 
+#: service_manager/customers/validators.py:7
+msgid "Please, enter digits only."
+msgstr "Моля, въведете единствено цифри."
+
+#: service_manager/customers/validators.py:14
+msgid "The allowed characters are: +, space and digits."
+msgstr "Позволените символи са: цифри, \"+\" и + \" \"."
+
 #: service_manager/main/models.py:13
 msgid "problem_description"
 msgstr "Описание на проблема"
@@ -740,9 +755,91 @@ msgstr "Бележка"
 msgid "created_by"
 msgstr "Създадена от"
 
+#: service_manager/main/templates/contact_us.html:4 templates/base.html:128
+msgid "Contact Us"
+msgstr "Връзка с нас"
+
+#: service_manager/main/templates/contact_us.html:11
+msgid "Send Question"
+msgstr "Изпрати въпрос"
+
 #: service_manager/main/templates/index.html:7
 msgid "Hello"
 msgstr "Здравей"
+
+#: service_manager/main/templates/index.html:14
+#| msgid "Password reset on Service Manager"
+msgid "Welcome to Service Manager!"
+msgstr "Добре доши в Service Manager!"
+
+#: service_manager/main/templates/index.html:15
+msgid ""
+"The main goal of Service Manager web application is to streamline\n"
+"                the end-to-end\n"
+"                process of servicing customer assets."
+msgstr ""
+"Главната цел на уеб приложението Service Manager е да стандартизира целия "
+"процес по сервизно обслужване на устройства на клиенти."
+
+#: service_manager/main/templates/index.html:19
+msgid ""
+"Let's Get Down To\n"
+"                    Work!"
+msgstr "Да се захващаме за работа!"
+
+#: service_manager/main/templates/index.html:23
+msgid ""
+"Let's Get Down\n"
+"                        To\n"
+"                        Work!"
+msgstr "Да се захващаме за работа!"
+
+#: service_manager/main/templates/index.html:28
+#: service_manager/main/templates/index.html:33
+msgid ""
+"Let's Get Down\n"
+"                            To\n"
+"                            Work!"
+msgstr "Да се захващаме за работа!"
+
+#: service_manager/main/templates/index.html:43
+msgid "Application documentation"
+msgstr "Документация на приложението"
+
+#: service_manager/main/templates/index.html:44
+msgid ""
+"If you are wondering how the app works under the hood, just follow the link below and\n"
+"                    take a sneak\n"
+"                    peek the code in detail."
+msgstr ""
+"Ако се чудите как работи конкретна функционалност на приложение, моля, "
+"последвайте линка по-долу."
+
+#: service_manager/main/templates/index.html:48
+#| msgid ""
+#| "Rollback Service Order with\n"
+#| "                        ID"
+msgid ""
+"Take\n"
+"                        me to GitHub"
+msgstr "Връзка към GitHub"
+
+#: service_manager/main/templates/index.html:54
+msgid "Contact the developer"
+msgstr "Връзка с разработчика"
+
+#: service_manager/main/templates/index.html:55
+msgid ""
+"Not sure how the application works? No problem, just follow the link below and ask\n"
+"                    your\n"
+"                    questions!"
+msgstr ""
+"Не сте сигурно как работи приложението. Няма проблем! Само последвайте линка"
+" по-долу и задайте Вашите въпроси."
+
+#: service_manager/main/templates/index.html:58
+msgid "I need Support"
+msgstr "Имам нужда от помощ"
 
 #: service_manager/main/templates/service_order_detail/service_order_detail_edit.html:4
 msgid "Edit service order detail"
@@ -950,6 +1047,10 @@ msgstr "Редактирай бележка"
 msgid "View"
 msgstr "Виж"
 
+#: service_manager/main/views.py:317
+msgid "The email message was sent."
+msgstr "Вашият имейл беше изпратен."
+
 #: service_manager/master_data/models.py:54
 msgid "model_number"
 msgstr "Номер на модел"
@@ -980,7 +1081,7 @@ msgid "Edit asset"
 msgstr "Редактирай устройство"
 
 #: service_manager/master_data/templates/asset_category/asset_categories.html:5
-#: templates/base.html:72
+#: templates/base.html:94
 msgid "Asset Categories"
 msgstr "Категории устройства"
 
@@ -1001,7 +1102,7 @@ msgid "Edit brand"
 msgstr "Редактирай марка"
 
 #: service_manager/master_data/templates/brands/brands.html:5
-#: templates/base.html:75
+#: templates/base.html:97
 msgid "Brands"
 msgstr "Марки"
 
@@ -1018,7 +1119,7 @@ msgid "Materials"
 msgstr "Материали"
 
 #: service_manager/master_data/templates/material_category/material_categories.html:5
-#: templates/base.html:81
+#: templates/base.html:105
 msgid "Material Categories"
 msgstr "Категории материали"
 
@@ -1066,45 +1167,104 @@ msgstr "Нямате достъп до тази страница!"
 msgid "Page not found"
 msgstr "Страницата не е открита"
 
-#: templates/base.html:34
+#: templates/base.html:48
+msgid "Admin Panel"
+msgstr "Административен панел"
+
+#: templates/base.html:54
 msgid "Home"
 msgstr "Начало"
 
-#: templates/base.html:50
+#: templates/base.html:69
 msgid "Orders"
 msgstr "Поръчки"
 
-#: templates/base.html:53
+#: templates/base.html:73
 msgid "Pending Service"
 msgstr "Поръчки в сервиз"
 
-#: templates/base.html:54
+#: templates/base.html:75
 msgid "Service Completed"
 msgstr "Обслужени поръчки"
 
-#: templates/base.html:78
+#: templates/base.html:101
 msgid "Material"
 msgstr "Материали"
 
-#: templates/base.html:93
+#: templates/base.html:117
 msgid "Reports"
 msgstr "Справки"
 
-#: templates/base.html:96
+#: templates/base.html:121
 msgid "Finished Orders"
 msgstr "Завършени поръчки"
 
-#: templates/base.html:111
+#: templates/base.html:139
 msgid "Language"
 msgstr "Език"
 
-#: templates/base.html:129
+#: templates/base.html:158
 msgid "Profile"
 msgstr "Профил"
 
-#: templates/base.html:130
+#: templates/base.html:159
 msgid "Logout"
 msgstr "Изход"
+
+#: templates/email_templates/contact_us_mail_template.html:3
+#| msgid "Password reset on Service Manager"
+msgid " Support needed @ ServiceManager.net"
+msgstr "Нужда от помощ @ ServicesManager.net"
+
+#: templates/email_templates/contact_us_mail_template.html:4
+msgid "Requestor"
+msgstr "От"
+
+#: templates/email_templates/contact_us_mail_template.html:5
+#| msgid "E-mail Address"
+msgid "Email Address"
+msgstr "И-мейл адрес"
+
+#: templates/email_templates/contact_us_mail_template.html:6
+msgid "Message"
+msgstr "Съобщение"
+
+#: templates/email_templates/service_order_created.html:3
+msgid " A new service order has been created at ServiceManager.net"
+msgstr "Нова сервизна поръчка беше създадена на ServiceManager.net"
+
+#: templates/email_templates/service_order_created.html:4
+msgid "Dear"
+msgstr "Уважаеми/а"
+
+#: templates/email_templates/service_order_created.html:5
+msgid ""
+"Please, be kindly informed that a new service order has been created for the following\n"
+"    asset:"
+msgstr ""
+"Желаем да Ви уведомим, че създадохме сервизна поръчка за следното "
+"устройство:"
+
+#: templates/email_templates/service_order_created.html:13
+msgid "The following service order has been created in our system"
+msgstr "Следната сервизна поръчка беше създадена в нашата система"
+
+#: templates/email_templates/service_order_created.html:15
+#| msgid "Create new note"
+msgid "Created on date"
+msgstr "Създадена на дата"
+
+#: templates/email_templates/service_order_created.html:18
+msgid "The device has been handed over by"
+msgstr "Устройството е предадено от"
+
+#: templates/email_templates/service_order_created.html:20
+msgid ""
+"We'll get back to you as soon as we make any progress with the resolution of"
+" your case."
+msgstr ""
+"Ще ви информираме, след като направим прогрес по разрешаването на Вашия "
+"проблем своевременно."
 
 #: templates/partials/paginator.html:4
 msgid "first"
