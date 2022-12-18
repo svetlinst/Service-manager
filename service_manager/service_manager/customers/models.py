@@ -2,6 +2,7 @@ from django.core.validators import EmailValidator
 from django.db import models
 
 from service_manager.core.models import BaseAuditEntity, ActiveModel
+from service_manager.customers.validators import numbers_only_validator, phone_number_validator
 from service_manager.master_data.models import Asset, CustomerType
 from django.utils.translation import gettext_lazy as _
 
@@ -22,6 +23,9 @@ class Customer(ActiveModel, BaseAuditEntity):
         max_length=VAT_MAX_LENGTH,
         null=True,
         blank=True,
+        validators=[
+            numbers_only_validator,
+        ],
     )
 
     email_address = models.EmailField(
@@ -35,6 +39,9 @@ class Customer(ActiveModel, BaseAuditEntity):
     phone_number = models.CharField(
         _('phone_number'),
         max_length=PHONE_NUMBER_MAX_LENGTH,
+        validators=(
+            phone_number_validator,
+        )
     )
 
     type = models.ForeignKey(
@@ -76,6 +83,9 @@ class CustomerRepresentative(ActiveModel, BaseAuditEntity):
     phone_number = models.CharField(
         _('phone_number'),
         max_length=PHONE_NUMBER_MAX_LENGTH,
+        validators=[
+            phone_number_validator,
+        ]
     )
 
     customer = models.ForeignKey(
