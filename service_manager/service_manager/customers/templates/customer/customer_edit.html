@@ -7,7 +7,24 @@
         <div class="col-lg-6">
             <form method="post" action="{% url "edit_customer" object.pk %}">
                 {% csrf_token %}
-                {{ form }}
+                {{ form.type.label_tag }}
+                {{ form.type }}
+                {{ form.name.label_tag }}
+                {{ form.name }}
+                {{ form.vat.label_tag }}
+                {{ form.vat }}
+                {{ form.email_address.label_tag }}
+                {{ form.email_address }}
+                {{ form.phone_number.label_tag }}
+                {{ form.phone_number }}
+                <div class="form-check form-switch">
+                    {{ form.has_subscription.label }}
+                    {{ form.has_subscription }}
+                </div>
+                <div class="form-check form-switch">
+                    {{ form.is_regular_customer.label }}
+                    {{ form.is_regular_customer }}
+                </div>
                 <a class="btn btn-secondary mt-1 float-start" href="javascript:history.back()">{% trans 'Back' %}</a>
                 <button type="submit" class="btn btn-primary mt-1 float-end">{% trans 'Update' %}</button>
             </form>

@@ -33,6 +33,8 @@
                 <th scope="col">{% trans 'VAT' %}</th>
                 <th scope="col">{% trans 'E-mail' %}</th>
                 <th scope="col">{% trans 'Phone Number' %}</th>
+                <th scope="col">{% trans 'Subscription' %}</th>
+                <th scope="col">{% trans 'Regular' %}</th>
                 <th scope="col">{% trans 'Action' %}</th>
             </tr>
             </thead>
@@ -48,6 +50,8 @@
                         <td>{{ customer.vat }}</td>
                         <td>{{ customer.email_address }}</td>
                         <td>{{ customer.phone_number }}</td>
+                        <td>{{ customer.has_subscription }}</td>
+                        <td>{{ customer.is_regular_customer }}</td>
                         <td>
                             {% if perms.customers.change_customer %}
                                 <a class="btn btn-outline-primary btn-sm"

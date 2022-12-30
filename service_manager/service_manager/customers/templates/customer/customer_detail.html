@@ -10,14 +10,20 @@
             {% endif %}
         </div>
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <p class="text-primary mb-0"><b class="text-dark">{% trans 'Name' %}: </b>{{ object.name }}</p>
                 <p class="text-primary mb-0"><b class="text-dark">{% trans 'Type' %}: </b>{{ object.type.name }}</p>
                 <p class="text-primary mb-0"><b class="text-dark">{% trans 'VAT' %}: </b>{{ object.vat }}</p>
             </div>
-            <div class="col-sm-6">
-                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Email' %}: </b>{{ object.email_address }}</p>
+            <div class="col-sm-4">
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Email' %}: </b>{{ object.email_address }}
+                </p>
                 <p class="text-primary mb-0"><b class="text-dark">{% trans 'Phone' %}: </b>{{ object.phone_number }}</p>
+            </div>
+            <div class="col-sm-4">
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Has Subscription' %}: </b>{{ object.has_subscription }}
+                </p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Is Regular' %}: </b>{{ object.is_regular_customer }}</p>
             </div>
         </div>
     </div>

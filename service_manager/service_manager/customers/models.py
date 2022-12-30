@@ -50,8 +50,23 @@ class Customer(ActiveModel, BaseAuditEntity):
         verbose_name=_('type'),
     )
 
+    has_subscription = models.BooleanField(
+        default=0,
+        null=False,
+        blank=False,
+    )
+
+    is_regular_customer = models.BooleanField(
+        default=0,
+        null=False,
+        blank=False,
+    )
+
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ('is_regular_customer', 'name',)
 
 
 class CustomerRepresentative(ActiveModel, BaseAuditEntity):
