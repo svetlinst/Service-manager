@@ -37,12 +37,13 @@
         <div class="row text-left">
             <div class="col">
                 <p class="text-primary mb-0"><b
-                        class="text-dark">{% trans 'Has Subscription' %}: </b>{{ service_order_header.customer.has_subscription }}</p>
+                        class="text-dark">{% trans 'Has Subscription' %}: </b>{% if service_order_header.customer.has_subscription %}
+                    {% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}</p>
             </div>
             <div class="col">
                 <p class="text-primary mb-0"><b
-                        class="text-dark">{% trans 'Is Regular' %}: </b>{{ service_order_header.customer.is_regular_customer }}
-                </p>
+                        class="text-dark">{% trans 'Is Regular' %}: </b>{% if service_order_header.customer.is_regular_customer %}
+                    {% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}</p>
             </div>
             <div class="col">
 
