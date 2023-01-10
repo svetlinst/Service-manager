@@ -21,14 +21,9 @@
                 <p class="text-primary mb-0"><b class="text-dark">{% trans 'Phone' %}: </b>{{ object.phone_number }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b
-                        class="text-dark">{% trans 'Has Subscription' %}: </b>{% if object.has_subscription %}
-                    {% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Has Subscription' %}: </b>{{ object.has_subscription }}
                 </p>
-                <p class="text-primary mb-0"><b
-                        class="text-dark">{% trans 'Is Regular' %}: </b>{% if object.is_regular_customer %}
-                    {% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}
-                </p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Is Regular' %}: </b>{{ object.is_regular_customer }}</p>
             </div>
         </div>
     </div>

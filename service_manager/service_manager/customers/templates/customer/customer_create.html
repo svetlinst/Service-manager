@@ -19,11 +19,11 @@
                 {{ form.phone_number.label_tag }}
                 {{ form.phone_number }}
                 <div class="form-check form-switch">
-                    {% trans 'Has Subscription' %}
+                    {{ form.has_subscription.label }}
                     {{ form.has_subscription }}
                 </div>
                 <div class="form-check form-switch">
-                    {% trans 'Is Regular' %}
+                    {{ form.is_regular_customer.label }}
                     {{ form.is_regular_customer }}
                 </div>
                 <a class="btn btn-secondary mt-1 float-start" href="javascript:history.back()">{% trans 'Back' %}</a>

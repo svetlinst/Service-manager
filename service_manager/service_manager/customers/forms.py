@@ -3,7 +3,6 @@ from django import forms
 from service_manager.core.forms import BootstrapFormMixin
 from service_manager.customers.models import Customer, CustomerAsset, CustomerRepresentative, CustomerDepartment
 from service_manager.master_data.models import Asset
-from django.utils.translation import gettext_lazy as _
 
 
 class EditCustomerForm(BootstrapFormMixin, forms.ModelForm):
@@ -12,12 +11,12 @@ class EditCustomerForm(BootstrapFormMixin, forms.ModelForm):
         fields = ('type', 'name', 'vat', 'email_address', 'phone_number', 'has_subscription', 'is_regular_customer',)
 
         widgets = {
-            _('has_subscription'): forms.CheckboxInput(
+            'has_subscription': forms.CheckboxInput(
                 attrs={
                     'class': 'form-check-input',
                 },
             ),
-            _('is_regular_customer'): forms.CheckboxInput(
+            'is_regular_customer': forms.CheckboxInput(
                 attrs={
                     'class': 'form-check-input',
                 },
