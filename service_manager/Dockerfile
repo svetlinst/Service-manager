@@ -14,6 +14,8 @@ WORKDIR $APP_HOME
 
 RUN pip install --upgrade pip
 
+RUN apt-get update && apt-get install -y binutils libproj-dev gdal-bin ffmpeg libgdal-dev
+
 COPY ./requirements.txt .
 
 RUN pip install -r requirements.txt
