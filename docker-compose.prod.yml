@@ -36,7 +36,7 @@ services:
   nginx:
     image: nginx
     ports:
-      - 81:80
+      - 80:80
       - 443:443
     depends_on:
       - web
