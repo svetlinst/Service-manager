@@ -39,13 +39,13 @@ class CreateCustomerAssetForm(BootstrapFormMixin, forms.ModelForm):
 
     class Meta:
         model = CustomerAsset
-        fields = ('asset', 'serial_number', 'product_number')
+        fields = ('asset', 'serial_number', 'product_number', 'inventory_number')
 
 
 class EditCustomerAssetForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = CustomerAsset
-        fields = ('serial_number', 'product_number',)
+        fields = ('serial_number', 'product_number', 'inventory_number')
 
 
 class EditCustomerRepresentativeForm(BootstrapFormMixin, forms.ModelForm):

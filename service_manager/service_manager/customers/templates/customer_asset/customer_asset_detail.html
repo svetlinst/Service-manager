@@ -11,35 +11,55 @@
                 <p class="text-primary mb-0"><b class="text-dark">{% trans 'Name' %}: </b>{{ object.customer.name }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Email' %}: </b>{{ object.customer.email_address }}</p>
+                <p class="text-primary mb-0"><b
+                        class="text-dark">{% trans 'Email' %}: </b>{{ object.customer.email_address }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Phone' %}: </b>{{ object.customer.phone_number }}</p>
+                <p class="text-primary mb-0"><b
+                        class="text-dark">{% trans 'Phone' %}: </b>{{ object.customer.phone_number }}</p>
             </div>
         </div>
 
         <h4 class='text-center text-secondary mb-3'>{% trans 'Asset' %}</h4>
         <div class="row text-left">
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Category' %}: </b>{{ object.asset.category.name }}</p>
+                <p class="text-primary mb-0"><b
+                        class="text-dark">{% trans 'Category' %}: </b>{{ object.asset.category.name }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Brand' %}: </b>{{ object.asset.brand.name }}</p>
+                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Brand' %}: </b>{{ object.asset.brand.name }}
+                </p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Model Name' %}: </b>{{ object.asset.model_name }}</p>
+                <p class="text-primary mb-0"><b
+                        class="text-dark">{% trans 'Model Name' %}: </b>{{ object.asset.model_name }}</p>
             </div>
         </div>
 
         <div class="row text-left">
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Model Number' %}: </b>{{ object.asset.model_number }}</p>
+                <p class="text-primary mb-0"><b
+                        class="text-dark">{% trans 'Model Number' %}: </b>{{ object.asset.model_number }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Serial Number' %}: </b>{{ object.serial_number }}</p>
+                <p class="text-primary mb-0"><b
+                        class="text-dark">{% trans 'Serial Number' %}: </b>{{ object.serial_number }}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-primary mb-0"><b class="text-dark">{% trans 'Product Number' %}: </b>{{ object.product_number }}</p>
+                <p class="text-primary mb-0"><b
+                        class="text-dark">{% trans 'Product Number' %}: </b>{{ object.product_number }}</p>
+            </div>
+        </div>
+        <div class="row text-left">
+            <div class="col-sm-4">
+                <p class="text-primary mb-0"><b
+                        class="text-dark">{% trans 'Inventory Number' %}: </b>{{ object.inventory_number|default_if_none:"" }}</p>
+            </div>
+            <div class="col-sm-4">
+
+            </div>
+            <div class="col-sm-4">
+
             </div>
         </div>
     </div>
