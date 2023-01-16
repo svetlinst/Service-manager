@@ -37,7 +37,8 @@
         <div class="row text-left">
             <div class="col">
                 <p class="text-primary mb-0"><b
-                        class="text-dark">{% trans 'Has Subscription' %}: </b>{{ service_order_header.customer.has_subscription }}</p>
+                        class="text-dark">{% trans 'Has Subscription' %}: </b>{{ service_order_header.customer.has_subscription }}
+                </p>
             </div>
             <div class="col">
                 <p class="text-primary mb-0"><b
@@ -84,6 +85,13 @@
             </div>
         </div>
         <h4 class='text-center text-secondary mt-1'>{% trans 'Order Information' %}</h4>
+        <div class="row text-left">
+            <div class="col-sm-12">
+                <p class="text-primary mb-0"><b
+                        class="text-dark">{% trans 'Packaging' %}: </b>{{ service_order_header.packaging|default_if_none:"" }}
+                </p>
+            </div>
+        </div>
         <div class="row text-left">
             <div class="col-sm-4">
                 <p class="text-primary mb-0"><b

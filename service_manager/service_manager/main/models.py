@@ -109,6 +109,13 @@ class ServiceOrderHeader(ActiveModel, BaseAuditEntity):
         verbose_name=_('handed_over_to'),
     )
 
+    packaging = models.CharField(
+        _('packaging'),
+        max_length=256,
+        null=True,
+        blank=True,
+    )
+
     @property
     def total_amount_due(self):
         return f'{sum([x.total_amount for x in self.serviceorderdetail_set.all()]):.2f}'
