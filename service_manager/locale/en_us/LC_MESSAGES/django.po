@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-18 08:17+0000\n"
+"POT-Creation-Date: 2023-01-18 19:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -171,23 +171,27 @@ msgstr ""
 
 #: service_manager/customers/models.py:109
 #: service_manager/customers/models.py:130
-#: service_manager/customers/models.py:169 service_manager/main/models.py:58
+#: service_manager/customers/models.py:177 service_manager/main/models.py:58
 msgid "customer"
 msgstr ""
 
-#: service_manager/customers/models.py:146
+#: service_manager/customers/models.py:147
 msgid "serial_number"
 msgstr ""
 
-#: service_manager/customers/models.py:153
+#: service_manager/customers/models.py:154
 msgid "product_number"
 msgstr ""
 
-#: service_manager/customers/models.py:160
+#: service_manager/customers/models.py:161
 msgid "inventory_number"
 msgstr ""
 
-#: service_manager/customers/models.py:175
+#: service_manager/customers/models.py:168
+msgid "location"
+msgstr ""
+
+#: service_manager/customers/models.py:183
 msgid "asset"
 msgstr ""
 
@@ -409,7 +413,7 @@ msgid "Create New"
 msgstr ""
 
 #: service_manager/customers/templates/customer/customers.html:30
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:72
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:75
 #: service_manager/customers/templates/customer_asset/customer_assets.html:28
 #: service_manager/customers/templates/customer_department/customer_departments.html:29
 #: service_manager/customers/templates/customer_representatives/customer_representatives.html:29
@@ -444,7 +448,7 @@ msgid "Regular"
 msgstr ""
 
 #: service_manager/customers/templates/customer/customers.html:38
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:79
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:82
 #: service_manager/customers/templates/customer_asset/customer_assets.html:35
 #: service_manager/customers/templates/customer_department/customer_departments.html:31
 #: service_manager/customers/templates/customer_representatives/customer_representatives.html:34
@@ -573,41 +577,46 @@ msgstr ""
 msgid "Inventory Number"
 msgstr ""
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:68
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:61
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:95
+msgid "Location"
+msgstr ""
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:71
 msgid "Service History"
 msgstr ""
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:73
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:139
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:76
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:141
 msgid "Status"
 msgstr ""
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:74
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:77
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:17
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:17
 #: service_manager/reports/templates/finished_orders.html:38
 msgid "Accepted On"
 msgstr ""
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:75
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:78
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:18
 #: service_manager/reports/templates/finished_orders.html:39
 msgid "Serviced On"
 msgstr ""
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:76
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:79
 msgid "Completed On"
 msgstr ""
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:77
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:80
 msgid "Serviced By"
 msgstr ""
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:78
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:81
 msgid "Amount Due"
 msgstr ""
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:97
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:100
 #: service_manager/customers/templates/customer_asset/customer_assets.html:66
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:41
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:44
@@ -615,7 +624,7 @@ msgstr ""
 msgid "Detail"
 msgstr ""
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:106
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:109
 msgid "No Service History available for this asset."
 msgstr ""
 
@@ -954,75 +963,75 @@ msgstr ""
 msgid "Asset Information"
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:100
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:102
 msgid "Order Information"
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:104
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:106
 msgid "Packaging"
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:111
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:113
 msgid "Place of service"
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:124
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:126
 msgid "Handed over by"
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:129
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:131
 msgid "Accepted by"
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:133
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:135
 msgid "Accepted on"
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:143
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:145
 msgid "Serviced by"
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:148
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:150
 msgid "Serviced on"
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:155
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:157
 msgid "Handed over to"
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:160
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:162
 msgid "Completed by"
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:165
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:167
 msgid "Completed on"
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:173
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:175
 msgid "Problem Description"
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:183
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:185
 msgid "Notes"
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:187
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:189
 msgid "Add Note"
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:197
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:199
 msgid "Click on the \"Add Note\" button to create a note."
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:210
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:212
 msgid "Complete Service"
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:217
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:219
 msgid "Rollback Order"
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:219
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:221
 msgid "Finalize Order"
 msgstr ""
 
