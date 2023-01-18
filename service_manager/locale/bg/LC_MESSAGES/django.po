@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-30 10:06+0200\n"
-"PO-Revision-Date: 2022-12-30 08:06+0000\n"
+"POT-Creation-Date: 2023-01-18 08:17+0000\n"
+"PO-Revision-Date: 2023-01-18 08:19+0000\n"
 "Last-Translator: Anonymous User <su@su.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -55,7 +55,7 @@ msgstr "Редактирай профил"
 #: service_manager/customers/templates/customer_department/customer_department_edit.html:12
 #: service_manager/customers/templates/customer_representatives/customer_representatives_create.html:12
 #: service_manager/main/templates/service_order_detail/service_order_detail_edit.html:12
-#: service_manager/main/templates/service_order_header/core/service_order_create.html:22
+#: service_manager/main/templates/service_order_header/core/service_order_create.html:35
 #: service_manager/main/templates/service_order_header/core/service_order_handover.html:12
 #: service_manager/main/templates/service_order_note/service_order_note_create.html:12
 #: service_manager/main/templates/service_order_note/service_order_note_edit.html:13
@@ -183,16 +183,25 @@ msgstr "Тип"
 
 #: service_manager/customers/models.py:109
 #: service_manager/customers/models.py:130
-#: service_manager/customers/models.py:161 service_manager/main/models.py:50
+#: service_manager/customers/models.py:169 service_manager/main/models.py:58
 msgid "customer"
 msgstr "Клиент"
 
-#: service_manager/customers/models.py:145
-#: service_manager/customers/models.py:152
+#: service_manager/customers/models.py:146
 msgid "serial_number"
 msgstr "Сериен номер"
 
-#: service_manager/customers/models.py:167
+#: service_manager/customers/models.py:153
+#| msgid "Product Number"
+msgid "product_number"
+msgstr "Продуктов номер"
+
+#: service_manager/customers/models.py:160
+#| msgid "phone_number"
+msgid "inventory_number"
+msgstr "Инвентарен номер"
+
+#: service_manager/customers/models.py:175
 msgid "asset"
 msgstr "Устройство"
 
@@ -210,7 +219,7 @@ msgstr "Създай нов клиент"
 #: service_manager/customers/templates/customer_representatives/customer_representative_edit.html:12
 #: service_manager/customers/templates/customer_representatives/customer_representatives_create.html:11
 #: service_manager/main/templates/service_order_detail/service_order_detail_edit.html:11
-#: service_manager/main/templates/service_order_header/core/service_order_create.html:21
+#: service_manager/main/templates/service_order_header/core/service_order_create.html:34
 #: service_manager/main/templates/service_order_header/core/service_order_handover.html:11
 #: service_manager/main/templates/service_order_note/service_order_note_create.html:11
 #: service_manager/main/templates/service_order_note/service_order_note_edit.html:12
@@ -325,13 +334,13 @@ msgid "VAT"
 msgstr "ЕИК"
 
 #: service_manager/customers/templates/customer/customer_detail.html:19
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:14
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:15
 #: service_manager/main/templates/service_order_header/core/service_order_details.html:24
 msgid "Email"
 msgstr "И-мейл адрес"
 
 #: service_manager/customers/templates/customer/customer_detail.html:21
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:17
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:19
 #: service_manager/main/templates/service_order_header/core/service_order_details.html:28
 msgid "Phone"
 msgstr "Телефон"
@@ -342,7 +351,7 @@ msgid "Has Subscription"
 msgstr "Абонамент"
 
 #: service_manager/customers/templates/customer/customer_detail.html:26
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:44
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:45
 msgid "Is Regular"
 msgstr "Редовен клиент"
 
@@ -414,7 +423,7 @@ msgid "Create New"
 msgstr "Създай нов"
 
 #: service_manager/customers/templates/customer/customers.html:30
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:52
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:72
 #: service_manager/customers/templates/customer_asset/customer_assets.html:28
 #: service_manager/customers/templates/customer_department/customer_departments.html:29
 #: service_manager/customers/templates/customer_representatives/customer_representatives.html:29
@@ -441,7 +450,6 @@ msgid "Phone Number"
 msgstr "Телефонен номер"
 
 #: service_manager/customers/templates/customer/customers.html:36
-#| msgid "problem_description"
 msgid "Subscription"
 msgstr "Абонамент"
 
@@ -450,7 +458,7 @@ msgid "Regular"
 msgstr "Редовен"
 
 #: service_manager/customers/templates/customer/customers.html:38
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:59
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:79
 #: service_manager/customers/templates/customer_asset/customer_assets.html:35
 #: service_manager/customers/templates/customer_department/customer_departments.html:31
 #: service_manager/customers/templates/customer_representatives/customer_representatives.html:34
@@ -505,14 +513,14 @@ msgstr "и продуктов номер"
 msgid "Customer"
 msgstr "Клиент"
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:21
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:23
 msgid "Asset"
 msgstr "Устройство"
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:24
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:27
 #: service_manager/customers/templates/customer_asset/customer_assets.html:29
 #: service_manager/main/templates/service_order_detail/service_order_details.html:13
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:55
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:56
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:11
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:11
 #: service_manager/master_data/templates/asset/assets.html:31
@@ -521,9 +529,9 @@ msgstr "Устройство"
 msgid "Category"
 msgstr "Категория"
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:27
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:30
 #: service_manager/customers/templates/customer_asset/customer_assets.html:30
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:60
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:61
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:12
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:12
 #: service_manager/master_data/templates/asset/assets.html:32
@@ -532,9 +540,9 @@ msgstr "Категория"
 msgid "Brand"
 msgstr "Марка"
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:30
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:35
 #: service_manager/customers/templates/customer_asset/customer_assets.html:31
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:65
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:66
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:13
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:13
 #: service_manager/master_data/templates/asset/assets.html:33
@@ -543,9 +551,9 @@ msgstr "Марка"
 msgid "Model Name"
 msgstr "Име на модел"
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:36
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:42
 #: service_manager/customers/templates/customer_asset/customer_assets.html:32
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:72
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:73
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:14
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:14
 #: service_manager/master_data/templates/asset/assets.html:34
@@ -554,9 +562,9 @@ msgstr "Име на модел"
 msgid "Model Number"
 msgstr "Номер на модел"
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:39
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:46
 #: service_manager/customers/templates/customer_asset/customer_assets.html:33
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:77
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:78
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:15
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:15
 #: service_manager/reports/templates/finished_orders.html:36
@@ -564,9 +572,9 @@ msgstr "Номер на модел"
 msgid "Serial Number"
 msgstr "Сериен номер"
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:42
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:50
 #: service_manager/customers/templates/customer_asset/customer_assets.html:34
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:82
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:83
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:16
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:16
 #: service_manager/reports/templates/finished_orders.html:37
@@ -574,41 +582,47 @@ msgstr "Сериен номер"
 msgid "Product Number"
 msgstr "Продуктов номер"
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:48
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:56
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:90
+#| msgid "Phone Number"
+msgid "Inventory Number"
+msgstr "Инвентарен номер"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:68
 msgid "Service History"
 msgstr "Сервизна история"
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:53
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:105
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:73
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:139
 msgid "Status"
 msgstr "Статус"
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:54
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:74
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:17
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:17
 #: service_manager/reports/templates/finished_orders.html:38
 msgid "Accepted On"
 msgstr "Приет на"
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:55
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:75
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:18
 #: service_manager/reports/templates/finished_orders.html:39
 msgid "Serviced On"
 msgstr "Обслужен на"
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:56
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:76
 msgid "Completed On"
 msgstr "Завършен на"
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:57
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:77
 msgid "Serviced By"
 msgstr "Обслужен от"
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:58
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:78
 msgid "Amount Due"
 msgstr "Дължима стойност"
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:77
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:97
 #: service_manager/customers/templates/customer_asset/customer_assets.html:66
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:41
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:44
@@ -616,7 +630,7 @@ msgstr "Дължима стойност"
 msgid "Detail"
 msgstr "Детайли"
 
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:86
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:106
 msgid "No Service History available for this asset."
 msgstr "Това устройство няма съществуваща сервизна история."
 
@@ -698,79 +712,109 @@ msgstr "Моля, въведете единствено цифри."
 msgid "The allowed characters are: +, space and digits."
 msgstr "Позволените символи са: цифри, \"+\" и + \" \"."
 
-#: service_manager/main/models.py:13
-msgid "problem_description"
+#: service_manager/main/models.py:12 service_manager/main/models.py:16
+#| msgid "Customer"
+msgid "Customer office"
+msgstr "В офис на клиент"
+
+#: service_manager/main/models.py:13 service_manager/main/models.py:17
+msgid "Brought in"
+msgstr "В сервиз"
+
+#: service_manager/main/models.py:21
+#| msgid "problem_description"
+msgid "problem description"
 msgstr "Описание на проблема"
 
-#: service_manager/main/models.py:19
-msgid "is_serviced"
+#: service_manager/main/models.py:27
+#| msgid "is_serviced"
+msgid "is serviced"
 msgstr "Обслужена"
 
-#: service_manager/main/models.py:24
-msgid "is_completed"
+#: service_manager/main/models.py:32
+#| msgid "is_completed"
+msgid "is completed"
 msgstr "Завършена"
 
-#: service_manager/main/models.py:29
-msgid "serviced_on"
+#: service_manager/main/models.py:37
+#| msgid "Serviced on"
+msgid "serviced on"
 msgstr "Обслужена на"
 
-#: service_manager/main/models.py:35
-msgid "completed_on"
+#: service_manager/main/models.py:43
+#| msgid "Completed on"
+msgid "completed on"
 msgstr "Завършена на"
 
-#: service_manager/main/models.py:41
-msgid "send_emails"
-msgstr "Изпращай имейли"
-
-#: service_manager/main/models.py:56
-msgid "customer_asset"
-msgstr "Клиентско устройство"
+#: service_manager/main/models.py:49
+#| msgid "send_emails"
+msgid "send emails"
+msgstr "Изпращай мейли"
 
 #: service_manager/main/models.py:64
+#| msgid "customer_asset"
+msgid "customer asset"
+msgstr "Клиентско устройство"
+
+#: service_manager/main/models.py:72
 msgid "department"
 msgstr "Отдел"
 
-#: service_manager/main/models.py:73
-msgid "handed_over_by"
+#: service_manager/main/models.py:81
+#| msgid "Handed over by"
+msgid "handed over by"
 msgstr "Предадена от"
 
-#: service_manager/main/models.py:82
-msgid "accepted_by"
+#: service_manager/main/models.py:90
+#| msgid "Accepted by"
+msgid "accepted by"
 msgstr "Приета от"
 
-#: service_manager/main/models.py:91
-msgid "serviced_by"
+#: service_manager/main/models.py:99
+#| msgid "Serviced by"
+msgid "serviced by"
 msgstr "Обслужена от"
 
-#: service_manager/main/models.py:100
-msgid "completed_by"
+#: service_manager/main/models.py:108
+#| msgid "Completed by"
+msgid "completed by"
 msgstr "Завършена от"
 
-#: service_manager/main/models.py:109
-msgid "handed_over_to"
+#: service_manager/main/models.py:117
+#| msgid "Handed over to"
+msgid "handed over to"
 msgstr "Предадена на"
 
-#: service_manager/main/models.py:132
+#: service_manager/main/models.py:121
+msgid "packaging"
+msgstr "Окомплектовка"
+
+#: service_manager/main/models.py:128
+#| msgid "Complete Service"
+msgid "place of service"
+msgstr "Обслужена в"
+
+#: service_manager/main/models.py:156
 msgid "quantity"
 msgstr "Количество"
 
-#: service_manager/main/models.py:133
+#: service_manager/main/models.py:157
 msgid "discount"
 msgstr "Отстъпка"
 
-#: service_manager/main/models.py:138 service_manager/main/models.py:181
+#: service_manager/main/models.py:162 service_manager/main/models.py:205
 msgid "service_order"
 msgstr "Сервизна поръчка"
 
-#: service_manager/main/models.py:144
+#: service_manager/main/models.py:168
 msgid "material"
 msgstr "Материал"
 
-#: service_manager/main/models.py:170
+#: service_manager/main/models.py:194
 msgid "note"
 msgstr "Бележка"
 
-#: service_manager/main/models.py:175
+#: service_manager/main/models.py:199
 msgid "created_by"
 msgstr "Създадена от"
 
@@ -939,71 +983,79 @@ msgstr "Създай нова сервизна поръчка"
 msgid "Department"
 msgstr "Отдел"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:51
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:52
 msgid "Asset Information"
 msgstr "Информация за устройство"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:86
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:100
 msgid "Order Information"
 msgstr "Информация за поръчка"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:90
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:104
+msgid "Packaging"
+msgstr "Окомплектовка"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:111
+msgid "Place of service"
+msgstr "Обслужена в"
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:124
 msgid "Handed over by"
 msgstr "Предадена от"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:95
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:129
 msgid "Accepted by"
 msgstr "Приета от"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:99
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:133
 msgid "Accepted on"
 msgstr "Прета на"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:109
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:143
 msgid "Serviced by"
 msgstr "Обслужена от"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:114
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:148
 msgid "Serviced on"
 msgstr "Обслужена на"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:121
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:155
 msgid "Handed over to"
 msgstr "Предадена на"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:126
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:160
 msgid "Completed by"
 msgstr "Завършена от"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:131
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:165
 msgid "Completed on"
 msgstr "Завършена на"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:139
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:173
 msgid "Problem Description"
 msgstr "Описание на проблема"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:149
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:183
 msgid "Notes"
 msgstr "Бележки"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:153
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:187
 msgid "Add Note"
 msgstr "Добави бележка"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:163
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:197
 msgid "Click on the \"Add Note\" button to create a note."
 msgstr "Кликнете на бутон \"Добави бележка\" за да създадете бележка."
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:176
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:210
 msgid "Complete Service"
 msgstr "Завърши обслужване"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:183
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:217
 msgid "Rollback Order"
 msgstr "Върни обратно към сервиз"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:185
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:219
 msgid "Finalize Order"
 msgstr "Финализирай поръчка"
 
@@ -1297,3 +1349,24 @@ msgstr "следваща"
 #: templates/partials/paginator.html:16
 msgid "last"
 msgstr "последна"
+
+#~ msgid "serviced_on"
+#~ msgstr "Обслужена на"
+
+#~ msgid "completed_on"
+#~ msgstr "Завършена на"
+
+#~ msgid "handed_over_by"
+#~ msgstr "Предадена от"
+
+#~ msgid "accepted_by"
+#~ msgstr "Приета от"
+
+#~ msgid "serviced_by"
+#~ msgstr "Обслужена от"
+
+#~ msgid "completed_by"
+#~ msgstr "Завършена от"
+
+#~ msgid "handed_over_to"
+#~ msgstr "Предадена на"
