@@ -9,36 +9,44 @@ from django.utils.translation import gettext_lazy as _
 
 
 class ServiceOrderHeader(ActiveModel, BaseAuditEntity):
+    TYPE_CHOICE_CUSTOMER_OFFICE = _('Customer office')
+    TYPE_CHOICE_BROUGHT_IN = _('Brought in')
+
+    TYPE_CHOICES = (
+        (TYPE_CHOICE_CUSTOMER_OFFICE, _('Customer office')),
+        (TYPE_CHOICE_BROUGHT_IN, _('Brought in')),
+    )
+
     problem_description = models.TextField(
-        _('problem_description'),
+        _('problem description'),
         null=False,
         blank=False,
     )
 
     is_serviced = models.BooleanField(
-        _('is_serviced'),
+        _('is serviced'),
         default=False,
     )
 
     is_completed = models.BooleanField(
-        _('is_completed'),
+        _('is completed'),
         default=False,
     )
 
     serviced_on = models.DateTimeField(
-        _('serviced_on'),
+        _('serviced on'),
         null=True,
         blank=True,
     )
 
     completed_on = models.DateTimeField(
-        _('completed_on'),
+        _('completed on'),
         null=True,
         blank=True,
     )
 
     send_emails = models.BooleanField(
-        _('send_emails'),
+        _('send emails'),
         default=True,
         null=False,
         blank=False,
@@ -53,7 +61,7 @@ class ServiceOrderHeader(ActiveModel, BaseAuditEntity):
     customer_asset = models.ForeignKey(
         CustomerAsset,
         on_delete=models.CASCADE,
-        verbose_name=_('customer_asset'),
+        verbose_name=_('customer asset'),
     )
 
     department = models.ForeignKey(
@@ -70,7 +78,7 @@ class ServiceOrderHeader(ActiveModel, BaseAuditEntity):
         related_name='handed_by_customer_representative',
         null=True,
         blank=True,
-        verbose_name=_('handed_over_by'),
+        verbose_name=_('handed over by'),
     )
 
     accepted_by = models.ForeignKey(
@@ -79,7 +87,7 @@ class ServiceOrderHeader(ActiveModel, BaseAuditEntity):
         related_name='accepted_by',
         null=True,
         blank=True,
-        verbose_name=_('accepted_by'),
+        verbose_name=_('accepted by'),
     )
 
     serviced_by = models.ForeignKey(
@@ -88,7 +96,7 @@ class ServiceOrderHeader(ActiveModel, BaseAuditEntity):
         related_name='serviced_by',
         null=True,
         blank=True,
-        verbose_name=_('serviced_by'),
+        verbose_name=_('serviced by'),
     )
 
     completed_by = models.ForeignKey(
@@ -97,7 +105,7 @@ class ServiceOrderHeader(ActiveModel, BaseAuditEntity):
         related_name='completed_by',
         null=True,
         blank=True,
-        verbose_name=_('completed_by'),
+        verbose_name=_('completed by'),
     )
 
     handed_over_to = models.ForeignKey(
@@ -106,7 +114,7 @@ class ServiceOrderHeader(ActiveModel, BaseAuditEntity):
         null=True,
         blank=True,
         related_name='handed_to_customer_representative',
-        verbose_name=_('handed_over_to'),
+        verbose_name=_('handed over to'),
     )
 
     packaging = models.CharField(
@@ -114,6 +122,15 @@ class ServiceOrderHeader(ActiveModel, BaseAuditEntity):
         max_length=256,
         null=True,
         blank=True,
+    )
+
+    place_of_service = models.CharField(
+        _('place of service'),
+        max_length=20,
+        null=False,
+        blank=False,
+        default=TYPE_CHOICE_BROUGHT_IN,
+        choices=TYPE_CHOICES,
     )
 
     @property

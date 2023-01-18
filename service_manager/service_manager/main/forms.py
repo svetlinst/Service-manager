@@ -5,17 +5,42 @@ from service_manager.customers.models import Customer, CustomerAsset, CustomerRe
 from service_manager.main.models import ServiceOrderHeader, ServiceOrderDetail, ServiceOrderNote
 
 
-class CreateServiceOrderHeaderForm(BootstrapFormMixin, forms.ModelForm):
+class CreateServiceOrderHeaderForm(forms.ModelForm):
     class Meta:
         model = ServiceOrderHeader
-        fields = ('department', 'handed_over_by', 'send_emails', 'problem_description', 'packaging')
+        fields = ('department', 'handed_over_by', 'send_emails', 'problem_description', 'packaging', 'place_of_service')
 
         widgets = {
+            'department': forms.Select(
+                attrs={
+                    'class': 'form-control',
+                },
+            ),
+            'handed_over_by': forms.Select(
+                attrs={
+                    'class': 'form-control',
+                },
+            ),
+            'problem_description': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                },
+            ),
+            'packaging': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                },
+            ),
             'send_emails': forms.CheckboxInput(
                 attrs={
                     'class': 'form-check-input',
                 },
             ),
+            'place_of_service': forms.RadioSelect(
+                # attrs={
+                #     'class': 'form-check ',
+                # },
+            )
         }
 
     def __init__(self, *args, **kwargs):

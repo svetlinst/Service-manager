@@ -108,6 +108,19 @@
         <div class="row text-left">
             <div class="col-sm-4">
                 <p class="text-primary mb-0"><b
+                        class="text-dark">{% trans 'Place of service' %}: </b>{{ service_order_header.place_of_service|default_if_none:"" }}
+                </p>
+            </div>
+            <div class="col-sm-4">
+
+            </div>
+            <div class="col-sm-4">
+
+            </div>
+        </div>
+        <div class="row text-left">
+            <div class="col-sm-4">
+                <p class="text-primary mb-0"><b
                         class="text-dark">{% trans 'Handed over by' %}: </b>{{ service_order_header.handed_over_by|default_if_none:"" }}
                 </p>
             </div>

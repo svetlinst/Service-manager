@@ -8,10 +8,21 @@
             <form method="post" id="service_order_form"
                   action="{% url 'create_service_order' customer.id customer_asset.id %}">
                 {% csrf_token %}
-                <div class="form-check form-switch">
-                    {{ form.send_emails.label }}
-                    {{ form.send_emails }}
+
+                <div class="form-control">
+                    <div class="form-check form-switch">
+                        {{ form.send_emails.label }}
+                        {{ form.send_emails }}
+                    </div>
                 </div>
+
+                {{ form.place_of_service.label_tag }}
+
+                <div class="form-control">
+                    {{ form.place_of_service }}
+
+                </div>
+
                 {{ form.department.label_tag }}
                 {{ form.department }}
                 {{ form.handed_over_by.label_tag }}
