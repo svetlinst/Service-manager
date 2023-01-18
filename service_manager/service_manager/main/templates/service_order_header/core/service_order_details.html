@@ -91,7 +91,9 @@
                 </p>
             </div>
             <div class="col">
-
+                <p class="text-primary mb-0"><b
+                        class="text-dark">{% trans 'Location' %}: </b>{{ service_order_header.customer_asset.location|default_if_none:"" }}
+                </p>
             </div>
             <div class="col">
 

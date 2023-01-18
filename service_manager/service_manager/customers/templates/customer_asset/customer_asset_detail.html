@@ -53,10 +53,13 @@
         <div class="row text-left">
             <div class="col-sm-4">
                 <p class="text-primary mb-0"><b
-                        class="text-dark">{% trans 'Inventory Number' %}: </b>{{ object.inventory_number|default_if_none:"" }}</p>
+                        class="text-dark">{% trans 'Inventory Number' %}: </b>{{ object.inventory_number|default_if_none:"" }}
+                </p>
             </div>
             <div class="col-sm-4">
-
+                <p class="text-primary mb-0"><b
+                        class="text-dark">{% trans 'Location' %}: </b>{{ object.location|default_if_none:"" }}
+                </p>
             </div>
             <div class="col-sm-4">
 

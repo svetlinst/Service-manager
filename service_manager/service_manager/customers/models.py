@@ -141,6 +141,7 @@ class CustomerAsset(ActiveModel, BaseAuditEntity):
     SERIAL_NUMBER_MAX_LENGTH = 20
     PRODUCT_NUMBER_MAX_LENGTH = 20
     INVENTORY_NUMBER_MAX_LENGTH = 20
+    LOCATION_MAX_LENGTH = 256
 
     serial_number = models.CharField(
         _('serial_number'),
@@ -159,6 +160,13 @@ class CustomerAsset(ActiveModel, BaseAuditEntity):
     inventory_number = models.CharField(
         _('inventory_number'),
         max_length=INVENTORY_NUMBER_MAX_LENGTH,
+        null=True,
+        blank=True,
+    )
+
+    location = models.CharField(
+        _('location'),
+        max_length=LOCATION_MAX_LENGTH,
         null=True,
         blank=True,
     )
