@@ -51,12 +51,14 @@ class Customer(ActiveModel, BaseAuditEntity):
     )
 
     has_subscription = models.BooleanField(
+        _('has subscription'),
         default=0,
         null=False,
         blank=False,
     )
 
     is_regular_customer = models.BooleanField(
+        _('is regular customer'),
         default=0,
         null=False,
         blank=False,

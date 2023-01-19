@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-18 19:49+0000\n"
+"POT-Creation-Date: 2023-01-19 20:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,16 +21,16 @@ msgstr ""
 msgid "email"
 msgstr ""
 
-#: service_manager/accounts/models.py:50 service_manager/customers/models.py:79
+#: service_manager/accounts/models.py:50 service_manager/customers/models.py:81
 msgid "first_name"
 msgstr ""
 
-#: service_manager/accounts/models.py:57 service_manager/customers/models.py:84
+#: service_manager/accounts/models.py:57 service_manager/customers/models.py:86
 msgid "last_name"
 msgstr ""
 
 #: service_manager/accounts/models.py:64 service_manager/customers/models.py:40
-#: service_manager/customers/models.py:99
+#: service_manager/customers/models.py:101
 msgid "phone_number"
 msgstr ""
 
@@ -147,7 +147,7 @@ msgid "Register user"
 msgstr ""
 
 #: service_manager/customers/models.py:17
-#: service_manager/customers/models.py:123
+#: service_manager/customers/models.py:125
 #: service_manager/master_data/models.py:11
 #: service_manager/master_data/models.py:23
 #: service_manager/master_data/models.py:38
@@ -161,7 +161,7 @@ msgid "vat"
 msgstr ""
 
 #: service_manager/customers/models.py:32
-#: service_manager/customers/models.py:89
+#: service_manager/customers/models.py:91
 msgid "email_address"
 msgstr ""
 
@@ -169,29 +169,37 @@ msgstr ""
 msgid "type"
 msgstr ""
 
-#: service_manager/customers/models.py:109
-#: service_manager/customers/models.py:130
-#: service_manager/customers/models.py:177 service_manager/main/models.py:58
+#: service_manager/customers/models.py:54
+msgid "has subscription"
+msgstr ""
+
+#: service_manager/customers/models.py:61
+msgid "is regular customer"
+msgstr ""
+
+#: service_manager/customers/models.py:111
+#: service_manager/customers/models.py:132
+#: service_manager/customers/models.py:179 service_manager/main/models.py:58
 msgid "customer"
 msgstr ""
 
-#: service_manager/customers/models.py:147
+#: service_manager/customers/models.py:149
 msgid "serial_number"
 msgstr ""
 
-#: service_manager/customers/models.py:154
+#: service_manager/customers/models.py:156
 msgid "product_number"
 msgstr ""
 
-#: service_manager/customers/models.py:161
+#: service_manager/customers/models.py:163
 msgid "inventory_number"
 msgstr ""
 
-#: service_manager/customers/models.py:168
+#: service_manager/customers/models.py:170
 msgid "location"
 msgstr ""
 
-#: service_manager/customers/models.py:183
+#: service_manager/customers/models.py:185
 msgid "asset"
 msgstr ""
 
