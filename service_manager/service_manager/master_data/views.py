@@ -5,8 +5,8 @@ from django.contrib.auth import mixins as auth_mixins
 
 from service_manager.core.views import BootstrapFormViewMixin
 from service_manager.master_data.forms import CreateAssetForm, EditAssetForm, CreateMaterialForm, EditMaterialForm, \
-    EditMaterialCategoryForm, EditBrandForm, EditAssetCategoryForm
-from service_manager.master_data.models import Asset, Material, MaterialCategory, Brand, AssetCategory
+    EditMaterialCategoryForm, EditBrandForm, EditAssetCategoryForm, EditSlaForm, CreateSlaForm
+from service_manager.master_data.models import Asset, Material, MaterialCategory, Brand, AssetCategory, SLA
 
 
 class AssetsListView(auth_mixins.PermissionRequiredMixin, views.ListView):
@@ -272,3 +272,56 @@ class DeleteAssetCategoryView(auth_mixins.PermissionRequiredMixin, views.DeleteV
     success_url = reverse_lazy('asset_categories_list')
 
     permission_required = 'master_data.change_assetcategory'
+
+
+class SlaListView(auth_mixins.PermissionRequiredMixin, views.ListView):
+    model = SLA
+    template_name = 'sla/service_level_agreements.html'
+    ordering = ('name',)
+
+    paginate_by = 10
+
+    permission_required = 'master_data.view_sla'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        request = self.request.GET.copy()
+        params = request.pop('page', True) and request.urlencode()
+        context['params'] = params
+
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        search_text = self.request.GET.get('search_value', None)
+        if search_text:
+            queryset = queryset.filter(name__icontains=search_text)
+        return queryset
+
+
+class CreateSlaView(auth_mixins.PermissionRequiredMixin, views.CreateView):
+    model = SLA
+    form_class = CreateSlaForm
+    template_name = 'sla/service_level_agreement_create.html'
+    success_url = reverse_lazy('slas_list')
+
+    permission_required = 'master_data.add_sla'
+
+
+class EditSlaView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
+    model = SLA
+    form_class = EditSlaForm
+    template_name = 'sla/service_level_agreement_edit.html'
+    success_url = reverse_lazy('slas_list')
+
+    permission_required = 'master_data.change_sla'
+
+
+class DeleteSlaView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
+    model = SLA
+    template_name = 'sla/service_level_agreement_delete.html'
+    success_url = reverse_lazy('slas_list')
+
+    permission_required = 'master_data.change_sla'

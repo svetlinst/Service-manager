@@ -22,14 +22,14 @@
 <body>
 
 {% for message in messages %}
-<div class="container-fluid p-0">
-  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
-    <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
-      <span aria-hidden="True">&times;</span>
-    </button>
-    {{ message }}
-  </div>
-</div>
+    <div class="container-fluid p-0">
+        <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+            <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                <span aria-hidden="True">&times;</span>
+            </button>
+            {{ message }}
+        </div>
+    </div>
 {% endfor %}
 
 <!-- Nav Bar -->
@@ -103,6 +103,10 @@
                                 {% if perms.master_data.view_materialcategory %}
                                     <a class="dropdown-item"
                                        href="{% url 'material_categories_list' %}">{% trans 'Material Categories' %}</a>
+                                {% endif %}
+                                {% if perms.master_data.view_sla %}
+                                    <a class="dropdown-item"
+                                       href="{% url 'slas_list' %}">{% trans 'Service Level Agreements' %}</a>
                                 {% endif %}
                             </div>
                         </li>

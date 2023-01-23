@@ -4,7 +4,7 @@ from django.db import models
 from service_manager.accounts.models import Profile, AppUser
 from service_manager.core.models import BaseAuditEntity, ActiveModel
 from service_manager.customers.models import Customer, CustomerAsset, CustomerRepresentative, CustomerDepartment
-from service_manager.master_data.models import CustomerType, Asset, Material
+from service_manager.master_data.models import CustomerType, Asset, Material, SLA
 from django.utils.translation import gettext_lazy as _
 
 
@@ -131,6 +131,15 @@ class ServiceOrderHeader(ActiveModel, BaseAuditEntity):
         blank=False,
         default=TYPE_CHOICE_BROUGHT_IN,
         choices=TYPE_CHOICES,
+    )
+
+    service_level_agreement = models.ForeignKey(
+        SLA,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name='service_level_agreement',
+        verbose_name=_('service_level_agreement'),
     )
 
     @property

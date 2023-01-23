@@ -14,6 +14,7 @@
                 <th scope="col">{% trans 'Model Number' %}</th>
                 <th scope="col">{% trans 'Serial Number' %}</th>
                 <th scope="col">{% trans 'Product Number' %}</th>
+                <th scope="col">{% trans 'SLA' %}</th>
                 <th scope="col">{% trans 'Accepted On' %}</th>
                 <th scope="col">{% trans 'Accepted By' %}</th>
                 <th scope="col">{% trans 'Action' %}</th>
@@ -31,6 +32,7 @@
                         <td>{{ service_order.customer_asset.asset.model_number }}</td>
                         <td>{{ service_order.customer_asset.serial_number }}</td>
                         <td>{{ service_order.customer_asset.product_number }}</td>
+                        <td>{{ service_order.service_level_agreement.name }}</td>
                         <td>{{ service_order.created_on }}</td>
                         <td>{{ service_order.accepted_by }}</td>
                         <td>

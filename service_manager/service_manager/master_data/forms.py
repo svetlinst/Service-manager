@@ -1,7 +1,7 @@
 from django import forms
 
 from service_manager.core.forms import BootstrapFormMixin
-from service_manager.master_data.models import Asset, Material, MaterialCategory, Brand, AssetCategory
+from service_manager.master_data.models import Asset, Material, MaterialCategory, Brand, AssetCategory, SLA
 
 
 class CreateAssetForm(forms.ModelForm):
@@ -69,3 +69,13 @@ class EditAssetCategoryForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = AssetCategory
         fields = ('name',)
+
+
+class EditSlaForm(BootstrapFormMixin, forms.ModelForm):
+    class Meta:
+        model = SLA
+        fields = ('name', 'description')
+
+
+class CreateSlaForm(EditSlaForm):
+    pass

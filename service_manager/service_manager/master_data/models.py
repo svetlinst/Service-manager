@@ -106,3 +106,28 @@ class Material(ActiveModel, BaseAuditEntity):
 
     def __str__(self):
         return f'{self.name} ({str(self.category)})'
+
+
+class SLA(ActiveModel, BaseAuditEntity):
+    NAME_MAX_LENGTH = 256
+    DESCRIPTION_MAX_LENGTH = 1024
+
+    name = models.CharField(
+        _('name'),
+        max_length=NAME_MAX_LENGTH,
+        null=False,
+        blank=False,
+    )
+
+    description = models.CharField(
+        _('description'),
+        max_length=DESCRIPTION_MAX_LENGTH,
+        null=True,
+        blank=True,
+    )
+
+    def __str__(self):
+        if self.description:
+            return f'{self.name} ({self.description})'
+        return self.name
+

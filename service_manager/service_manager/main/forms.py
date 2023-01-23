@@ -8,7 +8,8 @@ from service_manager.main.models import ServiceOrderHeader, ServiceOrderDetail, 
 class CreateServiceOrderHeaderForm(forms.ModelForm):
     class Meta:
         model = ServiceOrderHeader
-        fields = ('department', 'handed_over_by', 'send_emails', 'problem_description', 'packaging', 'place_of_service')
+        fields = ('department', 'handed_over_by', 'send_emails', 'problem_description', 'packaging', 'place_of_service',
+                  'service_level_agreement')
 
         widgets = {
             'department': forms.Select(
@@ -36,11 +37,12 @@ class CreateServiceOrderHeaderForm(forms.ModelForm):
                     'class': 'form-check-input',
                 },
             ),
-            'place_of_service': forms.RadioSelect(
-                # attrs={
-                #     'class': 'form-check ',
-                # },
-            )
+            'place_of_service': forms.RadioSelect(),
+            'service_level_agreement': forms.Select(
+                attrs={
+                    'class': 'form-control',
+                },
+            ),
         }
 
     def __init__(self, *args, **kwargs):
