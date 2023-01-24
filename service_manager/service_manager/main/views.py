@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import permission_required
 from django.db.models import Q
 from django.shortcuts import render, redirect
 import django.views.generic as views
+from django.template.defaultfilters import slugify
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth import mixins as auth_mixins
 
@@ -104,6 +105,12 @@ class CreateServiceOrderHeader(auth_mixins.PermissionRequiredMixin, views.Create
         service_order.customer_asset = CustomerAsset.objects.get(pk=customer_asset_id)
 
         service_order.save()
+
+        # Create a slug
+        created_on = service_order.created_on
+        slug = f'{hex(service_order.pk)}-{hex(created_on.year)}-{hex(created_on.month)}-{hex(created_on.day)}'
+        service_order.slug = slugify(slug)
+
         return super().form_valid(form)
 
 
@@ -322,3 +329,9 @@ def contact_us(request):
         'form': form,
     }
     return render(request, 'contact_us.html', context)
+
+
+class TrackOrderDetailView(views.DetailView):
+    model = ServiceOrderHeader
+    template_name = 'service_order_header/service_order_track.html'
+    context_object_name = 'order'
