@@ -9,6 +9,5 @@ from service_manager.main.tasks import send_successful_service_order_creation_em
 def service_order_header_created(sender, instance, created, **kwargs):
     if not created:
         return
-    if not instance.send_emails:
-        return
-    send_successful_service_order_creation_email.delay(instance.pk)
+    if instance.send_emails:
+        send_successful_service_order_creation_email.delay(instance.pk)
