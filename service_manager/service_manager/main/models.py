@@ -142,6 +142,11 @@ class ServiceOrderHeader(ActiveModel, BaseAuditEntity):
         verbose_name=_('service_level_agreement'),
     )
 
+    slug = models.SlugField(
+        null=True,
+        blank=True,
+    )
+
     @property
     def total_amount_due(self):
         return f'{sum([x.total_amount for x in self.serviceorderdetail_set.all()]):.2f}'
