@@ -186,7 +186,7 @@ class CustomerAsset(ActiveModel, BaseAuditEntity):
     )
 
     def __str__(self):
-        return f'{str(self.customer)}---{str(self.asset)}--{self.serial_number}---{self.product_number}'
+        return f'{str(self.asset)}; Serial Number: {self.serial_number}; Product Number: {self.product_number};'
 
     class Meta:
         ordering = ('asset__category__name', 'asset__brand__name', 'asset__model_name', 'serial_number',)
