@@ -3,7 +3,11 @@
 {% load i18n %}
 {% block content %}
     <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:0.5%">
-        <h4 class='text-center text-secondary'>{% trans 'Customer Information' %}</h4>
+        <div class="text-center">
+            <h4 class='d-inline text-secondary mb-3'>{% trans 'Customer Information' %}</h4>
+            <a class="btn btn-secondary mt-1 float-end" title="{% trans 'Print' %}"><i class="fa fa-print" aria-hidden="true"></i></a>
+        </div>
+
         <div class="row text-left">
             <div class="col">
                 <p class="text-primary mb-0"><b
@@ -44,8 +48,9 @@
             </div>
             <div class="col">
                 <p class="text-primary mb-0"><b
-                        class="text-dark">{% trans 'Is Regular' %}: </b>{% if service_order_header.customer.is_regular_customer %}
-                    {% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}
+                        class="text-dark">{% trans 'Is Regular' %}: </b>
+                    {% if service_order_header.customer.is_regular_customer %}
+                        {% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}
                 </p>
             </div>
             <div class="col">
