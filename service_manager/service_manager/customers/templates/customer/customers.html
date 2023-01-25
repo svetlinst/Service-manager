@@ -50,8 +50,8 @@
                         <td>{{ customer.vat }}</td>
                         <td>{{ customer.email_address }}</td>
                         <td>{{ customer.phone_number }}</td>
-                        <td>{{ customer.has_subscription }}</td>
-                        <td>{{ customer.is_regular_customer }}</td>
+                        <td>{% if customer.has_subscription %}{% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}</td>
+                        <td>{% if customer.is_regular_customer %}{% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}</td>
                         <td>
                             {% if perms.customers.change_customer %}
                                 <a class="btn btn-outline-primary btn-sm"
