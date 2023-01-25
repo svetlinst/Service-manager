@@ -154,13 +154,13 @@ class ServiceOrderHeader(ActiveModel, BaseAuditEntity):
     @property
     def status(self):
         if not self.active:
-            return 'Deleted'
+            return _('Deleted')
         if not self.serviced_on:
-            return 'New'
+            return _('New')
         if not self.completed_on:
-            return 'Serviced'
+            return _('Serviced')
         if self.completed_on:
-            return 'Completed'
+            return _('Completed')
 
     def __str__(self):
         return f'{str(self.customer)}--{str(self.customer_asset)}'
