@@ -19,3 +19,65 @@ nav .logo {
 /*    background-attachment: fixed;*/
 /*    background-size: cover;*/
 /*}*/
+
+section.tracking-content-container {
+    background-color: white;
+    padding: 50px 20px;
+    margin-top: 20px;
+    border: 2px solid rgb(179, 211, 208);
+}
+
+header.tracking-order-header {
+    display: flex;
+    justify-content: center;
+}
+
+.header-logo img {
+    display: -webkit-box;
+    margin-left: auto;
+    justify-content: right;
+    align-items: center;
+
+}
+
+h1.track-order-title {
+    flex: 1;
+    text-align: center;
+    padding-bottom: 0;
+    font-weight: bold;
+    margin-bottom: 0;
+    display: block;
+}
+
+section.track-order-info {
+    padding-left: 20px;
+    padding-bottom: 5px;
+}
+
+section.track-order-info p {
+    padding: 0;
+    margin: 0;
+}
+
+.track-order-sub-title {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 20px;
+}
+
+.track-order-sub-title:nth-child(2) {
+    padding-bottom: 20px;
+}
+
+.amount-due{
+    text-align: right;
+}
+
+.contact-info {
+    font-style: italic;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
