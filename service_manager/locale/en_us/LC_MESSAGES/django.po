@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-26 12:32+0000\n"
+"POT-Creation-Date: 2023-01-26 16:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -980,6 +980,8 @@ msgid "Quantity"
 msgstr ""
 
 #: service_manager/main/templates/service_order_detail/service_order_details.html:16
+#: service_manager/main/templates/service_order_header/customer_printout.html:69
+#: service_manager/main/templates/service_order_header/service_order_track.html:56
 msgid "Discount"
 msgstr ""
 
@@ -1204,12 +1206,6 @@ msgstr ""
 #: service_manager/main/templates/service_order_header/service_order_track.html:53
 #: templates/base.html:101
 msgid "Material"
-msgstr ""
-
-#: service_manager/main/templates/service_order_header/customer_printout.html:69
-#: service_manager/main/templates/service_order_header/service_order_track.html:56
-#, python-format
-msgid "Discount %%"
 msgstr ""
 
 #: service_manager/main/templates/service_order_header/customer_printout.html:70

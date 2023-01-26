@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-26 12:32+0000\n"
-"PO-Revision-Date: 2023-01-26 12:37+0000\n"
+"POT-Creation-Date: 2023-01-26 16:26+0000\n"
+"PO-Revision-Date: 2023-01-26 16:25+0000\n"
 "Last-Translator: Anonymous User <su@su.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -23,18 +23,15 @@ msgstr ""
 msgid "email"
 msgstr "И-мейл"
 
-#: service_manager/accounts/models.py:50
-#: service_manager/customers/models.py:81
+#: service_manager/accounts/models.py:50 service_manager/customers/models.py:81
 msgid "first_name"
 msgstr "Име"
 
-#: service_manager/accounts/models.py:57
-#: service_manager/customers/models.py:86
+#: service_manager/accounts/models.py:57 service_manager/customers/models.py:86
 msgid "last_name"
 msgstr "Фамилия"
 
-#: service_manager/accounts/models.py:64
-#: service_manager/customers/models.py:40
+#: service_manager/accounts/models.py:64 service_manager/customers/models.py:40
 #: service_manager/customers/models.py:101
 msgid "phone_number"
 msgstr "Телефонен номер"
@@ -68,8 +65,7 @@ msgstr "Редактирай профил"
 msgid "Save"
 msgstr "Запази"
 
-#: service_manager/accounts/templates/login_user.html:4
-#: templates/base.html:159
+#: service_manager/accounts/templates/login_user.html:4 templates/base.html:159
 msgid "Login"
 msgstr "Вход"
 
@@ -132,8 +128,8 @@ msgid ""
 "Hello, You're receiving this email because you requested a password reset "
 "for your user account at "
 msgstr ""
-"Здравейте, получвате този имейл, защото сте заявили смяна на парола за Вашия"
-" акаунт на"
+"Здравейте, получвате този имейл, защото сте заявили смяна на парола за Вашия "
+"акаунт на"
 
 #: service_manager/accounts/templates/password/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
@@ -389,7 +385,6 @@ msgstr "Да"
 #: service_manager/main/templates/service_order_header/core/service_order_details.html:53
 #: service_manager/main/templates/service_order_header/customer_printout.html:49
 #: service_manager/main/templates/service_order_header/service_order_track.html:36
-#| msgid "Note"
 msgid "No"
 msgstr "Не"
 
@@ -849,7 +844,6 @@ msgid "service_level_agreement"
 msgstr "Срок за изпълнение"
 
 #: service_manager/main/models.py:157
-#| msgid "Delete"
 msgid "Deleted"
 msgstr "Изтриване"
 
@@ -858,12 +852,10 @@ msgid "New"
 msgstr "Нов"
 
 #: service_manager/main/models.py:161
-#| msgid "Service"
 msgid "Serviced"
 msgstr "Обслужен"
 
 #: service_manager/main/models.py:163
-#| msgid "Completed On"
 msgid "Completed"
 msgstr "Завършен"
 
@@ -943,7 +935,8 @@ msgstr "Документация на приложението"
 
 #: service_manager/main/templates/index.html:44
 msgid ""
-"If you are wondering how the app works under the hood, just follow the link below and\n"
+"If you are wondering how the app works under the hood, just follow the link "
+"below and\n"
 "                    take a sneak\n"
 "                    peek the code in detail."
 msgstr ""
@@ -962,12 +955,13 @@ msgstr "Връзка с разработчика"
 
 #: service_manager/main/templates/index.html:55
 msgid ""
-"Not sure how the application works? No problem, just follow the link below and ask\n"
+"Not sure how the application works? No problem, just follow the link below "
+"and ask\n"
 "                    your\n"
 "                    questions!"
 msgstr ""
-"Не сте сигурно как работи приложението. Няма проблем! Само последвайте линка"
-" по-долу и задайте Вашите въпроси."
+"Не сте сигурно как работи приложението. Няма проблем! Само последвайте линка "
+"по-долу и задайте Вашите въпроси."
 
 #: service_manager/main/templates/index.html:58
 msgid "I need Support"
@@ -1000,6 +994,8 @@ msgid "Quantity"
 msgstr "Количество"
 
 #: service_manager/main/templates/service_order_detail/service_order_details.html:16
+#: service_manager/main/templates/service_order_header/customer_printout.html:69
+#: service_manager/main/templates/service_order_header/service_order_track.html:56
 msgid "Discount"
 msgstr "Отстъпка"
 
@@ -1163,7 +1159,6 @@ msgid "Order handover"
 msgstr "Предаване на поръчка"
 
 #: service_manager/main/templates/service_order_header/customer_printout.html:10
-#| msgid "Customer Information"
 msgid "Customer Printout"
 msgstr "Клиентска форма за печат"
 
@@ -1178,13 +1173,11 @@ msgstr "СЕРВИЗНА ПОРЪЧКА"
 
 #: service_manager/main/templates/service_order_header/customer_printout.html:29
 #: service_manager/main/templates/service_order_header/service_order_track.html:16
-#| msgid "Phone Number"
 msgid "Number"
 msgstr "Номер"
 
 #: service_manager/main/templates/service_order_header/customer_printout.html:32
 #: service_manager/main/templates/service_order_header/service_order_track.html:19
-#| msgid "service_order"
 msgid "Device model"
 msgstr "Модел на устройство"
 
@@ -1195,37 +1188,31 @@ msgstr "Номер за проследяване"
 
 #: service_manager/main/templates/service_order_header/customer_printout.html:34
 #: service_manager/main/templates/service_order_header/service_order_track.html:21
-#| msgid "Update"
 msgid "Updated on"
 msgstr "Актуализирана на"
 
 #: service_manager/main/templates/service_order_header/customer_printout.html:38
 #: service_manager/main/templates/service_order_header/service_order_track.html:25
-#| msgid "Service Level Agreements"
 msgid "Service Level Agreement"
 msgstr "Срок за изпълнение"
 
 #: service_manager/main/templates/service_order_header/customer_printout.html:46
 #: service_manager/main/templates/service_order_header/service_order_track.html:33
-#| msgid "Email Address"
 msgid "Email address"
 msgstr "И-мейл адрес"
 
 #: service_manager/main/templates/service_order_header/customer_printout.html:48
 #: service_manager/main/templates/service_order_header/service_order_track.html:35
-#| msgid "has subscription"
 msgid "Has subscription"
 msgstr "Абонамент"
 
 #: service_manager/main/templates/service_order_header/customer_printout.html:54
 #: service_manager/main/templates/service_order_header/service_order_track.html:41
-#| msgid "problem description"
 msgid "Problem description"
 msgstr "Описание на проблема"
 
 #: service_manager/main/templates/service_order_header/customer_printout.html:61
 #: service_manager/main/templates/service_order_header/service_order_track.html:47
-#| msgid "Service Completed"
 msgid "Service performed"
 msgstr "Изпълнено обслужване"
 
@@ -1235,13 +1222,6 @@ msgstr "Изпълнено обслужване"
 msgid "Material"
 msgstr "Материали"
 
-#: service_manager/main/templates/service_order_header/customer_printout.html:69
-#: service_manager/main/templates/service_order_header/service_order_track.html:56
-#, python-format
-#| msgid "Discount"
-msgid "Discount %%"
-msgstr "Отстъпка%"
-
 #: service_manager/main/templates/service_order_header/customer_printout.html:70
 #: service_manager/main/templates/service_order_header/service_order_track.html:57
 msgid "Unit Price (after discount)"
@@ -1249,7 +1229,6 @@ msgstr "Единична цена (след отстъпка)"
 
 #: service_manager/main/templates/service_order_header/customer_printout.html:71
 #: service_manager/main/templates/service_order_header/service_order_track.html:58
-#| msgid "Unit Price"
 msgid "Total Price"
 msgstr "Обща стойност"
 
@@ -1266,7 +1245,6 @@ msgstr "лв."
 
 #: service_manager/main/templates/service_order_header/customer_printout.html:97
 #: service_manager/main/templates/service_order_header/customer_printout.html:103
-#| msgid "The device has been handed over by"
 msgid "Device has been handed over on"
 msgstr "Устройството е предадено на"
 
@@ -1552,15 +1530,12 @@ msgid "Dear"
 msgstr "Уважаеми/а"
 
 #: templates/email_templates/service_order_created.html:5
-#| msgid ""
-#| "Please, be kindly informed that a new service order has been created for the following\n"
-#| "    asset:"
 msgid ""
-"Please, be kindly informed that a new service order has been created for the following\n"
+"Please, be kindly informed that a new service order has been created for the "
+"following\n"
 "        asset:"
 msgstr ""
-"Желаем да Ви уведомим, че създадохме сервизна поръчка за следното "
-"устройство:"
+"Желаем да Ви уведомим, че създадохме сервизна поръчка за следното устройство:"
 
 #: templates/email_templates/service_order_created.html:12
 msgid "The following service order has been created in our system"
@@ -1575,11 +1550,9 @@ msgid "The device has been handed over by"
 msgstr "Устройството е предадено от"
 
 #: templates/email_templates/service_order_created.html:18
-#| msgid ""
-#| "We'll get back to you as soon as we make any progress with the resolution of"
-#| " your case."
 msgid ""
-"We'll get back to you as soon as we make any progress with the resolution of your\n"
+"We'll get back to you as soon as we make any progress with the resolution of "
+"your\n"
 "        case."
 msgstr ""
 "Ще ви информираме, след като направим прогрес по разрешаването на Вашия "
@@ -1612,6 +1585,11 @@ msgstr "следваща"
 #: templates/partials/paginator.html:16
 msgid "last"
 msgstr "последна"
+
+#, python-format
+#~| msgid "Discount"
+#~ msgid "Discount %%"
+#~ msgstr "Отстъпка %%"
 
 #~ msgid "serviced_on"
 #~ msgstr "Обслужена на"
