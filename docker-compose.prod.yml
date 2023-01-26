@@ -13,7 +13,7 @@ services:
       - ./service_manager/envs/.env.prod
     depends_on:
       - postgres
-  postgres:    
+  postgres:
     image: postgres
     restart: always
     ports:
@@ -46,4 +46,15 @@ services:
       - ./nginx/logs:/var/log/nginx
       - ./certbot/www:/var/www/certbot/:ro
       - ./certbot/conf/:/etc/nginx/ssl/:ro
-
+  celery:
+    restart: always
+    build: ./service_manager
+    command: celery -A service_manager worker -l info
+    volumes:
+      - ./staticfiles:/tmp/service_manager/staticfiles
+    env_file:
+      - ./service_manager/envs/.env.prod
+    depends_on:
+      - postgres
+      - redis
+      - web
