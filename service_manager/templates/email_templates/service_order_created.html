@@ -4,6 +4,8 @@
     <p>{% trans 'Dear' %}, {{ service_order.customer.name }}.</p>
     <p>{% blocktrans %}Please, be kindly informed that a new service order has been created for the following
         asset:{% endblocktrans %}</p>
+    <p>THIS IS A TEST</p>
+
     <p>{% trans 'Brand' %}: {{ service_order.customer_asset.asset.brand.name }}</p>
     <p>{% trans 'Model Name' %}: {{ service_order.customer_asset.asset.model_name }}</p>
     <p>{% trans 'Model Number' %}: {{ service_order.customer_asset.asset.model_number }}</p>
@@ -18,7 +20,9 @@
     <p>{% blocktrans %}We'll get back to you as soon as we make any progress with the resolution of your
         case.{% endblocktrans %}</p>
     <p>{% blocktrans %}You can track the status of your order here{% endblocktrans %}:</p>
-    <p>{% trans 'Track your order' %}: <a href="{{ protocol_domain }}{% url 'track_order' service_order.slug %}">{{ service_order.slug }}</a></p>
+    <p>THIS IS A TEST</p>
+    <p>{% trans 'Track your order' %}: <a
+            href="{{ protocol_domain }}{% url 'track_order' service_order.slug %}">{{ service_order.slug }}</a></p>
 
     {% trans "Thanks for using our site!" %}
 
