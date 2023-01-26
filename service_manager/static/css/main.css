@@ -20,6 +20,11 @@ nav .logo {
 /*    background-size: cover;*/
 /*}*/
 
+@page {
+    size: Letter;
+    margin: 0in 0.44in 0.2in 0.44in;
+}
+
 section.tracking-content-container {
     background-color: white;
     padding: 50px 20px;

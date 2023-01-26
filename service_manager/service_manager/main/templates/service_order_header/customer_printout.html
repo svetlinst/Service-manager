@@ -1,0 +1,100 @@
+{% load i18n %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% trans 'Customer Printout' %}</title>
+</head>
+<body>
+<section class="tracking-content-container">
+    <header class="tracking-order-header">
+        <h1 class="track-order-title">{% trans 'SERVICE ORDER' %}</h1>
+        <div class="header-logo">
+            <img src="https://elcomis.com/wp-content/uploads/2019/01/cropped-Elcom_logo_transparent_resized_200.png"
+                 alt="logo">
+        </div>
+    </header>
+
+    <main style="font-size: 12px;">
+        <header>
+            <h2 class="track-order-sub-title"><b>{{ order.slug|upper }}</b></h2>
+            <h2 class="track-order-sub-title"><b>{% trans 'Number' %}: {{ order.id }}</b></h2>
+        </header>
+        <section class="track-order-info">
+            <p><b>{% trans 'Device model' %}</b>: {{ order.customer_asset }}</p>
+            <p><b>{% trans 'Tracking number' %}</b>: {{ order.slug }}</p>
+            <p><b>{% trans 'Updated on' %}</b>: {{ order.updated_on }}</p>
+            <p><b>{% trans 'Status' %}</b>: {{ order.status }}</p>
+            <p><b>{% trans 'Category' %}</b>: {{ order.customer_asset.asset.category }}</p>
+            <p>
+                <b>{% trans 'Service Level Agreement' %}</b>: {{ order.service_level_agreement.name|default_if_none:"" }}
+            </p>
+        </section>
+
+        <hr>
+
+        <section class="track-order-info">
+            <p><b>{% trans 'Customer' %}</b>: {{ order.customer.name }}</p>
+            <p><b>{% trans 'Email address' %}</b>: {{ order.customer.email_address }}</p>
+            <p><b>{% trans 'Phone Number' %}</b>: {{ order.customer.phone_number }}</p>
+            <p><b>{% trans 'Has subscription' %}</b>: {% if order.customer.has_subscription %}
+                {% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}</p>
+            <p><b>{% trans 'Serial Number' %}</b>: {{ order.customer_asset.serial_number }}</p>
+            <p><b>{% trans 'Packaging' %}</b>: {{ order.packaging|default_if_none:"" }}</p>
+            <p><b>{% trans 'Place of service' %}</b>: {{ order.place_of_service }}</p>
+            <p><b>{% trans 'Accepted by' %}</b>: {{ order.accepted_by }}</p>
+            <p><b>{% trans 'Problem description' %}</b>: {{ order.problem_description }}</p>
+        </section>
+
+        <hr>
+
+        <section>
+            <h3 class="track-order-sub-title">{% trans 'Service performed' %}</h3>
+            {% if order.serviceorderdetail_set %}
+                <div class="table-responsive-md">
+                    <table class="table table-sm table-striped text-center">
+                        <thead>
+                        <tr>
+                            <th>{% trans 'Material' %}</th>
+                            <th>{% trans 'Quantity' %}</th>
+                            <th>{% trans 'Unit Price' %}</th>
+                            <th>{% trans 'Discount %' %}</th>
+                            <th>{% trans 'Unit Price (after discount)' %}</th>
+                            <th>{% trans 'Total Price' %}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for detail in order.serviceorderdetail_set.all %}
+                            <tr>
+                                <td>{{ detail.material.name }}</td>
+                                <td>{{ detail.quantity|floatformat:1 }}</td>
+                                <td>{{ detail.material.price|floatformat:2 }} {% trans 'lv.' %}</td>
+                                <td>{{ detail.discount|floatformat:2 }}%</td>
+                                <td>{{ detail.discounted_price|floatformat:2 }} {% trans 'lv.' %}</td>
+                                <td>{{ detail.total_amount|floatformat:2 }} {% trans 'lv.' %}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <p class="amount-due">
+                    <b>{% trans 'Total Amount Due' %}</b>: {{ order.total_amount_due }} {% trans 'lv.' %}</p>
+            {% else %}
+                <p>{% trans 'None' %}</p>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer>
+        <p class="contact-info">{% blocktrans %}Address: Kysutendil, 29 Hristo Botev str., bl. 109; Phone number: (078)
+            55 06 00, (078) 55 31 70; Email: office@elcomis.com{% endblocktrans %}</p>
+    </footer>
+</section>
+</body>
+</html>
+
+

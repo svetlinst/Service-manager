@@ -1,10 +1,13 @@
 import datetime
 
+from django.conf import settings
 from django.contrib.auth.decorators import permission_required
 from django.db.models import Q
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 import django.views.generic as views
 from django.template.defaultfilters import slugify
+from django.template.loader import get_template
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth import mixins as auth_mixins
 
@@ -15,6 +18,7 @@ from service_manager.main.models import Customer, CustomerAsset, ServiceOrderHea
 from service_manager.main.tasks import send_contact_us_email
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
+from weasyprint import HTML, CSS
 
 
 def get_index(request):
@@ -335,3 +339,27 @@ class TrackOrderDetailView(views.DetailView):
     model = ServiceOrderHeader
     template_name = 'service_order_header/service_order_track.html'
     context_object_name = 'order'
+
+
+class ServiceOrderPrintoutView(views.DetailView):
+    template_name = 'service_order_header/customer_printout.html'
+    model = ServiceOrderHeader
+    context_object_name = 'order'
+
+    def get(self, request, *args, **kwargs):
+        template_response = super().get(self, request, *args, **kwargs)
+        styles = CSS(settings.STATICFILES_DIRS[0] / "css/main.css")
+        html = HTML(string=template_response.rendered_content).write_pdf(
+            stylesheets=[
+                styles,
+            ]
+        )
+
+
+
+        response = HttpResponse(html, content_type='application/pdf')
+
+        response['Content-Disposition'] = f'filename=Customer_Printout_{kwargs["pk"]}.pdf'
+        return response
+
+

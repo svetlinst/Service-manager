@@ -5,7 +5,7 @@
     <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:0.5%">
         <div class="text-center">
             <h4 class='d-inline text-secondary mb-3'>{% trans 'Customer Information' %}</h4>
-            <a class="btn btn-secondary mt-1 float-end" title="{% trans 'Print' %}"><i class="fa fa-print" aria-hidden="true"></i></a>
+            <a class="btn btn-secondary mt-1 float-end" title="{% trans 'Print' %}" target="_blank" href="{% url 'customer_printout' service_order_header.id %}"><i class="fa fa-print" aria-hidden="true"></i></a>
         </div>
 
         <div class="row text-left">
