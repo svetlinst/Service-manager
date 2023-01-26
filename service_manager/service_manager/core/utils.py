@@ -7,6 +7,6 @@ def get_protocol_and_domain_as_string():
         result = f'http://{settings.ALLOWED_HOSTS[1]}:8000'
     else:
         # Production
-        result = f'https://{settings.ALLOWED_HOSTS}'
+        result = f'https://{settings.ALLOWED_HOSTS[0]}'
 
     return result
