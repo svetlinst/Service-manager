@@ -1,4 +1,5 @@
 import datetime
+from io import BytesIO
 
 from django.conf import settings
 from django.contrib.auth.decorators import permission_required
@@ -7,10 +8,10 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 import django.views.generic as views
 from django.template.defaultfilters import slugify
-from django.template.loader import get_template
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth import mixins as auth_mixins
 
+from service_manager.core.utils import get_protocol_and_domain_as_string
 from service_manager.main.forms import CreateServiceOrderHeaderForm, CreateServiceOrderDetailForm, \
     EditServiceOrderDetailForm, CreateServiceOrderNoteForm, HandoverServiceOrderForm, ContactForm
 from service_manager.main.models import Customer, CustomerAsset, ServiceOrderHeader, ServiceOrderDetail, \
@@ -19,6 +20,8 @@ from service_manager.main.tasks import send_contact_us_email
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from weasyprint import HTML, CSS
+import qrcode
+import qrcode.image.svg
 
 
 def get_index(request):
@@ -346,6 +349,25 @@ class ServiceOrderPrintoutView(views.DetailView):
     model = ServiceOrderHeader
     context_object_name = 'order'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Generate the link in the QR code
+        domain = get_protocol_and_domain_as_string()
+        code_text = f"{domain}{reverse('track_order', kwargs={'slug': kwargs['object'].slug})}"
+
+        # Build the QR code
+        factory = qrcode.image.svg.SvgImage
+        img = qrcode.make(code_text, image_factory=factory, box_size=5)
+
+        # Save as stream
+        stream = BytesIO()
+        img.save(stream)
+
+        # Pass to the context
+        context["qrcode"] = stream.getvalue().decode()
+        return context
+
     def get(self, request, *args, **kwargs):
         template_response = super().get(self, request, *args, **kwargs)
         styles = CSS(settings.STATICFILES_DIRS[0] / "css/main.css")
@@ -355,11 +377,7 @@ class ServiceOrderPrintoutView(views.DetailView):
             ]
         )
 
-
-
         response = HttpResponse(html, content_type='application/pdf')
 
         response['Content-Disposition'] = f'filename=Customer_Printout_{kwargs["pk"]}.pdf'
         return response
-
-

@@ -18,7 +18,7 @@
     <p>{% blocktrans %}We'll get back to you as soon as we make any progress with the resolution of your
         case.{% endblocktrans %}</p>
     <p>{% blocktrans %}You can track the status of your order here{% endblocktrans %}:</p>
-    <p>{% trans 'Track your order' %}: <a href="{{ protocol }}://{{ domain }}{% url 'track_order' service_order.slug %}">{{ service_order.slug }}</a></p>
+    <p>{% trans 'Track your order' %}: <a href="{{ protocol_domain }}{% url 'track_order' service_order.slug %}">{{ service_order.slug }}</a></p>
 
     {% trans "Thanks for using our site!" %}
 

@@ -3,6 +3,7 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
 from service_manager import settings
+from service_manager.core.utils import get_protocol_and_domain_as_string
 from service_manager.main.models import ServiceOrderHeader
 
 
@@ -13,18 +14,12 @@ def send_successful_service_order_creation_email(service_order_id):
     tracking_url = f'test'
     allowed_hosts = settings.ALLOWED_HOSTS
 
-    if isinstance(allowed_hosts, list):
-        domain = f'{allowed_hosts[1]}:8000'
-        protocol = 'http'
-    else:
-        protocol = 'https'
-        domain = allowed_hosts
+    protocol_domain = get_protocol_and_domain_as_string()
 
     context = {
         'service_order': service_order_header,
         'tracking_url': tracking_url,
-        'domain': domain,
-        'protocol': protocol,
+        'protocol_domain': protocol_domain,
     }
 
     message = render_to_string('email_templates/service_order_created.html', context)

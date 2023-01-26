@@ -35,6 +35,7 @@ section.tracking-content-container {
 header.tracking-order-header {
     display: flex;
     justify-content: center;
+    margin-bottom: 50px;
 }
 
 .header-logo img {
@@ -42,7 +43,19 @@ header.tracking-order-header {
     margin-left: auto;
     justify-content: right;
     align-items: center;
+}
 
+.header-qr-code {
+    display: -webkit-box;
+    margin-left: auto;
+    justify-content: left;
+    align-items: center;
+}
+
+p.scan-qr-text{
+    margin-top: 0;
+    padding-left: 10px;
+    font-size: 8px;
 }
 
 h1.track-order-title {
@@ -76,8 +89,23 @@ section.track-order-info p {
     padding-bottom: 20px;
 }
 
-.amount-due{
+.amount-due {
     text-align: right;
+}
+
+.handover-info{
+
+}
+
+p.handover-left{
+    padding-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+span.handover-right{
+    float: right;
+    margin-right: 50%;
 }
 
 .contact-info {
@@ -85,4 +113,6 @@ section.track-order-info p {
     text-align: center;
     padding: 0;
     margin: 0;
+    margin-top: 10px;
+    font-size: 12px;
 }
