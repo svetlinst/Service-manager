@@ -370,7 +370,7 @@ class ServiceOrderPrintoutView(views.DetailView):
 
     def get(self, request, *args, **kwargs):
         template_response = super().get(self, request, *args, **kwargs)
-        styles = CSS(settings.STATICFILES_DIRS[0] / "css/main.css")
+        styles = CSS(settings.STATIC_ROOT + "/css/main.css")
         html = HTML(string=template_response.rendered_content).write_pdf(
             stylesheets=[
                 styles,
