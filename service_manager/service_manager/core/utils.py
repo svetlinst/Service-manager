@@ -2,7 +2,7 @@ from django.conf import settings
 
 
 def get_protocol_and_domain_as_string():
-    if isinstance(settings.ALLOWED_HOSTS, list):
+    if len(settings.ALLOWED_HOSTS) == 2:
         # Local
         result = f'http://{settings.ALLOWED_HOSTS[1]}:8000'
     else:
