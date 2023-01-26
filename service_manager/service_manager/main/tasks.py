@@ -11,14 +11,11 @@ from service_manager.main.models import ServiceOrderHeader
 def send_successful_service_order_creation_email(service_order_id):
     service_order_header = ServiceOrderHeader.objects.get(pk=service_order_id)
     user_mail = service_order_header.customer.email_address
-    tracking_url = f'test'
-    allowed_hosts = settings.ALLOWED_HOSTS
 
     protocol_domain = get_protocol_and_domain_as_string()
 
     context = {
         'service_order': service_order_header,
-        'tracking_url': tracking_url,
         'protocol_domain': protocol_domain,
     }
 
