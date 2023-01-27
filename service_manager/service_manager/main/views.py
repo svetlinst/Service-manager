@@ -292,7 +292,7 @@ class HandoverServiceOrderView(auth_mixins.PermissionRequiredMixin, views.Update
     model = ServiceOrderHeader
     form_class = HandoverServiceOrderForm
     template_name = 'service_order_header/core/service_order_handover.html'
-    success_url = reverse_lazy('service_orders_list_pending_service')
+    # success_url = reverse_lazy('service_orders_list_pending_service')
 
     permission_required = 'main.change_serviceorderheader'
 
@@ -315,6 +315,10 @@ class HandoverServiceOrderView(auth_mixins.PermissionRequiredMixin, views.Update
         service_oder.save()
 
         return super().form_valid(form)
+
+    def get_success_url(self):
+        order_id = self.kwargs['pk']
+        return reverse_lazy('detail_service_order', kwargs={'pk': order_id})
 
 
 def contact_us(request):
