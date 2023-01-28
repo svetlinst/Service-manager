@@ -52,7 +52,7 @@ header.tracking-order-header {
     align-items: center;
 }
 
-p.scan-qr-text{
+p.scan-qr-text {
     margin-top: 0;
     padding-left: 10px;
     font-size: 8px;
@@ -93,17 +93,17 @@ section.track-order-info p {
     text-align: right;
 }
 
-.handover-info{
+.handover-info {
 
 }
 
-p.handover-left{
+p.handover-left {
     padding-left: 20px;
     margin-top: 5px;
     margin-bottom: 0;
 }
 
-span.handover-right{
+span.handover-right {
     float: right;
     margin-right: 50%;
 }
@@ -116,3 +116,8 @@ span.handover-right{
     margin-top: 10px;
     font-size: 12px;
 }
+
+/*div.g-recaptcha {*/
+/*  margin: 0 auto;*/
+/*  width: 304px;*/
+/*}*/

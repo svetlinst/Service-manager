@@ -114,11 +114,4 @@ class TrackOrderSearchForm(forms.Form):
         ),
     )
 
-    def clean_order_tracking_number(self):
-        data = self.cleaned_data['order_tracking_number'].strip().lower()
-        service_order = ServiceOrderHeader.objects.filter(slug__exact=data)
-
-        if not service_order:
-            raise ValidationError(_(f'Invalid Tracking order number!'))
-
-        return data
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())

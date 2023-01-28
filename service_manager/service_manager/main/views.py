@@ -399,9 +399,19 @@ class TrackOrderSearchFormView(views.FormView):
 
     def form_valid(self, form):
         order_slug = form.cleaned_data['order_tracking_number'].strip().lower()
-        self.success_url = reverse('track_order', kwargs={'slug': order_slug})
-        return super().form_valid(form)
+        service_order = ServiceOrderHeader.objects.filter(slug__exact=order_slug)
+
+        if not service_order:
+            messages.error(self.request, _("Invalid Tracking number!"))
+            return self.render_to_response(self.get_context_data(request=self.request, form=form))
+        else:
+            self.success_url = reverse('track_order', kwargs={'slug': order_slug})
+            return super().form_valid(form)
 
     def form_invalid(self, form):
-        messages.error(self.request, _("Invalid order tracking number!"))
+        for key, error in list(form.errors.items()):
+            if key == 'captcha' and error[0] == 'This field is required.':
+                messages.error(self.request, "You must pass the reCAPTCHA test")
+                continue
+            messages.error(self.request, error)
         return self.render_to_response(self.get_context_data(request=self.request, form=form))
