@@ -46,6 +46,7 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
     'rosetta',
+    'captcha',
 )
 
 PROJECT_APPS = (
@@ -210,3 +211,7 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
