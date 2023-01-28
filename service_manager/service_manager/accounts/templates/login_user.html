@@ -9,7 +9,7 @@
                 <form method="post" action="{% url 'login_user' %}?next={{ next }}">
                     {% csrf_token %}
                     {{ form }}
-                    <div class="text-center mt-2">
+                    <div class="text-center mt-5">
                         <button type="submit" class="btn btn-primary">{% trans 'Log In' %}</button>
                     </div>
                     <div class="text-center mt-3">

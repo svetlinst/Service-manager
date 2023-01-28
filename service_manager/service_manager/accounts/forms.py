@@ -6,6 +6,8 @@ from service_manager.accounts.models import Profile
 from service_manager.accounts.tasks import send_password_reset_email_async
 from service_manager.core.forms import BootstrapFormMixin
 from service_manager.core.validators import validate_digits_only
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 
 UserModel = get_user_model()
 
@@ -28,6 +30,8 @@ class RegisterForm(BootstrapFormMixin, auth_forms.UserCreationForm):
         validators=[validate_digits_only, ]
     )
 
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
+
     class Meta:
         model = UserModel
         fields = ('email', 'first_name', 'last_name', 'phone_number',)
@@ -49,6 +53,7 @@ class RegisterForm(BootstrapFormMixin, auth_forms.UserCreationForm):
 
 
 class LoginForm(BootstrapFormMixin, auth_forms.AuthenticationForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
     pass
 
 
