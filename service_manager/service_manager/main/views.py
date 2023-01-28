@@ -334,6 +334,12 @@ def contact_us(request):
             send_contact_us_email.delay(email_data)
             messages.success(request, _("The email message was sent."))
             return redirect('index')
+        else:
+            for key, error in list(form.errors.items()):
+                if key == 'captcha' and error[0] == 'This field is required.':
+                    messages.error(request, "You must pass the reCAPTCHA test")
+                    continue
+                messages.error(request, error)
 
     form = ContactForm()
     context = {

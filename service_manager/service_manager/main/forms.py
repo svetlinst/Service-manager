@@ -5,6 +5,8 @@ from service_manager.core.forms import BootstrapFormMixin
 from service_manager.customers.models import Customer, CustomerAsset, CustomerRepresentative, CustomerDepartment
 from service_manager.main.models import ServiceOrderHeader, ServiceOrderDetail, ServiceOrderNote
 from django.utils.translation import gettext_lazy as _
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 
 
 class CreateServiceOrderHeaderForm(forms.ModelForm):
@@ -100,6 +102,7 @@ class ContactForm(BootstrapFormMixin, forms.Form):
     last_name = forms.CharField(max_length=20)
     email_address = forms.EmailField(max_length=200)
     message = forms.CharField(widget=forms.Textarea, max_length=2000)
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
 
 
 class TrackOrderSearchForm(forms.Form):
