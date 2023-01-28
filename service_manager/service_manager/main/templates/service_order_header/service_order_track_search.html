@@ -1,10 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <h1 class="text-center my-3">{% trans 'Track service order' %}</h1>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <form action="{% url 'track_order_search' %}" method="post">
+                <div class="row g-3 align-items-center">
+                    {% csrf_token %}
+                    <div class="col-4">
+                        <label for="staticEmail"
+                               class="col-form-label">{{ form.order_tracking_number.label_tag }}</label>
+                    </div>
+
+                    <div class="col-6">
+                        {{ form.order_tracking_number }}
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" class="btn btn-primary">{% trans 'Track' %}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+
+{% endblock %}

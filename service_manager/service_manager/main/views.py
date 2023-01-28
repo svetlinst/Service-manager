@@ -13,7 +13,7 @@ from django.contrib.auth import mixins as auth_mixins
 
 from service_manager.core.utils import get_protocol_and_domain_as_string
 from service_manager.main.forms import CreateServiceOrderHeaderForm, CreateServiceOrderDetailForm, \
-    EditServiceOrderDetailForm, CreateServiceOrderNoteForm, HandoverServiceOrderForm, ContactForm
+    EditServiceOrderDetailForm, CreateServiceOrderNoteForm, HandoverServiceOrderForm, ContactForm, TrackOrderSearchForm
 from service_manager.main.models import Customer, CustomerAsset, ServiceOrderHeader, ServiceOrderDetail, \
     ServiceOrderNote
 from service_manager.main.tasks import send_contact_us_email
@@ -385,3 +385,17 @@ class ServiceOrderPrintoutView(views.DetailView):
 
         response['Content-Disposition'] = f'filename=Customer_Printout_{kwargs["pk"]}.pdf'
         return response
+
+
+class TrackOrderSearchFormView(views.FormView):
+    template_name = 'service_order_header/service_order_track_search.html'
+    form_class = TrackOrderSearchForm
+
+    def form_valid(self, form):
+        order_slug = form.cleaned_data['order_tracking_number'].strip().lower()
+        self.success_url = reverse('track_order', kwargs={'slug': order_slug})
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, _("Invalid order tracking number!"))
+        return self.render_to_response(self.get_context_data(request=self.request, form=form))

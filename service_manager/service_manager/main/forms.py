@@ -1,8 +1,10 @@
 from django import forms
+from django.core.exceptions import ValidationError
 
 from service_manager.core.forms import BootstrapFormMixin
 from service_manager.customers.models import Customer, CustomerAsset, CustomerRepresentative, CustomerDepartment
 from service_manager.main.models import ServiceOrderHeader, ServiceOrderDetail, ServiceOrderNote
+from django.utils.translation import gettext_lazy as _
 
 
 class CreateServiceOrderHeaderForm(forms.ModelForm):
@@ -98,3 +100,22 @@ class ContactForm(BootstrapFormMixin, forms.Form):
     last_name = forms.CharField(max_length=20)
     email_address = forms.EmailField(max_length=200)
     message = forms.CharField(widget=forms.Textarea, max_length=2000)
+
+
+class TrackOrderSearchForm(forms.Form):
+    order_tracking_number = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+            },
+        ),
+    )
+
+    def clean_order_tracking_number(self):
+        data = self.cleaned_data['order_tracking_number'].strip().lower()
+        service_order = ServiceOrderHeader.objects.filter(slug__exact=data)
+
+        if not service_order:
+            raise ValidationError(_(f'Invalid Tracking order number!'))
+
+        return data
