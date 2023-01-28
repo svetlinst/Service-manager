@@ -16,58 +16,18 @@
                 the end-to-end
                 process of servicing customer assets.{% endblocktrans %}</p>
             {% if not request.user.is_authenticated %}
-                <a class="btn btn-primary btn-lg" href="{% url 'login_user' %}">{% blocktrans %}Let's Get Down To
-                    Work!{% endblocktrans %}</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'track_order_search' %}">{% blocktrans %}Track service order{% endblocktrans %}</a>
             {% else %}
                 {% if perms.customers.view_customer %}
-                    <a class="btn btn-primary btn-lg" href="{% url 'customers_list' %}">{% blocktrans %}Let's Get Down
-                        To
-                        Work!{% endblocktrans %}</a>
+                    <a class="btn btn-primary btn-lg" href="{% url 'customers_list' %}">{% blocktrans %}To Customers!{% endblocktrans %}</a>
                 {% elif perms.main.view_serviceorderheader %}
                     <a class="btn btn-primary btn-lg" href="{% url 'service_orders_list_pending_service' %}">
-                        {% blocktrans %}Let's Get Down
-                            To
-                            Work!{% endblocktrans %}</a>
+                        {% blocktrans %}To Pending service orders!{% endblocktrans %}</a>
                 {% elif perms.master_data.view_asset %}
                     <a class="btn btn-primary btn-lg" href="{% url 'assets_list' %}">
-                        {% blocktrans %}Let's Get Down
-                            To
-                            Work!{% endblocktrans %}</a>
+                        {% blocktrans %}To Assets!{% endblocktrans %}</a>
                 {% endif %}
             {% endif %}
         </div>
     </div>
-    <div class="row align-items-md-stretch">
-        <div class="col-md-6">
-            <div class="h-100 p-5 text-white bg-dark rounded-3">
-                <h2>{% blocktrans %}Application documentation{% endblocktrans %}</h2>
-                <p>{% blocktrans %}If you are wondering how the app works under the hood, just follow the link below and
-                    take a sneak
-                    peek the code in detail.{% endblocktrans %}</p>
-                <a class="btn btn-outline-light" href="https://github.com/svetlinst/Service-manager" target="_blank">
-                    {% blocktrans %}Take
-                        me to GitHub{% endblocktrans %}</a>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="h-100 p-5 bg-light border rounded-3">
-                <h2>{% blocktrans %}Contact the developer{% endblocktrans %}</h2>
-                <p>{% blocktrans %}Not sure how the application works? No problem, just follow the link below and ask
-                    your
-                    questions!{% endblocktrans %}</p>
-                <a class="btn btn-outline-secondary" href="{% url 'contact_us' %}">{% blocktrans %}I need Support{% endblocktrans %}</a>
-            </div>
-        </div>
-    </div>
-    {#    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">#}
-    {#        <div class="absolute">#}
-    {#            <h1 class="display-4">Hello, world!</h1>#}
-    {#            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention#}
-    {#                to#}
-    {#                featured content or information.</p>#}
-    {#            <hr class="my-4">#}
-    {#            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>#}
-    {#        </div>#}
-    {#    </div>#}
-
 {% endblock %}
