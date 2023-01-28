@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-26 16:26+0000\n"
+"POT-Creation-Date: 2023-01-28 12:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,7 +63,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: service_manager/accounts/templates/login_user.html:4 templates/base.html:159
+#: service_manager/accounts/templates/login_user.html:4 templates/base.html:163
 msgid "Login"
 msgstr ""
 
@@ -129,13 +129,13 @@ msgstr ""
 
 #: service_manager/accounts/templates/password/password_reset_email.html:9
 #: templates/email_templates/contact_us_mail_template.html:8
-#: templates/email_templates/service_order_created.html:23
+#: templates/email_templates/service_order_created.html:24
 msgid "Thanks for using our site!"
 msgstr ""
 
 #: service_manager/accounts/templates/password/password_reset_email.html:11
 #: templates/email_templates/contact_us_mail_template.html:9
-#: templates/email_templates/service_order_created.html:25
+#: templates/email_templates/service_order_created.html:26
 msgid "The Service Manager's team"
 msgstr ""
 
@@ -875,7 +875,7 @@ msgstr ""
 msgid "created_by"
 msgstr ""
 
-#: service_manager/main/templates/contact_us.html:4 templates/base.html:132
+#: service_manager/main/templates/contact_us.html:4 templates/base.html:136
 msgid "Contact Us"
 msgstr ""
 
@@ -899,58 +899,20 @@ msgid ""
 msgstr ""
 
 #: service_manager/main/templates/index.html:19
-msgid ""
-"Let's Get Down To\n"
-"                    Work!"
+#: service_manager/main/templates/service_order_header/service_order_track_search.html:4
+msgid "Track service order"
 msgstr ""
 
-#: service_manager/main/templates/index.html:23
-msgid ""
-"Let's Get Down\n"
-"                        To\n"
-"                        Work!"
+#: service_manager/main/templates/index.html:22
+msgid "To Customers!"
+msgstr ""
+
+#: service_manager/main/templates/index.html:25
+msgid "To Pending service orders!"
 msgstr ""
 
 #: service_manager/main/templates/index.html:28
-#: service_manager/main/templates/index.html:33
-msgid ""
-"Let's Get Down\n"
-"                            To\n"
-"                            Work!"
-msgstr ""
-
-#: service_manager/main/templates/index.html:43
-msgid "Application documentation"
-msgstr ""
-
-#: service_manager/main/templates/index.html:44
-msgid ""
-"If you are wondering how the app works under the hood, just follow the link "
-"below and\n"
-"                    take a sneak\n"
-"                    peek the code in detail."
-msgstr ""
-
-#: service_manager/main/templates/index.html:48
-msgid ""
-"Take\n"
-"                        me to GitHub"
-msgstr ""
-
-#: service_manager/main/templates/index.html:54
-msgid "Contact the developer"
-msgstr ""
-
-#: service_manager/main/templates/index.html:55
-msgid ""
-"Not sure how the application works? No problem, just follow the link below "
-"and ask\n"
-"                    your\n"
-"                    questions!"
-msgstr ""
-
-#: service_manager/main/templates/index.html:58
-msgid "I need Support"
+msgid "To Assets!"
 msgstr ""
 
 #: service_manager/main/templates/service_order_detail/service_order_detail_edit.html:4
@@ -1271,6 +1233,10 @@ msgid ""
 "06 00, (078) 55 31 70; Email: office@elcomis.com"
 msgstr ""
 
+#: service_manager/main/templates/service_order_header/service_order_track_search.html:20
+msgid "Track"
+msgstr ""
+
 #: service_manager/main/templates/service_order_note/service_order_note_create.html:4
 msgid "Create new note"
 msgstr ""
@@ -1306,8 +1272,12 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: service_manager/main/views.py:331
+#: service_manager/main/views.py:335
 msgid "The email message was sent."
+msgstr ""
+
+#: service_manager/main/views.py:405
+msgid "Invalid Tracking number!"
 msgstr ""
 
 #: service_manager/master_data/models.py:54
@@ -1431,11 +1401,11 @@ msgstr ""
 msgid "Returned On"
 msgstr ""
 
-#: service_manager/settings.py:133
+#: service_manager/settings.py:134
 msgid "English"
 msgstr ""
 
-#: service_manager/settings.py:134
+#: service_manager/settings.py:135
 msgid "Bulgarian"
 msgstr ""
 
@@ -1475,15 +1445,19 @@ msgstr ""
 msgid "Finished Orders"
 msgstr ""
 
-#: templates/base.html:143
+#: templates/base.html:132
+msgid "Track Order"
+msgstr ""
+
+#: templates/base.html:147
 msgid "Language"
 msgstr ""
 
-#: templates/base.html:162
+#: templates/base.html:166
 msgid "Profile"
 msgstr ""
 
-#: templates/base.html:163
+#: templates/base.html:167
 msgid "Logout"
 msgstr ""
 

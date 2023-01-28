@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-26 16:26+0000\n"
-"PO-Revision-Date: 2023-01-26 16:25+0000\n"
+"POT-Creation-Date: 2023-01-28 12:39+0000\n"
+"PO-Revision-Date: 2023-01-28 12:40+0000\n"
 "Last-Translator: Anonymous User <su@su.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -23,15 +23,18 @@ msgstr ""
 msgid "email"
 msgstr "И-мейл"
 
-#: service_manager/accounts/models.py:50 service_manager/customers/models.py:81
+#: service_manager/accounts/models.py:50
+#: service_manager/customers/models.py:81
 msgid "first_name"
 msgstr "Име"
 
-#: service_manager/accounts/models.py:57 service_manager/customers/models.py:86
+#: service_manager/accounts/models.py:57
+#: service_manager/customers/models.py:86
 msgid "last_name"
 msgstr "Фамилия"
 
-#: service_manager/accounts/models.py:64 service_manager/customers/models.py:40
+#: service_manager/accounts/models.py:64
+#: service_manager/customers/models.py:40
 #: service_manager/customers/models.py:101
 msgid "phone_number"
 msgstr "Телефонен номер"
@@ -65,13 +68,14 @@ msgstr "Редактирай профил"
 msgid "Save"
 msgstr "Запази"
 
-#: service_manager/accounts/templates/login_user.html:4 templates/base.html:159
+#: service_manager/accounts/templates/login_user.html:4
+#: templates/base.html:163
 msgid "Login"
 msgstr "Вход"
 
 #: service_manager/accounts/templates/login_user.html:13
 msgid "Log In"
-msgstr "Изход"
+msgstr "Вход"
 
 #: service_manager/accounts/templates/login_user.html:17
 msgid "Password Reset"
@@ -128,8 +132,8 @@ msgid ""
 "Hello, You're receiving this email because you requested a password reset "
 "for your user account at "
 msgstr ""
-"Здравейте, получвате този имейл, защото сте заявили смяна на парола за Вашия "
-"акаунт на"
+"Здравейте, получвате този имейл, защото сте заявили смяна на парола за Вашия"
+" акаунт на"
 
 #: service_manager/accounts/templates/password/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
@@ -137,13 +141,13 @@ msgstr "Моля, отидете на следния адрес и създай�
 
 #: service_manager/accounts/templates/password/password_reset_email.html:9
 #: templates/email_templates/contact_us_mail_template.html:8
-#: templates/email_templates/service_order_created.html:23
+#: templates/email_templates/service_order_created.html:24
 msgid "Thanks for using our site!"
 msgstr "Благодарим Ви, че използвате нашият сайт!"
 
 #: service_manager/accounts/templates/password/password_reset_email.html:11
 #: templates/email_templates/contact_us_mail_template.html:9
-#: templates/email_templates/service_order_created.html:25
+#: templates/email_templates/service_order_created.html:26
 msgid "The Service Manager's team"
 msgstr "Екипът на Service Manager"
 
@@ -883,7 +887,7 @@ msgstr "Бележка"
 msgid "created_by"
 msgstr "Създадена от"
 
-#: service_manager/main/templates/contact_us.html:4 templates/base.html:132
+#: service_manager/main/templates/contact_us.html:4 templates/base.html:136
 msgid "Contact Us"
 msgstr "Връзка с нас"
 
@@ -909,63 +913,25 @@ msgstr ""
 "процес по сервизно обслужване на устройства на клиенти."
 
 #: service_manager/main/templates/index.html:19
-msgid ""
-"Let's Get Down To\n"
-"                    Work!"
-msgstr "Да се захващаме за работа!"
+#: service_manager/main/templates/service_order_header/service_order_track_search.html:4
+#| msgid "service_order"
+msgid "Track service order"
+msgstr "Проследи сервизна поръчка"
 
-#: service_manager/main/templates/index.html:23
-msgid ""
-"Let's Get Down\n"
-"                        To\n"
-"                        Work!"
-msgstr "Да се захващаме за работа!"
+#: service_manager/main/templates/index.html:22
+#| msgid "Customers"
+msgid "To Customers!"
+msgstr "Към Клиенти"
+
+#: service_manager/main/templates/index.html:25
+#| msgid "Pending Service Orders"
+msgid "To Pending service orders!"
+msgstr "Към Сервизни порички"
 
 #: service_manager/main/templates/index.html:28
-#: service_manager/main/templates/index.html:33
-msgid ""
-"Let's Get Down\n"
-"                            To\n"
-"                            Work!"
-msgstr "Да се захващаме за работа!"
-
-#: service_manager/main/templates/index.html:43
-msgid "Application documentation"
-msgstr "Документация на приложението"
-
-#: service_manager/main/templates/index.html:44
-msgid ""
-"If you are wondering how the app works under the hood, just follow the link "
-"below and\n"
-"                    take a sneak\n"
-"                    peek the code in detail."
-msgstr ""
-"Ако се чудите как работи конкретна функционалност на приложение, моля, "
-"последвайте линка по-долу."
-
-#: service_manager/main/templates/index.html:48
-msgid ""
-"Take\n"
-"                        me to GitHub"
-msgstr "Връзка към GitHub"
-
-#: service_manager/main/templates/index.html:54
-msgid "Contact the developer"
-msgstr "Връзка с разработчика"
-
-#: service_manager/main/templates/index.html:55
-msgid ""
-"Not sure how the application works? No problem, just follow the link below "
-"and ask\n"
-"                    your\n"
-"                    questions!"
-msgstr ""
-"Не сте сигурно как работи приложението. Няма проблем! Само последвайте линка "
-"по-долу и задайте Вашите въпроси."
-
-#: service_manager/main/templates/index.html:58
-msgid "I need Support"
-msgstr "Имам нужда от помощ"
+#| msgid "Assets"
+msgid "To Assets!"
+msgstr "Към Устройства"
 
 #: service_manager/main/templates/service_order_detail/service_order_detail_edit.html:4
 msgid "Edit service order detail"
@@ -1289,6 +1255,10 @@ msgstr ""
 "Адрес: Кюстендил, ул. Христо Ботев 20, блок 109, телефон: (078) 55 06 00, "
 "(078) 55 31 70, имейл: office@elcomis.com"
 
+#: service_manager/main/templates/service_order_header/service_order_track_search.html:20
+msgid "Track"
+msgstr "Проследи"
+
 #: service_manager/main/templates/service_order_note/service_order_note_create.html:4
 msgid "Create new note"
 msgstr "Създай нова бележка"
@@ -1324,9 +1294,14 @@ msgstr "Редактирай бележка"
 msgid "View"
 msgstr "Виж"
 
-#: service_manager/main/views.py:331
+#: service_manager/main/views.py:335
 msgid "The email message was sent."
 msgstr "Вашият имейл беше изпратен."
+
+#: service_manager/main/views.py:405
+#| msgid "Tracking number"
+msgid "Invalid Tracking number!"
+msgstr "Невалиден номер за проследяване"
 
 #: service_manager/master_data/models.py:54
 msgid "model_number"
@@ -1449,11 +1424,11 @@ msgstr "филтрирай"
 msgid "Returned On"
 msgstr "Върната на"
 
-#: service_manager/settings.py:133
+#: service_manager/settings.py:134
 msgid "English"
 msgstr "Английски"
 
-#: service_manager/settings.py:134
+#: service_manager/settings.py:135
 msgid "Bulgarian"
 msgstr "Български"
 
@@ -1493,15 +1468,20 @@ msgstr "Справки"
 msgid "Finished Orders"
 msgstr "Завършени поръчки"
 
-#: templates/base.html:143
+#: templates/base.html:132
+#| msgid "Track your order"
+msgid "Track Order"
+msgstr "Проследяване на проъчка"
+
+#: templates/base.html:147
 msgid "Language"
 msgstr "Език"
 
-#: templates/base.html:162
+#: templates/base.html:166
 msgid "Profile"
 msgstr "Профил"
 
-#: templates/base.html:163
+#: templates/base.html:167
 msgid "Logout"
 msgstr "Изход"
 
@@ -1531,11 +1511,11 @@ msgstr "Уважаеми/а"
 
 #: templates/email_templates/service_order_created.html:5
 msgid ""
-"Please, be kindly informed that a new service order has been created for the "
-"following\n"
+"Please, be kindly informed that a new service order has been created for the following\n"
 "        asset:"
 msgstr ""
-"Желаем да Ви уведомим, че създадохме сервизна поръчка за следното устройство:"
+"Желаем да Ви уведомим, че създадохме сервизна поръчка за следното "
+"устройство:"
 
 #: templates/email_templates/service_order_created.html:12
 msgid "The following service order has been created in our system"
@@ -1551,8 +1531,7 @@ msgstr "Устройството е предадено от"
 
 #: templates/email_templates/service_order_created.html:18
 msgid ""
-"We'll get back to you as soon as we make any progress with the resolution of "
-"your\n"
+"We'll get back to you as soon as we make any progress with the resolution of your\n"
 "        case."
 msgstr ""
 "Ще ви информираме, след като направим прогрес по разрешаването на Вашия "
@@ -1586,8 +1565,54 @@ msgstr "следваща"
 msgid "last"
 msgstr "последна"
 
+#~ msgid ""
+#~ "Let's Get Down To\n"
+#~ "                    Work!"
+#~ msgstr "Да се захващаме за работа!"
+
+#~ msgid ""
+#~ "Let's Get Down\n"
+#~ "                        To\n"
+#~ "                        Work!"
+#~ msgstr "Да се захващаме за работа!"
+
+#~ msgid ""
+#~ "Let's Get Down\n"
+#~ "                            To\n"
+#~ "                            Work!"
+#~ msgstr "Да се захващаме за работа!"
+
+#~ msgid "Application documentation"
+#~ msgstr "Документация на приложението"
+
+#~ msgid ""
+#~ "If you are wondering how the app works under the hood, just follow the link below and\n"
+#~ "                    take a sneak\n"
+#~ "                    peek the code in detail."
+#~ msgstr ""
+#~ "Ако се чудите как работи конкретна функционалност на приложение, моля, "
+#~ "последвайте линка по-долу."
+
+#~ msgid ""
+#~ "Take\n"
+#~ "                        me to GitHub"
+#~ msgstr "Връзка към GitHub"
+
+#~ msgid "Contact the developer"
+#~ msgstr "Връзка с разработчика"
+
+#~ msgid ""
+#~ "Not sure how the application works? No problem, just follow the link below and ask\n"
+#~ "                    your\n"
+#~ "                    questions!"
+#~ msgstr ""
+#~ "Не сте сигурно как работи приложението. Няма проблем! Само последвайте линка"
+#~ " по-долу и задайте Вашите въпроси."
+
+#~ msgid "I need Support"
+#~ msgstr "Имам нужда от помощ"
+
 #, python-format
-#~| msgid "Discount"
 #~ msgid "Discount %%"
 #~ msgstr "Отстъпка %%"
 
