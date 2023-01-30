@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-28 12:39+0000\n"
-"PO-Revision-Date: 2023-01-28 12:40+0000\n"
+"PO-Revision-Date: 2023-01-30 13:57+0000\n"
 "Last-Translator: Anonymous User <su@su.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -1471,7 +1471,7 @@ msgstr "Завършени поръчки"
 #: templates/base.html:132
 #| msgid "Track your order"
 msgid "Track Order"
-msgstr "Проследяване на проъчка"
+msgstr "Проследяване на поръчка"
 
 #: templates/base.html:147
 msgid "Language"
@@ -1543,7 +1543,7 @@ msgstr "Можете да проследите Вашата проъчка ту�
 
 #: templates/email_templates/service_order_created.html:21
 msgid "Track your order"
-msgstr "Проследяване на проъчка"
+msgstr "Проследяване на поръчка"
 
 #: templates/partials/paginator.html:4
 msgid "first"
