@@ -122,13 +122,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Sofia"
 
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
+
+FORMAT_MODULE_PATH = 'service_manager.formats'
 
 LANGUAGES = (
     ('en', _('English')),
