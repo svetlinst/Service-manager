@@ -10,14 +10,14 @@
                         <input type="search" class="form-control rounded mr-3" placeholder="{% trans 'Search' %}" aria-label="Search"
                                aria-describedby="search-addon" name="search_value"/>
                         <button type="submit" class="btn btn-outline-primary"
-                                href="{% url 'material_categories_list' %}">{% trans 'search' %}
+                                href="{% url 'material_categories_list' %}"><i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </div>
                 </form>
             </div>
             <div class="col-md-2 text-left align-self-center">
                 <a href="{% url 'material_categories_list' %}"
-                   class="btn btn-outline-warning btn-md">{% trans 'clear' %}</a>
+                   class="btn btn-outline-warning btn-md"><i class="fa-solid fa-ban"></i></a>
             </div>
             {% if perms.master_data.add_materialcategory %}
                 <div class="col-md-2 text-right align-self-center">
@@ -41,12 +41,12 @@
                         <td>{{ material_category.name }}</td>
                         <td>
                             {% if perms.master_data.change_materialcategory %}
-                                <a class="btn btn-outline-primary btn-sm"
+                                <a class="btn btn-outline-primary btn-md"
                                    href="{% url 'edit_material_category' material_category.id %}"
-                                   role="button">{% trans 'Edit' %}</a>
-                                <a class="btn btn-outline-danger btn-sm"
+                                   role="button"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a class="btn btn-outline-danger btn-md"
                                    href="{% url 'delete_material_category' material_category.id %}"
-                                   role="button">{% trans 'Delete' %}</a>
+                                   role="button"><i class="fa-solid fa-trash"></i></a>
                             {% endif %}
                         </td>
                     </tr>

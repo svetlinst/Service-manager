@@ -37,12 +37,12 @@
                     {% if not service_order_header.is_serviced %}
                         <td>
                             {% if perms.main.change_serviceorderdetail %}
-                                <a class="btn btn-outline-primary btn-sm"
+                                <a class="btn btn-outline-primary btn-md"
                                    href="{% url 'edit_service_order_detail' service_order_header.pk service_order_detail.id %}"
-                                   role="button">{% trans 'Edit' %}</a>
-                                <a class="btn btn-outline-danger btn-sm"
+                                   role="button"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a class="btn btn-outline-danger btn-md"
                                    href="{% url 'delete_service_order_detail' service_order_header.id service_order_detail.id %}"
-                                   role="button">{% trans 'Delete' %}</a>
+                                   role="button"><i class="fa-solid fa-trash"></i></a>
                             {% endif %}
                         </td>
                     {% endif %}

@@ -38,13 +38,13 @@
                         <td>{{ service_order.serviced_on }}</td>
                         <td>
                             {% if perms.main.change_serviceorderheader %}
-                                <a class="btn btn-outline-info btn-sm"
+                                <a class="btn btn-outline-info btn-md"
                                    href="{% url 'detail_service_order' service_order.id %}"
-                                   role="button">{% trans 'Detail' %}</a>
+                                   role="button"><i class="fa-solid fa-circle-info"></i></a>
                                 {% if perms.main.change_serviceorderheader %}
-                                    <a class="btn btn-outline-danger btn-sm"
+                                    <a class="btn btn-outline-danger btn-md"
                                        href="{% url 'delete_service_order' service_order.id %}"
-                                       role="button">{% trans 'Delete' %}</a>
+                                       role="button"><i class="fa-solid fa-trash"></i></a>
                                 {% endif %}
                             {% endif %}
                     </tr>

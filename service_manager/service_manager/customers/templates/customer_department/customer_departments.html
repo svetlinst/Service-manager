@@ -11,7 +11,7 @@
                     <input type="hidden" id="show_deps" name="show_departments" value="t">
                     <button type="submit" class="btn btn-outline-primary"
                             href="#">
-                        {% trans 'search' %}
+                        <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </div>
             </form>
@@ -39,12 +39,12 @@
                     <td>{{ department.name }}</td>
                     <td>
                         {% if perms.customers.change_customerdepartment %}
-                            <a class="btn btn-outline-primary btn-sm"
+                            <a class="btn btn-outline-primary btn-md"
                                href="{% url 'edit_customer_department' department.customer.pk department.pk %}"
-                               role="button">{% trans 'Edit' %}</a>
-                            <a class="btn btn-outline-danger btn-sm"
+                               role="button"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a class="btn btn-outline-danger btn-md"
                                href="{% url 'delete_customer_department' department.customer.pk department.pk %}"
-                               role="button">{% trans 'Delete' %}</a>
+                               role="button"><i class="fa-solid fa-trash"></i></a>
                         {% endif %}
                     </td>
                 </tr>

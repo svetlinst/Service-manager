@@ -95,9 +95,9 @@
                         <td>{{ service_order_header.total_amount_due|default_if_none:"" }}</td>
                         <td class="text-right">
                             {% if perms.main.view_serviceorderheader %}
-                                <a class="btn btn-outline-info btn-sm"
+                                <a class="btn btn-outline-info btn-md"
                                    href="{% url 'detail_service_order' service_order_header.id %}"
-                                   role="button">{% trans 'Detail' %}</a>
+                                   role="button"><i class="fa-solid fa-circle-info"></i></a>
                             {% endif %}
                         </td>
                     </tr>

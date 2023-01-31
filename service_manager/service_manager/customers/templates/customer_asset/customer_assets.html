@@ -10,7 +10,7 @@
                     <input type="hidden" id="show_assets" name="show_assets" value="t">
                     <button type="submit" class="btn btn-outline-primary"
                             href="#">
-                        {% trans 'search' %}
+                        <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </div>
             </form>
@@ -47,13 +47,13 @@
                     <td>{{ asset.asset.model_number }}</td>
                     <td>{{ asset.serial_number }}</td>
                     <td>{{ asset.product_number }}</td>
-                    <td class="text-right">
+                    <td class="text-end">
 
                         {% if perms.main.add_serviceorderheader %}
                             {% if not asset in assets_being_serviced %}
-                                <a class="btn btn-outline-success btn-sm"
+                                <a class="btn btn-outline-success btn-md"
                                    href="{% url 'create_service_order' asset.customer.id asset.pk %}"
-                                   role="button">{% trans 'Create Order' %}</a>
+                                   role="button"><i class="fa-solid fa-plus"></i></a>
                             {% else %}
                                 <i class="fa fa-cogs" title="In Service" aria-hidden="true"></i>
                                 <span class="tooltip-text">{% trans 'In Service' %}</span>
@@ -61,18 +61,18 @@
                         {% endif %}
 
                         {% if perms.customers.view_customerasset %}
-                            <a class="btn btn-outline-info btn-sm"
+                            <a class="btn btn-outline-info btn-md"
                                href="{% url 'customer_asset_detail' asset.customer.id asset.id %}"
-                               role="button">{% trans 'Detail' %}</a>
+                               role="button"><i class="fa-solid fa-circle-info"></i></a>
                         {% endif %}
 
                         {% if perms.customers.change_customerasset %}
-                            <a class="btn btn-outline-primary btn-sm"
+                            <a class="btn btn-outline-primary btn-md"
                                href="{% url 'edit_customer_asset' asset.customer.id asset.id %}"
-                               role="button">{% trans 'Edit' %}</a>
-                            <a class="btn btn-outline-danger btn-sm"
+                               role="button"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a class="btn btn-outline-danger btn-md"
                                href="{% url 'delete_customer_asset' asset.customer.id asset.id %}"
-                               role="button">{% trans 'Delete' %}</a>
+                               role="button"><i class="fa-solid fa-trash"></i></a>
                         {% endif %}
                     </td>
                 </tr>
