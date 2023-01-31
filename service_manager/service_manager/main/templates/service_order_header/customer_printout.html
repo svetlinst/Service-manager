@@ -56,35 +56,33 @@
 
 
         <section>
-            {% if order.status == 'Completed' %}
+            {% if order.status == _('Completed') %}
                 <hr>
                 <h3 class="track-order-sub-title">{% trans 'Service performed' %}</h3>
-                <div class="table-responsive-md">
-                    <table class="table table-sm table-striped text-center">
-                        <thead>
+                <table class="styled-table">
+                    <thead>
+                    <tr>
+                        <th>{% trans 'Material' %}</th>
+                        <th>{% trans 'Quantity' %}</th>
+                        <th>{% trans 'Unit Price' %}</th>
+                        <th>{% trans 'Discount' %}</th>
+                        <th>{% trans 'Unit Price (after discount)' %}</th>
+                        <th>{% trans 'Total Price' %}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for detail in order.serviceorderdetail_set.all %}
                         <tr>
-                            <th>{% trans 'Material' %}</th>
-                            <th>{% trans 'Quantity' %}</th>
-                            <th>{% trans 'Unit Price' %}</th>
-                            <th>{% trans 'Discount' %}</th>
-                            <th>{% trans 'Unit Price (after discount)' %}</th>
-                            <th>{% trans 'Total Price' %}</th>
+                            <td>{{ detail.material.name }}</td>
+                            <td>{{ detail.quantity|floatformat:1 }}</td>
+                            <td>{{ detail.material.price|floatformat:2 }} {% trans 'lv.' %}</td>
+                            <td>{{ detail.discount|floatformat:2 }}%</td>
+                            <td>{{ detail.discounted_price|floatformat:2 }} {% trans 'lv.' %}</td>
+                            <td>{{ detail.total_amount|floatformat:2 }} {% trans 'lv.' %}</td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        {% for detail in order.serviceorderdetail_set.all %}
-                            <tr>
-                                <td>{{ detail.material.name }}</td>
-                                <td>{{ detail.quantity|floatformat:1 }}</td>
-                                <td>{{ detail.material.price|floatformat:2 }} {% trans 'lv.' %}</td>
-                                <td>{{ detail.discount|floatformat:2 }}%</td>
-                                <td>{{ detail.discounted_price|floatformat:2 }} {% trans 'lv.' %}</td>
-                                <td>{{ detail.total_amount|floatformat:2 }} {% trans 'lv.' %}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+                    {% endfor %}
+                    </tbody>
+                </table>
                 <p class="amount-due">
                     <b>{% trans 'Total Amount Due' %}</b>: {{ order.total_amount_due }} {% trans 'lv.' %}</p>
             {% endif %}
@@ -93,18 +91,23 @@
         <hr>
 
         <section class="handover-info">
-            {% if order.status == 'Completed' %}
+            {% if order.status == _('Completed') %}
                 <p class="handover-left"><b>{% blocktrans %}Device has been handed over on{% endblocktrans %}
                     :</b> {{ order.completed_on|default_if_none:"" }}</p>
-                <p class="handover-left"><b>{% trans 'Handed over by' %}:</b> {{ order.completed_by }}</p>
+                <p class="handover-left">
+                    <b>{% trans 'Handed over by' %}:</b> {{ order.completed_by|default_if_none:"" }} <span
+                        class="handover-right"><b>{% trans 'Signature' %}:</b> ...........</span></p>
                 <p class="handover-left"><b>{% trans 'Accepted by' %}:</b> {{ order.handed_over_to|default_if_none:"" }}
+                    <span class="handover-right"><b>{% trans 'Signature' %}:</b> ...........</span>
                 </p>
             {% else %}
                 <p class="handover-left"><b>{% blocktrans %}Device has been handed over on{% endblocktrans %}
                     :</b> {{ order.created_on|default_if_none:"" }}</p>
                 <p class="handover-left">
-                    <b>{% trans 'Handed over by' %}:</b> {{ order.handed_over_by|default_if_none:"" }} <span class="handover-right"><b>{% trans 'Signature' %}:</b> ...........</span></p>
-                <p class="handover-left"><b>{% trans 'Accepted by' %}:</b> {{ order.accepted_by }} <span class="handover-right"><b>{% trans 'Signature' %}:</b> ...........</span></p>
+                    <b>{% trans 'Handed over by' %}:</b> {{ order.handed_over_by|default_if_none:"" }} <span
+                        class="handover-right"><b>{% trans 'Signature' %}:</b> ...........</span></p>
+                <p class="handover-left"><b>{% trans 'Accepted by' %}:</b> {{ order.accepted_by }} <span
+                        class="handover-right"><b>{% trans 'Signature' %}:</b> ...........</span></p>
             {% endif %}
         </section>
 

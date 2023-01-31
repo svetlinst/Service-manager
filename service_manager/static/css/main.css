@@ -120,3 +120,32 @@ span.handover-right {
 /*  margin: 0 auto;*/
 /*  width: 304px;*/
 /*}*/
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 4px 0;
+    font-size: 1em;
+    /*font-family: sans-serif;*/
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: rgb(181, 181, 181);
+    color: #000000;
+    text-align: center;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 4px 8px;
+    text-align: center;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}

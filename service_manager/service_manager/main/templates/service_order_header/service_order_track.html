@@ -44,8 +44,8 @@
             <hr>
 
             <section>
-                <h3 class="track-order-sub-title">{% trans 'Service performed' %}</h3>
-                {% if order.serviceorderdetail_set %}
+                {% if order.status == _('Completed') %}
+                    <h3 class="track-order-sub-title">{% trans 'Service performed' %}</h3>
                     <div class="table-responsive-md">
                         <table class="table table-sm table-striped text-center">
                             <thead>
@@ -72,15 +72,15 @@
                             </tbody>
                         </table>
                     </div>
-                    <p class="amount-due"><b>{% trans 'Total Amount Due' %}</b>: {{ order.total_amount_due }} {% trans 'lv.' %}</p>
-                {% else %}
-                    <p>{% trans 'None' %}</p>
+                    <p class="amount-due">
+                        <b>{% trans 'Total Amount Due' %}</b>: {{ order.total_amount_due }} {% trans 'lv.' %}</p>
                 {% endif %}
             </section>
         </main>
 
         <footer>
-            <p class="contact-info">{% blocktrans %}Address: Kysutendil, 29 Hristo Botev str., bl. 109; Phone number: (078) 55 06 00, (078) 55 31 70; Email: office@elcomis.com{% endblocktrans %}</p>
+            <p class="contact-info">{% blocktrans %}Address: Kysutendil, 29 Hristo Botev str., bl. 109; Phone number:
+                (078) 55 06 00, (078) 55 31 70; Email: office@elcomis.com{% endblocktrans %}</p>
         </footer>
     </section>
 
