@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-28 12:39+0000\n"
-"PO-Revision-Date: 2023-01-30 13:57+0000\n"
+"PO-Revision-Date: 2023-02-01 20:36+0200\n"
 "Last-Translator: Anonymous User <su@su.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -849,7 +849,7 @@ msgstr "Срок за изпълнение"
 
 #: service_manager/main/models.py:157
 msgid "Deleted"
-msgstr "Изтриване"
+msgstr "Изтрита"
 
 #: service_manager/main/models.py:159
 msgid "New"
