@@ -21,7 +21,7 @@
                     <td>{{ note.created_by }}</td>
                     <td>{{ note.created_on }}</td>
                     {# Allow only the creator of the given note to edit\delete it #}
-                    {% if not service_order_header.is_completed %}
+                    {% if not service_order_header.is_completed and service_order_header.active %}
                         <td>
                             <a class="btn btn-outline-info btn-md"
                                href="{% url 'service_order_note_detail' note.service_order.id note.pk %}"
@@ -41,6 +41,15 @@
                                    title="{% trans 'Delete' %}"
                                    role="button"><i class="fa-solid fa-trash"></i></a>
                             {% endif %}
+                        </td>
+                    {% else %}
+                        <td>
+                            <a class="btn btn-outline-info btn-md"
+                               href="{% url 'service_order_note_detail' note.service_order.id note.pk %}"
+                               role="button"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Detail' %}"><i class="fa-solid fa-circle-info"></i>
+                            </a>
                         </td>
                     {% endif %}
                 </tr>

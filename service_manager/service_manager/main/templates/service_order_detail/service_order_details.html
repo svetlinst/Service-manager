@@ -16,7 +16,7 @@
             <th scope="col">{% trans 'Discount' %}</th>
             <th scope="col">{% trans 'Unit Price' %}</th>
             <th scope="col">{% trans 'Total Amount' %}</th>
-            {% if not service_order_header.is_serviced %}
+            {% if not service_order_header.is_serviced and service_order_header.active %}
                 <th scope="col">{% trans 'Action' %}</th>
             {% endif %}
 
@@ -34,7 +34,7 @@
                     <td>{{ service_order_detail.discount|floatformat:"1" }}%</td>
                     <td>{{ service_order_detail.discounted_price|floatformat:"2" }}</td>
                     <td>{{ service_order_detail.total_amount|floatformat:"2" }}</td>
-                    {% if not service_order_header.is_serviced %}
+                    {% if not service_order_header.is_serviced and service_order_header.active %}
                         <td>
                             {% if perms.main.change_serviceorderdetail %}
                                 <a class="btn btn-outline-primary btn-md"
