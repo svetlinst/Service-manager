@@ -7,20 +7,27 @@
             <div class="col-md-8">
                 <form class="form" method="GET" action="">
                     <div class="input-group my-3">
-                        <input type="search" class="form-control rounded mr-3" placeholder="{% trans 'Search' %}" aria-label="Search"
+                        <input type="search" class="form-control rounded mr-3" placeholder="{% trans 'Search' %}"
+                               aria-label="Search"
                                aria-describedby="search-addon" name="search_value"/>
                         <button type="submit" class="btn btn-outline-primary"
+                                data-bs-toggle="tooltip"
+                                title="{% trans 'Search' %}"
                                 href="{% url 'customers_list' %}"><i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </div>
                 </form>
             </div>
             <div class="col-md-2 text-left align-self-center">
-                <a href="{% url 'customers_list' %}" class="btn btn-outline-warning btn-md"><i class="fa-solid fa-ban"></i></a>
+                <a href="{% url 'customers_list' %}" class="btn btn-outline-warning btn-md"
+                   data-bs-toggle="tooltip"
+                   title="{% trans 'Clear' %}">
+                    <i class="fa-solid fa-ban"></i></a>
             </div>
             {% if perms.customers.add_customer %}
                 <div class="col-md-2 text-right align-self-center">
-                    <a href="{% url 'create_customer' %}" class="btn btn-success btn-md float-end">{% trans 'Create New' %}</a>
+                    <a href="{% url 'create_customer' %}"
+                       class="btn btn-success btn-md float-end">{% trans 'Create New' %}</a>
                 </div>
             {% endif %}
         </div>
@@ -50,14 +57,21 @@
                         <td>{{ customer.vat }}</td>
                         <td>{{ customer.email_address }}</td>
                         <td>{{ customer.phone_number }}</td>
-                        <td>{% if customer.has_subscription %}{% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}</td>
-                        <td>{% if customer.is_regular_customer %}{% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}</td>
+                        <td>{% if customer.has_subscription %}{% trans 'Yes' %}{% else %}
+                            {% trans 'No' %}{% endif %}</td>
+                        <td>{% if customer.is_regular_customer %}{% trans 'Yes' %}{% else %}
+                            {% trans 'No' %}{% endif %}</td>
                         <td>
                             {% if perms.customers.change_customer %}
                                 <a class="btn btn-outline-primary btn-md"
                                    href="{% url 'customer_detail' customer.id %}"
+                                   data-bs-toggle="tooltip"
+                                   title="{% trans 'Manage' %}"
                                    role="button"><i class="fa-solid fa-list-check"></i></a>
-                                <a class="btn btn-outline-danger btn-md" href="{% url 'delete_customer' customer.id %}"
+                                <a class="btn btn-outline-danger btn-md"
+                                   href="{% url 'delete_customer' customer.id %}"
+                                   data-bs-toggle="tooltip"
+                                   title="{% trans 'Delete' %}"
                                    role="button"><i class="fa-solid fa-trash"></i></a>
                             {% endif %}
                         </td>

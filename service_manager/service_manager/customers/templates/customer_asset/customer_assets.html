@@ -9,6 +9,8 @@
                            aria-describedby="search-addon" name="search_value"/>
                     <input type="hidden" id="show_assets" name="show_assets" value="t">
                     <button type="submit" class="btn btn-outline-primary"
+                            data-bs-toggle="tooltip"
+                            title="{% trans 'Search' %}"
                             href="#">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
@@ -53,6 +55,8 @@
                             {% if not asset in assets_being_serviced %}
                                 <a class="btn btn-outline-success btn-md"
                                    href="{% url 'create_service_order' asset.customer.id asset.pk %}"
+                                   data-bs-toggle="tooltip"
+                                   title="{% trans 'Service' %}"
                                    role="button"><i class="fa-solid fa-plus"></i></a>
                             {% else %}
                                 <i class="fa fa-cogs" title="In Service" aria-hidden="true"></i>
@@ -63,15 +67,21 @@
                         {% if perms.customers.view_customerasset %}
                             <a class="btn btn-outline-info btn-md"
                                href="{% url 'customer_asset_detail' asset.customer.id asset.id %}"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Detail' %}"
                                role="button"><i class="fa-solid fa-circle-info"></i></a>
                         {% endif %}
 
                         {% if perms.customers.change_customerasset %}
                             <a class="btn btn-outline-primary btn-md"
                                href="{% url 'edit_customer_asset' asset.customer.id asset.id %}"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Edit' %}"
                                role="button"><i class="fa-solid fa-pen-to-square"></i></a>
                             <a class="btn btn-outline-danger btn-md"
                                href="{% url 'delete_customer_asset' asset.customer.id asset.id %}"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Delete' %}"
                                role="button"><i class="fa-solid fa-trash"></i></a>
                         {% endif %}
                     </td>

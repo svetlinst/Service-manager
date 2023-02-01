@@ -39,9 +39,13 @@
                             {% if perms.main.change_serviceorderdetail %}
                                 <a class="btn btn-outline-primary btn-md"
                                    href="{% url 'edit_service_order_detail' service_order_header.pk service_order_detail.id %}"
+                                   data-bs-toggle="tooltip"
+                                   title="{% trans 'Edit' %}"
                                    role="button"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <a class="btn btn-outline-danger btn-md"
                                    href="{% url 'delete_service_order_detail' service_order_header.id service_order_detail.id %}"
+                                   data-bs-toggle="tooltip"
+                                   title="{% trans 'Delete' %}"
                                    role="button"><i class="fa-solid fa-trash"></i></a>
                             {% endif %}
                         </td>
@@ -64,11 +68,13 @@
                     <p class="my-0">{% trans 'Customer' %}: {{ service_order_header.customer.name }}</p>
                     <p class="my-0"> {% trans 'Asset Serial Number' %}: {{ service_order_header.customer_asset.serial_number }}</p>
                     <p class="my-0"> {% trans 'Asset Product Number' %}: {{ service_order_header.customer_asset.product_number }}</p>
-                    <p class="my-2"><b>{% trans 'Total Amount Due' %}: {{ service_order_header.total_amount_due }}</b></p>
+                    <p class="my-2"><b>{% trans 'Total Amount Due' %}: {{ service_order_header.total_amount_due }}</b>
+                    </p>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">{% trans 'Close' %}</button>
+                    <button type="button" class="btn btn-sm btn-danger"
+                            data-bs-dismiss="modal">{% trans 'Close' %}</button>
                     {% if perms.main.change_serviceorderdetail %}
                         <a class="btn btn-sm btn-success"
                            href="{% url 'complete_service_order' service_order_header.pk %}">{% trans 'Confirm' %}</a>
@@ -90,7 +96,8 @@
                     <p class="my-0">{% blocktrans %}Please, confirm{% endblocktrans %}</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">{% trans 'Close' %}</button>
+                    <button type="button" class="btn btn-sm btn-danger"
+                            data-bs-dismiss="modal">{% trans 'Close' %}</button>
                     {% if perms.main.change_serviceorderheader %}
                         <a class="btn btn-sm btn-success"
                            href="{% url 'rollback_service_order' service_order_header.pk %}">{% trans 'Rollback' %}</a>

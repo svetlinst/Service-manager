@@ -10,6 +10,8 @@
                            aria-describedby="search-addon" name="departments"/>
                     <input type="hidden" id="show_deps" name="show_departments" value="t">
                     <button type="submit" class="btn btn-outline-primary"
+                            data-bs-toggle="tooltip"
+                            title="{% trans 'Search' %}"
                             href="#">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
@@ -41,9 +43,13 @@
                         {% if perms.customers.change_customerdepartment %}
                             <a class="btn btn-outline-primary btn-md"
                                href="{% url 'edit_customer_department' department.customer.pk department.pk %}"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Edit' %}"
                                role="button"><i class="fa-solid fa-pen-to-square"></i></a>
                             <a class="btn btn-outline-danger btn-md"
                                href="{% url 'delete_customer_department' department.customer.pk department.pk %}"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Delete' %}"
                                role="button"><i class="fa-solid fa-trash"></i></a>
                         {% endif %}
                     </td>

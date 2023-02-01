@@ -40,10 +40,14 @@
                             {% if perms.main.change_serviceorderheader %}
                                 <a class="btn btn-outline-info btn-md"
                                    href="{% url 'detail_service_order' service_order.id %}"
+                                   data-bs-toggle="tooltip"
+                                   title="{% trans 'Detail' %}"
                                    role="button"><i class="fa-solid fa-circle-info"></i></a>
                                 {% if perms.main.change_serviceorderheader %}
                                     <a class="btn btn-outline-danger btn-md"
                                        href="{% url 'delete_service_order' service_order.id %}"
+                                       data-bs-toggle="tooltip"
+                                       title="{% trans 'Delete' %}"
                                        role="button"><i class="fa-solid fa-trash"></i></a>
                                 {% endif %}
                             {% endif %}

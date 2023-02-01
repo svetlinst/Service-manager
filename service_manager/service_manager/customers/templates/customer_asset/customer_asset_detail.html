@@ -97,6 +97,8 @@
                             {% if perms.main.view_serviceorderheader %}
                                 <a class="btn btn-outline-info btn-md"
                                    href="{% url 'detail_service_order' service_order_header.id %}"
+                                   data-bs-toggle="tooltip"
+                                   title="{% trans 'Detail' %}"
                                    role="button"><i class="fa-solid fa-circle-info"></i></a>
                             {% endif %}
                         </td>

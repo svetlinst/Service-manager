@@ -12,17 +12,23 @@
                                    aria-label="Search"
                                    aria-describedby="search-addon" name="search_value"/>
                             <button type="submit" class="btn btn-outline-primary"
-                                    href="{% url 'asset_categories_list' %}"><i class="fa-solid fa-magnifying-glass"></i>
+                                    data-bs-toggle="tooltip"
+                                    title="{% trans 'Search' %}"
+                                    href="{% url 'asset_categories_list' %}"><i
+                                    class="fa-solid fa-magnifying-glass"></i>
                             </button>
                         </div>
                     </form>
                 </div>
                 <div class="col-md-2 text-left align-self-center">
                     <a href="{% url 'asset_categories_list' %}"
+                       data-bs-toggle="tooltip"
+                       title="{% trans 'Clear' %}"
                        class="btn btn-outline-warning btn-md"><i class="fa-solid fa-ban"></i></a>
                 </div>
                 <div class="col-md-2 text-right align-self-center">
-                    <a href="{% url 'create_asset_category' %}" class="btn btn-success btn-md float-end">{% trans 'Create New' %}</a>
+                    <a href="{% url 'create_asset_category' %}"
+                       class="btn btn-success btn-md float-end">{% trans 'Create New' %}</a>
                 </div>
             {% endif %}
         </div>
@@ -44,9 +50,14 @@
                             {% if perms.master_data.change_assetcategory %}
                                 <a class="btn btn-outline-primary btn-md"
                                    href="{% url 'edit_asset_category' asset_category.id %}"
+                                   data-bs-toggle="tooltip"
+                                   title="{% trans 'Edit' %}"
                                    role="button"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <a class="btn btn-outline-danger btn-md"
-                                   href="{% url 'delete_asset_category' asset_category.id %}" role="button"><i class="fa-solid fa-trash"></i></a>
+                                   href="{% url 'delete_asset_category' asset_category.id %}"
+                                   data-bs-toggle="tooltip"
+                                   title="{% trans 'Delete' %}"
+                                   role="button"><i class="fa-solid fa-trash"></i></a>
                             {% endif %}
                         </td>
                     </tr>
