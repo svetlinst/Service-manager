@@ -190,14 +190,14 @@
     </div>
 
     {#    Service order notes actions#}
-    {% if not service_order_header.pk|soh_is_completed_without_notes %}
+    {% if not service_order_header.pk|soh_is_completed_or_deleted_without_notes %}
         <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:0.5%">
             <div class="row">
                 <div class="col-md-12 text-right align-self-center my-1">
                     <div class="text-center">
                         <h4 class='text-secondary d-inline'>{% trans 'Notes' %}</h4>
                         {% if not service_order_header.is_completed %}
-                            {% if perms.main.add_serviceordernote %}
+                            {% if perms.main.add_serviceordernote and service_order_header.active %}
                                 <a href="{% url 'create_service_order_note' service_order_header.pk %}?next={{ request.path|urlencode }}"
                                    class="btn btn-success float-end">{% trans 'Add Note' %}</a>
                             {% endif %}
@@ -218,21 +218,23 @@
     {#    Action menu bar#}
     <div class="d-block rounded-lg bg-light" style="padding:2%">
         <div class="row">
-            {% if not service_order_header.is_serviced %}
-                <div class="col-md-12 text-right align-self-center">
-                    {% if perms.main.change_serviceorderdetail %}
-                        <a class="btn btn-outline-success float-end" href="#" data-bs-toggle="modal"
-                           data-bs-target="#complete_order_modal">{% trans 'Complete Service' %}</a>
-                    {% endif %}
-                </div>
-            {% elif not service_order_header.is_completed %}
-                {% if perms.main.change_serviceorderheader %}
-                    <div class="col-md-12 text-right align-self-center my-3">
-                        <a class="btn btn-outline-warning float-end" href="#" data-bs-toggle="modal"
-                           data-bs-target="#rollback_modal">{% trans 'Rollback Order' %}</a>
-                        <a class="btn btn-outline-success float-end me-2"
-                           href="{% url 'handover_service_order' service_order_header.id %}">{% trans 'Finalize Order' %}</a>
+            {% if service_order_header.active %}
+                {% if not service_order_header.is_serviced %}
+                    <div class="col-md-12 text-right align-self-center">
+                        {% if perms.main.change_serviceorderdetail %}
+                            <a class="btn btn-outline-success float-end" href="#" data-bs-toggle="modal"
+                               data-bs-target="#complete_order_modal">{% trans 'Complete Service' %}</a>
+                        {% endif %}
                     </div>
+                {% elif not service_order_header.is_completed %}
+                    {% if perms.main.change_serviceorderheader %}
+                        <div class="col-md-12 text-right align-self-center my-3">
+                            <a class="btn btn-outline-warning float-end" href="#" data-bs-toggle="modal"
+                               data-bs-target="#rollback_modal">{% trans 'Rollback Order' %}</a>
+                            <a class="btn btn-outline-success float-end me-2"
+                               href="{% url 'handover_service_order' service_order_header.id %}">{% trans 'Finalize Order' %}</a>
+                        </div>
+                    {% endif %}
                 {% endif %}
             {% endif %}
         </div>
