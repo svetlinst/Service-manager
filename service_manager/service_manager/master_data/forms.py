@@ -20,10 +20,10 @@ class CreateAssetForm(forms.ModelForm):
                 attrs={'class': 'form-control'},
             ),
             'brand': forms.Select(
-                attrs={'class': 'form-control'},
+                attrs={'class': 'form-select'},
             ),
             'category': forms.Select(
-                attrs={'class': 'form-control'},
+                attrs={'class': 'form-select'},
             ),
         }
 
@@ -41,7 +41,7 @@ class CreateMaterialForm(forms.ModelForm):
                 attrs={'class': 'form-control'},
             ),
             'category': forms.Select(
-                attrs={'class': 'form-control'},
+                attrs={'class': 'form-select'},
             ),
             'price': forms.NumberInput(
                 attrs={'class': 'form-control'},
