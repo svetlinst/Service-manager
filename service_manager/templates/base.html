@@ -45,13 +45,12 @@
                 {% if request.user.is_staff %}
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{% url 'admin:index' %}">{% trans 'Admin Panel' %}<span
-                                class="sr-only">(current)</span></a>
+                           href="{% url 'admin:index' %}">{% trans 'Admin Panel' %}</a>
                     </li>
                 {% endif %}
                 <li class="nav-item">
                     <a class="nav-link {% if url_name == 'index' %}active{% endif %}"
-                       href="{% url 'index' %}">{% trans 'Home' %}<span class="sr-only">(current)</span></a>
+                       href="{% url 'index' %}">{% trans 'Home' %}</a>
                 </li>
                 {% if request.user.is_authenticated %}
                     {% if perms.customers.view_customer %}
@@ -129,12 +128,11 @@
                 {% endif %}
                 <li class="nav-item">
                     <a class="nav-link {% if url_name == 'track_order_search' %}active{% endif %}"
-                       href="{% url 'track_order_search' %}">{% trans 'Track Order' %}<span
-                            class="sr-only">(current)</span></a>
+                       href="{% url 'track_order_search' %}">{% trans 'Track Order' %}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if url_name == 'contact_us' %}active{% endif %}"
-                       href="{% url 'contact_us' %}">{% trans 'Contact Us' %}<span class="sr-only">(current)</span></a>
+                       href="{% url 'contact_us' %}">{% trans 'Contact Us' %}</a>
                 </li>
             </ul>
 
