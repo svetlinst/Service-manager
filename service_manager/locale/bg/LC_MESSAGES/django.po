@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-28 12:39+0000\n"
-"PO-Revision-Date: 2023-02-01 20:36+0200\n"
+"PO-Revision-Date: 2023-02-05 21:17+0200\n"
 "Last-Translator: Anonymous User <su@su.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -1191,7 +1191,7 @@ msgstr "Материали"
 #: service_manager/main/templates/service_order_header/customer_printout.html:70
 #: service_manager/main/templates/service_order_header/service_order_track.html:57
 msgid "Unit Price (after discount)"
-msgstr "Единична цена (след отстъпка)"
+msgstr "Ед. цена (с отстъпка)"
 
 #: service_manager/main/templates/service_order_header/customer_printout.html:71
 #: service_manager/main/templates/service_order_header/service_order_track.html:58
