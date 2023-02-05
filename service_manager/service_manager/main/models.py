@@ -47,7 +47,7 @@ class ServiceOrderHeader(ActiveModel, BaseAuditEntity):
 
     send_emails = models.BooleanField(
         _('send emails'),
-        default=True,
+        default=False,
         null=False,
         blank=False,
     )
