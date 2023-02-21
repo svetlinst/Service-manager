@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 body {
     background-image: url('/static/background.jpg');
     -webkit-background-size: cover;
@@ -5,20 +7,115 @@ body {
     -o-background-size: cover;
     background-size: cover;
     background-attachment: fixed;
+    font-family: 'Montserrat', sans-serif;;
 }
 
 nav .logo {
     height: 50px;
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*left: 0;*/
 }
 
-/*body {*/
-/*    background: linear-gradient(rgba(0, 0, 0, 0.76), rgba(0, 0, 0, 0.5)), url('/static/background.tif');*/
-/*    background-attachment: fixed;*/
-/*    background-size: cover;*/
-/*}*/
+.navbar-menu-action-button {
+    font-size: 24px;
+    color: #149289;
+}
+
+/* CUSTOMERS */
+.card-items {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    gap: 18px;
+    margin-top: 18px;
+    margin-bottom: 24px;
+}
+
+.card-item {
+    min-width: 360px;
+    width: 30%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    padding: 20px 8px;
+    border: 1px solid lightgrey;
+}
+
+.card-item:hover {
+    scale: 1.1;
+}
+
+.card-header {
+    display: flex;
+    width: 100%;
+    justify-content: stretch;
+    margin-bottom: 16px;
+    align-items: center;
+    padding: 0 8px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.card-header .customer-id {
+    font-size: 12px;
+    flex-basis: 20%;
+    color: grey;
+}
+
+.card-header .customer-name {
+    flex-basis: 60%;
+    text-align: center;
+}
+
+.card-header .customer-icon {
+    font-size: 32px;
+    flex-basis: 20%;
+    text-align: end;
+}
+
+.ind-icon i {
+    color: lightcoral;
+}
+
+.bus-icon {
+    color: cadetblue;
+}
+
+.card-info {
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid lightgrey;
+    margin-bottom: 16px;
+}
+
+.card-info .info-text {
+    padding: 0;
+    margin: 4px;
+    font-weight: 500;
+}
+
+.card-info .info-text .info-text-detail {
+    color: #0d6efd;
+    font-weight: 300;
+}
+
+.card-info .info-text .info-text-detail .text-negative {
+    color: darkred;
+    font-weight: 500;
+}
+
+.card-info .info-text .info-text-detail .text-positive {
+    font-weight: 500;
+    color: green;
+}
+
+.card-actions {
+    display: flex;
+    padding: 0 24px;
+    justify-content: space-around;
+    align-items: center;
+}
 
 @page {
     size: Letter;

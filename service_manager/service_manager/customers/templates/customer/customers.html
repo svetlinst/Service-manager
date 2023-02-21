@@ -31,55 +31,110 @@
                 </div>
             {% endif %}
         </div>
-        <table class="table table-striped text-center">
-            <thead>
-            <tr>
-                <th scope="col">{% trans 'ID' %}</th>
-                <th scope="col">{% trans 'Name' %}</th>
-                <th scope="col">{% trans 'Type' %}</th>
-                <th scope="col">{% trans 'VAT' %}</th>
-                <th scope="col">{% trans 'E-mail' %}</th>
-                <th scope="col">{% trans 'Phone Number' %}</th>
-                <th scope="col">{% trans 'Subscription' %}</th>
-                <th scope="col">{% trans 'Regular' %}</th>
-                <th scope="col">{% trans 'Action' %}</th>
-            </tr>
-            </thead>
-            <tbody>
 
+        {% if object_list %}
+            <section class="card-items">
 
-            {% if object_list %}
                 {% for customer in object_list %}
-                    <tr>
-                        <td>{{ customer.id }}</td>
-                        <td>{{ customer.name }}</td>
-                        <td>{{ customer.type }}</td>
-                        <td>{{ customer.vat }}</td>
-                        <td>{{ customer.email_address }}</td>
-                        <td>{{ customer.phone_number }}</td>
-                        <td>{% if customer.has_subscription %}{% trans 'Yes' %}{% else %}
-                            {% trans 'No' %}{% endif %}</td>
-                        <td>{% if customer.is_regular_customer %}{% trans 'Yes' %}{% else %}
-                            {% trans 'No' %}{% endif %}</td>
-                        <td>
-                            {% if perms.customers.change_customer %}
-                                <a class="btn btn-outline-primary btn-md"
-                                   href="{% url 'customer_detail' customer.id %}"
-                                   data-bs-toggle="tooltip"
-                                   title="{% trans 'Manage' %}"
-                                   role="button"><i class="fa-solid fa-list-check"></i></a>
-                                <a class="btn btn-outline-danger btn-md"
-                                   href="{% url 'delete_customer' customer.id %}"
-                                   data-bs-toggle="tooltip"
-                                   title="{% trans 'Delete' %}"
-                                   role="button"><i class="fa-solid fa-trash"></i></a>
+                    <div class="card-item">
+                        <header class="card-header">
+                            <p class="customer-id">ID: {{ customer.id }}</p>
+                            <p class="customer-name"><b>{{ customer.name }}</b></p>
+
+                            {% if customer.type.name == 'Individual' %}
+                                <p class="customer-icon ind-icon">
+                                    <i class="fa-solid fa-person"></i>
+                                </p>
+                            {% else %}
+                                <p class="customer-icon bus-icon">
+                                    <i class="fa-solid fa-building"></i>
+                                </p>
                             {% endif %}
-                        </td>
-                    </tr>
+                        </header>
+                        <div class="card-info">
+                            <p class="info-text">{% trans 'VAT' %}: <span
+                                    class="info-text-detail">{{ customer.vat }}</span></p>
+                            <p class="info-text">{% trans 'E-mail' %}: <span
+                                    class="info-text-detail">{{ customer.email_address }}</span></p>
+                            <p class="info-text">{% trans 'Phone Number' %}: <span
+                                    class="info-text-detail">{{ customer.phone_number }}</span></p>
+                            <p class="info-text">{% trans 'Subscription' %}:
+                                <span class="info-text-detail">{% if customer.has_subscription %}
+                                    <span class="text-positive">{% trans 'Yes' %}</span>{% else %}
+                                    <span class="text-negative">{% trans 'No' %}</span>{% endif %}</span></p>
+                            <p class="info-text">{% trans 'Regular' %}:
+                                <span class="info-text-detail">{% if customer.is_regular_customer %}
+                                    <span class="text-positive">{% trans 'Yes' %}</span>{% else %}
+                                    <span class="text-negative">{% trans 'No' %}</span>{% endif %}</span></p>
+                        </div>
+                        <div class="card-actions">
+                            <a class="btn btn-outline-primary btn-md"
+                               href="{% url 'customer_detail' customer.id %}"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Manage' %}"
+                               role="button"><i class="fa-solid fa-list-check"></i></a>
+                            <a class="btn btn-outline-danger btn-md"
+                               href="{% url 'delete_customer' customer.id %}"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Delete' %}"
+                               role="button"><i class="fa-solid fa-trash"></i></a>
+                        </div>
+                    </div>
                 {% endfor %}
-            {% endif %}
-            </tbody>
-        </table>
+            </section>
+
+        {% endif %}
+
+
+        {#        <table class="table table-striped text-center">#}
+        {#            <thead>#}
+        {#            <tr>#}
+        {#                <th scope="col">{% trans 'ID' %}</th>#}
+        {#                <th scope="col">{% trans 'Name' %}</th>#}
+        {#                <th scope="col">{% trans 'Type' %}</th>#}
+        {#                <th scope="col">{% trans 'VAT' %}</th>#}
+        {#                <th scope="col">{% trans 'E-mail' %}</th>#}
+        {#                <th scope="col">{% trans 'Phone Number' %}</th>#}
+        {#                <th scope="col">{% trans 'Subscription' %}</th>#}
+        {#                <th scope="col">{% trans 'Regular' %}</th>#}
+        {#                <th scope="col">{% trans 'Action' %}</th>#}
+        {#            </tr>#}
+        {#            </thead>#}
+        {#            <tbody>#}
+        {##}
+        {##}
+        {#            {% if object_list %}#}
+        {#                {% for customer in object_list %}#}
+        {#                    <tr>#}
+        {#                        <td>{{ customer.id }}</td>#}
+        {#                        <td>{{ customer.name }}</td>#}
+        {#                        <td>{{ customer.type }}</td>#}
+        {#                        <td>{{ customer.vat }}</td>#}
+        {#                        <td>{{ customer.email_address }}</td>#}
+        {#                        <td>{{ customer.phone_number }}</td>#}
+        {#                        <td>{% if customer.has_subscription %}{% trans 'Yes' %}{% else %}#}
+        {#                            {% trans 'No' %}{% endif %}</td>#}
+        {#                        <td>{% if customer.is_regular_customer %}{% trans 'Yes' %}{% else %}#}
+        {#                            {% trans 'No' %}{% endif %}</td>#}
+        {#                        <td>#}
+        {#                            {% if perms.customers.change_customer %}#}
+        {#                                <a class="btn btn-outline-primary btn-md"#}
+        {#                                   href="{% url 'customer_detail' customer.id %}"#}
+        {#                                   data-bs-toggle="tooltip"#}
+        {#                                   title="{% trans 'Manage' %}"#}
+        {#                                   role="button"><i class="fa-solid fa-list-check"></i></a>#}
+        {#                                <a class="btn btn-outline-danger btn-md"#}
+        {#                                   href="{% url 'delete_customer' customer.id %}"#}
+        {#                                   data-bs-toggle="tooltip"#}
+        {#                                   title="{% trans 'Delete' %}"#}
+        {#                                   role="button"><i class="fa-solid fa-trash"></i></a>#}
+        {#                            {% endif %}#}
+        {#                        </td>#}
+        {#                    </tr>#}
+        {#                {% endfor %}#}
+        {#            {% endif %}#}
+        {#            </tbody>#}
+        {#        </table>#}
         {% include 'partials/paginator.html' %}
     </div>
 

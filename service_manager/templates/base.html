@@ -13,10 +13,11 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     {#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"#}
     {#          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">#}
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"/>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
     <script src="{% static 'js/main.js' %}"></script>
 </head>
 <body>
@@ -143,13 +144,16 @@
             <div class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    {% trans 'Language' %}
+                    <span class="navbar-menu-action-button"><i class="fa-solid fa-globe"></i></span>
                 </a>
                 <div class="dropdown-menu">
                     {% for language in languages %}
                         <a href="/{{ language.code }}/{{ request.get_full_path|slice:"4:" }}"
-                                {% if language.code == LANGUAGE_CODE %} class="dropdown-item active" {% else %}
-                           class="dropdown-item"{% endif %}>
+                            {% if language.code == LANGUAGE_CODE %}
+                                class="dropdown-item active"
+                            {% else %}
+                                class="dropdown-item"
+                            {% endif %}>
                             {{ language.name_local }}
                         </a>
                     {% endfor %}
@@ -159,11 +163,20 @@
             {#    Authentication#}
             <div class="d-flex">
                 {% if request.user.is_anonymous %}
-                    <a class="btn btn-light ms-3" href="{% url 'login_user' %}">{% trans 'Login' %}</a>
+                    <a class="btn btn-light ms-3" href="{% url 'login_user' %}"
+                       data-bs-toggle="tooltip"
+                       title="{% trans 'Login' %}"><span class="navbar-menu-action-button"><i
+                            class="fa-solid fa-right-from-bracket"></i></span></a>
                 {% else %}
                     <a class="btn btn-light ms-3"
-                       href="{% url 'edit_profile'  request.user.profile.pk %}">{% trans 'Profile' %}</a>
-                    <a class="btn btn-light ms-3" href="{% url 'logout_user' %}">{% trans 'Logout' %}</a>
+                       href="{% url 'edit_profile'  request.user.profile.pk %}"
+                       data-bs-toggle="tooltip"
+                       title="{% trans 'Profile' %}"><span class="navbar-menu-action-button"><i
+                            class="fa-solid fa-user"></i></span></a>
+                    <a class="btn btn-light ms-3" href="{% url 'logout_user' %}"
+                       data-bs-toggle="tooltip"
+                       title="{% trans 'Logout' %}"><span
+                            class="navbar-menu-action-button"><i class="fa-solid fa-right-from-bracket"></i></span></a>
                 {% endif %}
             </div>
 
