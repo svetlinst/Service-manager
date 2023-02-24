@@ -19,7 +19,7 @@ nav .logo {
     color: #149289;
 }
 
-/* CUSTOMERS */
+/*  CUSTOMERS   */
 .card-items {
     display: flex;
     width: 100%;
@@ -116,6 +116,78 @@ nav .logo {
     justify-content: space-around;
     align-items: center;
 }
+
+/*  SERVICE ORDERS  */
+
+.order-card-items {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.order-card-item {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    gap: 4px;
+    min-width: 1244px;
+    background-color: white;
+    border: 2px solid lightgrey;
+    align-items: center;
+    padding: 8px 4px;
+}
+
+.order-card-item.card-header {
+
+}
+
+.order-card-item.card-main.subscription {
+    background: rgb(19, 214, 91);
+    background: radial-gradient(circle, rgba(19, 214, 91, 0.3981967787114846) 0%, rgba(255, 255, 255, 0.36738445378151263) 100%);
+}
+
+.order-card-item.card-main.regular {
+    background: rgb(214, 169, 19);
+    background: radial-gradient(circle, rgba(214, 169, 19, 0.3981967787114846) 0%, rgba(255, 255, 255, 0.36738445378151263) 100%);
+}
+
+.order-card-item.card-main.sla {
+    background: rgb(19, 141, 214);
+    background: radial-gradient(circle, rgba(19, 141, 214, 0.3981967787114846) 0%, rgba(255, 255, 255, 0.36738445378151263) 100%);
+}
+
+.order-card-item.card-header {
+    border-color: black;
+}
+
+.order-card-item .card-item-text-content {
+    text-align: center;
+    flex-basis: 10%;
+    margin: 0;
+}
+
+.order-card-item.card-header {
+    font-weight: 600;
+}
+
+.order-card-item .actions-fixed {
+    flex-basis: 15%;
+}
+
+.order-list-title {
+    margin-top: 20px;
+    text-align: left;
+    font-weight: 500;
+    color: #149289;
+}
+
+.order-list-title:first-of-type {
+    margin-top: 4px;
+}
+
+/*  PRINT OUTS  */
 
 @page {
     size: Letter;
