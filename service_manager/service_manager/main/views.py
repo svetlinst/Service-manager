@@ -31,10 +31,40 @@ def get_index(request):
 class ServiceOrderHeaderPendingServiceListView(auth_mixins.PermissionRequiredMixin, views.ListView):
     model = ServiceOrderHeader
     template_name = 'service_order_header/list_views/service_orders_service.html'
-    ordering = ('created_on', 'customer')
-    RELATED_ENTITIES = ['serviceordernote_set', 'serviceorderdetail_set', ]
+    ordering = (
+        'service_level_agreement', 'customer__has_subscription', 'customer__is_regular_customer', 'created_on',
+        'customer')
+    RELATED_ENTITIES = ['serviceordernote_set', 'serviceorderdetail_set', 'customer']
 
     permission_required = 'main.view_serviceorderheader'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        queryset = self.get_queryset()
+
+        sla_orders = queryset.filter(service_level_agreement=True)
+
+        subscription_customers = queryset.filter(customer__has_subscription=True).exclude(
+            id__in=sla_orders.values_list('id', flat=True)
+        )
+
+        regular_customers = queryset.filter(customer__is_regular_customer=True).exclude(
+            Q(id__in=sla_orders.values_list('id', flat=True)) |
+            Q(id__in=subscription_customers.values_list('id', flat=True))
+        )
+
+        others = queryset.exclude(
+            Q(id__in=sla_orders.values_list('id', flat=True)) |
+            Q(id__in=subscription_customers.values_list('id', flat=True)) |
+            Q(id__in=regular_customers.values_list('id', flat=True))
+        )
+
+        context['sla_orders'] = sla_orders
+        context['subscription_customers'] = subscription_customers
+        context['regular_customers'] = regular_customers
+        context['others'] = others
+
+        return context
 
     def get_queryset(self):
         queryset = super().get_queryset()
