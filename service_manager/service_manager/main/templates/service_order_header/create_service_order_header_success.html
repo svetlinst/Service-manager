@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load common_tags %}
+{% load i18n %}
+{% block content %}
+    <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:0.5%">
+        <div class="text-center mb-4">
+            <h4 class='d-inline text-secondary mb-3'>{% trans 'Service order successfully created' %}</h4>
+        </div>
+        <div class="d-flex justify-content-center gap-3">
+            <a class="btn btn-success" style="width: 150px"
+               href="{% url 'customer_detail' service_order.customer.id %}">{% trans 'Create new' %}</a>
+            {% if perms.main.add_serviceorderdetail %}
+                <a class="btn btn-primary" style="width: 150px"
+                   href="{% url 'create_service_order_detail' service_order.id %}">{% trans 'View' %}</a>
+            {% else %}
+                <a class="btn btn-primary" style="width: 150px"
+                   href="{% url 'detail_service_order' service_order.id %}">{% trans 'View' %}</a>
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %}

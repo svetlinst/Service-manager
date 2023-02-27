@@ -106,7 +106,13 @@ class CreateServiceOrderHeader(auth_mixins.PermissionRequiredMixin, views.Create
     permission_required = 'main.add_serviceorderheader'
 
     def get_success_url(self):
-        return reverse_lazy('detail_service_order', kwargs={'pk': self.object.id})
+        return reverse_lazy(
+            'create_service_order_success',
+            kwargs=
+            {
+                'pk': self.object.id,
+            }
+        )
 
     def get_initial(self):
         customer_id = self.kwargs['customer_id']
@@ -147,8 +153,14 @@ class CreateServiceOrderHeader(auth_mixins.PermissionRequiredMixin, views.Create
         created_on = service_order.created_on
         slug = f'{hex(service_order.pk)}-{hex(created_on.year)}-{hex(created_on.month)}-{hex(created_on.day)}'
         service_order.slug = slugify(slug)
-
         return super().form_valid(form)
+
+
+class CreateServiceOrderSuccess(auth_mixins.PermissionRequiredMixin, views.DetailView):
+    model = ServiceOrderHeader
+    context_object_name = 'service_order'
+    template_name = 'service_order_header/create_service_order_header_success.html'
+    permission_required = 'main.view_serviceorderheader'
 
 
 class DeleteServiceOrderHeaderView(auth_mixins.PermissionRequiredMixin, views.DeleteView):

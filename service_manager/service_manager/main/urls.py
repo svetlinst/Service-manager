@@ -8,7 +8,7 @@ from service_manager.main.views import get_index, ServiceOrderHeaderPendingServi
     EditServiceOrderDetailView, DeleteServiceOrderDetailView, complete_service_order, CreateServiceOrderNoteView, \
     ServiceOrderNotesListView, EditServiceOrderNoteView, DeleteServiceOrderNoteView, DeleteServiceOrderHeaderView, \
     ServiceOrderHeaderServicedListView, rollback_service_order, HandoverServiceOrderView, ServiceOrderNoteDetailView, \
-    contact_us, TrackOrderDetailView, ServiceOrderPrintoutView, TrackOrderSearchFormView
+    contact_us, TrackOrderDetailView, ServiceOrderPrintoutView, TrackOrderSearchFormView, CreateServiceOrderSuccess
 
 urlpatterns = [
                   path('', get_index, name='index'),
@@ -21,6 +21,8 @@ urlpatterns = [
                   path('service_order/customer/<int:customer_id>/asset/<int:asset_id>/create/',
                        CreateServiceOrderHeader.as_view(),
                        name='create_service_order'),
+                  path('service_order/<int:pk>/success/', CreateServiceOrderSuccess.as_view(),
+                       name='create_service_order_success'),
                   path('service_order/delete/<int:pk>/', DeleteServiceOrderHeaderView.as_view(),
                        name='delete_service_order'),
                   path('service_order/<int:order_id>/service_order_detail/create/',
