@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-24 13:15+0200\n"
-"PO-Revision-Date: 2023-02-24 13:16+0200\n"
+"POT-Creation-Date: 2023-02-27 14:34+0200\n"
+"PO-Revision-Date: 2023-02-27 14:36+0200\n"
 "Last-Translator: Anonymous User <su@su.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -1100,33 +1100,48 @@ msgstr "Завършена на"
 msgid "Problem Description"
 msgstr "Описание на проблема"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:198
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:196
 msgid "Notes"
 msgstr "Бележки"
 
 #: service_manager/main/templates/service_order_header/core/service_order_details.html:202
-msgid "Add Note"
-msgstr "Добави бележка"
+#| msgid "Add Note"
+msgid "Add new"
+msgstr "Създай нов"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:212
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:210
 msgid "Click on the \"Add Note\" button to create a note."
 msgstr "Кликнете на бутон \"Добави бележка\" за да създадете бележка."
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:226
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:224
 msgid "Complete Service"
 msgstr "Завърши обслужване"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:233
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:231
 msgid "Rollback Order"
 msgstr "Върни обратно към сервиз"
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:235
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:233
 msgid "Finalize Order"
 msgstr "Финализирай поръчка"
 
 #: service_manager/main/templates/service_order_header/core/service_order_handover.html:4
 msgid "Order handover"
 msgstr "Предаване на поръчка"
+
+#: service_manager/main/templates/service_order_header/create_service_order_header_success.html:7
+msgid "Service order successfully created"
+msgstr "Поръчката беше създадена успешно"
+
+#: service_manager/main/templates/service_order_header/create_service_order_header_success.html:11
+#| msgid "Create New"
+msgid "Create new"
+msgstr "Създай нов"
+
+#: service_manager/main/templates/service_order_header/create_service_order_header_success.html:14
+#: service_manager/main/templates/service_order_header/create_service_order_header_success.html:17
+msgid "View"
+msgstr "Виж"
 
 #: service_manager/main/templates/service_order_header/customer_printout.html:10
 msgid "Customer Printout"
@@ -1246,7 +1261,6 @@ msgid "Pending Service Orders"
 msgstr "Поръчки в сервиз"
 
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:21
-#| msgid "Orders"
 msgid "SLA orders"
 msgstr "Срок за изпълнение"
 
@@ -1255,12 +1269,10 @@ msgid "Subscription customers orders"
 msgstr "Абонамент"
 
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:96
-#| msgid "is regular customer"
 msgid "Regular customers orders"
 msgstr "Редовен клиент"
 
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:134
-#| msgid "Orders"
 msgid "Other orders"
 msgstr "Други"
 
@@ -1307,11 +1319,11 @@ msgstr "Бележка"
 msgid "Edit note"
 msgstr "Редактирай бележка"
 
-#: service_manager/main/views.py:365
+#: service_manager/main/views.py:377
 msgid "The email message was sent."
 msgstr "Вашият имейл беше изпратен."
 
-#: service_manager/main/views.py:435
+#: service_manager/main/views.py:447
 msgid "Invalid Tracking number!"
 msgstr "Невалиден номер за проследяване"
 
@@ -1593,9 +1605,6 @@ msgstr "последна"
 #~ msgstr ""
 #~ "Адрес: Кюстендил, ул. Христо Ботев 20, блок 109, телефон: (078) 55 06 00, "
 #~ "(078) 55 31 70, имейл: office@elcomis.com"
-
-#~ msgid "View"
-#~ msgstr "Виж"
 
 #~ msgid ""
 #~ "Let's Get Down To\n"
