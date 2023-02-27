@@ -192,18 +192,16 @@
     {#    Service order notes actions#}
     {% if not service_order_header.pk|soh_is_completed_or_deleted_without_notes %}
         <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:0.5%">
-            <div class="row">
-                <div class="col-md-12 text-right align-self-center my-1">
-                    <div class="text-center">
-                        <h4 class='text-secondary d-inline'>{% trans 'Notes' %}</h4>
-                        {% if not service_order_header.is_completed %}
-                            {% if perms.main.add_serviceordernote and service_order_header.active %}
-                                <a href="{% url 'create_service_order_note' service_order_header.pk %}?next={{ request.path|urlencode }}"
-                                   class="btn btn-success float-end">{% trans 'Add Note' %}</a>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                </div>
+            <div class="d-flex text-center justify-content-center">
+                <h4 class='text-secondary d-block mx-auto'>{% trans 'Notes' %}</h4>
+                {% if not service_order_header.is_completed %}
+                    {% if perms.main.add_serviceordernote and service_order_header.active %}
+                        <a href="{% url 'create_service_order_note' service_order_header.pk %}?next={{ request.path|urlencode }}"
+                           class="btn btn-success d-block float-end"
+                           data-bs-toggle="tooltip"
+                           title="{% trans 'Add new' %}"><i class="fa-solid fa-plus"></i></a>
+                    {% endif %}
+                {% endif %}
             </div>
             {% if service_order_header.serviceordernote_set.all %}
                 {% include 'service_order_note/service_order_notes.html' %}
