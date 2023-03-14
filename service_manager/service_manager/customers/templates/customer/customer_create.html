@@ -7,17 +7,30 @@
         <div class="col-lg-6">
             <form method="post" action="{% url 'create_customer' %}">
                 {% csrf_token %}
-
                 {{ form.type.label_tag }}
                 {{ form.type }}
                 {{ form.name.label_tag }}
                 {{ form.name }}
                 {{ form.vat.label_tag }}
                 {{ form.vat }}
+                {% if form.vat.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ form.vat.errors }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
+
                 {{ form.email_address.label_tag }}
                 {{ form.email_address }}
                 {{ form.phone_number.label_tag }}
                 {{ form.phone_number }}
+                {% if form.phone_number.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ form.phone_number.errors }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
+
                 <div class="form-check form-switch">
                     {{ form.has_subscription.label }}
                     {{ form.has_subscription }}

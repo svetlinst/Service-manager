@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-02-27 14:34+0200\n"
-"PO-Revision-Date: 2023-02-27 14:36+0200\n"
+"PO-Revision-Date: 2023-03-14 14:49+0200\n"
 "Last-Translator: Anonymous User <su@su.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -776,7 +776,7 @@ msgstr "Моля, въведете единствено цифри."
 
 #: service_manager/customers/validators.py:14
 msgid "The allowed characters are: +, space and digits."
-msgstr "Позволените символи са: цифри, \"+\" и + \" \"."
+msgstr "Позволените символи са: цифри, интервал и плюс"
 
 #: service_manager/main/models.py:12 service_manager/main/models.py:16
 msgid "Customer office"
