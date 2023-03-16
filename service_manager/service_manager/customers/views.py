@@ -8,6 +8,7 @@ from service_manager.customers.forms import EditCustomerForm, CreateCustomerForm
     CreateCustomerDepartmentForm
 from service_manager.customers.models import Customer, CustomerAsset, CustomerRepresentative, CustomerDepartment
 from service_manager.main.models import ServiceOrderHeader
+from service_manager.master_data.models import AssetCategory, Brand, Asset
 
 
 class CustomersListView(auth_mixins.PermissionRequiredMixin, views.ListView):
@@ -130,6 +131,28 @@ class CreateCustomerAssetView(auth_mixins.PermissionRequiredMixin, views.CreateV
         if customer_id:
             customer = Customer.objects.prefetch_related('customerasset_set').filter(pk=customer_id).get()
             context['customer'] = customer
+
+        context['asset_categories'] = AssetCategory.objects.all()
+        context['brands'] = Brand.objects.all()
+        assets = Asset.objects.all()
+
+        # filter assets by brand
+        brand = self.request.GET.get('brands', None)
+        if brand:
+            brand = int(brand)
+            if brand > 0:
+                assets = assets.filter(brand__pk=brand)
+
+        # filter assets by category
+        category = self.request.GET.get('asset_categories', None)
+        if category:
+            category = int(category)
+            if category > 0:
+                assets = assets.filter(category__pk=category)
+
+        context['form'].fields['asset'].queryset = assets
+        context['asset_cnt'] = len(assets)
+
         return context
 
 

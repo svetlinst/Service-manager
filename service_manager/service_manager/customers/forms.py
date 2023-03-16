@@ -32,11 +32,6 @@ class CreateCustomerForm(EditCustomerForm):
 
 
 class CreateCustomerAssetForm(BootstrapFormMixin, forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['asset'].queryset = Asset.objects.all()
-        pass
-
     class Meta:
         model = CustomerAsset
         fields = ('asset', 'serial_number', 'product_number', 'inventory_number', 'location')

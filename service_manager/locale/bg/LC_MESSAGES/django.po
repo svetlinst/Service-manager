@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-27 14:34+0200\n"
-"PO-Revision-Date: 2023-03-16 09:20+0200\n"
+"POT-Creation-Date: 2023-03-16 15:09+0200\n"
+"PO-Revision-Date: 2023-03-16 15:10+0200\n"
 "Last-Translator: Anonymous User <su@su.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -48,8 +48,8 @@ msgid "Edit profile"
 msgstr "Редактирай профил"
 
 #: service_manager/accounts/templates/edit_profile.html:11
-#: service_manager/customers/templates/customer/customer_create.html:30
-#: service_manager/customers/templates/customer_asset/customer_asset_create.html:12
+#: service_manager/customers/templates/customer/customer_create.html:43
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:84
 #: service_manager/customers/templates/customer_asset/customer_asset_edit.html:13
 #: service_manager/customers/templates/customer_department/customer_department_create.html:12
 #: service_manager/customers/templates/customer_department/customer_department_edit.html:12
@@ -221,9 +221,9 @@ msgstr "Устройство"
 msgid "Create new customer"
 msgstr "Създай нов клиент"
 
-#: service_manager/customers/templates/customer/customer_create.html:29
+#: service_manager/customers/templates/customer/customer_create.html:42
 #: service_manager/customers/templates/customer/customer_edit.html:28
-#: service_manager/customers/templates/customer_asset/customer_asset_create.html:11
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:83
 #: service_manager/customers/templates/customer_asset/customer_asset_detail.html:7
 #: service_manager/customers/templates/customer_asset/customer_asset_edit.html:12
 #: service_manager/customers/templates/customer_department/customer_department_create.html:11
@@ -444,6 +444,7 @@ msgid "Search"
 msgstr "Търси"
 
 #: service_manager/customers/templates/customer/customers.html:24
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:24
 #: service_manager/master_data/templates/asset/assets.html:24
 #: service_manager/master_data/templates/asset_category/asset_categories.html:26
 #: service_manager/master_data/templates/brands/brands.html:24
@@ -451,7 +452,7 @@ msgstr "Търси"
 #: service_manager/master_data/templates/material_category/material_categories.html:26
 #: service_manager/master_data/templates/sla/service_level_agreements.html:25
 msgid "Clear"
-msgstr "изчисти"
+msgstr "Изчисти"
 
 #: service_manager/customers/templates/customer/customers.html:30
 #: service_manager/master_data/templates/asset/assets.html:29
@@ -511,6 +512,48 @@ msgstr "Изтриване"
 msgid "Create new customer asset"
 msgstr "Добавяне на ново устройство"
 
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:11
+#| msgid "Complete Service"
+msgid "Filter devices"
+msgstr "Филтриране на устройства"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:16
+#| msgid "filter"
+msgid "Filter"
+msgstr "Филтрирай"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:31
+#: service_manager/main/templates/service_order_header/create_service_order_header_success.html:11
+msgid "Create new"
+msgstr "Създай нов"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:41
+#| msgid "Asset Categories"
+msgid "Asset category"
+msgstr "Категории устройства"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:43
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:58
+msgid "All"
+msgstr "Всички"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:56
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:30
+#: service_manager/customers/templates/customer_asset/customer_assets.html:32
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:72
+#: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:12
+#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:10
+#: service_manager/master_data/templates/asset/assets.html:38
+#: service_manager/reports/templates/finished_orders.html:33
+#: templates/email_templates/service_order_created.html:7
+msgid "Brand"
+msgstr "Марка"
+
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:71
+#| msgid "Assets"
+msgid "Assets found"
+msgstr "Открити устройства"
+
 #: service_manager/customers/templates/customer_asset/customer_asset_delete.html:6
 msgid "Are you sure you want to delete Asset with SN"
 msgstr "Сигурни ли сте, че искате да изтриете устройство със сериен номер"
@@ -543,17 +586,6 @@ msgstr "Устройство"
 #: service_manager/reports/templates/finished_orders.html:32
 msgid "Category"
 msgstr "Категория"
-
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:30
-#: service_manager/customers/templates/customer_asset/customer_assets.html:32
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:72
-#: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:12
-#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:10
-#: service_manager/master_data/templates/asset/assets.html:38
-#: service_manager/reports/templates/finished_orders.html:33
-#: templates/email_templates/service_order_created.html:7
-msgid "Brand"
-msgstr "Марка"
 
 #: service_manager/customers/templates/customer_asset/customer_asset_detail.html:35
 #: service_manager/customers/templates/customer_asset/customer_assets.html:33
@@ -1105,7 +1137,6 @@ msgid "Notes"
 msgstr "Бележки"
 
 #: service_manager/main/templates/service_order_header/core/service_order_details.html:202
-#| msgid "Add Note"
 msgid "Add new"
 msgstr "Създай нов"
 
@@ -1132,11 +1163,6 @@ msgstr "Предаване на поръчка"
 #: service_manager/main/templates/service_order_header/create_service_order_header_success.html:7
 msgid "Service order successfully created"
 msgstr "Поръчката беше създадена успешно"
-
-#: service_manager/main/templates/service_order_header/create_service_order_header_success.html:11
-#| msgid "Create New"
-msgid "Create new"
-msgstr "Създай нов"
 
 #: service_manager/main/templates/service_order_header/create_service_order_header_success.html:14
 #: service_manager/main/templates/service_order_header/create_service_order_header_success.html:17

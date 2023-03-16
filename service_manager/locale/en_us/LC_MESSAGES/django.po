@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-27 14:34+0200\n"
+"POT-Creation-Date: 2023-03-16 15:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,8 +43,8 @@ msgid "Edit profile"
 msgstr ""
 
 #: service_manager/accounts/templates/edit_profile.html:11
-#: service_manager/customers/templates/customer/customer_create.html:30
-#: service_manager/customers/templates/customer_asset/customer_asset_create.html:12
+#: service_manager/customers/templates/customer/customer_create.html:43
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:84
 #: service_manager/customers/templates/customer_asset/customer_asset_edit.html:13
 #: service_manager/customers/templates/customer_department/customer_department_create.html:12
 #: service_manager/customers/templates/customer_department/customer_department_edit.html:12
@@ -209,9 +209,9 @@ msgstr ""
 msgid "Create new customer"
 msgstr ""
 
-#: service_manager/customers/templates/customer/customer_create.html:29
+#: service_manager/customers/templates/customer/customer_create.html:42
 #: service_manager/customers/templates/customer/customer_edit.html:28
-#: service_manager/customers/templates/customer_asset/customer_asset_create.html:11
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:83
 #: service_manager/customers/templates/customer_asset/customer_asset_detail.html:7
 #: service_manager/customers/templates/customer_asset/customer_asset_edit.html:12
 #: service_manager/customers/templates/customer_department/customer_department_create.html:11
@@ -432,6 +432,7 @@ msgid "Search"
 msgstr ""
 
 #: service_manager/customers/templates/customer/customers.html:24
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:24
 #: service_manager/master_data/templates/asset/assets.html:24
 #: service_manager/master_data/templates/asset_category/asset_categories.html:26
 #: service_manager/master_data/templates/brands/brands.html:24
@@ -499,6 +500,44 @@ msgstr ""
 msgid "Create new customer asset"
 msgstr ""
 
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:11
+msgid "Filter devices"
+msgstr ""
+
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:16
+msgid "Filter"
+msgstr ""
+
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:31
+#: service_manager/main/templates/service_order_header/create_service_order_header_success.html:11
+msgid "Create new"
+msgstr ""
+
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:41
+msgid "Asset category"
+msgstr ""
+
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:43
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:58
+msgid "All"
+msgstr ""
+
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:56
+#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:30
+#: service_manager/customers/templates/customer_asset/customer_assets.html:32
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:72
+#: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:12
+#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:10
+#: service_manager/master_data/templates/asset/assets.html:38
+#: service_manager/reports/templates/finished_orders.html:33
+#: templates/email_templates/service_order_created.html:7
+msgid "Brand"
+msgstr ""
+
+#: service_manager/customers/templates/customer_asset/customer_asset_create.html:71
+msgid "Assets found"
+msgstr ""
+
 #: service_manager/customers/templates/customer_asset/customer_asset_delete.html:6
 msgid "Are you sure you want to delete Asset with SN"
 msgstr ""
@@ -530,17 +569,6 @@ msgstr ""
 #: service_manager/master_data/templates/material/materials.html:38
 #: service_manager/reports/templates/finished_orders.html:32
 msgid "Category"
-msgstr ""
-
-#: service_manager/customers/templates/customer_asset/customer_asset_detail.html:30
-#: service_manager/customers/templates/customer_asset/customer_assets.html:32
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:72
-#: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:12
-#: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:10
-#: service_manager/master_data/templates/asset/assets.html:38
-#: service_manager/reports/templates/finished_orders.html:33
-#: templates/email_templates/service_order_created.html:7
-msgid "Brand"
 msgstr ""
 
 #: service_manager/customers/templates/customer_asset/customer_asset_detail.html:35
@@ -1116,10 +1144,6 @@ msgstr ""
 
 #: service_manager/main/templates/service_order_header/create_service_order_header_success.html:7
 msgid "Service order successfully created"
-msgstr ""
-
-#: service_manager/main/templates/service_order_header/create_service_order_header_success.html:11
-msgid "Create new"
 msgstr ""
 
 #: service_manager/main/templates/service_order_header/create_service_order_header_success.html:14

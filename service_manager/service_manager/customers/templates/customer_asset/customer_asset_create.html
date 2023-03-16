@@ -5,6 +5,78 @@
     <div class="row">
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
+            <div class="container-fluid bg-light mt-3 mb-5 pt-3">
+                <form class="form" method="GET" action="">
+                    <div class="d-flex justify-content-between">
+                        <h4>{% trans 'Filter devices' %}</h4>
+                        <div class="d-flex">
+
+                            <button type="submit" class="btn btn-outline-primary"
+                                    data-bs-toggle="tooltip"
+                                    title="{% trans 'Filter' %}"
+                                    href="{% url 'create_customer_asset' customer.pk %}"><i
+                                    class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+
+                            <a href="{% url 'create_customer_asset' customer.pk %}"
+                               class="btn btn-outline-warning btn-md mx-1"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Clear' %}">
+                                <i class="fa-solid fa-ban"></i>
+                            </a>
+
+                            <a href="{% url 'create_asset' %}"
+                               class="btn btn-outline-success btn-md mx-1"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Create new' %}">
+                                <i class="fa-solid fa-plus"></i>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="asset_categories"
+                                   style="display: inline-block">{% trans 'Asset category' %}:</label>
+                            <select class=" form-select" name="asset_categories" id="asset_categories">
+                                <option value="-1">{% trans 'All' %}</option>
+                                {% for asset_category in asset_categories %}
+                                    {% if 'asset_categories' in request.GET and request.GET.asset_categories == asset_category.id|stringformat:"i" %}
+                                        <option value="{{ asset_category.id }}"
+                                                selected>{{ asset_category.name }}</option>
+                                    {% else %}
+                                        <option value="{{ asset_category.id }}">{{ asset_category.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="brands" style="display: inline-block">{% trans 'Brand' %}:</label>
+                            <select class=" form-select" name="brands" id="brands">
+                                <option value="-1">{% trans 'All' %}</option>
+                                {% for brand in brands %}
+                                    {% if 'brands' in request.GET and request.GET.brands == brand.id|stringformat:"i" %}
+                                        <option value="{{ brand.id }}" selected>{{ brand.name }}</option>
+                                    {% else %}
+                                        <option value="{{ brand.id }}">{{ brand.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <p class="{% if asset_cnt > 0 %}text-primary{% else %} text-danger {% endif %} pb-2">
+                    <i>{% trans 'Assets found' %}: {{ asset_cnt }}</i></p>
+            </div>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
             <form method="post" action="{% url 'create_customer_asset' customer.pk %}">
                 {% csrf_token %}
                 {{ form }}
