@@ -31,7 +31,12 @@ class CustomersListView(auth_mixins.PermissionRequiredMixin, views.ListView):
 
         search_text = self.request.GET.get('search_value', None)
         if search_text:
-            queryset = queryset.filter(Q(name__icontains=search_text) | Q(vat__icontains=search_text))
+            queryset = queryset.filter(
+                Q(name__icontains=search_text) |
+                Q(vat__icontains=search_text) |
+                Q(email_address__icontains=search_text) |
+                Q(phone_number__icontains=search_text)
+            )
         return queryset
 
 

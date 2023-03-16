@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-02-27 14:34+0200\n"
-"PO-Revision-Date: 2023-03-14 14:49+0200\n"
+"PO-Revision-Date: 2023-03-16 09:20+0200\n"
 "Last-Translator: Anonymous User <su@su.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -509,7 +509,7 @@ msgstr "Изтриване"
 
 #: service_manager/customers/templates/customer_asset/customer_asset_create.html:4
 msgid "Create new customer asset"
-msgstr "Създай нов клиент"
+msgstr "Добавяне на ново устройство"
 
 #: service_manager/customers/templates/customer_asset/customer_asset_delete.html:6
 msgid "Are you sure you want to delete Asset with SN"
@@ -1074,7 +1074,7 @@ msgstr "Приета от"
 #: service_manager/main/templates/service_order_header/core/service_order_details.html:148
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:16
 msgid "Accepted on"
-msgstr "Прета на"
+msgstr "Приета на"
 
 #: service_manager/main/templates/service_order_header/core/service_order_details.html:158
 msgid "Serviced by"
