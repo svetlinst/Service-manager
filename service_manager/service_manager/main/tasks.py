@@ -1,6 +1,7 @@
 from celery import shared_task
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from django.utils import translation
 
 from service_manager import settings
 from service_manager.core.utils import get_protocol_and_domain_as_string
@@ -19,14 +20,20 @@ def send_successful_service_order_creation_email(service_order_id):
         'protocol_domain': protocol_domain,
     }
 
-    message = render_to_string('email_templates/service_order_created.html', context)
-    send_mail(
-        subject='New Service order @ ServiceManager',
-        message=None,
-        html_message=message,
-        from_email=settings.EMAIL_HOST_USER,
-        recipient_list=[user_mail],
-    )
+    cur_language = translation.get_language()
+
+    try:
+        translation.activate('bg')
+        message = render_to_string('email_templates/service_order_created.html', context)
+        send_mail(
+            subject='New Service order @ ServiceManager',
+            message=None,
+            html_message=message,
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[user_mail],
+        )
+    finally:
+        translation.activate(cur_language)
 
 
 @shared_task()
