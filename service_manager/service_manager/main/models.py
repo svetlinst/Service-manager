@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator
 from django.db import models
 
 from service_manager.accounts.models import Profile, AppUser
@@ -168,7 +169,12 @@ class ServiceOrderHeader(ActiveModel, BaseAuditEntity):
 
 class ServiceOrderDetail(ActiveModel, BaseAuditEntity):
     quantity = models.FloatField(_('quantity'))
-    discount = models.FloatField(_('discount'))
+    discount = models.FloatField(
+        _('discount'),
+        validators=[
+            MinValueValidator(0),
+        ]
+    )
 
     service_order = models.ForeignKey(
         ServiceOrderHeader,
