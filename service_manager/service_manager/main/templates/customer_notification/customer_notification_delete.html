@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1>{% blocktrans %}Are you sure you want to delete Customer notification with ID{% endblocktrans %} {{ object.id }}?</h1>
+            <div class="m-auto d-flex justify-content-center">
+                <div class="m-2">
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="{% trans 'Confirm' %}" class="btn btn-danger"/>
+                        <input type="hidden" name="next" value="{{ request.GET.next }}">
+                    </form>
+                </div>
+                <div class="m-2">
+                    <a class="btn btn-primary" href="javascript:history.back()">{% trans 'No, go back' %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

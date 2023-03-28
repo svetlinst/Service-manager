@@ -13,9 +13,10 @@ from django.contrib.auth import mixins as auth_mixins
 
 from service_manager.core.utils import get_protocol_and_domain_as_string
 from service_manager.main.forms import CreateServiceOrderHeaderForm, CreateServiceOrderDetailForm, \
-    EditServiceOrderDetailForm, CreateServiceOrderNoteForm, HandoverServiceOrderForm, ContactForm, TrackOrderSearchForm
+    EditServiceOrderDetailForm, CreateServiceOrderNoteForm, HandoverServiceOrderForm, ContactForm, TrackOrderSearchForm, \
+    CreateCustomerNotificationForm
 from service_manager.main.models import Customer, CustomerAsset, ServiceOrderHeader, ServiceOrderDetail, \
-    ServiceOrderNote
+    ServiceOrderNote, CustomerNotification
 from service_manager.main.tasks import send_contact_us_email
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
@@ -457,3 +458,77 @@ class TrackOrderSearchFormView(views.FormView):
                 continue
             messages.error(self.request, error)
         return self.render_to_response(self.get_context_data(request=self.request, form=form))
+
+
+class CustomerNotificationsListView(auth_mixins.PermissionRequiredMixin, views.ListView):
+    model = CustomerNotification
+    template_name = 'customer_notification/customer_notifications.html'
+
+    # todo: create a new permission and change here and in the template as well
+    permission_required = 'main.view_serviceordernote'
+
+
+class CreateCustomerNotificationView(auth_mixins.PermissionRequiredMixin, views.CreateView):
+    model = CustomerNotification
+    template_name = 'customer_notification/customer_notification_create.html'
+    form_class = CreateCustomerNotificationForm
+
+    # todo: create a new permission and change here and in the template as well
+    permission_required = 'main.add_serviceordernote'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        service_order_id = self.kwargs['order_id']
+        if service_order_id:
+            service_order = ServiceOrderHeader.objects.filter(pk=service_order_id).get()
+            context['service_order'] = service_order
+
+        return context
+
+    def get_success_url(self):
+        go_to_next = self.request.POST.get('next', '/')
+        return go_to_next
+
+    def form_valid(self, form):
+        service_order_id = self.kwargs['order_id']
+        service_order_header = ServiceOrderHeader.objects.get(pk=service_order_id)
+
+        notification = form.save(commit=False)
+        notification.service_order = service_order_header
+        notification.notified_by = self.request.user
+        notification.notification_method = CustomerNotification.TYPE_CHOICE_PHONE
+        notification.service_order_current_status = service_order_header.status
+        notification.save()
+
+        return super().form_valid(form)
+
+
+class EditCustomerNotificationView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
+    model = CustomerNotification
+    template_name = 'customer_notification/customer_notification_edit.html'
+    form_class = CreateCustomerNotificationForm
+
+    permission_required = 'main.change_serviceordernote'
+
+    def get_success_url(self):
+        go_to_next = self.request.POST.get('next', '/')
+        return go_to_next
+
+
+class DeleteCustomerNotificationView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
+    model = CustomerNotification
+    template_name = 'customer_notification/customer_notification_delete.html'
+
+    permission_required = 'main.change_serviceordernote'
+
+    def get_success_url(self):
+        go_to_next = self.request.POST.get('next', '/')
+        return go_to_next
+
+
+class CustomerNotificationDetailView(auth_mixins.PermissionRequiredMixin, views.DetailView):
+    model = CustomerNotification
+    template_name = 'customer_notification/customer_notification_detail.html'
+
+    permission_required = 'main.view_serviceordernote'

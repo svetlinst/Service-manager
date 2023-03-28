@@ -227,3 +227,58 @@ class ServiceOrderNote(ActiveModel, BaseAuditEntity):
 
     class Meta:
         ordering = ('-created_on',)
+
+
+class CustomerNotification(ActiveModel, BaseAuditEntity):
+    COMMENT_MAX_LENGTH = 100
+    TYPE_CHOICE_PHONE = 1
+    TYPE_CHOICE_EMAIL = 2
+
+    TYPE_CHOICES = (
+        (TYPE_CHOICE_PHONE, _('By phone')),
+        (TYPE_CHOICE_EMAIL, _('By email')),
+    )
+
+    notified_on = models.DateTimeField(
+        verbose_name=_('notified_on'),
+        blank=False,
+        null=False,
+    )
+
+    notified_by = models.ForeignKey(
+        AppUser,
+        on_delete=models.CASCADE,
+        verbose_name=_('created_by'),
+    )
+
+    notification_method = models.CharField(
+        verbose_name=_('notification_method'),
+        max_length=2,
+        null=False,
+        blank=False,
+        choices=TYPE_CHOICES,
+        default=TYPE_CHOICE_PHONE,
+    )
+
+    comment = models.CharField(
+        verbose_name=_('comment'),
+        max_length=COMMENT_MAX_LENGTH,
+        null=True,
+        blank=False,
+    )
+
+    service_order_current_status = models.CharField(
+        verbose_name=_('service_order_current_status'),
+        max_length=20,
+        blank=False,
+        null=False,
+    )
+
+    service_order = models.ForeignKey(
+        ServiceOrderHeader,
+        on_delete=models.CASCADE,
+        verbose_name=_('service_order'),
+    )
+
+    class Meta:
+        ordering = ('-created_on',)

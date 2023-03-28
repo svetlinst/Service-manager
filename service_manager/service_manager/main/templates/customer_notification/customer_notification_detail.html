@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load customer_notifications %}
+{% load i18n %}
+{% block content %}
+    <div class="d-block mt-5 rounded-lg bg-light my-3" style="padding:2%">
+        {#    Header#}
+        <div class="container-fluid p-0 m-0">
+            <div class="text-center">
+                <h4 class="d-inline text-secondary">{% trans 'Customer Notification Detail' %}</h4>
+                <a class="d-inline float-end btn btn-secondary" href="javascript:history.back()">{% trans 'Go Back' %}</a>
+            </div>
+        </div>
+        {#Attributes#}
+        <div class="row text-left">
+            <div class="col-sm-6">
+                <p class="text-primary"><b class="text-dark">{% trans 'Notified By' %}: </b>{{ object.notified_by }}</p>
+            </div>
+            <div class="col-sm-6">
+                <p class="text-primary"><b class="text-dark">{% trans 'Notified On' %}: </b>{{ object.notified_on }}</p>
+            </div>
+        </div>
+        <div class="row text-left">
+            {% get_notification_value object.notification_method as notification_text %}
+            <div class="col-sm-6">
+                <p class="text-primary"><b class="text-dark">{% trans 'Notification method' %}: </b>{{ notification_text }}</p>
+            </div>
+            <div class="col-sm-6">
+                <p class="text-primary"><b class="text-dark">{% trans 'Service order status' %}: </b>{{ object.service_order_current_status }}</p>
+            </div>
+        </div>
+        {#        Notes#}
+        <p class="text-primary"><b class="text-dark">{% trans 'Comment' %}:</b></p>
+        <div class="text-left"><i>{{ object.comment }}</i></div>
+    </div>
+{% endblock %}

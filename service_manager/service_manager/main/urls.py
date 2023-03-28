@@ -8,7 +8,9 @@ from service_manager.main.views import get_index, ServiceOrderHeaderPendingServi
     EditServiceOrderDetailView, DeleteServiceOrderDetailView, complete_service_order, CreateServiceOrderNoteView, \
     ServiceOrderNotesListView, EditServiceOrderNoteView, DeleteServiceOrderNoteView, DeleteServiceOrderHeaderView, \
     ServiceOrderHeaderServicedListView, rollback_service_order, HandoverServiceOrderView, ServiceOrderNoteDetailView, \
-    contact_us, TrackOrderDetailView, ServiceOrderPrintoutView, TrackOrderSearchFormView, CreateServiceOrderSuccess
+    contact_us, TrackOrderDetailView, ServiceOrderPrintoutView, TrackOrderSearchFormView, CreateServiceOrderSuccess, \
+    CustomerNotificationsListView, CreateCustomerNotificationView, EditCustomerNotificationView, \
+    DeleteCustomerNotificationView, CustomerNotificationDetailView
 
 urlpatterns = [
                   path('', get_index, name='index'),
@@ -55,4 +57,14 @@ urlpatterns = [
                        name='customer_printout'),
                   path('service_order/track_order_search/', TrackOrderSearchFormView.as_view(),
                        name='track_order_search'),
+                  path('service_order/<int:order_id>/customer_notifications/', CustomerNotificationsListView.as_view(),
+                       name='customer_notifications'),
+                  path('service_order/<int:order_id>/customer_notifications/create/',
+                       CreateCustomerNotificationView.as_view(), name='create_customer_notification'),
+                  path('service_order/<int:order_id>/customer_notifications/<int:pk>/',
+                       EditCustomerNotificationView.as_view(), name='edit_customer_notification'),
+                  path('service_order/<int:order_id>/customer_notifications/delete/<int:pk>/',
+                       DeleteCustomerNotificationView.as_view(), name='delete_customer_notification'),
+                  path('service_order/<int:order_id>/customer_notifications/detail/<int:pk>/',
+                       CustomerNotificationDetailView.as_view(), name='customer_notification_detail'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

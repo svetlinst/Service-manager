@@ -213,6 +213,26 @@
         </div>
     {% endif %}
 
+    {#    Customer notifications actions#}
+    <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:0.5%">
+        <div class="d-flex text-center justify-content-center">
+            <h4 class='text-secondary d-block mx-auto'>{% trans 'Customer notifications' %}</h4>
+            {% if perms.main.add_serviceordernote %}
+                <a href="{% url 'create_customer_notification' service_order_header.pk %}?next={{ request.path|urlencode }}"
+                   class="btn btn-success d-block float-end"
+                   data-bs-toggle="tooltip"
+                   title="{% trans 'Add new' %}"><i class="fa-solid fa-plus"></i></a>
+            {% endif %}
+        </div>
+        {% if service_order_header.customernotification_set.all %}
+            {% include 'customer_notification/customer_notifications.html' %}
+        {% else %}
+            <div class="text-center">
+                <p><i>{% blocktrans %}Click on the "Add new" button to create a new record.{% endblocktrans %}</i></p>
+            </div>
+        {% endif %}
+    </div>
+
     {#    Action menu bar#}
     <div class="d-block rounded-lg bg-light" style="padding:2%">
         <div class="row">

@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 
 from service_manager.core.forms import BootstrapFormMixin
 from service_manager.customers.models import Customer, CustomerAsset, CustomerRepresentative, CustomerDepartment
-from service_manager.main.models import ServiceOrderHeader, ServiceOrderDetail, ServiceOrderNote
+from service_manager.main.models import ServiceOrderHeader, ServiceOrderDetail, ServiceOrderNote, CustomerNotification
 from django.utils.translation import gettext_lazy as _
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
@@ -115,3 +115,17 @@ class TrackOrderSearchForm(forms.Form):
     )
 
     captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
+
+
+class CreateCustomerNotificationForm(BootstrapFormMixin, forms.ModelForm):
+    class Meta:
+        model = CustomerNotification
+        fields = ('notified_on', 'comment',)
+
+        widgets = {
+            'notified_on': forms.DateTimeInput(
+                attrs={
+                    'id': 'datetimepicker1Input',
+                },
+            ),
+        }

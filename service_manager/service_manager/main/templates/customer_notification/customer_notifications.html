@@ -1,0 +1,54 @@
+{% load customer_notifications %}
+{% load i18n %}
+{% block content %}
+    <table class="table table-striped text-center">
+        <thead>
+        <tr>
+            <th scope="col">{% trans 'ID' %}</th>
+            <th scope="col">{% trans 'Comment' %}</th>
+            <th scope="col">{% trans 'Notified by' %}</th>
+            <th scope="col">{% trans 'Notified on' %}</th>
+            <th scope="col">{% trans 'Notification method' %}</th>
+            <th scope="col">{% trans 'Service order current status' %}</th>
+            <th scope="col">{% trans 'Action' %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if service_order_header.customernotification_set.all %}
+            {% for notification in service_order_header.customernotification_set.all %}
+                <tr>
+                    <td>{{ notification.id }}</td>
+                    <td>{{ notification.comment|default_if_none:""|truncatechars:10 }}</td>
+                    <td>{{ notification.notified_by }}</td>
+                    <td>{{ notification.notified_on }}</td>
+                    {% get_notification_value notification.notification_method as notification_text %}
+                    <td>{% trans notification_text %}</td>
+                    <td>{{ notification.service_order_current_status }}</td>
+                    <td>
+                        {% if notification.notification_method == '1' %}
+                            <a class="btn btn-outline-info btn-md"
+                               href="{% url 'customer_notification_detail' notification.service_order.id notification.pk %}"
+                               role="button"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Detail' %}"><i class="fa-solid fa-circle-info"></i>
+                            </a>
+                        {% endif %}
+                        {% if request.user == notification.notified_by %}
+                            <a class="btn btn-outline-primary btn-md"
+                               href="{% url 'edit_customer_notification' notification.service_order.id notification.pk %}?next={{ request.path|urlencode }}"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Edit' %}"
+                               role="button"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a class="btn btn-outline-danger btn-md"
+                               href="{% url 'delete_customer_notification' notification.service_order.id notification.pk %}?next={{ request.path|urlencode }}"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Delete' %}"
+                               role="button"><i class="fa-solid fa-trash"></i></a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

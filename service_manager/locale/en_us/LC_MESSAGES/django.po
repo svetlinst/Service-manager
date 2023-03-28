@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-16 15:09+0200\n"
+"POT-Creation-Date: 2023-03-28 08:55+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,6 +49,8 @@ msgstr ""
 #: service_manager/customers/templates/customer_department/customer_department_create.html:12
 #: service_manager/customers/templates/customer_department/customer_department_edit.html:12
 #: service_manager/customers/templates/customer_representatives/customer_representatives_create.html:12
+#: service_manager/main/templates/customer_notification/customer_notification_create.html:34
+#: service_manager/main/templates/customer_notification/customer_notification_edit.html:34
 #: service_manager/main/templates/service_order_detail/service_order_detail_edit.html:12
 #: service_manager/main/templates/service_order_header/core/service_order_create.html:37
 #: service_manager/main/templates/service_order_header/core/service_order_handover.html:12
@@ -63,7 +65,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: service_manager/accounts/templates/login_user.html:4 templates/base.html:168
+#: service_manager/accounts/templates/login_user.html:4 templates/base.html:167
 msgid "Login"
 msgstr ""
 
@@ -181,7 +183,7 @@ msgstr ""
 
 #: service_manager/customers/models.py:111
 #: service_manager/customers/models.py:132
-#: service_manager/customers/models.py:179 service_manager/main/models.py:58
+#: service_manager/customers/models.py:179 service_manager/main/models.py:59
 msgid "customer"
 msgstr ""
 
@@ -218,6 +220,8 @@ msgstr ""
 #: service_manager/customers/templates/customer_department/customer_department_edit.html:11
 #: service_manager/customers/templates/customer_representatives/customer_representative_edit.html:12
 #: service_manager/customers/templates/customer_representatives/customer_representatives_create.html:11
+#: service_manager/main/templates/customer_notification/customer_notification_create.html:33
+#: service_manager/main/templates/customer_notification/customer_notification_edit.html:33
 #: service_manager/main/templates/service_order_detail/service_order_detail_edit.html:11
 #: service_manager/main/templates/service_order_header/core/service_order_create.html:36
 #: service_manager/main/templates/service_order_header/core/service_order_handover.html:11
@@ -258,6 +262,7 @@ msgstr ""
 #: service_manager/customers/templates/customer_asset/customer_asset_delete.html:11
 #: service_manager/customers/templates/customer_department/customer_department_delete.html:11
 #: service_manager/customers/templates/customer_representatives/customer_representative_delete.html:11
+#: service_manager/main/templates/customer_notification/customer_notification_delete.html:11
 #: service_manager/main/templates/service_order_detail/service_order_detail_delete.html:11
 #: service_manager/main/templates/service_order_detail/service_order_details.html:80
 #: service_manager/main/templates/service_order_header/core/service_order_delete.html:11
@@ -275,6 +280,7 @@ msgstr ""
 #: service_manager/customers/templates/customer_asset/customer_asset_delete.html:15
 #: service_manager/customers/templates/customer_department/customer_department_delete.html:15
 #: service_manager/customers/templates/customer_representatives/customer_representative_delete.html:15
+#: service_manager/main/templates/customer_notification/customer_notification_delete.html:16
 #: service_manager/main/templates/service_order_detail/service_order_detail_delete.html:15
 #: service_manager/main/templates/service_order_header/core/service_order_delete.html:15
 #: service_manager/main/templates/service_order_note/service_order_note_delete.html:16
@@ -296,6 +302,7 @@ msgstr ""
 #: service_manager/customers/templates/customer_asset/customer_assets.html:79
 #: service_manager/customers/templates/customer_department/customer_departments.html:47
 #: service_manager/customers/templates/customer_representatives/customer_representatives.html:53
+#: service_manager/main/templates/customer_notification/customer_notifications.html:40
 #: service_manager/main/templates/service_order_detail/service_order_details.html:43
 #: service_manager/main/templates/service_order_note/service_order_notes.html:36
 #: service_manager/master_data/templates/asset/asset_edit.html:12
@@ -385,7 +392,7 @@ msgstr ""
 
 #: service_manager/customers/templates/customer/customer_detail.html:39
 #: service_manager/master_data/templates/asset/assets.html:5
-#: templates/base.html:90
+#: templates/base.html:89
 msgid "Assets"
 msgstr ""
 
@@ -407,7 +414,7 @@ msgid "Update"
 msgstr ""
 
 #: service_manager/customers/templates/customer/customers.html:5
-#: templates/base.html:60
+#: templates/base.html:59
 msgid "Customers"
 msgstr ""
 
@@ -472,7 +479,7 @@ msgid "Regular"
 msgstr ""
 
 #: service_manager/customers/templates/customer/customers.html:74
-#: templates/base.html:86
+#: templates/base.html:85
 msgid "Manage"
 msgstr ""
 
@@ -480,6 +487,7 @@ msgstr ""
 #: service_manager/customers/templates/customer_asset/customer_assets.html:84
 #: service_manager/customers/templates/customer_department/customer_departments.html:52
 #: service_manager/customers/templates/customer_representatives/customer_representatives.html:58
+#: service_manager/main/templates/customer_notification/customer_notifications.html:45
 #: service_manager/main/templates/service_order_detail/service_order_details.html:48
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:50
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:50
@@ -633,6 +641,7 @@ msgstr ""
 #: service_manager/customers/templates/customer_asset/customer_assets.html:30
 #: service_manager/customers/templates/customer_department/customer_departments.html:31
 #: service_manager/customers/templates/customer_representatives/customer_representatives.html:31
+#: service_manager/main/templates/customer_notification/customer_notifications.html:7
 #: service_manager/main/templates/service_order_detail/service_order_details.html:11
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:9
 #: service_manager/main/templates/service_order_note/service_order_notes.html:6
@@ -681,6 +690,7 @@ msgstr ""
 #: service_manager/customers/templates/customer_asset/customer_assets.html:37
 #: service_manager/customers/templates/customer_department/customer_departments.html:33
 #: service_manager/customers/templates/customer_representatives/customer_representatives.html:36
+#: service_manager/main/templates/customer_notification/customer_notifications.html:13
 #: service_manager/main/templates/service_order_detail/service_order_details.html:20
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:20
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:18
@@ -697,6 +707,7 @@ msgstr ""
 
 #: service_manager/customers/templates/customer_asset/customer_asset_detail.html:101
 #: service_manager/customers/templates/customer_asset/customer_assets.html:71
+#: service_manager/main/templates/customer_notification/customer_notifications.html:33
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:44
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:44
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:81
@@ -794,127 +805,209 @@ msgstr ""
 msgid "The allowed characters are: +, space and digits."
 msgstr ""
 
-#: service_manager/main/models.py:12 service_manager/main/models.py:16
+#: service_manager/main/models.py:13 service_manager/main/models.py:17
 msgid "Customer office"
 msgstr ""
 
-#: service_manager/main/models.py:13 service_manager/main/models.py:17
+#: service_manager/main/models.py:14 service_manager/main/models.py:18
 msgid "Brought in"
 msgstr ""
 
-#: service_manager/main/models.py:21
+#: service_manager/main/models.py:22
 msgid "problem description"
 msgstr ""
 
-#: service_manager/main/models.py:27
+#: service_manager/main/models.py:28
 msgid "is serviced"
 msgstr ""
 
-#: service_manager/main/models.py:32
+#: service_manager/main/models.py:33
 msgid "is completed"
 msgstr ""
 
-#: service_manager/main/models.py:37
+#: service_manager/main/models.py:38
 msgid "serviced on"
 msgstr ""
 
-#: service_manager/main/models.py:43
+#: service_manager/main/models.py:44
 msgid "completed on"
 msgstr ""
 
-#: service_manager/main/models.py:49
+#: service_manager/main/models.py:50
 msgid "send emails"
 msgstr ""
 
-#: service_manager/main/models.py:64
+#: service_manager/main/models.py:65
 msgid "customer asset"
 msgstr ""
 
-#: service_manager/main/models.py:72
+#: service_manager/main/models.py:73
 msgid "department"
 msgstr ""
 
-#: service_manager/main/models.py:81
+#: service_manager/main/models.py:82
 msgid "handed over by"
 msgstr ""
 
-#: service_manager/main/models.py:90
+#: service_manager/main/models.py:91
 msgid "accepted by"
 msgstr ""
 
-#: service_manager/main/models.py:99
+#: service_manager/main/models.py:100
 msgid "serviced by"
 msgstr ""
 
-#: service_manager/main/models.py:108
+#: service_manager/main/models.py:109
 msgid "completed by"
 msgstr ""
 
-#: service_manager/main/models.py:117
+#: service_manager/main/models.py:118
 msgid "handed over to"
 msgstr ""
 
-#: service_manager/main/models.py:121
+#: service_manager/main/models.py:122
 msgid "packaging"
 msgstr ""
 
-#: service_manager/main/models.py:128
+#: service_manager/main/models.py:129
 msgid "place of service"
 msgstr ""
 
-#: service_manager/main/models.py:142
+#: service_manager/main/models.py:143
 msgid "service_level_agreement"
 msgstr ""
 
-#: service_manager/main/models.py:157
+#: service_manager/main/models.py:158
 msgid "Deleted"
 msgstr ""
 
-#: service_manager/main/models.py:159
+#: service_manager/main/models.py:160
 msgid "New"
 msgstr ""
 
-#: service_manager/main/models.py:161
+#: service_manager/main/models.py:162
 msgid "Serviced"
 msgstr ""
 
-#: service_manager/main/models.py:163
+#: service_manager/main/models.py:164
 #: service_manager/main/templates/service_order_header/customer_printout.html:59
 #: service_manager/main/templates/service_order_header/customer_printout.html:94
 #: service_manager/main/templates/service_order_header/service_order_track.html:47
 msgid "Completed"
 msgstr ""
 
-#: service_manager/main/models.py:170
+#: service_manager/main/models.py:171
 msgid "quantity"
 msgstr ""
 
-#: service_manager/main/models.py:171
+#: service_manager/main/models.py:173
 msgid "discount"
 msgstr ""
 
-#: service_manager/main/models.py:176 service_manager/main/models.py:219
+#: service_manager/main/models.py:182 service_manager/main/models.py:225
+#: service_manager/main/models.py:280
 msgid "service_order"
 msgstr ""
 
-#: service_manager/main/models.py:182
+#: service_manager/main/models.py:188
 msgid "material"
 msgstr ""
 
-#: service_manager/main/models.py:208
+#: service_manager/main/models.py:214
 msgid "note"
 msgstr ""
 
-#: service_manager/main/models.py:213
+#: service_manager/main/models.py:219 service_manager/main/models.py:251
 msgid "created_by"
 msgstr ""
 
-#: service_manager/main/templates/contact_us.html:4 templates/base.html:136
+#: service_manager/main/models.py:238
+msgid "By phone"
+msgstr ""
+
+#: service_manager/main/models.py:239
+msgid "By email"
+msgstr ""
+
+#: service_manager/main/models.py:243
+msgid "notified_on"
+msgstr ""
+
+#: service_manager/main/models.py:255
+msgid "notification_method"
+msgstr ""
+
+#: service_manager/main/models.py:264
+msgid "comment"
+msgstr ""
+
+#: service_manager/main/models.py:271
+msgid "service_order_current_status"
+msgstr ""
+
+#: service_manager/main/templates/contact_us.html:4 templates/base.html:135
 msgid "Contact Us"
 msgstr ""
 
 #: service_manager/main/templates/contact_us.html:11
 msgid "Send Question"
+msgstr ""
+
+#: service_manager/main/templates/customer_notification/customer_notification_create.html:4
+msgid "Create new customer notification"
+msgstr ""
+
+#: service_manager/main/templates/customer_notification/customer_notification_create.html:14
+#: service_manager/main/templates/customer_notification/customer_notification_edit.html:14
+#: service_manager/main/templates/customer_notification/customer_notifications.html:10
+msgid "Notified on"
+msgstr ""
+
+#: service_manager/main/templates/customer_notification/customer_notification_delete.html:6
+msgid "Are you sure you want to delete Customer notification with ID"
+msgstr ""
+
+#: service_manager/main/templates/customer_notification/customer_notification_detail.html:9
+msgid "Customer Notification Detail"
+msgstr ""
+
+#: service_manager/main/templates/customer_notification/customer_notification_detail.html:10
+#: service_manager/main/templates/service_order_note/service_order_note_detail.html:9
+msgid "Go Back"
+msgstr ""
+
+#: service_manager/main/templates/customer_notification/customer_notification_detail.html:16
+msgid "Notified By"
+msgstr ""
+
+#: service_manager/main/templates/customer_notification/customer_notification_detail.html:19
+msgid "Notified On"
+msgstr ""
+
+#: service_manager/main/templates/customer_notification/customer_notification_detail.html:25
+#: service_manager/main/templates/customer_notification/customer_notifications.html:11
+msgid "Notification method"
+msgstr ""
+
+#: service_manager/main/templates/customer_notification/customer_notification_detail.html:28
+msgid "Service order status"
+msgstr ""
+
+#: service_manager/main/templates/customer_notification/customer_notification_detail.html:32
+#: service_manager/main/templates/customer_notification/customer_notifications.html:8
+msgid "Comment"
+msgstr ""
+
+#: service_manager/main/templates/customer_notification/customer_notification_edit.html:4
+msgid "Edit customer notification"
+msgstr ""
+
+#: service_manager/main/templates/customer_notification/customer_notifications.html:9
+msgid "Notified by"
+msgstr ""
+
+#: service_manager/main/templates/customer_notification/customer_notifications.html:12
+msgid "Service order current status"
 msgstr ""
 
 #: service_manager/main/templates/index.html:7
@@ -1119,6 +1212,7 @@ msgid "Notes"
 msgstr ""
 
 #: service_manager/main/templates/service_order_header/core/service_order_details.html:202
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:224
 msgid "Add new"
 msgstr ""
 
@@ -1126,15 +1220,23 @@ msgstr ""
 msgid "Click on the \"Add Note\" button to create a note."
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:224
-msgid "Complete Service"
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:219
+msgid "Customer notifications"
 msgstr ""
 
 #: service_manager/main/templates/service_order_header/core/service_order_details.html:231
+msgid "Click on the \"Add new\" button to create a new record."
+msgstr ""
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:244
+msgid "Complete Service"
+msgstr ""
+
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:251
 msgid "Rollback Order"
 msgstr ""
 
-#: service_manager/main/templates/service_order_header/core/service_order_details.html:233
+#: service_manager/main/templates/service_order_header/core/service_order_details.html:253
 msgid "Finalize Order"
 msgstr ""
 
@@ -1211,7 +1313,7 @@ msgstr ""
 
 #: service_manager/main/templates/service_order_header/customer_printout.html:65
 #: service_manager/main/templates/service_order_header/service_order_track.html:53
-#: templates/base.html:101
+#: templates/base.html:100
 msgid "Material"
 msgstr ""
 
@@ -1300,10 +1402,6 @@ msgstr ""
 msgid "Note Detail"
 msgstr ""
 
-#: service_manager/main/templates/service_order_note/service_order_note_detail.html:9
-msgid "Go Back"
-msgstr ""
-
 #: service_manager/main/templates/service_order_note/service_order_note_detail.html:15
 #: service_manager/main/templates/service_order_note/service_order_notes.html:8
 msgid "Created By"
@@ -1323,11 +1421,11 @@ msgstr ""
 msgid "Edit note"
 msgstr ""
 
-#: service_manager/main/views.py:377
+#: service_manager/main/views.py:378
 msgid "The email message was sent."
 msgstr ""
 
-#: service_manager/main/views.py:447
+#: service_manager/main/views.py:448
 msgid "Invalid Tracking number!"
 msgstr ""
 
@@ -1365,7 +1463,7 @@ msgid "Edit asset"
 msgstr ""
 
 #: service_manager/master_data/templates/asset_category/asset_categories.html:5
-#: templates/base.html:94
+#: templates/base.html:93
 msgid "Asset Categories"
 msgstr ""
 
@@ -1386,7 +1484,7 @@ msgid "Edit brand"
 msgstr ""
 
 #: service_manager/master_data/templates/brands/brands.html:5
-#: templates/base.html:97
+#: templates/base.html:96
 msgid "Brands"
 msgstr ""
 
@@ -1403,7 +1501,7 @@ msgid "Materials"
 msgstr ""
 
 #: service_manager/master_data/templates/material_category/material_categories.html:5
-#: templates/base.html:105
+#: templates/base.html:104
 msgid "Material Categories"
 msgstr ""
 
@@ -1424,7 +1522,7 @@ msgid "Edit service level agreement"
 msgstr ""
 
 #: service_manager/master_data/templates/sla/service_level_agreements.html:5
-#: templates/base.html:109
+#: templates/base.html:108
 msgid "Service Level Agreements"
 msgstr ""
 
@@ -1468,43 +1566,43 @@ msgstr ""
 msgid "Page not found"
 msgstr ""
 
-#: templates/base.html:49
+#: templates/base.html:48
 msgid "Admin Panel"
 msgstr ""
 
-#: templates/base.html:54
+#: templates/base.html:53
 msgid "Home"
 msgstr ""
 
-#: templates/base.html:69
+#: templates/base.html:68
 msgid "Orders"
 msgstr ""
 
-#: templates/base.html:73
+#: templates/base.html:72
 msgid "Pending Service"
 msgstr ""
 
-#: templates/base.html:75
+#: templates/base.html:74
 msgid "Service Completed"
 msgstr ""
 
-#: templates/base.html:121
+#: templates/base.html:120
 msgid "Reports"
 msgstr ""
 
-#: templates/base.html:125
+#: templates/base.html:124
 msgid "Finished Orders"
 msgstr ""
 
-#: templates/base.html:132
+#: templates/base.html:131
 msgid "Track Order"
 msgstr ""
 
-#: templates/base.html:174
+#: templates/base.html:173
 msgid "Profile"
 msgstr ""
 
-#: templates/base.html:178
+#: templates/base.html:177
 msgid "Logout"
 msgstr ""
 
