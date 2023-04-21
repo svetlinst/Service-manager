@@ -33,7 +33,9 @@ class Customer(ActiveModel, BaseAuditEntity):
         max_length=EMAIL_MAX_LENGTH,
         validators=(
             EmailValidator,
-        )
+        ),
+        null=True,
+        blank=True,
     )
 
     phone_number = models.CharField(
