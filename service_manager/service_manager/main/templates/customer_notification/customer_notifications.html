@@ -32,18 +32,18 @@
                                data-bs-toggle="tooltip"
                                title="{% trans 'Detail' %}"><i class="fa-solid fa-circle-info"></i>
                             </a>
-                        {% endif %}
-                        {% if request.user == notification.notified_by %}
-                            <a class="btn btn-outline-primary btn-md"
-                               href="{% url 'edit_customer_notification' notification.service_order.id notification.pk %}?next={{ request.path|urlencode }}"
-                               data-bs-toggle="tooltip"
-                               title="{% trans 'Edit' %}"
-                               role="button"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a class="btn btn-outline-danger btn-md"
-                               href="{% url 'delete_customer_notification' notification.service_order.id notification.pk %}?next={{ request.path|urlencode }}"
-                               data-bs-toggle="tooltip"
-                               title="{% trans 'Delete' %}"
-                               role="button"><i class="fa-solid fa-trash"></i></a>
+                            {% if request.user == notification.notified_by %}
+                                <a class="btn btn-outline-primary btn-md"
+                                   href="{% url 'edit_customer_notification' notification.service_order.id notification.pk %}?next={{ request.path|urlencode }}"
+                                   data-bs-toggle="tooltip"
+                                   title="{% trans 'Edit' %}"
+                                   role="button"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a class="btn btn-outline-danger btn-md"
+                                   href="{% url 'delete_customer_notification' notification.service_order.id notification.pk %}?next={{ request.path|urlencode }}"
+                                   data-bs-toggle="tooltip"
+                                   title="{% trans 'Delete' %}"
+                                   role="button"><i class="fa-solid fa-trash"></i></a>
+                            {% endif %}
                         {% endif %}
                     </td>
                 </tr>
