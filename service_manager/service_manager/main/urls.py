@@ -10,7 +10,10 @@ from service_manager.main.views import get_index, ServiceOrderHeaderPendingServi
     ServiceOrderHeaderServicedListView, rollback_service_order, HandoverServiceOrderView, ServiceOrderNoteDetailView, \
     contact_us, TrackOrderDetailView, ServiceOrderPrintoutView, TrackOrderSearchFormView, CreateServiceOrderSuccess, \
     CustomerNotificationsListView, CreateCustomerNotificationView, EditCustomerNotificationView, \
-    DeleteCustomerNotificationView, CustomerNotificationDetailView
+    DeleteCustomerNotificationView, CustomerNotificationDetailView, ServiceRequestsListView, CreateServiceRequestView, \
+    EditServiceRequestView, DeleteServiceRequestView, ServiceRequestDetailView, ServiceRequestAssignHandlerView, \
+    ServiceRequestUpdateResolutionView, finalize_service_request, reject_service_request, \
+    ServiceRequestCreateServiceOrder
 
 urlpatterns = [
                   path('', get_index, name='index'),
@@ -67,4 +70,21 @@ urlpatterns = [
                        DeleteCustomerNotificationView.as_view(), name='delete_customer_notification'),
                   path('service_order/<int:order_id>/customer_notifications/detail/<int:pk>/',
                        CustomerNotificationDetailView.as_view(), name='customer_notification_detail'),
+                  path('service_requests/', ServiceRequestsListView.as_view(), name='service_requests'),
+                  path('service_requests/detail/<int:pk>/', ServiceRequestDetailView.as_view(),
+                       name='service_request_detail'),
+                  path('service_requests/create/', CreateServiceRequestView.as_view(), name='create_service_request'),
+                  path('service_requests/<int:pk>/', EditServiceRequestView.as_view(), name='edit_service_request'),
+                  path('service_requests/<int:pk>/assign_handler/', ServiceRequestAssignHandlerView.as_view(),
+                       name='service_request_assign_handler'),
+                  path('service_requests/<int:pk>/update_resolution/', ServiceRequestUpdateResolutionView.as_view(),
+                       name='service_request_update_resolution'),
+                  path('service_requests/delete/<int:pk>/', DeleteServiceRequestView.as_view(),
+                       name='delete_service_request'),
+                  path('service_requests/<int:pk>/finalize/', finalize_service_request,
+                       name='finalize_service_request'),
+                  path('service_requests/<int:pk>/reject/', reject_service_request, name='reject_service_request'),
+                  path('service_requests/<int:pk>/create_service_order/<int:customer_id>/',
+                       ServiceRequestCreateServiceOrder.as_view(),
+                       name='service_request_create_order')
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

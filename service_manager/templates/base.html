@@ -74,6 +74,10 @@
                                    href="{% url 'service_orders_list_serviced' %}">{% trans 'Service Completed' %}</a>
                             </div>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if url_name == 'service_requests' %}active{% endif %}"
+                               href="{% url 'service_requests' %}?period=1">{% trans 'Requests' %}</a>
+                        </li>
                     {% endif %}
 
                     {% if request.user|user_has_master_data_permissions %}
@@ -126,14 +130,19 @@
                         </li>
                     {% endif %}
                 {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link {% if url_name == 'track_order_search' %}active{% endif %}"
-                       href="{% url 'track_order_search' %}">{% trans 'Track Order' %}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if url_name == 'contact_us' %}active{% endif %}"
-                       href="{% url 'contact_us' %}">{% trans 'Contact Us' %}</a>
-                </li>
+
+                {% if not request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if url_name == 'track_order_search' %}active{% endif %}"
+                           href="{% url 'track_order_search' %}">{% trans 'Track Order' %}</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {% if url_name == 'contact_us' %}active{% endif %}"
+                           href="{% url 'contact_us' %}">{% trans 'Contact Us' %}</a>
+                    </li>
+                {% endif %}
+            
             </ul>
 
             {#        Language selection#}
@@ -148,11 +157,11 @@
                 <div class="dropdown-menu">
                     {% for language in languages %}
                         <a href="/{{ language.code }}/{{ request.get_full_path|slice:"4:" }}"
-                            {% if language.code == LANGUAGE_CODE %}
-                                class="dropdown-item active"
-                            {% else %}
-                                class="dropdown-item"
-                            {% endif %}>
+                                {% if language.code == LANGUAGE_CODE %}
+                           class="dropdown-item active"
+                                {% else %}
+                           class="dropdown-item"
+                                {% endif %}>
                             {{ language.name_local }}
                         </a>
                     {% endfor %}

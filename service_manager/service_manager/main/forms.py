@@ -3,7 +3,8 @@ from django.core.exceptions import ValidationError
 
 from service_manager.core.forms import BootstrapFormMixin
 from service_manager.customers.models import Customer, CustomerAsset, CustomerRepresentative, CustomerDepartment
-from service_manager.main.models import ServiceOrderHeader, ServiceOrderDetail, ServiceOrderNote, CustomerNotification
+from service_manager.main.models import ServiceOrderHeader, ServiceOrderDetail, ServiceOrderNote, CustomerNotification, \
+    ServiceRequest
 from django.utils.translation import gettext_lazy as _
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
@@ -129,3 +130,71 @@ class CreateCustomerNotificationForm(BootstrapFormMixin, forms.ModelForm):
                 },
             ),
         }
+
+
+class CreateServiceRequestForm(BootstrapFormMixin, forms.ModelForm):
+    class Meta:
+        model = ServiceRequest
+        fields = ('customer', 'requestor_name', 'requestor_phone_number', 'problem_description')
+
+        widgets = {
+            'problem_description': forms.Textarea(
+                {
+                    'rows': 5
+                }
+            ),
+        }
+
+
+class ServiceRequestAssignHandlerForm(BootstrapFormMixin, forms.ModelForm):
+    class Meta:
+        model = ServiceRequest
+        fields = ('handled_by',)
+
+
+class ServiceRequestUpdateResolutionForm(BootstrapFormMixin, forms.ModelForm):
+    class Meta:
+        model = ServiceRequest
+        fields = ('resolution',)
+
+        widgets = {
+            'resolution': forms.Textarea(
+                {
+                    'rows': 5
+                }
+            ),
+        }
+
+
+class ServiceRequestFilteringForm(BootstrapFormMixin, forms.Form):
+    status_choices = [('0', _('All'))]
+    period_choices = [
+        (-1, _('All')), (0, _('Today')), (1, _('This week')), (2, _('Last week')),
+        (3, _('This month')), (4, _('Last month')), (5, _('Older')),
+    ]
+    status_choices.extend(ServiceRequest.TYPE_CHOICES)
+
+    status = forms.ChoiceField(
+        choices=status_choices,
+        required=False,
+        widget=forms.Select(
+            attrs={
+                'onchange': 'filter_form.submit();',
+            },
+        )
+    )
+
+    period = forms.ChoiceField(
+        choices=period_choices,
+        required=False,
+        widget=forms.Select(
+            attrs={
+                'onchange': 'filter_form.submit();',
+            },
+        )
+    )
+
+    search = forms.CharField(
+        required=False,
+        widget=forms.TextInput(),
+    )

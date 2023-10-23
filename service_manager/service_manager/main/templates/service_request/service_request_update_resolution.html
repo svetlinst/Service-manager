@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <h1 class='text-center'>{% trans 'Service request - update resolution' %}</h1>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <form method="post" id="service_order_form"
+                  action="{% url 'service_request_update_resolution' object.pk %}">
+                {% csrf_token %}
+
+                {{ form.resolution.label_tag }}
+                {{ form.resolution }}
+
+                <a class="btn btn-secondary mt-1 float-start" href="javascript:history.back()">{% trans 'Back' %}</a>
+                <button type="submit" class="btn btn-primary mt-1 float-end">{% trans 'Save' %}</button>
+            </form>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <div class="d-block mt-5 rounded-lg bg-light my-3" style="padding:2%">
+        <div class="row">
+            <div class="col-md-9 my-3">
+                <form class="form" method="GET" action="">
+                    <div class="input-group my-3">
+                        <input type="search" class="form-control rounded mr-3" placeholder="{% trans 'Search Assets' %}"
+                               aria-label="Search"
+                               aria-describedby="search-addon" name="search_value"/>
+                        <button type="submit" class="btn btn-outline-primary"
+                                data-bs-toggle="tooltip"
+                                title="{% trans 'Search' %}"
+                                href="#">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <table class="table table-striped text-center">
+            <thead>
+            <tr>
+                <th scope="col">{% trans 'ID' %}</th>
+                <th scope="col">{% trans 'Category' %}</th>
+                <th scope="col">{% trans 'Brand' %}</th>
+                <th scope="col">{% trans 'Model Name' %}</th>
+                <th scope="col">{% trans 'Model Number' %}</th>
+                <th scope="col">{% trans 'Serial Number' %}</th>
+                <th scope="col">{% trans 'Product Number' %}</th>
+                <th scope="col">{% trans 'Action' %}</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% if customer_assets %}
+                {% for asset in customer_assets %}
+                    <tr>
+                        <td>{{ asset.id }}</td>
+                        <td>{{ asset.asset.category }}</td>
+                        <td>{{ asset.asset.brand.name }}</td>
+                        <td>{{ asset.asset.model_name }}</td>
+                        <td>{{ asset.asset.model_number }}</td>
+                        <td>{{ asset.serial_number }}</td>
+                        <td>{{ asset.product_number }}</td>
+                        <td class="text-end">
+                            {% if perms.main.add_serviceorderheader %}
+                                {% if not asset in assets_being_serviced %}
+                                    <a class="btn btn-outline-success btn-md"
+                                       href="{% url 'create_service_order' asset.customer.id asset.pk %}?service_request_id={{ service_request_id }}"
+                                       data-bs-toggle="tooltip"
+                                       title="{% trans 'Service' %}"
+                                       role="button"><i class="fa-solid fa-plus"></i></a>
+                                {% else %}
+                                    <i class="fa fa-cogs" title="In Service" aria-hidden="true"></i>
+                                    <span class="tooltip-text">{% trans 'In Service' %}</span>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="100%">
+                        <p>
+                            {% trans 'No records matching your search' %}
+                        </p>
+                    </td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

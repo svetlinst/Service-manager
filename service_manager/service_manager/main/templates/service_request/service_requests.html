@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load common_tags %}
+{% load service_requests %}
+{% load i18n %}
+{% block content %}
+    <div class="d-block mt-5 rounded-lg bg-light my-3" style="padding:2%">
+        <div class="container-fluid d-flex justify-content-between align-items-center mb-3 p-0">
+            <p></p>
+            <h2 class='text-center text-secondary mb-3'>{% trans 'Service Requests' %}</h2>
+            <a href="{% url 'create_service_request' %}?next={{ request.path|urlencode }}"
+               class="btn btn-success btn-md">{% trans 'Create New' %}</a>
+        </div>
+        <div class="container-fluid justify-content-between align-items-center mb-3 p-0">
+            <form method="get" id="filter_form">
+                <div class="row">
+                    <div class="col-6">
+                        {{ filter_form.search.label }}
+                        {{ filter_form.search }}
+                    </div>
+                    <div class="col-2 align-self-end">
+                        <button type="submit" class="btn btn-outline-primary"
+                                data-bs-toggle="tooltip"
+                                title="{% trans 'Search' %}"
+                                href="{% url 'service_requests' %}"><i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        {% with period=filter_form.period.value status=filter_form.status.value %}
+                            <a href="{% url 'service_requests' %}?{% get_query_string_params search='' %}"
+                               class="btn btn-outline-warning btn-md"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Clear' %}">
+                                <i class="fa-solid fa-ban"></i></a>
+                        {% endwith %}
+
+                    </div>
+                    <div class="col-2">
+                        {{ filter_form.status.label }}
+                        {{ filter_form.status }}
+                    </div>
+                    <div class="col-2">
+                        {{ filter_form.period.label }}
+                        {{ filter_form.period }}
+                    </div>
+                </div>
+            </form>
+        </div>
+        <section class="order-card-items">
+            <div class="order-card-item card-header">
+                <p class="card-item-text-content">{% trans 'Customer' %}</p>
+                <p class="card-item-text-content">{% trans 'Problem Description' %}</p>
+                <p class="card-item-text-content">{% trans 'Requested By' %}</p>
+                <p class="card-item-text-content">{% trans 'Requested On' %}</p>
+                <p class="card-item-text-content">{% trans 'Phone number' %}</p>
+                <p class="card-item-text-content">{% trans 'Status' %}</p>
+                <p class="card-item-text-content">{% trans 'Accepted By' %}</p>
+                <p class="card-item-text-content">{% trans 'Handled By' %}</p>
+                <p class="card-item-text-content actions-fixed">{% trans 'Action' %}</p>
+            </div>
+            {% if object_list %}
+                <p class="order-list-title">{% trans 'Open service requests' %}: {{ open_service_requests_cnt }}</p>
+                {% for service_request in object_list %}
+                    <div class="order-card-item card-main">
+                        <p class="card-item-text-content">{{ service_request.customer.name }}</p>
+                        <p class="card-item-text-content">{{ service_request.problem_description|truncatechars:10 }}</p>
+                        <p class="card-item-text-content">{{ service_request.requestor_name }}</p>
+                        <p class="card-item-text-content">{{ service_request.created_on }}</p>
+                        <p class="card-item-text-content">{{ service_request.requestor_phone_number }}</p>
+                        {% get_status_value service_request.status as status_text %}
+                        <p class="card-item-text-content">{{ status_text }}</p>
+                        <p class="card-item-text-content">{{ service_request.accepted_by.profile_full_name }}</p>
+                        <p class="card-item-text-content">{{ service_request.handled_by.profile_full_name }}</p>
+                        <p class="card-item-text-content actions-fixed">
+                            <a class="btn btn-outline-info btn-md"
+                               href="{% url 'service_request_detail' service_request.pk %}"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Detail' %}"
+                               role="button"><i class="fa-solid fa-circle-info"></i></a>
+                            {% if perms.main.change_serviceorderheader %}
+                                <a class="btn btn-outline-danger btn-md"
+                                   href="{% url 'delete_service_request' service_request.id %}"
+                                   data-bs-toggle="tooltip"
+                                   title="{% trans 'Delete' %}"
+                                   role="button"><i class="fa-solid fa-trash"></i></a>
+                            {% endif %}
+                        </p>
+                    </div>
+                {% endfor %}
+                {% include 'partials/paginator.html' %}
+            {% endif %}
+        </section>
+    </div>
+{% endblock %}

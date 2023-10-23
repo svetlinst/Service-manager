@@ -13,8 +13,8 @@ GROUP_NAMES = {
     'master_data': master_data_url_patterns,
 }
 
-# todo: handle active tabl selection with JS
-COMMON_TABS = ['index', 'contact_us',]
+# todo: handle active tab selection with JS
+COMMON_TABS = ['index', 'contact_us', 'service_requests', 'create_service_request']
 
 
 @register.filter(name='is_active_nav_link')

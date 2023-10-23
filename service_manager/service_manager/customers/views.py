@@ -7,6 +7,7 @@ from service_manager.customers.forms import EditCustomerForm, CreateCustomerForm
     EditCustomerAssetForm, CreateCustomerRepresentativeForm, EditCustomerRepresentativeForm, \
     CreateCustomerDepartmentForm
 from service_manager.customers.models import Customer, CustomerAsset, CustomerRepresentative, CustomerDepartment
+from service_manager.customers.utils import get_assets_currently_in_service
 from service_manager.main.models import ServiceOrderHeader
 from service_manager.master_data.models import AssetCategory, Brand, Asset
 
@@ -68,8 +69,7 @@ class CustomerDetailView(auth_mixins.PermissionRequiredMixin, views.DetailView):
         if department_search:
             context['customer_departments'] = customer.customerdepartment_set.filter(name__icontains=department_search)
 
-        customer_open_service_orders = ServiceOrderHeader.objects.filter(customer_id=customer.id, is_completed=False)
-        assets_being_serviced = [x.customer_asset for x in customer_open_service_orders.all()]
+        assets_being_serviced = get_assets_currently_in_service(customer)
 
         context['assets_being_serviced'] = assets_being_serviced
 

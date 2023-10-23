@@ -85,56 +85,6 @@
 
         {% endif %}
 
-
-        {#        <table class="table table-striped text-center">#}
-        {#            <thead>#}
-        {#            <tr>#}
-        {#                <th scope="col">{% trans 'ID' %}</th>#}
-        {#                <th scope="col">{% trans 'Name' %}</th>#}
-        {#                <th scope="col">{% trans 'Type' %}</th>#}
-        {#                <th scope="col">{% trans 'VAT' %}</th>#}
-        {#                <th scope="col">{% trans 'E-mail' %}</th>#}
-        {#                <th scope="col">{% trans 'Phone Number' %}</th>#}
-        {#                <th scope="col">{% trans 'Subscription' %}</th>#}
-        {#                <th scope="col">{% trans 'Regular' %}</th>#}
-        {#                <th scope="col">{% trans 'Action' %}</th>#}
-        {#            </tr>#}
-        {#            </thead>#}
-        {#            <tbody>#}
-        {##}
-        {##}
-        {#            {% if object_list %}#}
-        {#                {% for customer in object_list %}#}
-        {#                    <tr>#}
-        {#                        <td>{{ customer.id }}</td>#}
-        {#                        <td>{{ customer.name }}</td>#}
-        {#                        <td>{{ customer.type }}</td>#}
-        {#                        <td>{{ customer.vat }}</td>#}
-        {#                        <td>{{ customer.email_address }}</td>#}
-        {#                        <td>{{ customer.phone_number }}</td>#}
-        {#                        <td>{% if customer.has_subscription %}{% trans 'Yes' %}{% else %}#}
-        {#                            {% trans 'No' %}{% endif %}</td>#}
-        {#                        <td>{% if customer.is_regular_customer %}{% trans 'Yes' %}{% else %}#}
-        {#                            {% trans 'No' %}{% endif %}</td>#}
-        {#                        <td>#}
-        {#                            {% if perms.customers.change_customer %}#}
-        {#                                <a class="btn btn-outline-primary btn-md"#}
-        {#                                   href="{% url 'customer_detail' customer.id %}"#}
-        {#                                   data-bs-toggle="tooltip"#}
-        {#                                   title="{% trans 'Manage' %}"#}
-        {#                                   role="button"><i class="fa-solid fa-list-check"></i></a>#}
-        {#                                <a class="btn btn-outline-danger btn-md"#}
-        {#                                   href="{% url 'delete_customer' customer.id %}"#}
-        {#                                   data-bs-toggle="tooltip"#}
-        {#                                   title="{% trans 'Delete' %}"#}
-        {#                                   role="button"><i class="fa-solid fa-trash"></i></a>#}
-        {#                            {% endif %}#}
-        {#                        </td>#}
-        {#                    </tr>#}
-        {#                {% endfor %}#}
-        {#            {% endif %}#}
-        {#            </tbody>#}
-        {#        </table>#}
         {% include 'partials/paginator.html' %}
     </div>
 

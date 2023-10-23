@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <h1 class='text-center'>{% trans 'Create new service request' %}</h1>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <form method="post" id="service_order_form"
+                  action="{% url 'create_service_request' %}">
+                {% csrf_token %}
+
+                {{ form.customer.label_tag }}
+                {{ form.customer }}
+
+                {{ form.requestor_name.label_tag }}
+                {{ form.requestor_name }}
+
+                {{ form.requestor_phone_number.label_tag }}
+                {{ form.requestor_phone_number }}
+                {% if form.requestor_phone_number.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ form.requestor_phone_number.errors }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
+
+                {{ form.problem_description.label_tag }}
+                {{ form.problem_description }}
+
+                <a class="btn btn-secondary mt-1 float-start" href="javascript:history.back()">{% trans 'Back' %}</a>
+                <button type="submit" class="btn btn-primary mt-1 float-end">{% trans 'Save' %}</button>
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+            </form>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+{% endblock %}

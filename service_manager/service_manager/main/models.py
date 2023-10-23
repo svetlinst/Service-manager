@@ -5,6 +5,7 @@ from django.db import models
 from service_manager.accounts.models import Profile, AppUser
 from service_manager.core.models import BaseAuditEntity, ActiveModel
 from service_manager.customers.models import Customer, CustomerAsset, CustomerRepresentative, CustomerDepartment
+from service_manager.customers.validators import phone_number_validator
 from service_manager.master_data.models import CustomerType, Asset, Material, SLA
 from django.utils.translation import gettext_lazy as _
 
@@ -282,3 +283,136 @@ class CustomerNotification(ActiveModel, BaseAuditEntity):
 
     class Meta:
         ordering = ('-created_on',)
+
+
+class ServiceRequest(ActiveModel, BaseAuditEntity):
+    PROBLEM_DESCRIPTION_MAX_LENGTH = 255
+    REQUESTOR_NAME_MAX_LENGTH = 100
+    REQUESTOR_PHONE_NUMBER_MAX_LENGTH = 20
+    RESOLUTION_MAX_LENGTH = 100
+    TYPE_NEW = 1
+    TYPE_IN_PROGRESS = 2
+    TYPE_RESOLVED = 3
+    TYPE_CLOSED = 4
+    TYPE_REJECTED = 5
+
+    TYPE_CHOICES = (
+        (TYPE_NEW, _('New')),
+        (TYPE_IN_PROGRESS, _('In progress')),
+        (TYPE_RESOLVED, _('Resolved')),
+        (TYPE_CLOSED, _('Closed')),
+        (TYPE_REJECTED, _('Rejected')),
+    )
+
+    problem_description = models.CharField(
+        verbose_name=_('problem description'),
+        max_length=PROBLEM_DESCRIPTION_MAX_LENGTH,
+        null=False,
+        blank=False,
+    )
+
+    requestor_name = models.CharField(
+        verbose_name=_('requestor name'),
+        max_length=REQUESTOR_NAME_MAX_LENGTH,
+        null=False,
+        blank=False,
+    )
+
+    requestor_phone_number = models.CharField(
+        verbose_name=_('requestor phone number'),
+        max_length=REQUESTOR_PHONE_NUMBER_MAX_LENGTH,
+        null=False,
+        blank=False,
+        validators=(
+            phone_number_validator,
+        ),
+    )
+
+    resolution = models.CharField(
+        verbose_name=_('resolution'),
+        max_length=RESOLUTION_MAX_LENGTH,
+        null=False,
+        blank=False,
+    )
+
+    status = models.CharField(
+        verbose_name=_('status'),
+        max_length=1,
+        choices=TYPE_CHOICES,
+        default=TYPE_NEW,
+        null=False,
+        blank=False,
+    )
+
+    customer = models.ForeignKey(
+        Customer,
+        on_delete=models.CASCADE,
+        verbose_name=_('customer'),
+    )
+
+    accepted_by = models.ForeignKey(
+        AppUser,
+        on_delete=models.CASCADE,
+        related_name='request_accepted_by',
+        null=True,
+        blank=True,
+        verbose_name=_('accepted by'),
+    )
+
+    handled_by = models.ForeignKey(
+        AppUser,
+        on_delete=models.CASCADE,
+        related_name='handled_by',
+        null=True,
+        blank=True,
+        verbose_name=_('handled by'),
+    )
+
+    handled_on = models.DateTimeField(
+        verbose_name=_('handled on'),
+        blank=True,
+        null=True,
+    )
+
+    closed_by = models.ForeignKey(
+        AppUser,
+        on_delete=models.CASCADE,
+        related_name='closed_by',
+        null=True,
+        blank=True,
+        verbose_name=_('closed by'),
+    )
+
+    closed_on = models.DateTimeField(
+        verbose_name=_('closed on'),
+        blank=True,
+        null=True,
+    )
+
+    service_order = models.ForeignKey(
+        ServiceOrderHeader,
+        on_delete=models.CASCADE,
+        verbose_name=_('service order'),
+        null=True,
+        blank=True,
+    )
+
+    def is_open(self):
+        if self.status in [str(k) for k, v in self.TYPE_CHOICES if k < 4]:
+            return True
+        return False
+
+    def is_rejected(self):
+        if self.status == str(self.TYPE_REJECTED):
+            return True
+        return False
+
+    def is_finalized(self):
+        if self.status == str(self.TYPE_CLOSED):
+            return True
+        return False
+
+    def is_handled(self):
+        if self.status < str(self.TYPE_RESOLVED):
+            return False
+        return True
