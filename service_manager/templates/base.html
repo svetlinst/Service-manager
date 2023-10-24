@@ -142,7 +142,7 @@
                            href="{% url 'contact_us' %}">{% trans 'Contact Us' %}</a>
                     </li>
                 {% endif %}
-            
+
             </ul>
 
             {#        Language selection#}
@@ -197,6 +197,9 @@
 
 <!-- Content Container -->
 <div class="container">
+    <div id="root"/>
+    <script src="{% static 'index-bundle.js' %}"></script>
+
     {% block content %}
 
     {% endblock %}
