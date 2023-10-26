@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <h4 class='text-center text-secondary'>{% trans 'Dashobard' %}</h4>
+    <div class="row">
+
+        <!-- div that the JavaScript framework will render in -->
+        <div id="js-framework-home"></div>
+        <!-- bundle file with our JavaScript application logic -->
+        <script src="{% static 'index-bundle.js' %}"></script>
+
+    </div>
+{% endblock %}

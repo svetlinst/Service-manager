@@ -14,7 +14,7 @@ GROUP_NAMES = {
 }
 
 # todo: handle active tab selection with JS
-COMMON_TABS = ['index', 'contact_us', 'service_requests', 'create_service_request']
+COMMON_TABS = ['index', 'contact_us', 'service_requests', 'create_service_request', 'dashboard']
 
 
 @register.filter(name='is_active_nav_link')

@@ -13,7 +13,7 @@ from service_manager.main.views import get_index, ServiceOrderHeaderPendingServi
     DeleteCustomerNotificationView, CustomerNotificationDetailView, ServiceRequestsListView, CreateServiceRequestView, \
     EditServiceRequestView, DeleteServiceRequestView, ServiceRequestDetailView, ServiceRequestAssignHandlerView, \
     ServiceRequestUpdateResolutionView, finalize_service_request, reject_service_request, \
-    ServiceRequestCreateServiceOrder
+    ServiceRequestCreateServiceOrder, DashboardTemplateView
 
 urlpatterns = [
                   path('', get_index, name='index'),
@@ -86,5 +86,6 @@ urlpatterns = [
                   path('service_requests/<int:pk>/reject/', reject_service_request, name='reject_service_request'),
                   path('service_requests/<int:pk>/create_service_order/<int:customer_id>/',
                        ServiceRequestCreateServiceOrder.as_view(),
-                       name='service_request_create_order')
+                       name='service_request_create_order'),
+                  path('dashboard/', DashboardTemplateView.as_view(), name='dashboard'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

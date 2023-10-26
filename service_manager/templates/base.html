@@ -53,6 +53,10 @@
                        href="{% url 'index' %}">{% trans 'Home' %}</a>
                 </li>
                 {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if url_name == 'dashboard' %}active{% endif %}"
+                           href="{% url 'dashboard' %}">{% trans 'Dashboard' %}</a>
+                    </li>
                     {% if perms.customers.view_customer %}
                         <li class="nav-item">
                             <a class="nav-link {% if url_name|is_active_nav_link:'customers' %}active{% endif %}"
@@ -197,8 +201,8 @@
 
 <!-- Content Container -->
 <div class="container">
-    <div id="root"/>
-    <script src="{% static 'index-bundle.js' %}"></script>
+{#    <div id="root"/>#}
+{#    <script src="{% static 'index-bundle.js' %}"></script>#}
 
     {% block content %}
 

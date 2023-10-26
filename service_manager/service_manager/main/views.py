@@ -170,6 +170,8 @@ class CreateServiceOrderHeader(auth_mixins.PermissionRequiredMixin, views.Create
             service_request.service_order = service_order
             service_order.save()
             service_request.save()
+        else:
+            service_order.save()
 
         # Create a slug
         created_on = service_order.created_on
@@ -768,3 +770,10 @@ class ServiceRequestCreateServiceOrder(auth_mixins.PermissionRequiredMixin, view
         context['service_request_id'] = self.kwargs['pk']
         context['assets_being_serviced'] = get_assets_currently_in_service(customer)
         return context
+
+
+class DashboardTemplateView(auth_mixins.PermissionRequiredMixin, views.TemplateView):
+    template_name = 'dashboard.html'
+
+    permission_required = 'main.view_serviceorderheader'
+

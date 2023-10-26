@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.header {
+    text-align: center;
+}

@@ -1,0 +1,304 @@
+openapi: 3.0.3
+info:
+  title: Service Manager API
+  version: 1.0.0
+  description: Service process automation project
+paths:
+  /en/api/service_orders/:
+    get:
+      operationId: en_api_service_orders_list
+      tags:
+      - en
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceOrderHeader'
+          description: ''
+    post:
+      operationId: en_api_service_orders_create
+      tags:
+      - en
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceOrderHeader'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ServiceOrderHeader'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ServiceOrderHeader'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceOrderHeader'
+          description: ''
+  /en/api/service_orders/{id}/:
+    get:
+      operationId: en_api_service_orders_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this service order header.
+        required: true
+      tags:
+      - en
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceOrderHeader'
+          description: ''
+    put:
+      operationId: en_api_service_orders_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this service order header.
+        required: true
+      tags:
+      - en
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceOrderHeader'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ServiceOrderHeader'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ServiceOrderHeader'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceOrderHeader'
+          description: ''
+    patch:
+      operationId: en_api_service_orders_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this service order header.
+        required: true
+      tags:
+      - en
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedServiceOrderHeader'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedServiceOrderHeader'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedServiceOrderHeader'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceOrderHeader'
+          description: ''
+    delete:
+      operationId: en_api_service_orders_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this service order header.
+        required: true
+      tags:
+      - en
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    PatchedServiceOrderHeader:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_on:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_on:
+          type: string
+          format: date-time
+          readOnly: true
+        active:
+          type: boolean
+        problem_description:
+          type: string
+        is_serviced:
+          type: boolean
+        is_completed:
+          type: boolean
+        serviced_on:
+          type: string
+          format: date-time
+          nullable: true
+        completed_on:
+          type: string
+          format: date-time
+          nullable: true
+        send_emails:
+          type: boolean
+        packaging:
+          type: string
+          nullable: true
+          maxLength: 256
+        place_of_service:
+          $ref: '#/components/schemas/PlaceOfServiceEnum'
+        slug:
+          type: string
+          nullable: true
+          maxLength: 50
+          pattern: ^[-a-zA-Z0-9_]+$
+        customer:
+          type: integer
+        customer_asset:
+          type: integer
+        department:
+          type: integer
+          nullable: true
+        handed_over_by:
+          type: integer
+          nullable: true
+        accepted_by:
+          type: integer
+          nullable: true
+        serviced_by:
+          type: integer
+          nullable: true
+        completed_by:
+          type: integer
+          nullable: true
+        handed_over_to:
+          type: integer
+          nullable: true
+        service_level_agreement:
+          type: integer
+          nullable: true
+    PlaceOfServiceEnum:
+      enum:
+      - Customer office
+      - Brought in
+      description: |-
+        * `Customer office` - Customer office
+        * `Brought in` - Brought in
+    ServiceOrderHeader:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_on:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_on:
+          type: string
+          format: date-time
+          readOnly: true
+        active:
+          type: boolean
+        problem_description:
+          type: string
+        is_serviced:
+          type: boolean
+        is_completed:
+          type: boolean
+        serviced_on:
+          type: string
+          format: date-time
+          nullable: true
+        completed_on:
+          type: string
+          format: date-time
+          nullable: true
+        send_emails:
+          type: boolean
+        packaging:
+          type: string
+          nullable: true
+          maxLength: 256
+        place_of_service:
+          $ref: '#/components/schemas/PlaceOfServiceEnum'
+        slug:
+          type: string
+          nullable: true
+          maxLength: 50
+          pattern: ^[-a-zA-Z0-9_]+$
+        customer:
+          type: integer
+        customer_asset:
+          type: integer
+        department:
+          type: integer
+          nullable: true
+        handed_over_by:
+          type: integer
+          nullable: true
+        accepted_by:
+          type: integer
+          nullable: true
+        serviced_by:
+          type: integer
+          nullable: true
+        completed_by:
+          type: integer
+          nullable: true
+        handed_over_to:
+          type: integer
+          nullable: true
+        service_level_agreement:
+          type: integer
+          nullable: true
+      required:
+      - created_on
+      - customer
+      - customer_asset
+      - id
+      - problem_description
+      - updated_on
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
