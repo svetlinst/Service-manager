@@ -583,9 +583,11 @@ class ServiceRequestsListView(auth_mixins.PermissionRequiredMixin, views.ListVie
 
             # today
             if period == '0':
+                start = today
+                end = today + dt.timedelta(days=1)
                 queryset = queryset.filter(created_on__range=(
-                    today,
-                    today + dt.timedelta(days=1))
+                    start,
+                    end)
                 )
 
             # this week
@@ -710,9 +712,12 @@ class DeleteServiceRequestView(auth_mixins.PermissionRequiredMixin, views.Delete
     model = ServiceRequest
     template_name = 'service_request/delete_service_request.html'
 
-    success_url = reverse_lazy('service_requests')
-
     permission_required = 'main.delete_serviceorderheader'
+
+    def get_success_url(self):
+        success_url = reverse('service_requests') + '?period=1'
+
+        return success_url
 
 
 @permission_required('main.change_serviceorderheader')
