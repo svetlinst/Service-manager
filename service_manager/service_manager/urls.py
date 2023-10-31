@@ -24,5 +24,6 @@ urlpatterns = i18n_patterns(
     path('master_data/', include('service_manager.master_data.urls')),
     path('accounts/', include('service_manager.accounts.urls')),
     path('reports/', include('service_manager.reports.urls')),
+    path('service_requests/', include('service_manager.service_requests.urls')),
     re_path(r'^rosetta/', include('rosetta.urls'))
 )

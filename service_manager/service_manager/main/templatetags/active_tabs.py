@@ -3,6 +3,7 @@ from service_manager.master_data.urls import urlpatterns as master_data_url_patt
 from service_manager.customers.urls import urlpatterns as customers_url_patterns
 from service_manager.main.urls import urlpatterns as main_url_patterns
 from service_manager.reports.urls import urlpatterns as reports_url_patterns
+from service_manager.service_requests.urls import urlpatterns as service_requests_url_patterns
 
 register = template.Library()
 
@@ -11,10 +12,11 @@ GROUP_NAMES = {
     'reports': reports_url_patterns,
     'customers': customers_url_patterns,
     'master_data': master_data_url_patterns,
+    'service_requests': service_requests_url_patterns,
 }
 
 # todo: handle active tab selection with JS
-COMMON_TABS = ['index', 'contact_us', 'service_requests', 'create_service_request']
+COMMON_TABS = ['index', 'contact_us']
 
 
 @register.filter(name='is_active_nav_link')

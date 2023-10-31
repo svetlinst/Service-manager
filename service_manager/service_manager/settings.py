@@ -55,6 +55,7 @@ PROJECT_APPS = (
     'service_manager.customers',
     'service_manager.master_data',
     'service_manager.reports',
+    'service_manager.service_requests',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -75,7 +76,13 @@ ROOT_URLCONF = "service_manager.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'templates']
+        "DIRS": [
+            BASE_DIR / 'templates',
+            BASE_DIR / 'service_manager' / 'customers' / 'templates',
+            BASE_DIR / 'service_manager' / 'main' / 'templates',
+            BASE_DIR / 'service_manager' / 'master_data' / 'templates',
+            BASE_DIR / 'service_manager' / 'reports' / 'templates',
+        ]
         ,
         "APP_DIRS": True,
         "OPTIONS": {

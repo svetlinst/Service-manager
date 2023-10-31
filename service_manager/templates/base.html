@@ -75,7 +75,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {% if url_name == 'service_requests' %}active{% endif %}"
+                            <a class="nav-link {% if url_name|is_active_nav_link:'service_requests' %}active{% endif %}"
                                href="{% url 'service_requests' %}?period=1">{% trans 'Requests' %}</a>
                         </li>
                     {% endif %}
