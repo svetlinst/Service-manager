@@ -3,55 +3,62 @@
 {% load common_tags %}
 {% load i18n %}
 {% block content %}
-    <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:0.5%">
-        <div class="text-center mb-4 d-flex justify-content-between align-items-center">
-            <p></p>
-            <h4 class='d-inline text-secondary mb-3'>{% trans 'Customer Information' %}</h4>
-            <a class="btn btn-outline-primary btn-md"
-               href="{% url 'edit_service_request' service_request.pk %}"
-               data-bs-toggle="tooltip"
-               title="{% trans 'Edit' %}"
-               role="button"><i class="fa-solid fa-pen-to-square"></i></a>
-        </div>
 
-        <div class="row text-left">
-            <div class="col">
-                <p class="text-primary mb-0"><b
-                        class="text-dark">{% trans 'Name' %}: </b>{{ service_request.customer.name }}</p>
-            </div>
-            <div class="col">
-                <p class="text-primary mb-0"><b
-                        class="text-dark">{% trans 'Requestor name' %}: </b>{{ service_request.requestor_name }}</p>
-            </div>
-            <div class="col">
-                <p class="text-primary mb-0"><b
-                        class="text-dark">{% trans 'Requestor phone number' %}: </b>{{ service_request.requestor_phone_number }}
-                </p>
-            </div>
-        </div>
-        <div class="row text-left">
-            <div class="col">
-                <p class="text-primary mb-0"><b
-                        class="text-dark">{% trans 'Problem description' %}: </b>{{ service_request.problem_description }}
-                </p>
-            </div>
-        </div>
-    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-9">
+                {#    Customer Information#}
+                <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:0.5%">
+                    <div class="text-center mb-4 d-flex justify-content-between align-items-center">
+                        <p></p>
+                        <h4 class='d-inline text-secondary mb-3'>{% trans 'Customer Information' %}</h4>
+                        <a class="btn btn-outline-primary btn-md"
+                           href="{% url 'edit_service_request' service_request.pk %}"
+                           data-bs-toggle="tooltip"
+                           title="{% trans 'Edit' %}"
+                           role="button"><i class="fa-solid fa-pen-to-square"></i></a>
+                    </div>
 
-    <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:0.5%">
-        <div class="text-center mb-4 d-flex justify-content-between align-items-center">
-            <p></p>
-            {% get_status_value service_request.status as status_text %}
-            <h4 class='text-center text-secondary mt-1'>{% trans 'Status' %} - {{ status_text }}</h4>
-            <div class="text-center mb-4 d-flex justify-content-between align-items-center">
-                {% if service_request.is_open %}
-                    <a class="btn btn-outline-primary btn-md mx-1"
-                       href="{% url 'service_request_assign_handler' service_request.pk %}"
-                       data-bs-toggle="tooltip"
-                       title="{% trans 'Handle' %}"
-                       role="button"><i class="fa-solid fa-business-time"></i></a>
-                    {% if service_request.is_handled %}
-                        <span data-bs-toggle="modal" data-bs-target="#close_request_modal">
+                    <div class="row text-left">
+                        <div class="col">
+                            <p class="text-primary mb-0"><b
+                                    class="text-dark">{% trans 'Name' %}: </b>{{ service_request.customer.name }}</p>
+                        </div>
+                        <div class="col">
+                            <p class="text-primary mb-0"><b
+                                    class="text-dark">{% trans 'Requestor name' %}: </b>{{ service_request.requestor_name }}
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="text-primary mb-0"><b
+                                    class="text-dark">{% trans 'Requestor phone number' %}: </b>{{ service_request.requestor_phone_number }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row text-left">
+                        <div class="col">
+                            <p class="text-primary mb-0"><b
+                                    class="text-dark">{% trans 'Problem description' %}: </b>{{ service_request.problem_description }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {#    Status#}
+                <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:0.5%">
+                    <div class="text-center mb-4 d-flex justify-content-between align-items-center">
+                        <p></p>
+                        {% get_status_value service_request.status as status_text %}
+                        <h4 class='text-center text-secondary mt-1'>{% trans 'Status' %} - {{ status_text }}</h4>
+                        <div class="text-center mb-4 d-flex justify-content-between align-items-center">
+                            {% if service_request.is_open %}
+                                <a class="btn btn-outline-primary btn-md mx-1"
+                                   href="{% url 'service_request_assign_handler' service_request.pk %}"
+                                   data-bs-toggle="tooltip"
+                                   title="{% trans 'Handle' %}"
+                                   role="button"><i class="fa-solid fa-business-time"></i></a>
+                                {% if service_request.is_handled %}
+                                    <span data-bs-toggle="modal" data-bs-target="#close_request_modal">
                         <a class="btn btn-outline-warning btn-md mx-1"
                            href="#"
                            title="{% trans 'Close' %}"
@@ -59,241 +66,291 @@
                            role="button"><i class="fa-solid fa-check"></i>
                         </a>
                     </span>
-                    {% endif %}
-                {% endif %}
+                                {% endif %}
+                            {% endif %}
 
 
-                {% if service_request.is_finalized and not service_request.service_order %}
-                    <a class="btn btn-outline-success btn-md mx-1"
-                       href="{% url 'service_request_create_order' service_request.pk service_request.customer.pk %}"
-                       data-bs-toggle="tooltip"
-                       title="{% trans 'Create Order' %}"
-                       role="button"><i class="fa-solid fa-gear"></i>
-                    </a>
-                {% endif %}
-            </div>
-        </div>
+                            {% if service_request.is_finalized and not service_request.service_order %}
+                                <a class="btn btn-outline-success btn-md mx-1"
+                                   href="{% url 'service_request_create_order' service_request.pk service_request.customer.pk %}"
+                                   data-bs-toggle="tooltip"
+                                   title="{% trans 'Create Order' %}"
+                                   role="button"><i class="fa-solid fa-gear"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
 
-        <div class="row text-left">
-            <div class="col">
-                <p class="text-primary mb-0"><b
-                        class="text-dark">{% trans 'Accepted by' %}: </b>{{ service_request.accepted_by.profile_full_name }}
-                </p>
-            </div>
-            <div class="col">
-                <p class="text-primary mb-0"><b
-                        class="text-dark">{% trans 'Accepted on' %}: </b>{{ service_request.created_on }}
-                </p>
-            </div>
-        </div>
-        <div class="row text-left">
-            <div class="col">
-                <p class="text-primary mb-0"><b
-                        class="text-dark">{% trans 'Handled by' %}: </b>{{ service_request.handled_by.profile_full_name }}
-                </p>
-            </div>
-            <div class="col">
-                <p class="text-primary mb-0"><b
-                        class="text-dark">{% trans 'Handled on' %}: </b>{{ service_request.handled_on }}
-                </p>
-            </div>
-        </div>
-        <div class="row text-left">
-            <div class="col">
-                <p class="text-primary mb-0"><b
-                        class="text-dark">{% trans 'Closed by' %}: </b>{{ service_request.closed_by.profile_full_name }}
-                </p>
-            </div>
-            <div class="col">
-                <p class="text-primary mb-0"><b
-                        class="text-dark">{% trans 'Closed on' %}: </b>{{ service_request.closed_on }}
-                </p>
-            </div>
-        </div>
-    </div>
+                    <div class="row text-left">
+                        <div class="col">
+                            <p class="text-primary mb-0"><b
+                                    class="text-dark">{% trans 'Accepted by' %}: </b>{{ service_request.accepted_by.profile_full_name }}
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="text-primary mb-0"><b
+                                    class="text-dark">{% trans 'Accepted on' %}: </b>{{ service_request.created_on }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row text-left">
+                        <div class="col">
+                            <p class="text-primary mb-0"><b
+                                    class="text-dark">{% trans 'Handled by' %}: </b>{{ service_request.handled_by.profile_full_name }}
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="text-primary mb-0"><b
+                                    class="text-dark">{% trans 'Handled on' %}: </b>{{ service_request.handled_on }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row text-left">
+                        <div class="col">
+                            <p class="text-primary mb-0"><b
+                                    class="text-dark">{% trans 'Closed by' %}: </b>{{ service_request.closed_by.profile_full_name }}
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="text-primary mb-0"><b
+                                    class="text-dark">{% trans 'Closed on' %}: </b>{{ service_request.closed_on }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-    <div class="d-block rounded-lg bg-light mb-1" style="padding:0.5%">
-        <div class="text-center mb-4 d-flex justify-content-between align-items-center">
-            <p></p>
-            <h4 class='text-center text-secondary mt-1'>{% trans 'Resolution' %}</h4>
-            <a class="btn btn-outline-primary btn-md"
-               href="{% url 'service_request_update_resolution' service_request.pk %}"
-               data-bs-toggle="tooltip"
-               title="{% trans 'Edit' %}"
-               role="button"><i class="fa-solid fa-pen-to-square"></i></a>
-        </div>
+                {#    Resolution#}
+                <div class="d-block rounded-lg bg-light mb-1" style="padding:0.5%">
+                    <div class="text-center mb-4 d-flex justify-content-between align-items-center">
+                        <p></p>
+                        <h4 class='text-center text-secondary mt-1'>{% trans 'Resolution' %}</h4>
+                        <a class="btn btn-outline-primary btn-md"
+                           href="{% url 'service_request_update_resolution' service_request.pk %}"
+                           data-bs-toggle="tooltip"
+                           title="{% trans 'Edit' %}"
+                           role="button"><i class="fa-solid fa-pen-to-square"></i></a>
+                    </div>
 
-        <div class="text-left">
-            {% if service_request.resolution %}
-                <p>{{ service_request.resolution }}</p>
-            {% else %}
-                <p class="text-center">{% trans 'No resolution entered yet...' %}</p>
-            {% endif %}
-        </div>
-    </div>
-
-    {% if service_request.service_order %}
-        <div class="d-block rounded-lg bg-light mb-1" style="padding:0.5%">
-            <div class="text-center mb-4 d-flex justify-content-between align-items-center">
-                <p></p>
-                <h3 class='text-center text-secondary mb-3'>{% trans 'Service Order Information' %}</h3>
-                <a class="btn btn-outline-info btn-md"
-                   href="{% url 'detail_service_order' service_request.service_order.pk %}"
-                   data-bs-toggle="tooltip"
-                   title="{% trans 'Detail' %}"
-                   role="button"><i class="fa-solid fa-circle-info"></i></a>
-            </div>
-
-            <h4 class='text-center text-secondary mt-1'>{% trans 'Asset' %}</h4>
-            <div class="row text-left">
-                <div class="col">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Category' %}: </b>{{ service_request.service_order.customer_asset.asset.category }}
-                    </p>
-                </div>
-                <div class="col">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Brand' %}: </b>{{ service_request.service_order.customer_asset.asset.brand }}
-                    </p>
-                </div>
-                <div class="col">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Model Name' %}: </b>{{ service_request.service_order.customer_asset.asset.model_name }}
-                    </p>
-                </div>
-            </div>
-            <div class="row text-left">
-                <div class="col">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Model Number' %}: </b>{{ service_request.service_order.customer_asset.asset.model_number }}
-                    </p>
-                </div>
-                <div class="col">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Serial Number' %}: </b>{{ service_request.service_order.customer_asset.serial_number }}
-                    </p>
-                </div>
-                <div class="col">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Product Number' %}: </b>{{ service_request.service_order.customer_asset.product_number }}
-                    </p>
-                </div>
-            </div>
-            <div class="row text-left">
-                <div class="col">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Inventory Number' %}: </b>{{ service_request.service_order.customer_asset.inventory_number|default_if_none:"" }}
-                    </p>
-                </div>
-                <div class="col">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Location' %}: </b>{{ service_request.service_order.customer_asset.location|default_if_none:"" }}
-                    </p>
-                </div>
-                <div class="col">
-
-                </div>
-            </div>
-            <h4 class='text-center text-secondary mt-1'>{% trans 'Order' %}</h4>
-            <div class="row text-left">
-                <div class="col-sm-12">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Packaging' %}: </b>{{ service_request.service_order.packaging|default_if_none:"" }}
-                    </p>
-                </div>
-            </div>
-            <div class="row text-left">
-                <div class="col-sm-4">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Place of service' %}: </b>{{ service_request.service_order.place_of_service|default_if_none:"" }}
-                    </p>
-                </div>
-                <div class="col-sm-4">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'SLA' %}: </b>{{ service_request.service_order.service_level_agreement.name|default_if_none:"" }}
-                    </p>
-                </div>
-                <div class="col-sm-4">
-
-                </div>
-            </div>
-            <div class="row text-left">
-                <div class="col-sm-4">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Handed over by' %}: </b>{{ service_request.service_order.handed_over_by|default_if_none:"" }}
-                    </p>
-                </div>
-                <div class="col-sm-4">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Accepted by' %}: </b>{{ service_request.service_order.accepted_by }}
-                    </p>
-                </div>
-                <div class="col-sm-4">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Accepted on' %}: </b>{{ service_request.service_order.created_on }}
-                    </p>
-                </div>
-            </div>
-            <div class="row text-left">
-                <div class="col-sm-4">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Status' %}: </b>{{ service_request.service_order.status }}</p>
-                </div>
-                <div class="col-sm-4">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Serviced by' %}: </b>{{ service_request.service_order.serviced_by|default_if_none:"" }}
-                    </p>
-                </div>
-                <div class="col-sm-4">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Serviced on' %}: </b>{{ service_request.service_order.serviced_on|default_if_none:"" }}
-                    </p>
-                </div>
-            </div>
-            <div class="row text-left">
-                <div class="col-sm-4">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Handed over to' %}: </b>{{ service_request.service_order.handed_over_to|default_if_none:"" }}
-                    </p>
-                </div>
-                <div class="col-sm-4">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Completed by' %}: </b>{{ service_order_header.completed_by|default_if_none:"" }}
-                    </p>
-                </div>
-                <div class="col-sm-4">
-                    <p class="text-primary mb-0"><b
-                            class="text-dark">{% trans 'Completed on' %}: </b>{{ service_request.service_order.completed_on|default_if_none:"" }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    {% endif %}
-
-    {#    Modal Close #}
-    <div class="modal fade" id="close_request_modal" tabindex="-1" role="dialog"
-         aria-labelledby="close_reqyest_modal_label"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">{% blocktrans %}Close Service request with
-                        ID{% endblocktrans %}: {{ service_request.pk }}?</h5>
-                </div>
-                <div class="modal-footer justify-content-between align-items-center">
-                    <button type="button" class="btn btn-sm btn-secondary"
-                            data-bs-dismiss="modal">{% trans 'Go Back' %}</button>
-                    <p></p>
-                    <div class="text-center">
-                        {% if perms.main.change_serviceorderheader %}
-                            <a class="btn btn-sm btn-danger"
-                               href="{% url 'reject_service_request' service_request.pk %}">{% trans 'Reject' %}</a>
-                            <a class="btn btn-sm btn-success"
-                               href="{% url 'finalize_service_request' service_request.pk %}">{% trans 'Finalize' %}</a>
+                    <div class="text-left">
+                        {% if service_request.resolution %}
+                            <p>{{ service_request.resolution }}</p>
+                        {% else %}
+                            <p class="text-center">{% trans 'No resolution entered yet...' %}</p>
                         {% endif %}
                     </div>
                 </div>
+
+                {% if service_request.service_order %}
+                    <div class="d-block rounded-lg bg-light mb-1" style="padding:0.5%">
+                        <div class="text-center mb-4 d-flex justify-content-between align-items-center">
+                            <p></p>
+                            <h3 class='text-center text-secondary mb-3'>{% trans 'Service Order Information' %}</h3>
+                            <a class="btn btn-outline-info btn-md"
+                               href="{% url 'detail_service_order' service_request.service_order.pk %}"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Detail' %}"
+                               role="button"><i class="fa-solid fa-circle-info"></i></a>
+                        </div>
+
+                        <h4 class='text-center text-secondary mt-1'>{% trans 'Asset' %}</h4>
+                        <div class="row text-left">
+                            <div class="col">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Category' %}: </b>{{ service_request.service_order.customer_asset.asset.category }}
+                                </p>
+                            </div>
+                            <div class="col">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Brand' %}: </b>{{ service_request.service_order.customer_asset.asset.brand }}
+                                </p>
+                            </div>
+                            <div class="col">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Model Name' %}: </b>{{ service_request.service_order.customer_asset.asset.model_name }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row text-left">
+                            <div class="col">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Model Number' %}: </b>{{ service_request.service_order.customer_asset.asset.model_number }}
+                                </p>
+                            </div>
+                            <div class="col">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Serial Number' %}: </b>{{ service_request.service_order.customer_asset.serial_number }}
+                                </p>
+                            </div>
+                            <div class="col">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Product Number' %}: </b>{{ service_request.service_order.customer_asset.product_number }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row text-left">
+                            <div class="col">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Inventory Number' %}: </b>{{ service_request.service_order.customer_asset.inventory_number|default_if_none:"" }}
+                                </p>
+                            </div>
+                            <div class="col">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Location' %}: </b>{{ service_request.service_order.customer_asset.location|default_if_none:"" }}
+                                </p>
+                            </div>
+                            <div class="col">
+
+                            </div>
+                        </div>
+                        <h4 class='text-center text-secondary mt-1'>{% trans 'Order' %}</h4>
+                        <div class="row text-left">
+                            <div class="col-sm-12">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Packaging' %}: </b>{{ service_request.service_order.packaging|default_if_none:"" }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row text-left">
+                            <div class="col-sm-4">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Place of service' %}: </b>{{ service_request.service_order.place_of_service|default_if_none:"" }}
+                                </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'SLA' %}: </b>{{ service_request.service_order.service_level_agreement.name|default_if_none:"" }}
+                                </p>
+                            </div>
+                            <div class="col-sm-4">
+
+                            </div>
+                        </div>
+                        <div class="row text-left">
+                            <div class="col-sm-4">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Handed over by' %}: </b>{{ service_request.service_order.handed_over_by|default_if_none:"" }}
+                                </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Accepted by' %}: </b>{{ service_request.service_order.accepted_by }}
+                                </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Accepted on' %}: </b>{{ service_request.service_order.created_on }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row text-left">
+                            <div class="col-sm-4">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Status' %}: </b>{{ service_request.service_order.status }}
+                                </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Serviced by' %}: </b>{{ service_request.service_order.serviced_by|default_if_none:"" }}
+                                </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Serviced on' %}: </b>{{ service_request.service_order.serviced_on|default_if_none:"" }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row text-left">
+                            <div class="col-sm-4">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Handed over to' %}: </b>{{ service_request.service_order.handed_over_to|default_if_none:"" }}
+                                </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Completed by' %}: </b>{{ service_order_header.completed_by|default_if_none:"" }}
+                                </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class="text-primary mb-0"><b
+                                        class="text-dark">{% trans 'Completed on' %}: </b>{{ service_request.service_order.completed_on|default_if_none:"" }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {#    Modal#}
+                {#    Modal Close #}
+                <div class="modal fade" id="close_request_modal" tabindex="-1" role="dialog"
+                     aria-labelledby="close_reqyest_modal_label"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalLabel">{% blocktrans %}Close Service request with
+                                    ID{% endblocktrans %}: {{ service_request.pk }}?</h5>
+                            </div>
+                            <div class="modal-footer justify-content-between align-items-center">
+                                <button type="button" class="btn btn-sm btn-secondary"
+                                        data-bs-dismiss="modal">{% trans 'Go Back' %}</button>
+                                <p></p>
+                                <div class="text-center">
+                                    {% if perms.main.change_serviceorderheader %}
+                                        <a class="btn btn-sm btn-danger"
+                                           href="{% url 'reject_service_request' service_request.pk %}">{% trans 'Reject' %}</a>
+                                        <a class="btn btn-sm btn-success"
+                                           href="{% url 'finalize_service_request' service_request.pk %}">{% trans 'Finalize' %}</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {#    Workflow#}
+            <div class="col-3">
+                <div class="card mt-2">
+                    <div class="card-body">
+                        <h5 class="card-title">{% trans 'Workflow' %}</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            {% if service_request.status >= 2|floatformat:"0" %}
+                                <span class="text-success"><i class="fa-solid fa-check"></i></span>
+                            {% else %}
+                                <span class="text-warning"><i class="fa-solid fa-xmark"></i></span>
+                            {% endif %}
+                            {% trans 'Handled' %}
+                        </li>
+                        <li class="list-group-item">
+                            {% if service_request.status >= 3|floatformat:"0" %}
+                                <span class="text-success"><i class="fa-solid fa-check"></i></span>
+                            {% else %}
+                                <span class="text-warning"><i class="fa-solid fa-xmark"></i></span>
+                            {% endif %}
+                            {% trans 'Resolved' %}
+                        </li>
+                        <li class="list-group-item">
+                            {% if service_request.status >= 4|floatformat:"0" %}
+                                <span class="text-success"><i class="fa-solid fa-check"></i></span>
+                            {% else %}
+                                <span class="text-warning"><i class="fa-solid fa-xmark"></i></span>
+                            {% endif %}
+                            {% trans 'Closed' %}
+                        </li>
+                        <li class="list-group-item">
+                            {% if service_request.service_order %}
+                                <span class="text-success"><i class="fa-solid fa-check"></i></span>
+                            {% else %}
+                                <span class="text-danger"><i class="fa-solid fa-xmark"></i></span>
+                            {% endif %}
+                            {% trans 'Service order created' %}
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
+
 {% endblock %}
