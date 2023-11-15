@@ -90,19 +90,24 @@ class MaterialCategory(ActiveModel, BaseAuditEntity):
 
 class Material(ActiveModel, BaseAuditEntity):
     NAME_MAX_LENGTH = 100
+    VAT_PCT = .2
 
     name = models.CharField(
         _('name'),
         max_length=NAME_MAX_LENGTH,
     )
 
-    price = models.FloatField(_('price'))
+    price = models.FloatField(verbose_name=_('price'))
 
     category = models.ForeignKey(
         MaterialCategory,
         on_delete=models.CASCADE,
         verbose_name=_('category'),
     )
+
+    @property
+    def price_no_vat(self):
+        return self.price / (1 + self.VAT_PCT)
 
     def __str__(self):
         return f'{self.name} ({str(self.category)})'

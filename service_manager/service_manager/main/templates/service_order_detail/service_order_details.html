@@ -2,7 +2,7 @@
 {% block content %}
     <div class="row">
         <div class="col-md-9 my-1">
-            <h2>{% blocktrans %}Total Amount Due{% endblocktrans %}: {{ service_order_header.total_amount_due }}</h2>
+            <h2>{% blocktrans %}Total Amount Due (VAT incl.){% endblocktrans %}: {{ service_order_header.total_amount_due }} {% trans 'lv.' %}</h2>
         </div>
     </div>
     <table class="table table-striped text-center">
@@ -11,11 +11,12 @@
             <th scope="col">{% trans 'ID' %}</th>
             <th scope="col">{% trans 'Material Name' %}</th>
             <th scope="col">{% trans 'Category' %}</th>
-            <th scope="col">{% trans 'Price' %}</th>
             <th scope="col">{% trans 'Quantity' %}</th>
             <th scope="col">{% trans 'Discount' %}</th>
-            <th scope="col">{% trans 'Unit Price' %}</th>
-            <th scope="col">{% trans 'Total Amount' %}</th>
+            <th scope="col">{% trans 'Regular price (VAT incl.)' %}</th>
+            <th scope="col">{% trans 'Discounted unit Price (VAT incl.)' %}</th>
+            <th scope="col">{% trans 'Total Amount (no VAT)' %}</th>
+            <th scope="col">{% trans 'Total Amount (VAT incl.)' %}</th>
             {% if not service_order_header.is_serviced and service_order_header.active %}
                 <th scope="col">{% trans 'Action' %}</th>
             {% endif %}
@@ -29,11 +30,12 @@
                     <td>{{ service_order_detail.id }}</td>
                     <td>{{ service_order_detail.material.name }}</td>
                     <td>{{ service_order_detail.material.category }}</td>
-                    <td>{{ service_order_detail.material.price|floatformat:"2" }}</td>
                     <td>{{ service_order_detail.quantity|floatformat:"1" }}</td>
                     <td>{{ service_order_detail.discount|floatformat:"1" }}%</td>
-                    <td>{{ service_order_detail.discounted_price|floatformat:"2" }}</td>
-                    <td>{{ service_order_detail.total_amount|floatformat:"2" }}</td>
+                    <td>{{ service_order_detail.material.price|floatformat:"2" }} {% trans 'lv.' %}</td>
+                    <td>{{ service_order_detail.discounted_price|floatformat:"2" }} {% trans 'lv.' %}</td>
+                    <td>{{ service_order_detail.total_amount_no_vat|floatformat:"2" }} {% trans 'lv.' %}</td>
+                    <td>{{ service_order_detail.total_amount|floatformat:"2" }} {% trans 'lv.' %}</td>
                     {% if not service_order_header.is_serviced and service_order_header.active %}
                         <td>
                             {% if perms.main.change_serviceorderdetail %}

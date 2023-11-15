@@ -7,7 +7,15 @@
         <div class="col-lg-6">
             <form method="post" action="{% url 'create_material' %}">
                 {% csrf_token %}
-                {{ form }}
+                {{ form.category.label_tag }}
+                {{ form.category }}
+
+                {{ form.name.label_tag }}
+                {{ form.name }}
+
+                <label for="id_price">{% trans 'Price (VAT included)' %}:</label>
+{#                {{ form.price.label_tag }}#}
+                {{ form.price }}
                 <a class="btn btn-secondary mt-1 float-start" href="javascript:history.back()">{% trans 'Back' %}</a>
                 <button type="submit" class="btn btn-primary mt-1 float-end">{% trans 'Save' %}</button>
             </form>
