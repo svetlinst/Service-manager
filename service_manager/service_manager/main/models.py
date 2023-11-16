@@ -427,3 +427,6 @@ class ServiceRequest(ActiveModel, BaseAuditEntity):
         if self.status < str(self.TYPE_RESOLVED):
             return False
         return True
+
+    class Meta:
+        ordering = ('-created_on',)
