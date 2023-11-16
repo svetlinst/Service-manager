@@ -175,6 +175,7 @@ class ServiceRequestFilteringForm(BootstrapFormMixin, forms.Form):
     status_choices.extend(ServiceRequest.TYPE_CHOICES)
 
     status = forms.ChoiceField(
+        label=_('Status'),
         choices=status_choices,
         required=False,
         widget=forms.Select(
@@ -185,6 +186,7 @@ class ServiceRequestFilteringForm(BootstrapFormMixin, forms.Form):
     )
 
     period = forms.ChoiceField(
+        label=_('Period'),
         choices=period_choices,
         required=False,
         widget=forms.Select(
