@@ -56,16 +56,19 @@
                                    href="{% url 'service_request_assign_handler' service_request.pk %}"
                                    data-bs-toggle="tooltip"
                                    title="{% trans 'Handle' %}"
-                                   role="button"><i class="fa-solid fa-business-time"></i></a>
-                                {% if service_request.is_handled %}
+                                   role="button"><i class="fa-solid fa-business-time"></i>
+                                </a>
+                                {% if service_request.handled_by %}
                                     <span data-bs-toggle="modal" data-bs-target="#close_request_modal">
-                        <a class="btn btn-outline-warning btn-md mx-1"
-                           href="#"
-                           title="{% trans 'Close' %}"
-                           data-bs-toggle="tooltip"
-                           role="button"><i class="fa-solid fa-check"></i>
-                        </a>
-                    </span>
+                                        <a class="btn btn-outline-warning btn-md mx-1"
+                                           href="#"
+                                           title="{% trans 'Close' %}"
+                                           data-bs-toggle="tooltip"
+                                           role="button"
+                                        >
+                                            <i class="fa-solid fa-check"></i>
+                                        </a>
+                                    </span>
                                 {% endif %}
                             {% endif %}
 
@@ -140,6 +143,7 @@
                     </div>
                 </div>
 
+                {#                Service order details#}
                 {% if service_request.service_order %}
                     <div class="d-block rounded-lg bg-light mb-1" style="padding:0.5%">
                         <div class="text-center mb-4 d-flex justify-content-between align-items-center">
@@ -316,7 +320,7 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            {% if service_request.status >= 2|floatformat:"0" %}
+                            {% if service_request.handled_by %}
                                 <span class="text-success"><i class="fa-solid fa-check"></i></span>
                             {% else %}
                                 <span class="text-warning"><i class="fa-solid fa-xmark"></i></span>
@@ -324,7 +328,7 @@
                             {% trans 'Handled' %}
                         </li>
                         <li class="list-group-item">
-                            {% if service_request.status >= 3|floatformat:"0" %}
+                            {% if service_request.resolution %}
                                 <span class="text-success"><i class="fa-solid fa-check"></i></span>
                             {% else %}
                                 <span class="text-warning"><i class="fa-solid fa-xmark"></i></span>
@@ -332,7 +336,7 @@
                             {% trans 'Resolved' %}
                         </li>
                         <li class="list-group-item">
-                            {% if service_request.status >= 4|floatformat:"0" %}
+                            {% if service_request.closed_by %}
                                 <span class="text-success"><i class="fa-solid fa-check"></i></span>
                             {% else %}
                                 <span class="text-warning"><i class="fa-solid fa-xmark"></i></span>
