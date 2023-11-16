@@ -232,4 +232,5 @@ class ServiceRequestCreateServiceOrder(auth_mixins.PermissionRequiredMixin, view
 
         context['service_request_id'] = self.kwargs['pk']
         context['assets_being_serviced'] = get_assets_currently_in_service(customer)
+        context['customer'] = customer
         return context
