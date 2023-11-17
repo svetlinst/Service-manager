@@ -429,4 +429,4 @@ class ServiceRequest(ActiveModel, BaseAuditEntity):
         return True
 
     class Meta:
-        ordering = ('-created_on',)
+        ordering = ('status', '-created_on',)
