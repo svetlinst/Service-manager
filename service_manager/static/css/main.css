@@ -89,13 +89,13 @@ nav .logo {
     margin-bottom: 16px;
 }
 
-.card-info .info-text {
+.info-text {
     padding: 0;
     margin: 4px;
     font-weight: 500;
 }
 
-.card-info .info-text .info-text-detail {
+.info-text-detail {
     color: #0d6efd;
     font-weight: 300;
 }
@@ -168,6 +168,17 @@ nav .logo {
     margin: 0;
 }
 
+.order-card-item-status-label {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 6px 0 6px;
+    align-items: center;
+    border-radius: 5px;
+    border: grey 1px solid;
+    min-width: 150px;
+}
+
 .order-card-item.card-header {
     font-weight: 600;
 }
@@ -186,6 +197,107 @@ nav .logo {
 .order-list-title:first-of-type {
     margin-top: 4px;
 }
+
+/*Service Requests*/
+.service-request-card {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    border: grey 1px solid;
+    border-radius: 5px;
+    /*min-height: 50px;*/
+    flex-wrap: wrap;
+    padding: 6px 12px 6px 12px;
+    margin-bottom: 12px;
+    background-color: white;
+}
+
+.service-request-card .sr-card-header {
+    text-align: center;
+    display: flex;
+    gap: 24px;
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: center;
+
+}
+
+.service-request-card .sr-requestor-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*width: 60%;*/
+    margin: 0 20% 0 20%;
+    gap: 24px;
+}
+
+.service-request-card .sr-card-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    /*border: 1px solid grey;*/
+    /*border-radius: 5px;*/
+    padding: 0 6px 0 6px;
+    /*background-color: grey;*/
+    /*width: 250px;*/
+    flex-basis: 25%;
+    justify-self: left;
+}
+
+.service-request-card .sr-card-info{
+    flex-basis: 50%;
+    justify-self: center;
+}
+
+.service-request-card .sr-card-actions{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    gap: 12px;
+    flex-basis: 25%;
+    justify-self: right;
+}
+
+.service-request-card .sr-card-title {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    border-bottom: 1px solid lightgrey;
+
+}
+
+.service-request-card .sr-body {
+    border-bottom: 1px solid lightgrey;
+    margin-bottom: 6px;
+    width: 100%;
+}
+
+.service-request-card .sr-timestamps {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.service-request-card .sr-actions {
+
+}
+
+.vertical-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bold-block {
+    display: block;
+    font-weight: 500;
+}
+
+.bold {
+    font-weight: 500;
+}
+
 
 /*  PRINT OUTS  */
 
