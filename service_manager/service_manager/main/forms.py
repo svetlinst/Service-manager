@@ -197,6 +197,7 @@ class ServiceRequestFilteringForm(BootstrapFormMixin, forms.Form):
     )
 
     search = forms.CharField(
+        label=_('Search'),
         required=False,
         widget=forms.TextInput(),
     )
