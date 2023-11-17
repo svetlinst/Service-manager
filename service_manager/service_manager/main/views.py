@@ -166,6 +166,8 @@ class CreateServiceOrderHeader(auth_mixins.PermissionRequiredMixin, views.Create
             service_request.service_order = service_order
             service_order.save()
             service_request.save()
+        else:
+            service_order.save()
 
         # Create a slug
         created_on = service_order.created_on
