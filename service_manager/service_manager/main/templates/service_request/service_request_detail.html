@@ -58,7 +58,7 @@
                                    title="{% trans 'Handle' %}"
                                    role="button"><i class="fa-solid fa-business-time"></i>
                                 </a>
-                                {% if service_request.handled_by %}
+                                {% if service_request.handled_by and service_request.resolution %}
                                     <span data-bs-toggle="modal" data-bs-target="#close_request_modal">
                                         <a class="btn btn-outline-warning btn-md mx-1"
                                            href="#"
