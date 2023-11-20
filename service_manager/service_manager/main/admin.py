@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.utils.html import format_html
 
 from service_manager.customers.models import CustomerAsset
-from service_manager.main.models import ServiceOrderHeader, ServiceOrderDetail
+from service_manager.main.models import ServiceOrderHeader, ServiceOrderDetail, ServiceRequest
 
 
 @admin.register(ServiceOrderHeader)
@@ -73,3 +73,7 @@ class ServiceOrderHeaderAdmin(admin.ModelAdmin):
 @admin.register(ServiceOrderDetail)
 class ServiceOrderDetailAdmin(admin.ModelAdmin):
     list_display = ['service_order', 'material', 'quantity', 'discount']
+
+@admin.register(ServiceRequest)
+class ServiceRequestAdmin(admin.ModelAdmin):
+    pass

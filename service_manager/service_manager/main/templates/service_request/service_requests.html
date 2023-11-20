@@ -4,20 +4,20 @@
 {% load i18n %}
 {% block content %}
     <div class="d-block mt-5 rounded-lg bg-light my-3" style="padding:2%">
-        <div class="container-fluid d-flex justify-content-between align-items-center mb-3 p-0">
-            <p></p>
+        <div class="container-fluid d-flex justify-content-center align-items-center mb-1 p-0">
             <h2 class='text-center text-secondary mb-3'>{% trans 'Service Requests' %}</h2>
-            <a href="{% url 'create_service_request' %}?next={{ request.path|urlencode }}"
-               class="btn btn-success btn-md">{% trans 'Create New' %}</a>
         </div>
         <div class="container-fluid justify-content-between align-items-center mb-3 p-0">
             <form method="get" id="filter_form">
-                <div class="row">
+                <div class="row mb-2 align-items-end justify-content-end">
+
                     <div class="col-6">
-                        {{ filter_form.search.label }}
+                        <h5 class="text-left">
+                            {{ filter_form.search.label }}
+                        </h5>
                         {{ filter_form.search }}
                     </div>
-                    <div class="col-2 align-self-end">
+                    <div class="col-2">
                         <button type="submit" class="btn btn-outline-primary"
                                 data-bs-toggle="tooltip"
                                 title="{% trans 'Search' %}"
@@ -30,104 +30,149 @@
                                title="{% trans 'Clear' %}">
                                 <i class="fa-solid fa-ban"></i></a>
                         {% endwith %}
+                    </div>
+                    <div class="col-4 ms-auto">
+                        <a href="{% url 'create_service_request' %}?next={{ request.path|urlencode }}"
+                           class="btn btn-success float-end btn-md">{% trans 'Create New' %}</a>
+                    </div>
+                </div>
 
+                <div class="row mb-2">
+                    <div class="col-12">
+                        <div class="form-control">
+                            <h5 class="text-left">
+                                {% trans 'Status' %}
+                            </h5>
+                            <div style="display: flex; justify-content: space-between">
+                                {% for checkbox in filter_form.status %}
+                                    <div>
+                                        {{ checkbox.tag }}
+                                        {{ checkbox.choice_label }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-2">
-                        {{ filter_form.status.label }}
-                        {{ filter_form.status }}
-                    </div>
-                    <div class="col-2">
-                        {{ filter_form.period.label }}
-                        {{ filter_form.period }}
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-control">
+                            <h5 class="text-left">
+                                {% trans 'Period' %}
+                            </h5>
+                            <div style="display: flex; justify-content: space-between">
+                                {% for checkbox in filter_form.period %}
+                                    <div>
+                                        {{ checkbox.tag }}
+                                        {{ checkbox.choice_label }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
         <section class="order-card-items"></section>
-            {% if object_list %}
-                <p class="order-list-title">{% trans 'Open service requests' %}: {{ open_service_requests_cnt }}</p>
+        {% if object_list %}
+            <p class="order-list-title">{% trans 'Open service requests' %}: {{ open_service_requests_cnt }}</p>
 
-                {#                Card items#}
-                {% for service_request in object_list %}
-                    <div class="service-request-card">
-                        <header class="sr-card-title">
-                            <section class="sr-card-header">
-                                <section class="sr-card-status">
-                                    {% get_status_value service_request.status as status_text %}
-                                    {% if service_request.status == '1' %}
-                                        <span class="text-warning fs-4"><i class="fa-solid fa-certificate"></i></span>
-                                    {% elif service_request.status == '2' %}
-                                        <span class="text-primary fs-4"><i
-                                                class="fa-solid fa-hourglass-half"></i></span>
-                                    {% elif service_request.status == '3' %}
-                                        <span class="text-info fs-4"><i class="fa-solid fa-handshake"></i></span>
-                                    {% elif service_request.status == '4' %}
-                                        <span class="text-success fs-4"><i
-                                                class="fa-solid fa-clipboard-check"></i></span>
-                                    {% elif service_request.status == '5' %}
-                                        <span class="text-danger fs-4"><i class="fa-solid fa-phone-slash"></i></span>
-                                    {% endif %}
-                                    <span class="info-text-detail">{{ status_text }}</span>
-                                </section>
+            {#                Card items#}
+            {% for service_request in object_list %}
+                <div class="service-request-card">
+                    <header class="sr-card-title">
+                        <section class="sr-card-header">
+                            <section class="sr-card-status">
+                                {% get_status_value service_request.status as status_text %}
+                                {% if service_request.status == '1' %}
+                                    <span class="text-warning fs-4"><i class="fa-solid fa-certificate"></i></span>
+                                {% elif service_request.status == '2' %}
+                                    <span class="text-primary fs-4"><i
+                                            class="fa-solid fa-hourglass-half"></i></span>
+                                {% elif service_request.status == '3' %}
+                                    <span class="text-info fs-4"><i class="fa-solid fa-handshake"></i></span>
+                                {% elif service_request.status == '4' %}
+                                    <span class="text-success fs-4"><i
+                                            class="fa-solid fa-clipboard-check"></i></span>
+                                {% elif service_request.status == '5' %}
+                                    <span class="text-danger fs-4"><i class="fa-solid fa-phone-slash"></i></span>
+                                {% endif %}
+                                <span class="info-text-detail">{{ status_text }}</span>
+                            </section>
 
-                                <section class="sr-card-info">
-                                    <p class="info-text">{% trans 'Customer' %}: <span class="info-text-detail">{{ service_request.customer.name }}</span></p>
-                                </section>
+                            <section class="sr-card-info">
+                                <p class="info-text">{% trans 'Customer' %}: <span
+                                        class="info-text-detail">{{ service_request.customer.name }}</span></p>
+                            </section>
 
-                                <section class="sr-card-actions">
-                                    <div class="sr-actions">
-                                        <a class="btn btn-outline-info btn-md"
-                                           href="{% url 'service_request_detail' service_request.pk %}"
+                            <section class="sr-card-actions">
+                                <div class="sr-actions">
+                                    <a class="btn btn-outline-info btn-md"
+                                       href="{% url 'service_request_detail' service_request.pk %}"
+                                       data-bs-toggle="tooltip"
+                                       title="{% trans 'Detail' %}"
+                                       role="button"><i class="fa-solid fa-circle-info"></i></a>
+                                    {% if perms.main.change_serviceorderheader %}
+                                        <a class="btn btn-outline-danger btn-md"
+                                           href="{% url 'delete_service_request' service_request.id %}"
                                            data-bs-toggle="tooltip"
-                                           title="{% trans 'Detail' %}"
-                                           role="button"><i class="fa-solid fa-circle-info"></i></a>
-                                        {% if perms.main.change_serviceorderheader %}
-                                            <a class="btn btn-outline-danger btn-md"
-                                               href="{% url 'delete_service_request' service_request.id %}"
-                                               data-bs-toggle="tooltip"
-                                               title="{% trans 'Delete' %}"
-                                               role="button"><i class="fa-solid fa-trash"></i></a>
-                                        {% endif %}
-                                    </div>
-                                </section>
+                                           title="{% trans 'Delete' %}"
+                                           role="button"><i class="fa-solid fa-trash"></i></a>
+                                    {% endif %}
+                                </div>
                             </section>
-                            <section class="sr-requestor-info">
-                                <p class="info-text">{% trans 'Phone number' %}: <span class="info-text-detail">{{ service_request.requestor_phone_number }}</span></p>
-                                <p class="info-text">{% trans 'Requestor' %}: <span class="info-text-detail">{{ service_request.requestor_name }}</span></p>
-                            </section>
-                        </header>
+                        </section>
+                        <section class="sr-requestor-info">
+                            <p class="info-text">{% trans 'Phone number' %}: <span
+                                    class="info-text-detail">{{ service_request.requestor_phone_number }}</span></p>
+                            <p class="info-text">{% trans 'Requestor' %}: <span
+                                    class="info-text-detail">{{ service_request.requestor_name }}</span></p>
+                        </section>
+                    </header>
 
-                        <section class="sr-body">
-                            <p class="info-text">
+                    <section class="sr-body">
+                        <p class="info-text">
                             <span class="bold-block">
                                 {% trans 'Problem description' %}:
                             </span>
-                                <span class="info-text-detail">
+                            <span class="info-text-detail">
                                     {{ service_request.problem_description|truncatechars:256 }}
                                 </span>
+                        </p>
+                    </section>
+
+
+                    <section class="sr-timestamps">
+                        <div class="vertical-flex">
+                            <p class="info-text">{% trans 'Accepted on' %}:<span
+                                    class="info-text-detail"> {{ service_request.created_on }}</span></p>
+                            <p class="info-text">{% trans 'Accepted by' %}:<span
+                                    class="info-text-detail"> {{ service_request.accepted_by.profile_full_name }}</span>
                             </p>
-                        </section>
+                        </div>
+                        <div class="vertical-flex">
+                            <p class="info-text">{% trans 'Handled on' %}: <span
+                                    class="info-text-detail">{{ service_request.handled_on|default_if_none:'' }}</span>
+                            </p>
+                            <p class="info-text">{% trans 'Handled by' %}: <span
+                                    class="info-text-detail">{{ service_request.handled_by.profile_full_name }}</span>
+                            </p>
+                        </div>
+                        <div class="vertical-flex">
+                            <p class="info-text">{% trans 'Closed on' %}: <span
+                                    class="info-text-detail">{{ service_request.closed_on|default_if_none:'' }}</span>
+                            </p>
+                            <p class="info-text">{% trans 'Closed by' %}: <span
+                                    class="info-text-detail">{{ service_request.closed_by.profile_full_name }}</span>
+                            </p>
+                        </div>
+                    </section>
 
-
-                        <section class="sr-timestamps">
-                            <div class="vertical-flex">
-                                <p class="info-text">{% trans 'Accepted on' %}:<span class="info-text-detail"> {{ service_request.created_on }}</span></p>
-                                <p class="info-text">{% trans 'Accepted by' %}:<span class="info-text-detail"> {{ service_request.accepted_by.profile_full_name }}</span></p>
-                            </div>
-                            <div class="vertical-flex">
-                                <p class="info-text">{% trans 'Handled on' %}: <span class="info-text-detail">{{ service_request.handled_on|default_if_none:'' }}</span></p>
-                                <p class="info-text">{% trans 'Handled by' %}: <span class="info-text-detail">{{ service_request.handled_by.profile_full_name }}</span></p>
-                            </div>
-                            <div class="vertical-flex">
-                                <p class="info-text">{% trans 'Closed on' %}: <span class="info-text-detail">{{ service_request.closed_on|default_if_none:'' }}</span></p>
-                                <p class="info-text">{% trans 'Closed by' %}: <span class="info-text-detail">{{ service_request.closed_by.profile_full_name }}</span></p>
-                            </div>
-                        </section>
-
-                    </div>
-                {% endfor %}
-                {% include 'partials/paginator.html' %}
-            {% endif %}
-        </section>
+                </div>
+            {% endfor %}
+            {% include 'partials/paginator.html' %}
+        {% endif %}
     </div>
 {% endblock %}

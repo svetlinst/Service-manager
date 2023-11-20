@@ -167,37 +167,24 @@ class ServiceRequestUpdateResolutionForm(BootstrapFormMixin, forms.ModelForm):
 
 
 class ServiceRequestFilteringForm(BootstrapFormMixin, forms.Form):
-    status_choices = [('0', _('All'))]
+    status_choices = ServiceRequest.TYPE_CHOICES
     period_choices = [
-        (-1, _('All')), (0, _('Today')), (1, _('This week')), (2, _('Last week')),
+        (0, _('Today')), (1, _('This week')), (2, _('Last week')),
         (3, _('This month')), (4, _('Last month')), (5, _('Older')),
     ]
-    status_choices.extend(ServiceRequest.TYPE_CHOICES)
 
-    status = forms.ChoiceField(
-        label=_('Status'),
+    status = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple(attrs={'onchange': 'filter_form.submit();'}),
         choices=status_choices,
-        required=False,
-        widget=forms.Select(
-            attrs={
-                'onchange': 'filter_form.submit();',
-            },
-        )
-    )
-
-    period = forms.ChoiceField(
-        label=_('Period'),
-        choices=period_choices,
-        required=False,
-        widget=forms.Select(
-            attrs={
-                'onchange': 'filter_form.submit();',
-            },
-        )
     )
 
     search = forms.CharField(
         label=_('Search'),
         required=False,
         widget=forms.TextInput(),
+    )
+
+    period = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple(attrs={'onchange': 'filter_form.submit();'}),
+        choices=period_choices,
     )

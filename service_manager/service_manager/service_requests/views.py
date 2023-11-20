@@ -30,66 +30,56 @@ class ServiceRequestsListView(auth_mixins.PermissionRequiredMixin, views.ListVie
 
         if 'search' in self.request.GET:
             search_text = self.request.GET['search']
-            queryset = queryset.filter(customer__name__icontains=search_text)
+            queryset = queryset.filter(
+                Q(customer__name__icontains=search_text) | Q(problem_description__icontains=search_text))
 
         if 'status' in self.request.GET:
-            status = self.request.GET['status']
+            status = self.request.GET.getlist('status')
 
-            if status != '0':
-                queryset = queryset.filter(status=int(status))
+            queryset = queryset.filter(status__in=[int(x) for x in status])
 
         if 'period' in self.request.GET:
-            period = self.request.GET['period']
+            period = self.request.GET.getlist('period')
+            conditions = []
+            combined_conditions = Q()
 
-            # today
-            if period == '0':
+            if '0' in period:
                 start = today
                 end = today + dt.timedelta(days=1)
-                queryset = queryset.filter(created_on__range=(
-                    start,
-                    end)
-                )
+                conditions.append((start, end))
 
-            # this week
-            if period == '1':
+            if '1' in period:
                 start = today - dt.timedelta(days=today.weekday())
                 end = start + dt.timedelta(days=7)
-                queryset = queryset.filter(created_on__range=(
-                    start,
-                    end)
-                )
+                conditions.append((start, end))
 
-            # last week
-            if period == '2':
+            if '2' in period:
                 start = today - dt.timedelta(days=(today.weekday() + 7))
                 end = start + dt.timedelta(days=7)
-                queryset = queryset.filter(created_on__range=(
-                    start,
-                    end)
-                )
+                conditions.append((start, end))
 
-            # this month
-            if period == '3':
+            if '3' in period:
                 start = today.replace(day=1)
                 end = today + relativedelta.relativedelta(months=1, day=1)
-                queryset = queryset.filter(created_on__range=(
-                    start,
-                    end)
-                )
+                conditions.append((start, end))
 
-            # last month
-            if period == '4':
+            if '4' in period:
                 start = today - relativedelta.relativedelta(months=1, day=1)
                 end = today.replace(day=1)
-                queryset = queryset.filter(created_on__range=(
-                    start,
-                    end)
-                )
+                conditions.append((start, end))
 
-            # older
-            if period == '5':
+            if '5' in period:
                 end = today - relativedelta.relativedelta(months=1, day=1)
-                queryset = queryset.filter(created_on__lte=end)
+                conditions.append(end)
+
+            for x in conditions:
+                if isinstance(x, tuple):
+                    condition = Q(created_on__range=(x[0], x[1]))
+                else:
+                    condition = Q(created_on__lte=x)
+                combined_conditions |= condition
+
+            queryset = queryset.filter(combined_conditions)
 
         return queryset
 
@@ -129,7 +119,7 @@ class CreateServiceRequestView(auth_mixins.PermissionRequiredMixin, views.Create
 
     def get_success_url(self):
         go_to_next = self.request.POST.get('next', '/')
-        return go_to_next + '?period=1'
+        return go_to_next + '?period=1&status=1&status=2&status=3'
 
 
 class EditServiceRequestView(auth_mixins.PermissionRequiredMixin, views.UpdateView):

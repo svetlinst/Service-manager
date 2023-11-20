@@ -1,4 +1,4 @@
-from django.forms import Textarea, Select
+from django.forms import Textarea, Select, CheckboxSelectMultiple
 
 
 class BootstrapFormMixin:
@@ -14,5 +14,7 @@ class BootstrapFormMixin:
 
             if isinstance(field.widget, Select):
                 field.widget.attrs['class'] += ' form-select'
+            elif isinstance(field.widget, CheckboxSelectMultiple):
+                field.widget.attrs['class'] += ' form-check-input-inline'
             else:
                 field.widget.attrs['class'] += ' form-control'
