@@ -2,32 +2,188 @@
 {% load static %}
 {% load i18n %}
 {% block content %}
-    {#    <div class="jumbotron">#}
     {% if not request.user.is_anonymous %}
-        <h3 class="text-end">{% trans 'Hello' %}, {{ request.user.profile.full_name }}!</h3>
+        <div class="index-meta">
+            <p>{% trans 'Latest update' %}: <span id="refresh-timer"></span></p>
+            <h5>{% trans 'Hello' %}, {{ request.user.profile.full_name }}!</h5>
+        </div>
     {% else %}
         <h3 class="text-end"></h3>
     {% endif %}
 
-    <div class="p-1 mb-4 bg-light rounded-3">
-        <div class="container-fluid py-2">
-            <h1 class="container-fluid py-5">{% blocktrans %}Welcome to Service Manager!{% endblocktrans %}</h1>
-            <p class="col-md-8 fs-4">{% blocktrans %}The main goal of Service Manager web application is to streamline
-                the end-to-end
-                process of servicing customer assets.{% endblocktrans %}</p>
-            {% if not request.user.is_authenticated %}
-                <a class="btn btn-primary btn-lg" href="{% url 'track_order_search' %}">{% blocktrans %}Track service order{% endblocktrans %}</a>
-            {% else %}
-                {% if perms.customers.view_customer %}
-                    <a class="btn btn-primary btn-lg" href="{% url 'customers_list' %}">{% blocktrans %}To Customers!{% endblocktrans %}</a>
-                {% elif perms.main.view_serviceorderheader %}
-                    <a class="btn btn-primary btn-lg" href="{% url 'service_orders_list_pending_service' %}">
-                        {% blocktrans %}To Pending service orders!{% endblocktrans %}</a>
-                {% elif perms.master_data.view_asset %}
-                    <a class="btn btn-primary btn-lg" href="{% url 'assets_list' %}">
-                        {% blocktrans %}To Assets!{% endblocktrans %}</a>
-                {% endif %}
-            {% endif %}
+    {% if not request.user.is_authenticated %}
+        <div class="p-1 mb-4 bg-light">
+            <div class="container-fluid py-2">
+                <h1 class="container-fluid py-5">{% blocktrans %}Welcome to Service Manager!{% endblocktrans %}</h1>
+                <p class="col-md-8 fs-4">{% blocktrans %}The main goal of Service Manager web application is to
+                    streamline
+                    the end-to-end
+                    process of servicing customer assets.{% endblocktrans %}</p>
+                <a class="btn btn-primary btn-lg" href="{% url 'track_order_search' %}">{% blocktrans %}Track service
+                    order{% endblocktrans %}</a>
+            </div>
         </div>
-    </div>
+    {% else %}
+        {#  Service requests#}
+        <div class="p-1 mb-4 bg-light">
+            <div class="container-fluid py-2">
+                <section class="home-section-container">
+
+                    <header class="home-section-container-header">
+                        <h4 class="centered-text header-title">{% trans 'Service requests' %}</h4>
+                        <a href="{% url 'service_requests' %}?status=1&status=2&status=3">
+                            <p class="header-link">{% trans 'Total number of open Service requests' %}:
+                                <b>{{ open_service_requests_count }}</b></p>
+                        </a>
+                        <p class="centered-text small-text">{% trans 'Latest open Service requests' %}</p>
+                    </header>
+
+                    <main class="section-items">
+                        {% for service_request in open_service_requests %}
+                            <div class="section-item">
+                                <header class="section-item-header">
+                                    <p class="info-text">{% trans 'Customer' %}: <span
+                                            class="info-text-detail">{{ service_request.customer.name }}</span></p>
+                                    <p class="info-text">{% trans 'Phone number' %}: <span
+                                            class="info-text-detail">{{ service_request.requestor_phone_number }}</span>
+                                    </p>
+                                    <p class="info-text">{% trans 'Requested by' %}: <span
+                                            class="info-text-detail">{{ service_request.requestor_name }}</span></p>
+                                    <p class="info-text">{% trans 'Accepted on' %}: <span
+                                            class="info-text-detail">{{ service_request.created_on }}</span></p>
+                                    <a class="btn btn-outline-info btn-md"
+                                       href="{% url 'service_request_detail' service_request.pk %}"
+                                       data-bs-toggle="tooltip"
+                                       title="{% trans 'Detail' %}"
+                                       role="button">
+                                        <i class="fa-solid fa-circle-info"></i>
+                                    </a>
+                                </header>
+                                <p class="info-text">{% trans 'Problem description' %}: <span
+                                        class="info-text-detail">{{ service_request.problem_description }}</span></p>
+
+                            </div>
+                        {% endfor %}
+                    </main>
+                </section>
+            </div>
+        </div>
+
+        {#  Pending Service Orders#}
+        <div class="p-1 mb-4 bg-light">
+            <div class="container-fluid py-2">
+                <section class="home-section-container">
+                    <header class="home-section-container-header">
+                        <h4 class="centered-text header-title">{% trans 'Pending Service orders' %}</h4>
+                        <a href="{% url 'service_orders_list_pending_service' %}">
+                            <p class="header-link">{% trans 'Total number of pending Service orders' %}:
+                                <b>{{ pending_service_orders_count }}</b></p>
+                        </a>
+                        <p class="centered-text small-text">{% trans 'Latest pending Service orders' %}</p>
+                    </header>
+
+                    <main class="section-items">
+                        {% for service_order in pending_service_orders %}
+                            <div class="section-item">
+                                <header class="section-item-header">
+                                    <p class="info-text">{% trans 'Customer' %}: <span
+                                            class="info-text-detail">{{ service_order.customer.name }}</span></p>
+                                    <p class="info-text">{% trans 'Asset' %}: <span
+                                            class="info-text-detail">{{ service_order.customer_asset.asset.category.name }}</span>
+                                    </p>
+                                    <p class="info-text">{% trans 'SLA' %}: <span
+                                            class="info-text-detail">{{ service_order.service_level_agreement.name }}</span>
+                                    </p>
+                                    <p class="info-text">{% trans 'Accepted on' %}: <span
+                                            class="info-text-detail">{{ service_order.created_on }}</span></p>
+                                    <a class="btn btn-outline-info btn-md"
+                                       href="{% url 'detail_service_order' service_order.pk %}"
+                                       data-bs-toggle="tooltip"
+                                       title="{% trans 'Detail' %}"
+                                       role="button">
+                                        <i class="fa-solid fa-circle-info"></i>
+                                    </a>
+                                </header>
+                                <p class="info-text">{% trans 'Problem description' %}: <span
+                                        class="info-text-detail">{{ service_order.problem_description }}</span></p>
+
+                            </div>
+                        {% endfor %}
+                    </main>
+                </section>
+            </div>
+        </div>
+
+        {#  Completed Service Orders#}
+        <div class="p-1 mb-4 bg-light">
+            <div class="container-fluid py-2">
+                <section class="home-section-container">
+                    <header class="home-section-container-header">
+                        <h4 class="centered-text header-title">{% trans 'Completed Service orders' %}</h4>
+                        <a href="{% url 'service_orders_list_serviced' %}">
+                            <p class="header-link">{% trans 'Total number of completed Service orders' %}:
+                                <b>{{ completed_service_orders_count }}</b></p>
+                        </a>
+                        <p class="centered-text small-text">{% trans 'Latest completed Service orders' %}</p>
+                    </header>
+
+                    <main class="section-items">
+                        {% for service_order in completed_service_orders %}
+                            <div class="section-item">
+                                <header class="section-item-header">
+                                    <p class="info-text">{% trans 'Customer' %}: <span
+                                            class="info-text-detail">{{ service_order.customer.name }}</span></p>
+                                    <p class="info-text">{% trans 'Asset' %}: <span
+                                            class="info-text-detail">{{ service_order.customer_asset.asset.category.name }}</span>
+                                    </p>
+                                    <p class="info-text">{% trans 'Amount due (VAT incl.)' %}: <span
+                                            class="info-text-detail">{{ service_order.total_amount_due }} {% trans 'lv.' %}</span>
+                                    </p>
+                                    <p class="info-text">{% trans 'Accepted on' %}: <span
+                                            class="info-text-detail">{{ service_order.created_on }}</span></p>
+                                    <a class="btn btn-outline-info btn-md"
+                                       href="{% url 'detail_service_order' service_order.pk %}"
+                                       data-bs-toggle="tooltip"
+                                       title="{% trans 'Detail' %}"
+                                       role="button">
+                                        <i class="fa-solid fa-circle-info"></i>
+                                    </a>
+                                </header>
+{#                                <p class="info-text">{% trans 'Problem description' %}: <span#}
+{#                                        class="info-text-detail">{{ service_order.problem_description }}</span></p>#}
+
+                            </div>
+                        {% endfor %}
+                    </main>
+                </section>
+            </div>
+        </div>
+    {% endif %}
+    <script>
+        let timerInSeconds = 0;
+        const refreshTimer = document.getElementById('refresh-timer');
+        // Create a new Date object
+        const currentDate = new Date();
+        const options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        };
+
+        // Get the date and time components
+        const time = currentDate.toLocaleTimeString('bg-BG', options);
+
+        setInterval(() => {
+            timerInSeconds += 1;
+            refreshTimer.innerHTML = `${time}`;
+
+            if (timerInSeconds >= 180) {
+                window.location.reload();
+            }
+        }, 1000);
+    </script>
 {% endblock %}

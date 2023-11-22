@@ -26,8 +26,37 @@ import qrcode
 import qrcode.image.svg
 
 
-def get_index(request):
-    return render(request, 'index.html')
+class HomeTemplateView(views.TemplateView):
+    template_name = 'index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Service requests
+        open_service_requests = ServiceRequest.objects.all().filter(status__in=[1, 2, 3]).order_by('-created_on')
+        open_service_requests_count = open_service_requests.count()
+        open_service_requests = open_service_requests[:3]
+
+        # Pending service orders
+        pending_service_orders = ServiceOrderHeader.objects.all().filter(is_serviced=False).order_by('-created_on')
+        pending_service_orders_count = pending_service_orders.count()
+        pending_service_orders = pending_service_orders[:3]
+
+        # Completed service orders
+        completed_service_orders = ServiceOrderHeader.objects.all().filter(Q(is_serviced=True) & Q(is_completed=False)).order_by('-created_on')
+        completed_service_orders_count = completed_service_orders.count()
+        completed_service_orders = completed_service_orders[:3]
+
+        context['open_service_requests'] = open_service_requests
+        context['open_service_requests_count'] = open_service_requests_count
+
+        context['pending_service_orders'] = pending_service_orders
+        context['pending_service_orders_count'] = pending_service_orders_count
+
+        context['completed_service_orders'] = completed_service_orders
+        context['completed_service_orders_count'] = completed_service_orders_count
+
+        return context
 
 
 class ServiceOrderHeaderPendingServiceListView(auth_mixins.PermissionRequiredMixin, views.ListView):

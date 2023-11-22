@@ -19,6 +19,83 @@ nav .logo {
     color: #149289;
 }
 
+.centered-text {
+    text-align: center;
+}
+
+/*HOME*/
+.index-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.index-meta p {
+    color: grey;
+    margin: 0;
+    padding: 0;
+}
+
+.index-meta h5 {
+    margin: 0;
+    padding: 0;
+}
+
+.home-section-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.home-section-container-header {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home-section-container-header .header-title {
+    margin: 0;
+}
+
+.home-section-container-header .header-link {
+    margin: 0;
+}
+
+.small-text {
+    color: grey;
+    flex-basis: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.section-items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.section-item {
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 0 6px 0 6px;
+}
+
+.section-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    padding: 6px 6px 6px 6px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.section-item-header p {
+    margin: 0;
+    width: 25%;
+}
+
 /*  CUSTOMERS   */
 .card-items {
     display: flex;
@@ -244,12 +321,12 @@ nav .logo {
     justify-self: left;
 }
 
-.service-request-card .sr-card-info{
+.service-request-card .sr-card-info {
     flex-basis: 50%;
     justify-self: center;
 }
 
-.service-request-card .sr-card-actions{
+.service-request-card .sr-card-actions {
     display: flex;
     justify-content: right;
     align-items: center;

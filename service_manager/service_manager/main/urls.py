@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 import service_manager.main.signals
-from service_manager.main.views import get_index, ServiceOrderHeaderPendingServiceListView, \
+from service_manager.main.views import ServiceOrderHeaderPendingServiceListView, \
     ServiceOrderHeaderDetailView, \
     CreateServiceOrderHeader, CreateServiceOrderDetailView, ServiceOrderDetailsListView, \
     EditServiceOrderDetailView, DeleteServiceOrderDetailView, complete_service_order, CreateServiceOrderNoteView, \
@@ -10,10 +10,10 @@ from service_manager.main.views import get_index, ServiceOrderHeaderPendingServi
     ServiceOrderHeaderServicedListView, rollback_service_order, HandoverServiceOrderView, ServiceOrderNoteDetailView, \
     contact_us, TrackOrderDetailView, ServiceOrderPrintoutView, TrackOrderSearchFormView, CreateServiceOrderSuccess, \
     CustomerNotificationsListView, CreateCustomerNotificationView, EditCustomerNotificationView, \
-    DeleteCustomerNotificationView, CustomerNotificationDetailView
+    DeleteCustomerNotificationView, CustomerNotificationDetailView, HomeTemplateView
 
 urlpatterns = [
-                  path('', get_index, name='index'),
+                  path('', HomeTemplateView.as_view(), name='index'),
                   path('contact_us/', contact_us, name='contact_us'),
                   path('service_orders/pending/', ServiceOrderHeaderPendingServiceListView.as_view(),
                        name='service_orders_list_pending_service'),
