@@ -70,7 +70,7 @@ class Customer(ActiveModel, BaseAuditEntity):
         return self.name
 
     class Meta:
-        ordering = ('-is_regular_customer', '-has_subscription', 'name',)
+        ordering = ('name',)
 
 
 class CustomerRepresentative(ActiveModel, BaseAuditEntity):

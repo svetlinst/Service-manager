@@ -15,7 +15,7 @@ from service_manager.master_data.models import AssetCategory, Brand, Asset
 class CustomersListView(auth_mixins.PermissionRequiredMixin, views.ListView):
     model = Customer
     template_name = 'customer/customers.html'
-    paginate_by = 10
+    paginate_by = 12
 
     permission_required = 'customers.view_customer'
 
