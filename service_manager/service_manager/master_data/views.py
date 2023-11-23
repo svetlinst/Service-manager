@@ -5,7 +5,8 @@ from django.contrib.auth import mixins as auth_mixins
 
 from service_manager.core.views import BootstrapFormViewMixin
 from service_manager.master_data.forms import CreateAssetForm, EditAssetForm, CreateMaterialForm, EditMaterialForm, \
-    EditMaterialCategoryForm, EditBrandForm, EditAssetCategoryForm, EditSlaForm, CreateSlaForm, FilterAssetsForm
+    EditMaterialCategoryForm, EditBrandForm, EditAssetCategoryForm, EditSlaForm, CreateSlaForm, FilterAssetsForm, \
+    FilterMaterialForm
 from service_manager.master_data.models import Asset, Material, MaterialCategory, Brand, AssetCategory, SLA
 
 
@@ -87,14 +88,21 @@ class MaterialsListView(auth_mixins.PermissionRequiredMixin, views.ListView):
         params = request.pop('page', True) and request.urlencode()
         context['params'] = params
 
+        context['filter_form'] = FilterMaterialForm(self.request.GET or None)
+
         return context
 
     def get_queryset(self):
         queryset = super().get_queryset()
 
-        search_text = self.request.GET.get('search_value', None)
+        search_text = self.request.GET.get('search', None)
         if search_text:
             queryset = queryset.filter(Q(name__icontains=search_text) | Q(category__name__icontains=search_text))
+
+        category = self.request.GET.get('category', None)
+        if category:
+            queryset = queryset.filter(category=category)
+
         return queryset
 
     permission_required = 'master_data.view_material'

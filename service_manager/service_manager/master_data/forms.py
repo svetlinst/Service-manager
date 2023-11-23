@@ -89,16 +89,43 @@ class FilterAssetsForm(BootstrapFormMixin, forms.ModelForm):
         widget=forms.TextInput(attrs={'placeholder': _('brand, model name and number'), }),
     )
 
-    class Meta:
-        model = Asset
-        fields = ('category',)
-
     category = forms.ModelChoiceField(
         label=_('Asset Category'),
         required=False,
         queryset=AssetCategory.objects.all(),
-        widget=forms.Select(attrs={
-            'class': 'form-control',
-            'onchange': 'filter_form.submit();',
-        }),
+        widget=forms.Select(
+            attrs=
+            {
+                'class': 'form-control',
+                'onchange': 'filter_form.submit();',
+            }
+        ),
     )
+
+    class Meta:
+        model = Asset
+        fields = ('category',)
+
+
+class FilterMaterialForm(BootstrapFormMixin, forms.ModelForm):
+    search = forms.CharField(
+        label=_('Search'),
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': _('material name'), })
+    )
+
+    category = forms.ModelChoiceField(
+        label=_('Material Category'),
+        required=False,
+        queryset=MaterialCategory.objects.all(),
+        widget=forms.Select(
+            attrs={
+                'class': 'form-control',
+                'onchange': 'filter_form.submit();',
+            }
+        )
+    )
+
+    class Meta:
+        model = Material
+        fields = ('category',)
