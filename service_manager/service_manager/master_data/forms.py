@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from service_manager.core.forms import BootstrapFormMixin
 from service_manager.master_data.models import Asset, Material, MaterialCategory, Brand, AssetCategory, SLA
@@ -79,3 +80,25 @@ class EditSlaForm(BootstrapFormMixin, forms.ModelForm):
 
 class CreateSlaForm(EditSlaForm):
     pass
+
+
+class FilterAssetsForm(BootstrapFormMixin, forms.ModelForm):
+    search = forms.CharField(
+        label=_('Search'),
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': _('brand, model name and number'), }),
+    )
+
+    class Meta:
+        model = Asset
+        fields = ('category',)
+
+    category = forms.ModelChoiceField(
+        label=_('Asset Category'),
+        required=False,
+        queryset=AssetCategory.objects.all(),
+        widget=forms.Select(attrs={
+            'class': 'form-control',
+            'onchange': 'filter_form.submit();',
+        }),
+    )
