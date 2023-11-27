@@ -25,6 +25,9 @@ from weasyprint import HTML, CSS
 import qrcode
 import qrcode.image.svg
 
+from service_manager.master_data.forms import FilterMaterialForm
+from service_manager.master_data.models import Material
+
 
 class HomeTemplateView(views.TemplateView):
     template_name = 'index.html'
@@ -235,10 +238,25 @@ class CreateServiceOrderDetailView(auth_mixins.PermissionRequiredMixin, views.Cr
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        context['filter_form'] = FilterMaterialForm(self.request.GET or None)
+
         service_order_header_id = self.kwargs['order_id']
         if service_order_header_id:
             context['service_order_header'] = ServiceOrderHeader.objects.prefetch_related(
                 'serviceorderdetail_set').get(pk=int(service_order_header_id))
+
+        # Material count
+        materials = Material.objects.all()
+
+        category = self.request.GET.get('category' or None)
+        if category:
+            materials = materials.filter(category=category)
+
+        search = self.request.GET.get('search' or None)
+        if search:
+            materials = materials.filter(Q(name__icontains=search) | Q(category__name__icontains=search))
+
+        context['material_count'] = materials.count()
 
         return context
 
@@ -251,6 +269,27 @@ class CreateServiceOrderDetailView(auth_mixins.PermissionRequiredMixin, views.Cr
         service_order_detail.save()
 
         return super().form_valid(form)
+
+    def get_initial(self):
+        category = self.request.GET.get('category' or None)
+        if category:
+            self.initial.update({
+                'category': category,
+            })
+        elif 'category' in self.initial:
+            self.initial.pop('category')
+
+        search = self.request.GET.get('search' or None)
+        if search:
+            self.initial.update(
+                {
+                    'search': search,
+                }
+            )
+        elif 'search' in self.initial:
+            self.initial.pop('search')
+
+        return super().get_initial()
 
 
 class EditServiceOrderDetailView(auth_mixins.PermissionRequiredMixin, views.UpdateView):

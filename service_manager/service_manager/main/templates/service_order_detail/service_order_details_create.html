@@ -4,15 +4,63 @@
     <div class="d-block mt-1 rounded-lg bg-light mb-1">
         <h4 class='text-center text-secondary'>{% trans 'Add Material' %}</h4>
         <div class="row">
-            <div class="col-lg-3"></div>
-            <div class="col-lg-6">
+            <div class="col-lg-12">
+                <form method="get" id="filter_form">
+                    <div class="row mb-2">
+
+                        <div class="col-7">
+                            {{ filter_form.search }}
+                        </div>
+
+                        <div class="col-1">
+                            <button type="submit" class="btn btn-outline-primary"
+                                    data-bs-toggle="tooltip"
+                                    title="{% trans 'Search' %}"
+                                    href="{% url 'create_service_order_detail' service_order_header.pk %}"><i
+                                    class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+
+                        <div class="col-1">
+                            <a href="{% url 'create_service_order_detail' service_order_header.pk %}"
+                               class="btn btn-outline-warning btn-md"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Clear' %}">
+                                <i class="fa-solid fa-ban"></i></a>
+                        </div>
+
+                        <div class="col-3">
+                            {{ filter_form.category }}
+                        </div>
+
+                    </div>
+                </form>
                 <form method="post" action="{% url 'create_service_order_detail' service_order_header.pk %}">
                     {% csrf_token %}
-                    {{ form }}
-                    <button type="submit" class="btn btn-primary mt-1 float-end">{% trans 'Add' %}</button>
+                    <div class="form-control">
+                        <div class="row align-items-end justify-content-left mb-2">
+                            <div class="col-6">
+                                <div>
+                                    {{ form.material.label }} <span><b>({{ material_count }} {% trans 'qty.' %})</b></span>
+                                </div>
+                                {{ form.material }}
+                            </div>
+                            <div class="col-2">
+                                {{ form.quantity.label }}
+                                {{ form.quantity }}
+                            </div>
+                            <div class="col-2">
+                                {% trans 'Discount (%)' %}
+                                {{ form.discount }}
+                            </div>
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-primary mt-1 float-end">{% trans 'Add' %}</button>
+                            </div>
+                        </div>
+                    </div>
+
                 </form>
             </div>
-            <div class="col-lg-3"></div>
         </div>
     </div>
 {% endblock %}
