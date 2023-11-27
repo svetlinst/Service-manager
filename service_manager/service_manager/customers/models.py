@@ -142,9 +142,9 @@ class CustomerDepartment(ActiveModel, BaseAuditEntity):
 
 
 class CustomerAsset(ActiveModel, BaseAuditEntity):
-    SERIAL_NUMBER_MAX_LENGTH = 20
-    PRODUCT_NUMBER_MAX_LENGTH = 20
-    INVENTORY_NUMBER_MAX_LENGTH = 20
+    SERIAL_NUMBER_MAX_LENGTH = 30
+    PRODUCT_NUMBER_MAX_LENGTH = 30
+    INVENTORY_NUMBER_MAX_LENGTH = 30
     LOCATION_MAX_LENGTH = 256
 
     serial_number = models.CharField(
