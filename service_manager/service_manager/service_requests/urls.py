@@ -1,8 +1,10 @@
 from django.urls import path
 
-from service_manager.service_requests.views import ServiceRequestsListView, ServiceRequestDetailView, CreateServiceRequestView, \
+from service_manager.service_requests.views import ServiceRequestsListView, ServiceRequestDetailView, \
+    CreateServiceRequestView, \
     EditServiceRequestView, ServiceRequestAssignHandlerView, ServiceRequestUpdateResolutionView, \
-    DeleteServiceRequestView, finalize_service_request, reject_service_request, ServiceRequestCreateServiceOrder
+    DeleteServiceRequestView, finalize_service_request, reject_service_request, ServiceRequestCreateServiceOrder, \
+    CreateDeliveryRequestView, EditDeliveryRequestView, DeleteDeliveryRequestView
 
 urlpatterns = [
     path('', ServiceRequestsListView.as_view(), name='service_requests'),
@@ -21,5 +23,12 @@ urlpatterns = [
     path('<int:pk>/reject/', reject_service_request, name='reject_service_request'),
     path('<int:pk>/create_service_order/<int:customer_id>/',
          ServiceRequestCreateServiceOrder.as_view(),
-         name='service_request_create_order')
+         name='service_request_create_order'),
+    path('detail/<int:service_request_id>/delivery_request/create/', CreateDeliveryRequestView.as_view(),
+         name='create_delivery_request'),
+    path('detail/<int:service_request_id>/delivery_request/<int:pk>/', EditDeliveryRequestView.as_view(),
+         name='edit_delivery_request'),
+    path('detail/<int:service_request_id>/delivery_request/delete/<int:pk>/', DeleteDeliveryRequestView.as_view(),
+         name='delete_delivery_request'),
+    # path('detail/<int:service_request_id>/delivery_requests/', DeliveryRequestListView.as_view(), name='delivery_requests')
 ]

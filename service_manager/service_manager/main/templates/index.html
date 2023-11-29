@@ -42,22 +42,55 @@
                         {% for service_request in open_service_requests %}
                             <div class="section-item">
                                 <header class="section-item-header">
-                                    <p class="info-text">{% trans 'Customer' %}: <span
-                                            class="info-text-detail">{{ service_request.customer.name }}</span></p>
-                                    <p class="info-text">{% trans 'Phone number' %}: <span
-                                            class="info-text-detail">{{ service_request.requestor_phone_number }}</span>
+                                    {% if service_request.order_type == 1 %}
+                                        <p class="info-text">
+                                            <span class="text-danger" data-bs-toggle="tooltip"
+                                                  title="{% trans 'Service' %}"><i
+                                                    class="fa-solid fa-screwdriver-wrench"></i></span>
+                                            {% trans 'Customer' %}:
+                                            <span class="info-text-detail">
+                                                {{ service_request.customer.name }}
+                                            </span>
+                                        </p>
+                                    {% elif service_request.order_type == 2 %}
+                                        <p class="info-text">
+                                            <span class="text-success align-self-start" data-bs-toggle="tooltip"
+                                                  title="{% trans 'Delivery' %}"><i
+                                                    class="fa-solid fa-dolly"></i></span>
+                                            {% trans 'Customer' %}:
+                                            <span class="info-text-detail">
+                                                {{ service_request.customer.name }}
+                                            </span>
+                                        </p>
+                                    {% endif %}
+
+                                    <p class="info-text">{% trans 'Phone number' %}:
+                                        <span class="info-text-detail">
+                                            {{ service_request.requestor_phone_number }}
+                                        </span>
                                     </p>
                                     <p class="info-text">{% trans 'Requested by' %}: <span
                                             class="info-text-detail">{{ service_request.requestor_name }}</span></p>
                                     <p class="info-text">{% trans 'Accepted on' %}: <span
                                             class="info-text-detail">{{ service_request.created_on }}</span></p>
-                                    <a class="btn btn-outline-info btn-md"
-                                       href="{% url 'service_request_detail' service_request.pk %}"
-                                       data-bs-toggle="tooltip"
-                                       title="{% trans 'Detail' %}"
-                                       role="button">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </a>
+                                    {% if service_request.order_type == 1 %}
+                                        <a class="btn btn-outline-info btn-md"
+                                           href="{% url 'service_request_detail' service_request.pk %}"
+                                           data-bs-toggle="tooltip"
+                                           title="{% trans 'Detail' %}"
+                                           role="button">
+                                            <i class="fa-solid fa-circle-info"></i>
+                                        </a>
+                                    {% elif service_request.order_type == 2 %}
+                                        <a class="btn btn-outline-info btn-md"
+                                           href="{% url 'create_delivery_request' service_request.pk %}"
+                                           data-bs-toggle="tooltip"
+                                           title="{% trans 'Detail' %}"
+                                           role="button">
+                                            <i class="fa-solid fa-circle-info"></i>
+                                        </a>
+                                    {% endif %}
+
                                 </header>
                                 <p class="info-text">{% trans 'Problem description' %}: <span
                                         class="info-text-detail">{{ service_request.problem_description }}</span></p>
@@ -149,8 +182,8 @@
                                         <i class="fa-solid fa-circle-info"></i>
                                     </a>
                                 </header>
-{#                                <p class="info-text">{% trans 'Problem description' %}: <span#}
-{#                                        class="info-text-detail">{{ service_order.problem_description }}</span></p>#}
+                                {#                                <p class="info-text">{% trans 'Problem description' %}: <span#}
+                                {#                                        class="info-text-detail">{{ service_order.problem_description }}</span></p>#}
 
                             </div>
                         {% endfor %}

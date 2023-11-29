@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <h1 class="text-center">{% trans 'Edit delivery request' %}</h1>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <form method="post" action="{% url "edit_delivery_request" object.service_request.pk object.pk %}">
+                {% csrf_token %}
+                {{ form }}
+                <a class="btn btn-secondary mt-1 float-start" href="javascript:history.back()">{% trans 'Back' %}</a>
+                <button type="submit" class="btn btn-primary mt-1 float-end">{% trans 'Save' %}</button>
+            </form>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+{% endblock %}

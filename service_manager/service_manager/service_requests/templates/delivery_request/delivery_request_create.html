@@ -1,10 +1,11 @@
-{% extends 'service_order_header/core/service_order_details.html' %}
+{% extends 'service_request/service_request_detail.html' %}
 {% load i18n %}
-{% block sod_create %}
+{% block service_delivery_create %}
     <div class="d-block mt-1 rounded-lg bg-light mb-1">
         <h4 class='text-center text-secondary'>{% trans 'Add Material' %}</h4>
         <div class="row">
             <div class="col-lg-12">
+                {#                FILTER #}
                 <form method="get" id="filter_form">
                     <div class="row mb-2">
 
@@ -16,13 +17,13 @@
                             <button type="submit" class="btn btn-outline-primary"
                                     data-bs-toggle="tooltip"
                                     title="{% trans 'Search' %}"
-                                    href="{% url 'create_service_order_detail' service_order_header.pk %}"><i
+                                    href="{% url 'create_delivery_request' service_request.pk %}"><i
                                     class="fa-solid fa-magnifying-glass"></i>
                             </button>
                         </div>
 
                         <div class="col-1">
-                            <a href="{% url 'create_service_order_detail' service_order_header.pk %}"
+                            <a href="{% url 'create_delivery_request' service_request.pk %}"
                                class="btn btn-outline-warning btn-md"
                                data-bs-toggle="tooltip"
                                title="{% trans 'Clear' %}">
@@ -35,7 +36,9 @@
 
                     </div>
                 </form>
-                <form method="post" action="{% url 'create_service_order_detail' service_order_header.pk %}">
+
+                {#                CREATE #}
+                <form method="post" action="{% url 'create_delivery_request' service_request.pk %}">
                     {% csrf_token %}
                     <div class="form-control">
                         <div class="row align-items-end justify-content-left mb-2">

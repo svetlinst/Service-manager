@@ -32,7 +32,7 @@
                         {% endwith %}
                     </div>
                     <div class="col-4 ms-auto">
-                        <a href="{% url 'create_service_request' %}?next={{ request.path|urlencode }}"
+                        <a href="{% url 'create_service_request' %}"
                            class="btn btn-success float-end btn-md">{% trans 'Create New' %}</a>
                     </div>
                 </div>
@@ -109,11 +109,19 @@
 
                             <section class="sr-card-actions">
                                 <div class="sr-actions">
-                                    <a class="btn btn-outline-info btn-md"
-                                       href="{% url 'service_request_detail' service_request.pk %}"
-                                       data-bs-toggle="tooltip"
-                                       title="{% trans 'Detail' %}"
-                                       role="button"><i class="fa-solid fa-circle-info"></i></a>
+                                    {% if service_request.order_type == 1 %}
+                                        <a class="btn btn-outline-info btn-md"
+                                           href="{% url 'service_request_detail' service_request.pk %}"
+                                           data-bs-toggle="tooltip"
+                                           title="{% trans 'Detail' %}"
+                                           role="button"><i class="fa-solid fa-circle-info"></i></a>
+                                    {% elif True %}
+                                        <a class="btn btn-outline-info btn-md"
+                                           href="{% url 'create_delivery_request' service_request.pk %}"
+                                           data-bs-toggle="tooltip"
+                                           title="{% trans 'Detail' %}"
+                                           role="button"><i class="fa-solid fa-circle-info"></i></a>
+                                    {% endif %}
                                     {% if perms.main.change_serviceorderheader %}
                                         <a class="btn btn-outline-danger btn-md"
                                            href="{% url 'delete_service_request' service_request.id %}"
@@ -125,6 +133,23 @@
                             </section>
                         </section>
                         <section class="sr-requestor-info">
+                            {% if service_request.order_type == 1 %}
+                                <p class="sr-order-type info-text">
+                                    <span class="text-danger fs-5">
+                                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                                    </span>
+                                    <span class="info-text">{% trans 'Service' %}</span>
+                                </p>
+                            {% else %}
+                                <p class="sr-order-type info-text">
+                                    <span class="text-success fs-5">
+                                        <i class="fa-solid fa-dolly"></i>
+                                    </span>
+                                    <span class="info-text">{% trans 'Delivery' %}</span>
+                                </p>
+
+
+                            {% endif %}
                             <p class="info-text">{% trans 'Phone number' %}: <span
                                     class="info-text-detail">{{ service_request.requestor_phone_number }}</span></p>
                             <p class="info-text">{% trans 'Requestor' %}: <span

@@ -149,7 +149,7 @@ class CreateCustomerNotificationForm(BootstrapFormMixin, forms.ModelForm):
 class CreateServiceRequestForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = ServiceRequest
-        fields = ('customer', 'requestor_name', 'requestor_phone_number', 'problem_description')
+        fields = ('customer', 'requestor_name', 'requestor_phone_number', 'order_type', 'problem_description')
 
         widgets = {
             'problem_description': forms.Textarea(

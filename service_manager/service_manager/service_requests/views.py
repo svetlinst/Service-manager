@@ -5,6 +5,8 @@ from django.contrib.auth import mixins as auth_mixins
 import django.views.generic as views
 from django.urls import reverse_lazy, reverse
 
+from service_manager.core.mixins import MaterialFilteringMixin
+from service_manager.core.utils import get_material_count_matching_conditions
 from service_manager.customers.models import CustomerAsset, Customer
 from service_manager.customers.utils import get_assets_currently_in_service
 from service_manager.main.forms import ServiceRequestFilteringForm, CreateServiceRequestForm, \
@@ -13,6 +15,11 @@ from service_manager.main.models import ServiceRequest
 import datetime as dt
 from dateutil import relativedelta
 import datetime
+
+from service_manager.master_data.forms import FilterMaterialForm
+from service_manager.master_data.models import Material
+from service_manager.service_requests.forms import CreateDeliveryRequestForm, EditDeliveryRequestForm
+from service_manager.service_requests.models import DeliveryRequest
 
 
 # Create your views here.
@@ -118,7 +125,7 @@ class CreateServiceRequestView(auth_mixins.PermissionRequiredMixin, views.Create
         return super().form_valid(form)
 
     def get_success_url(self):
-        go_to_next = self.request.POST.get('next', '/')
+        go_to_next = reverse_lazy('service_requests')
         return go_to_next + '?period=1&status=1&status=2&status=3'
 
 
@@ -130,7 +137,13 @@ class EditServiceRequestView(auth_mixins.PermissionRequiredMixin, views.UpdateVi
     permission_required = 'main.change_serviceorderheader'
 
     def get_success_url(self):
+        service_request = ServiceRequest.objects.all().get(pk=self.kwargs['pk'])
+        # Delivery
+        if service_request.order_type == 2:
+            return reverse_lazy('create_delivery_request', kwargs={'service_request_id': self.kwargs['pk']})
+        # Service
         return reverse_lazy('service_request_detail', kwargs={'pk': self.kwargs['pk']})
+
 
 
 class ServiceRequestAssignHandlerView(EditServiceRequestView):
@@ -224,3 +237,68 @@ class ServiceRequestCreateServiceOrder(auth_mixins.PermissionRequiredMixin, view
         context['assets_being_serviced'] = get_assets_currently_in_service(customer)
         context['customer'] = customer
         return context
+
+
+class CreateDeliveryRequestView(MaterialFilteringMixin, auth_mixins.PermissionRequiredMixin, views.CreateView):
+    model = DeliveryRequest
+    template_name = 'delivery_request/delivery_request_create.html'
+    permission_required = 'main.add_serviceorderheader'
+    form_class = CreateDeliveryRequestForm
+
+    context_object_name = 'delivery_request'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        service_request = ServiceRequest.objects.all().get(pk=self.kwargs['service_request_id'])
+        context['service_request'] = service_request
+
+        context['filter_form'] = FilterMaterialForm(self.request.GET or None)
+
+        context['material_count'] = get_material_count_matching_conditions(
+            self.request.GET.get('category' or None),
+            self.request.GET.get('search' or None)
+        )
+
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('create_delivery_request', kwargs={'service_request_id': self.kwargs['service_request_id']})
+
+    def form_valid(self, form):
+        service_request_id = self.kwargs['service_request_id']
+        service_request = ServiceRequest.objects.all().get(pk=service_request_id)
+
+        delivery_request = form.save(commit=False)
+        delivery_request.service_request = service_request
+        delivery_request.save()
+
+        return super().form_valid(form)
+
+
+class EditDeliveryRequestView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
+    model = DeliveryRequest
+    template_name = 'delivery_request/delivery_request_edit.html'
+    permission_required = 'main.change_serviceorderheader'
+
+    form_class = EditDeliveryRequestForm
+
+    def get_success_url(self):
+        return reverse_lazy('create_delivery_request', kwargs={'service_request_id': self.kwargs['service_request_id']})
+
+
+class DeleteDeliveryRequestView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
+    model = DeliveryRequest
+    template_name = 'delivery_request/delivery_request_delete.html'
+    permission_required = 'main.change_serviceorderheader'
+
+    def get_success_url(self):
+        return reverse_lazy('create_delivery_request', kwargs={'service_request_id': self.kwargs['service_request_id']})
+
+# class DeliveryRequestListView(auth_mixins.PermissionRequiredMixin, views.ListView):
+#     model = DeliveryRequest
+#     template_name = ''
+#     permission_required = 'main.add_serviceorderheader'
+#
+#     context_object_name = 'delivery_requests'
+

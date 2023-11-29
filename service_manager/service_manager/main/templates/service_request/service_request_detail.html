@@ -73,7 +73,7 @@
                             {% endif %}
 
 
-                            {% if service_request.is_finalized and not service_request.service_order %}
+                            {% if service_request.is_finalized and not service_request.service_order and service_request.order_type == 1 %}
                                 <a class="btn btn-outline-success btn-md mx-1"
                                    href="{% url 'service_request_create_order' service_request.pk service_request.customer.pk %}"
                                    data-bs-toggle="tooltip"
@@ -343,18 +343,49 @@
                             {% endif %}
                             {% trans 'Closed' %}
                         </li>
-                        <li class="list-group-item">
-                            {% if service_request.service_order %}
-                                <span class="text-success"><i class="fa-solid fa-check"></i></span>
-                            {% else %}
-                                <span class="text-danger"><i class="fa-solid fa-xmark"></i></span>
-                            {% endif %}
-                            {% trans 'Service order created' %}
-                        </li>
+                        {% if service_request.order_type == 1 %}
+                            <li class="list-group-item">
+                                {% if service_request.service_order %}
+                                    <span class="text-success"><i class="fa-solid fa-check"></i></span>
+                                {% else %}
+                                    <span class="text-danger"><i class="fa-solid fa-xmark"></i></span>
+                                {% endif %}
+                                {% trans 'Service order created' %}
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
         </div>
+
+        {#    CREATE NEW DELIVERY REQUEST#}
+        {% if service_request.order_type == 2 and not service_request.is_finalized %}
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:0.5%">
+                        {% block service_delivery_create %}
+
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-12">
+                {#    LIST ADDED DELIVERY REQUESTS#}
+                {% if service_request.order_type == 2 %}
+                    <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:0.5%">
+                        {% include 'delivery_request/delivery_requests.html' %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
     </div>
+
+
+
+
 
 {% endblock %}

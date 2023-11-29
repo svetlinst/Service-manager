@@ -1,0 +1,60 @@
+{% load i18n %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-9 my-1">
+            <h2>{% blocktrans %}Total Amount Due (VAT incl.){% endblocktrans %}: {{ service_request.total_amount_due }} {% trans 'lv.' %}</h2>
+        </div>
+    </div>
+    <table class="table table-striped text-center">
+        <thead>
+        <tr>
+            <th scope="col">{% trans 'ID' %}</th>
+            <th scope="col">{% trans 'Material Name' %}</th>
+            <th scope="col">{% trans 'Category' %}</th>
+            <th scope="col">{% trans 'Quantity' %}</th>
+            <th scope="col">{% trans 'Discount' %}</th>
+            <th scope="col">{% trans 'Regular price (VAT incl.)' %}</th>
+            <th scope="col">{% trans 'Discounted unit Price (VAT incl.)' %}</th>
+            <th scope="col">{% trans 'Total Amount (no VAT)' %}</th>
+            <th scope="col">{% trans 'Total Amount (VAT incl.)' %}</th>
+            {% if not service_order_header.is_serviced and service_order_header.active %}
+                <th scope="col">{% trans 'Action' %}</th>
+            {% endif %}
+
+        </tr>
+        </thead>
+        <tbody>
+        {% if service_request.deliveryrequest_set %}
+            {% for delivery_request in service_request.deliveryrequest_set.all %}
+                <tr>
+                    <td>{{ delivery_request.id }}</td>
+                    <td>{{ delivery_request.material.name }}</td>
+                    <td>{{ delivery_request.material.category }}</td>
+                    <td>{{ delivery_request.quantity|floatformat:"1" }}</td>
+                    <td>{{ delivery_request.discount|floatformat:"1" }}%</td>
+                    <td>{{ delivery_request.material.price|floatformat:"2" }} {% trans 'lv.' %}</td>
+                    <td>{{ delivery_request.discounted_price|floatformat:"2" }} {% trans 'lv.' %}</td>
+                    <td>{{ delivery_request.total_amount_no_vat|floatformat:"2" }} {% trans 'lv.' %}</td>
+                    <td>{{ delivery_request.total_amount|floatformat:"2" }} {% trans 'lv.' %}</td>
+                    {% if not service_request.is_finalized %}
+                        <td>
+                            {% if perms.main.change_serviceorderdetail %}
+                                <a class="btn btn-outline-primary btn-md"
+                                   href="{% url 'edit_delivery_request' service_request.pk delivery_request.id %}"
+                                   data-bs-toggle="tooltip"
+                                   title="{% trans 'Edit' %}"
+                                   role="button"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a class="btn btn-outline-danger btn-md"
+                                   href="{% url 'delete_delivery_request' service_request.id delivery_request.id %}"
+                                   data-bs-toggle="tooltip"
+                                   title="{% trans 'Delete' %}"
+                                   role="button"><i class="fa-solid fa-trash"></i></a>
+                            {% endif %}
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

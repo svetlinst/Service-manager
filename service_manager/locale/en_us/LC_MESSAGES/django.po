@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-23 23:54+0200\n"
+"POT-Creation-Date: 2023-11-28 20:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,8 +56,8 @@ msgstr ""
 #: service_manager/main/templates/service_order_header/core/service_order_handover.html:12
 #: service_manager/main/templates/service_order_note/service_order_note_create.html:12
 #: service_manager/main/templates/service_order_note/service_order_note_edit.html:13
-#: service_manager/main/templates/service_request/create_service_request.html:31
-#: service_manager/main/templates/service_request/edit_service_request.html:31
+#: service_manager/main/templates/service_request/create_service_request.html:34
+#: service_manager/main/templates/service_request/edit_service_request.html:35
 #: service_manager/main/templates/service_request/service_request_assign_handler.html:16
 #: service_manager/main/templates/service_request/service_request_update_resolution.html:16
 #: service_manager/master_data/templates/asset/asset_create.html:12
@@ -66,6 +66,7 @@ msgstr ""
 #: service_manager/master_data/templates/material/material_create.html:20
 #: service_manager/master_data/templates/material_category/material_category_create.html:12
 #: service_manager/master_data/templates/sla/service_level_agreement_create.html:12
+#: service_manager/service_requests/templates/delivery_request/delivery_request_edit.html:12
 msgid "Save"
 msgstr ""
 
@@ -187,8 +188,8 @@ msgstr ""
 
 #: service_manager/customers/models.py:113
 #: service_manager/customers/models.py:134
-#: service_manager/customers/models.py:181 service_manager/main/models.py:60
-#: service_manager/main/models.py:361
+#: service_manager/customers/models.py:181 service_manager/main/models.py:61
+#: service_manager/main/models.py:343
 msgid "customer"
 msgstr ""
 
@@ -233,8 +234,8 @@ msgstr ""
 #: service_manager/main/templates/service_order_header/core/service_order_handover.html:11
 #: service_manager/main/templates/service_order_note/service_order_note_create.html:11
 #: service_manager/main/templates/service_order_note/service_order_note_edit.html:12
-#: service_manager/main/templates/service_request/create_service_request.html:30
-#: service_manager/main/templates/service_request/edit_service_request.html:30
+#: service_manager/main/templates/service_request/create_service_request.html:33
+#: service_manager/main/templates/service_request/edit_service_request.html:34
 #: service_manager/main/templates/service_request/service_request_assign_handler.html:15
 #: service_manager/main/templates/service_request/service_request_update_resolution.html:15
 #: service_manager/master_data/templates/asset/asset_create.html:11
@@ -249,6 +250,7 @@ msgstr ""
 #: service_manager/master_data/templates/material_category/material_category_edit.html:11
 #: service_manager/master_data/templates/sla/service_level_agreement_create.html:11
 #: service_manager/master_data/templates/sla/service_level_agreement_edit.html:11
+#: service_manager/service_requests/templates/delivery_request/delivery_request_edit.html:11
 #: templates/403.html:5
 msgid "Back"
 msgstr ""
@@ -265,6 +267,7 @@ msgstr ""
 #: service_manager/master_data/templates/material/material_delete.html:6
 #: service_manager/master_data/templates/material_category/material_category_delete.html:6
 #: service_manager/master_data/templates/sla/service_level_agreement_delete.html:6
+#: service_manager/service_requests/templates/delivery_request/delivery_request_delete.html:6
 msgid "Are you sure you want to delete"
 msgstr ""
 
@@ -284,6 +287,7 @@ msgstr ""
 #: service_manager/master_data/templates/material/material_delete.html:11
 #: service_manager/master_data/templates/material_category/material_category_delete.html:11
 #: service_manager/master_data/templates/sla/service_level_agreement_delete.html:11
+#: service_manager/service_requests/templates/delivery_request/delivery_request_delete.html:11
 msgid "Confirm"
 msgstr ""
 
@@ -302,6 +306,7 @@ msgstr ""
 #: service_manager/master_data/templates/material/material_delete.html:15
 #: service_manager/master_data/templates/material_category/material_category_delete.html:15
 #: service_manager/master_data/templates/sla/service_level_agreement_delete.html:15
+#: service_manager/service_requests/templates/delivery_request/delivery_request_delete.html:15
 msgid "No, go back"
 msgstr ""
 
@@ -332,6 +337,7 @@ msgstr ""
 #: service_manager/master_data/templates/material_category/material_category_edit.html:12
 #: service_manager/master_data/templates/sla/service_level_agreement_edit.html:12
 #: service_manager/master_data/templates/sla/service_level_agreements.html:56
+#: service_manager/service_requests/templates/delivery_request/delivery_requests.html:45
 msgid "Edit"
 msgstr ""
 
@@ -440,7 +446,8 @@ msgstr ""
 #: service_manager/customers/templates/customer_asset/customer_assets_list.html:19
 #: service_manager/customers/templates/customer_department/customer_departments.html:14
 #: service_manager/customers/templates/customer_representatives/customer_representatives.html:14
-#: service_manager/main/forms.py:182
+#: service_manager/main/forms.py:196
+#: service_manager/main/templates/service_order_detail/service_order_details_create.html:18
 #: service_manager/main/templates/service_request/service_requests.html:23
 #: service_manager/master_data/forms.py:87
 #: service_manager/master_data/forms.py:112
@@ -454,11 +461,13 @@ msgstr ""
 #: service_manager/master_data/templates/material_category/material_categories.html:16
 #: service_manager/master_data/templates/sla/service_level_agreements.html:10
 #: service_manager/master_data/templates/sla/service_level_agreements.html:15
+#: service_manager/service_requests/templates/delivery_request/delivery_request_create.html:19
 msgid "Search"
 msgstr ""
 
 #: service_manager/customers/templates/customer/customers.html:24
 #: service_manager/customers/templates/customer_asset/customer_asset_create.html:24
+#: service_manager/main/templates/service_order_detail/service_order_details_create.html:28
 #: service_manager/main/templates/service_request/service_requests.html:30
 #: service_manager/master_data/templates/asset/assets.html:27
 #: service_manager/master_data/templates/asset_category/asset_categories.html:26
@@ -466,6 +475,7 @@ msgstr ""
 #: service_manager/master_data/templates/material/materials.html:27
 #: service_manager/master_data/templates/material_category/material_categories.html:26
 #: service_manager/master_data/templates/sla/service_level_agreements.html:25
+#: service_manager/service_requests/templates/delivery_request/delivery_request_create.html:29
 msgid "Clear"
 msgstr ""
 
@@ -516,13 +526,14 @@ msgstr ""
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:125
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:163
 #: service_manager/main/templates/service_order_note/service_order_notes.html:41
-#: service_manager/main/templates/service_request/service_requests.html:121
+#: service_manager/main/templates/service_request/service_requests.html:129
 #: service_manager/master_data/templates/asset/assets.html:74
 #: service_manager/master_data/templates/asset_category/asset_categories.html:59
 #: service_manager/master_data/templates/brands/brands.html:56
 #: service_manager/master_data/templates/material/materials.html:73
 #: service_manager/master_data/templates/material_category/material_categories.html:60
 #: service_manager/master_data/templates/sla/service_level_agreements.html:61
+#: service_manager/service_requests/templates/delivery_request/delivery_requests.html:50
 msgid "Delete"
 msgstr ""
 
@@ -609,6 +620,7 @@ msgstr ""
 #: service_manager/master_data/templates/asset/assets.html:50
 #: service_manager/master_data/templates/material/materials.html:51
 #: service_manager/reports/templates/finished_orders.html:32
+#: service_manager/service_requests/templates/delivery_request/delivery_requests.html:13
 msgid "Category"
 msgstr ""
 
@@ -696,6 +708,7 @@ msgstr ""
 #: service_manager/master_data/templates/material_category/material_categories.html:39
 #: service_manager/master_data/templates/sla/service_level_agreements.html:38
 #: service_manager/reports/templates/finished_orders.html:30
+#: service_manager/service_requests/templates/delivery_request/delivery_requests.html:11
 msgid "ID"
 msgstr ""
 
@@ -750,6 +763,7 @@ msgstr ""
 #: service_manager/master_data/templates/material_category/material_categories.html:41
 #: service_manager/master_data/templates/sla/service_level_agreements.html:41
 #: service_manager/reports/templates/finished_orders.html:41
+#: service_manager/service_requests/templates/delivery_request/delivery_requests.html:21
 msgid "Action"
 msgstr ""
 
@@ -767,7 +781,8 @@ msgstr ""
 #: service_manager/main/templates/service_order_note/service_order_notes.html:30
 #: service_manager/main/templates/service_order_note/service_order_notes.html:51
 #: service_manager/main/templates/service_request/service_request_detail.html:155
-#: service_manager/main/templates/service_request/service_requests.html:115
+#: service_manager/main/templates/service_request/service_requests.html:116
+#: service_manager/main/templates/service_request/service_requests.html:122
 #: service_manager/reports/templates/finished_orders.html:63
 msgid "Detail"
 msgstr ""
@@ -791,10 +806,12 @@ msgstr ""
 
 #: service_manager/customers/templates/customer_asset/customer_assets.html:59
 #: service_manager/customers/templates/customer_asset/customer_assets_list.html:58
+#: service_manager/main/models.py:296
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:38
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:75
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:113
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:151
+#: service_manager/main/templates/service_request/service_requests.html:141
 msgid "Service"
 msgstr ""
 
@@ -866,222 +883,234 @@ msgstr ""
 msgid "The allowed characters are: +, space and digits."
 msgstr ""
 
-#: service_manager/main/forms.py:172
+#: service_manager/main/forms.py:186
 msgid "Today"
 msgstr ""
 
-#: service_manager/main/forms.py:172
+#: service_manager/main/forms.py:186
 msgid "This week"
 msgstr ""
 
-#: service_manager/main/forms.py:172
+#: service_manager/main/forms.py:186
 msgid "Last week"
 msgstr ""
 
-#: service_manager/main/forms.py:173
+#: service_manager/main/forms.py:187
 msgid "This month"
 msgstr ""
 
-#: service_manager/main/forms.py:173
+#: service_manager/main/forms.py:187
 msgid "Last month"
 msgstr ""
 
-#: service_manager/main/forms.py:173
+#: service_manager/main/forms.py:187
 msgid "Older"
 msgstr ""
 
-#: service_manager/main/models.py:14 service_manager/main/models.py:18
+#: service_manager/main/models.py:15 service_manager/main/models.py:19
 msgid "Customer office"
 msgstr ""
 
-#: service_manager/main/models.py:15 service_manager/main/models.py:19
+#: service_manager/main/models.py:16 service_manager/main/models.py:20
 msgid "Brought in"
 msgstr ""
 
-#: service_manager/main/models.py:23 service_manager/main/models.py:319
+#: service_manager/main/models.py:24 service_manager/main/models.py:301
 msgid "problem description"
 msgstr ""
 
-#: service_manager/main/models.py:29
+#: service_manager/main/models.py:30
 msgid "is serviced"
 msgstr ""
 
-#: service_manager/main/models.py:34
+#: service_manager/main/models.py:35
 msgid "is completed"
 msgstr ""
 
-#: service_manager/main/models.py:39
+#: service_manager/main/models.py:40
 msgid "serviced on"
 msgstr ""
 
-#: service_manager/main/models.py:45
+#: service_manager/main/models.py:46
 msgid "completed on"
 msgstr ""
 
-#: service_manager/main/models.py:51
+#: service_manager/main/models.py:52
 msgid "send emails"
 msgstr ""
 
-#: service_manager/main/models.py:66
+#: service_manager/main/models.py:67
 msgid "customer asset"
 msgstr ""
 
-#: service_manager/main/models.py:74
+#: service_manager/main/models.py:75
 msgid "department"
 msgstr ""
 
-#: service_manager/main/models.py:83
+#: service_manager/main/models.py:84
 msgid "handed over by"
 msgstr ""
 
-#: service_manager/main/models.py:92 service_manager/main/models.py:370
+#: service_manager/main/models.py:93 service_manager/main/models.py:352
 msgid "accepted by"
 msgstr ""
 
-#: service_manager/main/models.py:101
+#: service_manager/main/models.py:102
 msgid "serviced by"
 msgstr ""
 
-#: service_manager/main/models.py:110
+#: service_manager/main/models.py:111
 msgid "completed by"
 msgstr ""
 
-#: service_manager/main/models.py:119
+#: service_manager/main/models.py:120
 msgid "handed over to"
 msgstr ""
 
-#: service_manager/main/models.py:123
+#: service_manager/main/models.py:124
 msgid "packaging"
 msgstr ""
 
-#: service_manager/main/models.py:130
+#: service_manager/main/models.py:131
 msgid "place of service"
 msgstr ""
 
-#: service_manager/main/models.py:144
+#: service_manager/main/models.py:145
 msgid "service_level_agreement"
 msgstr ""
 
-#: service_manager/main/models.py:159
+#: service_manager/main/models.py:160
 msgid "Deleted"
 msgstr ""
 
-#: service_manager/main/models.py:161 service_manager/main/models.py:311
+#: service_manager/main/models.py:162 service_manager/main/models.py:288
 msgid "New"
 msgstr ""
 
-#: service_manager/main/models.py:163
+#: service_manager/main/models.py:164
 msgid "Serviced"
 msgstr ""
 
-#: service_manager/main/models.py:165
+#: service_manager/main/models.py:166
 #: service_manager/main/templates/service_order_header/customer_printout.html:59
 #: service_manager/main/templates/service_order_header/customer_printout.html:94
 #: service_manager/main/templates/service_order_header/service_order_track.html:47
 msgid "Completed"
 msgstr ""
 
-#: service_manager/main/models.py:172
+#: service_manager/main/models.py:173
+#: service_manager/service_requests/models.py:13
 msgid "quantity"
 msgstr ""
 
-#: service_manager/main/models.py:174
+#: service_manager/main/models.py:175
+#: service_manager/service_requests/models.py:16
 msgid "discount"
 msgstr ""
 
-#: service_manager/main/models.py:183 service_manager/main/models.py:237
-#: service_manager/main/models.py:292
+#: service_manager/main/models.py:184 service_manager/main/models.py:209
+#: service_manager/main/models.py:264
 msgid "service_order"
 msgstr ""
 
-#: service_manager/main/models.py:189
+#: service_manager/main/models.py:190
+#: service_manager/service_requests/models.py:25
 msgid "material"
 msgstr ""
 
-#: service_manager/main/models.py:226
+#: service_manager/main/models.py:198
 msgid "note"
 msgstr ""
 
-#: service_manager/main/models.py:231 service_manager/main/models.py:263
+#: service_manager/main/models.py:203 service_manager/main/models.py:235
 msgid "created_by"
 msgstr ""
 
-#: service_manager/main/models.py:250
+#: service_manager/main/models.py:222
 msgid "By phone"
 msgstr ""
 
-#: service_manager/main/models.py:251
+#: service_manager/main/models.py:223
 msgid "By email"
 msgstr ""
 
-#: service_manager/main/models.py:255
+#: service_manager/main/models.py:227
 msgid "notified_on"
 msgstr ""
 
-#: service_manager/main/models.py:267
+#: service_manager/main/models.py:239
 msgid "notification_method"
 msgstr ""
 
-#: service_manager/main/models.py:276
+#: service_manager/main/models.py:248
 msgid "comment"
 msgstr ""
 
-#: service_manager/main/models.py:283
+#: service_manager/main/models.py:255
 msgid "service_order_current_status"
 msgstr ""
 
-#: service_manager/main/models.py:312
+#: service_manager/main/models.py:289
 msgid "In progress"
 msgstr ""
 
-#: service_manager/main/models.py:313
+#: service_manager/main/models.py:290
 #: service_manager/main/templates/service_request/service_request_detail.html:336
 msgid "Resolved"
 msgstr ""
 
-#: service_manager/main/models.py:314
+#: service_manager/main/models.py:291
 #: service_manager/main/templates/service_request/service_request_detail.html:344
 msgid "Closed"
 msgstr ""
 
-#: service_manager/main/models.py:315
+#: service_manager/main/models.py:292
 msgid "Rejected"
 msgstr ""
 
-#: service_manager/main/models.py:326
+#: service_manager/main/models.py:297
+#: service_manager/main/templates/service_request/service_requests.html:148
+msgid "Delivery"
+msgstr ""
+
+#: service_manager/main/models.py:308
 msgid "requestor name"
 msgstr ""
 
-#: service_manager/main/models.py:333
+#: service_manager/main/models.py:315
 msgid "requestor phone number"
 msgstr ""
 
-#: service_manager/main/models.py:343
+#: service_manager/main/models.py:325
 msgid "resolution"
 msgstr ""
 
-#: service_manager/main/models.py:350
+#: service_manager/main/models.py:332
 msgid "status"
 msgstr ""
 
-#: service_manager/main/models.py:379
+#: service_manager/main/models.py:361
 msgid "handled by"
 msgstr ""
 
-#: service_manager/main/models.py:383
+#: service_manager/main/models.py:365
 msgid "handled on"
 msgstr ""
 
-#: service_manager/main/models.py:394
+#: service_manager/main/models.py:376
 msgid "closed by"
 msgstr ""
 
-#: service_manager/main/models.py:398
+#: service_manager/main/models.py:380
 msgid "closed on"
 msgstr ""
 
-#: service_manager/main/models.py:406
+#: service_manager/main/models.py:388
 msgid "service order"
+msgstr ""
+
+#: service_manager/main/models.py:394
+msgid "order type"
 msgstr ""
 
 #: service_manager/main/templates/contact_us.html:4 templates/base.html:146
@@ -1189,7 +1218,7 @@ msgid "Latest open Service requests"
 msgstr ""
 
 #: service_manager/main/templates/index.html:47
-#: service_manager/main/templates/service_request/service_requests.html:128
+#: service_manager/main/templates/service_request/service_requests.html:153
 msgid "Phone number"
 msgstr ""
 
@@ -1204,7 +1233,7 @@ msgstr ""
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:16
 #: service_manager/main/templates/service_request/service_request_detail.html:95
 #: service_manager/main/templates/service_request/service_request_detail.html:245
-#: service_manager/main/templates/service_request/service_requests.html:149
+#: service_manager/main/templates/service_request/service_requests.html:174
 msgid "Accepted on"
 msgstr ""
 
@@ -1213,7 +1242,7 @@ msgstr ""
 #: service_manager/main/templates/service_order_header/customer_printout.html:54
 #: service_manager/main/templates/service_order_header/service_order_track.html:41
 #: service_manager/main/templates/service_request/service_request_detail.html:41
-#: service_manager/main/templates/service_request/service_requests.html:138
+#: service_manager/main/templates/service_request/service_requests.html:163
 msgid "Problem description"
 msgstr ""
 
@@ -1267,6 +1296,11 @@ msgstr ""
 #: service_manager/main/templates/service_order_header/service_order_track.html:68
 #: service_manager/main/templates/service_order_header/service_order_track.html:69
 #: service_manager/main/templates/service_order_header/service_order_track.html:76
+#: service_manager/service_requests/templates/delivery_request/delivery_requests.html:5
+#: service_manager/service_requests/templates/delivery_request/delivery_requests.html:35
+#: service_manager/service_requests/templates/delivery_request/delivery_requests.html:36
+#: service_manager/service_requests/templates/delivery_request/delivery_requests.html:37
+#: service_manager/service_requests/templates/delivery_request/delivery_requests.html:38
 msgid "lv."
 msgstr ""
 
@@ -1275,38 +1309,46 @@ msgid "Edit service order detail"
 msgstr ""
 
 #: service_manager/main/templates/service_order_detail/service_order_details.html:5
+#: service_manager/service_requests/templates/delivery_request/delivery_requests.html:5
 msgid "Total Amount Due (VAT incl.)"
 msgstr ""
 
 #: service_manager/main/templates/service_order_detail/service_order_details.html:12
+#: service_manager/service_requests/templates/delivery_request/delivery_requests.html:12
 msgid "Material Name"
 msgstr ""
 
 #: service_manager/main/templates/service_order_detail/service_order_details.html:14
 #: service_manager/main/templates/service_order_header/customer_printout.html:66
 #: service_manager/main/templates/service_order_header/service_order_track.html:54
+#: service_manager/service_requests/templates/delivery_request/delivery_requests.html:14
 msgid "Quantity"
 msgstr ""
 
 #: service_manager/main/templates/service_order_detail/service_order_details.html:15
 #: service_manager/main/templates/service_order_header/customer_printout.html:68
 #: service_manager/main/templates/service_order_header/service_order_track.html:56
+#: service_manager/service_requests/templates/delivery_request/delivery_requests.html:15
 msgid "Discount"
 msgstr ""
 
 #: service_manager/main/templates/service_order_detail/service_order_details.html:16
+#: service_manager/service_requests/templates/delivery_request/delivery_requests.html:16
 msgid "Regular price (VAT incl.)"
 msgstr ""
 
 #: service_manager/main/templates/service_order_detail/service_order_details.html:17
+#: service_manager/service_requests/templates/delivery_request/delivery_requests.html:17
 msgid "Discounted unit Price (VAT incl.)"
 msgstr ""
 
 #: service_manager/main/templates/service_order_detail/service_order_details.html:18
+#: service_manager/service_requests/templates/delivery_request/delivery_requests.html:18
 msgid "Total Amount (no VAT)"
 msgstr ""
 
 #: service_manager/main/templates/service_order_detail/service_order_details.html:19
+#: service_manager/service_requests/templates/delivery_request/delivery_requests.html:19
 msgid "Total Amount (VAT incl.)"
 msgstr ""
 
@@ -1351,10 +1393,25 @@ msgid "Rollback"
 msgstr ""
 
 #: service_manager/main/templates/service_order_detail/service_order_details_create.html:5
+#: service_manager/service_requests/templates/delivery_request/delivery_request_create.html:5
 msgid "Add Material"
 msgstr ""
 
-#: service_manager/main/templates/service_order_detail/service_order_details_create.html:12
+#: service_manager/main/templates/service_order_detail/service_order_details_create.html:49
+#: service_manager/main/templates/service_order_detail/service_order_details_create.html:52
+#: service_manager/service_requests/templates/delivery_request/delivery_request_create.html:52
+#: service_manager/service_requests/templates/delivery_request/delivery_request_create.html:55
+msgid "qty."
+msgstr ""
+
+#: service_manager/main/templates/service_order_detail/service_order_details_create.html:64
+#: service_manager/service_requests/templates/delivery_request/delivery_request_create.html:67
+#, python-format
+msgid "Discount (%%)"
+msgstr ""
+
+#: service_manager/main/templates/service_order_detail/service_order_details_create.html:68
+#: service_manager/service_requests/templates/delivery_request/delivery_request_create.html:71
 msgid "Add"
 msgstr ""
 
@@ -1407,7 +1464,7 @@ msgstr ""
 #: service_manager/main/templates/service_order_header/service_order_track.html:40
 #: service_manager/main/templates/service_request/service_request_detail.html:90
 #: service_manager/main/templates/service_request/service_request_detail.html:240
-#: service_manager/main/templates/service_request/service_requests.html:151
+#: service_manager/main/templates/service_request/service_requests.html:176
 msgid "Accepted by"
 msgstr ""
 
@@ -1680,22 +1737,22 @@ msgid "Create Order"
 msgstr ""
 
 #: service_manager/main/templates/service_request/service_request_detail.html:102
-#: service_manager/main/templates/service_request/service_requests.html:159
+#: service_manager/main/templates/service_request/service_requests.html:184
 msgid "Handled by"
 msgstr ""
 
 #: service_manager/main/templates/service_request/service_request_detail.html:107
-#: service_manager/main/templates/service_request/service_requests.html:156
+#: service_manager/main/templates/service_request/service_requests.html:181
 msgid "Handled on"
 msgstr ""
 
 #: service_manager/main/templates/service_request/service_request_detail.html:114
-#: service_manager/main/templates/service_request/service_requests.html:167
+#: service_manager/main/templates/service_request/service_requests.html:192
 msgid "Closed by"
 msgstr ""
 
 #: service_manager/main/templates/service_request/service_request_detail.html:119
-#: service_manager/main/templates/service_request/service_requests.html:164
+#: service_manager/main/templates/service_request/service_requests.html:189
 msgid "Closed on"
 msgstr ""
 
@@ -1737,7 +1794,7 @@ msgstr ""
 msgid "Handled"
 msgstr ""
 
-#: service_manager/main/templates/service_request/service_request_detail.html:352
+#: service_manager/main/templates/service_request/service_request_detail.html:353
 msgid "Service order created"
 msgstr ""
 
@@ -1757,16 +1814,16 @@ msgstr ""
 msgid "Open service requests"
 msgstr ""
 
-#: service_manager/main/templates/service_request/service_requests.html:130
+#: service_manager/main/templates/service_request/service_requests.html:155
 #: templates/email_templates/contact_us_mail_template.html:4
 msgid "Requestor"
 msgstr ""
 
-#: service_manager/main/views.py:427
+#: service_manager/main/views.py:439
 msgid "The email message was sent."
 msgstr ""
 
-#: service_manager/main/views.py:497
+#: service_manager/main/views.py:509
 msgid "Invalid Tracking number!"
 msgstr ""
 
@@ -1913,6 +1970,14 @@ msgstr ""
 
 #: service_manager/reports/templates/finished_orders.html:40
 msgid "Returned On"
+msgstr ""
+
+#: service_manager/service_requests/models.py:31
+msgid "service_request"
+msgstr ""
+
+#: service_manager/service_requests/templates/delivery_request/delivery_request_edit.html:4
+msgid "Edit delivery request"
 msgstr ""
 
 #: service_manager/settings.py:143

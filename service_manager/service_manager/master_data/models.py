@@ -110,7 +110,7 @@ class Material(ActiveModel, BaseAuditEntity):
         return self.price / (1 + self.VAT_PCT)
 
     def __str__(self):
-        return f'{self.name} ({str(self.category)})'
+        return f'{self.name} ({str(self.category)}) - {self.price:.2f} {_("lv.")}'
 
 
 class SLA(ActiveModel, BaseAuditEntity):

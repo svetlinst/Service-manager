@@ -3,6 +3,7 @@ from django.core.validators import MinValueValidator
 from django.db import models
 
 from service_manager.accounts.models import Profile, AppUser
+from service_manager.core.mixins import PricingMixin
 from service_manager.core.models import BaseAuditEntity, ActiveModel
 from service_manager.customers.models import Customer, CustomerAsset, CustomerRepresentative, CustomerDepartment
 from service_manager.customers.validators import phone_number_validator
@@ -168,7 +169,7 @@ class ServiceOrderHeader(ActiveModel, BaseAuditEntity):
         return f'{str(self.customer)}--{str(self.customer_asset)}'
 
 
-class ServiceOrderDetail(ActiveModel, BaseAuditEntity):
+class ServiceOrderDetail(PricingMixin, ActiveModel, BaseAuditEntity):
     quantity = models.FloatField(_('quantity'))
     discount = models.FloatField(
         _('discount'),
@@ -191,35 +192,6 @@ class ServiceOrderDetail(ActiveModel, BaseAuditEntity):
 
     def __str__(self):
         return f'{str(self.service_order)}---{str(self.material)}'
-
-    @property
-    def discount_percentage(self):
-        pct = 0
-        if self.discount > 0:
-            pct = self.discount / 100
-        return pct
-
-    @property
-    def discounted_price(self):
-        price = self.material.price
-        if self.discount_percentage > 0:
-            price = price * (1 - self.discount_percentage)
-        return price
-
-    @property
-    def discounted_price_no_vat(self):
-        price = self.material.price_no_vat
-        if self.discount_percentage > 0:
-            price = price * (1 - self.discount_percentage)
-        return price
-
-    @property
-    def total_amount(self):
-        return self.discounted_price * self.quantity
-
-    @property
-    def total_amount_no_vat(self):
-        return self.discounted_price_no_vat * self.quantity
 
 
 class ServiceOrderNote(ActiveModel, BaseAuditEntity):
@@ -301,11 +273,16 @@ class ServiceRequest(ActiveModel, BaseAuditEntity):
     REQUESTOR_NAME_MAX_LENGTH = 100
     REQUESTOR_PHONE_NUMBER_MAX_LENGTH = 20
     RESOLUTION_MAX_LENGTH = 100
+    ORDER_TYPE_MAX_LENGTH = 1
+
     TYPE_NEW = 1
     TYPE_IN_PROGRESS = 2
     TYPE_RESOLVED = 3
     TYPE_CLOSED = 4
     TYPE_REJECTED = 5
+
+    ORDER_TYPE_SERVICE = 1
+    ORDER_TYPE_DELIVERY = 2
 
     TYPE_CHOICES = (
         (TYPE_NEW, _('New')),
@@ -313,6 +290,11 @@ class ServiceRequest(ActiveModel, BaseAuditEntity):
         (TYPE_RESOLVED, _('Resolved')),
         (TYPE_CLOSED, _('Closed')),
         (TYPE_REJECTED, _('Rejected')),
+    )
+
+    ORDER_TYPE_CHOICES = (
+        (ORDER_TYPE_SERVICE, _('Service')),
+        (ORDER_TYPE_DELIVERY, _('Delivery'))
     )
 
     problem_description = models.CharField(
@@ -408,6 +390,14 @@ class ServiceRequest(ActiveModel, BaseAuditEntity):
         blank=True,
     )
 
+    order_type = models.IntegerField(
+        verbose_name=_('order type'),
+        choices=ORDER_TYPE_CHOICES,
+        default=ORDER_TYPE_SERVICE,
+        null=False,
+        blank=False,
+    )
+
     def is_open(self):
         if self.status in [str(k) for k, v in self.TYPE_CHOICES if k < 4]:
             return True
@@ -427,6 +417,10 @@ class ServiceRequest(ActiveModel, BaseAuditEntity):
         if self.status < str(self.TYPE_RESOLVED):
             return False
         return True
+
+    @property
+    def total_amount_due(self):
+        return f'{sum([x.total_amount for x in self.deliveryrequest_set.all()]):.2f}'
 
     class Meta:
         ordering = ('status', '-created_on',)

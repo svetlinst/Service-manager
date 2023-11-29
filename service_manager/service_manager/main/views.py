@@ -12,7 +12,8 @@ from django.template.defaultfilters import slugify
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth import mixins as auth_mixins
 
-from service_manager.core.utils import get_protocol_and_domain_as_string
+from service_manager.core.mixins import MaterialFilteringMixin
+from service_manager.core.utils import get_protocol_and_domain_as_string, get_material_count_matching_conditions
 from service_manager.main.forms import CreateServiceOrderHeaderForm, CreateServiceOrderDetailForm, \
     EditServiceOrderDetailForm, CreateServiceOrderNoteForm, HandoverServiceOrderForm, ContactForm, TrackOrderSearchForm, \
     CreateCustomerNotificationForm
@@ -46,7 +47,8 @@ class HomeTemplateView(views.TemplateView):
         pending_service_orders = pending_service_orders[:3]
 
         # Completed service orders
-        completed_service_orders = ServiceOrderHeader.objects.all().filter(Q(is_serviced=True) & Q(is_completed=False)).order_by('-created_on')
+        completed_service_orders = ServiceOrderHeader.objects.all().filter(
+            Q(is_serviced=True) & Q(is_completed=False)).order_by('-created_on')
         completed_service_orders_count = completed_service_orders.count()
         completed_service_orders = completed_service_orders[:3]
 
@@ -224,7 +226,7 @@ class DeleteServiceOrderHeaderView(auth_mixins.PermissionRequiredMixin, views.De
     permission_required = 'main.change_serviceorderheader'
 
 
-class CreateServiceOrderDetailView(auth_mixins.PermissionRequiredMixin, views.CreateView):
+class CreateServiceOrderDetailView(MaterialFilteringMixin, auth_mixins.PermissionRequiredMixin, views.CreateView):
     model = ServiceOrderDetail
     template_name = 'service_order_detail/service_order_details_create.html'
     form_class = CreateServiceOrderDetailForm
@@ -245,18 +247,10 @@ class CreateServiceOrderDetailView(auth_mixins.PermissionRequiredMixin, views.Cr
             context['service_order_header'] = ServiceOrderHeader.objects.prefetch_related(
                 'serviceorderdetail_set').get(pk=int(service_order_header_id))
 
-        # Material count
-        materials = Material.objects.all()
-
-        category = self.request.GET.get('category' or None)
-        if category:
-            materials = materials.filter(category=category)
-
-        search = self.request.GET.get('search' or None)
-        if search:
-            materials = materials.filter(Q(name__icontains=search) | Q(category__name__icontains=search))
-
-        context['material_count'] = materials.count()
+        context['material_count'] = get_material_count_matching_conditions(
+            self.request.GET.get('category' or None),
+            self.request.GET.get('search' or None)
+        )
 
         return context
 
@@ -269,27 +263,6 @@ class CreateServiceOrderDetailView(auth_mixins.PermissionRequiredMixin, views.Cr
         service_order_detail.save()
 
         return super().form_valid(form)
-
-    def get_initial(self):
-        category = self.request.GET.get('category' or None)
-        if category:
-            self.initial.update({
-                'category': category,
-            })
-        elif 'category' in self.initial:
-            self.initial.pop('category')
-
-        search = self.request.GET.get('search' or None)
-        if search:
-            self.initial.update(
-                {
-                    'search': search,
-                }
-            )
-        elif 'search' in self.initial:
-            self.initial.pop('search')
-
-        return super().get_initial()
 
 
 class EditServiceOrderDetailView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
