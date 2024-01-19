@@ -22,12 +22,12 @@ class CreateServiceOrderHeaderForm(forms.ModelForm):
         widgets = {
             'department': forms.Select(
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-select',
                 },
             ),
             'handed_over_by': forms.Select(
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-select',
                 },
             ),
             'problem_description': forms.Textarea(
@@ -48,7 +48,7 @@ class CreateServiceOrderHeaderForm(forms.ModelForm):
             'place_of_service': forms.RadioSelect(),
             'service_level_agreement': forms.Select(
                 attrs={
-                    'class': 'form-control',
+                    'class': 'form-select',
                 },
             ),
         }
