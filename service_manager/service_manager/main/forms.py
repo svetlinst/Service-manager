@@ -58,9 +58,13 @@ class CreateServiceOrderHeaderForm(forms.ModelForm):
 
         if 'customer' in self.initial:
             customer_id = int(self.initial['customer'])
-            self.fields['handed_over_by'].queryset = CustomerRepresentative.objects.filter(
-                customer=customer_id)
+            representatives = CustomerRepresentative.objects.filter(customer=customer_id)
+
+            self.fields['handed_over_by'].queryset = representatives
             self.fields['department'].queryset = CustomerDepartment.objects.filter(customer=customer_id)
+
+            if representatives:
+                self.fields['handed_over_by'].initial = representatives[0]
 
 
 class EditServiceOrderDetailForm(BootstrapFormMixin, forms.ModelForm):
