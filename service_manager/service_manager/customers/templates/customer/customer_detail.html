@@ -37,10 +37,11 @@
             <a class="nav-item nav-link {% if not request.GET or 'show_assets' in request.GET %} active {% endif %}"
                href="{% url 'customer_detail' object.pk %}" role="tab"
                aria-selected="true">{% trans 'Assets' %}</a>
+            <a class="nav-item nav-link {% if 'show_representatives' in request.GET %} active {% endif %}"
+               href="{% url 'customer_detail' object.pk %}?show_representatives" role="tab"
+               aria-selected="false">{% trans 'Representatives' %}</a>
             {% if object.type.name == 'Business' %}
-                <a class="nav-item nav-link {% if 'show_representatives' in request.GET %} active {% endif %}"
-                   href="{% url 'customer_detail' object.pk %}?show_representatives" role="tab"
-                   aria-selected="false">{% trans 'Representatives' %}</a>
+        
                 <a class="nav-item nav-link {% if 'show_departments' in request.GET %} active {% endif %}"
                    href="{% url 'customer_detail' object.pk %}?show_departments" role="tab"
                    aria-selected="false">{% trans 'Departments' %}</a>

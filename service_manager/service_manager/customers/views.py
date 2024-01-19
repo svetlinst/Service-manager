@@ -95,6 +95,22 @@ class CreateCustomerView(auth_mixins.PermissionRequiredMixin, views.CreateView):
 
     permission_required = 'customers.add_customer'
 
+    def form_valid(self, form):
+        customer = form.save(commit=False)
+        customer.save()
+        if customer.type.name == 'Individual':
+            first_name, *last_name = customer.name.split(' ')
+
+            representative = CustomerRepresentative(
+                first_name=first_name,
+                last_name=' '.join(last_name),
+                phone_number=customer.phone_number,
+                customer=customer,
+            )
+            representative.save()
+
+        return super().form_valid(form)
+
 
 class DeleteCustomerView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
     model = Customer
