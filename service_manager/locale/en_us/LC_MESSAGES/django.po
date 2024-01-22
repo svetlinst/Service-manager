@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-28 20:38+0200\n"
+"POT-Creation-Date: 2024-01-22 10:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -156,12 +156,12 @@ msgstr ""
 
 #: service_manager/customers/models.py:17
 #: service_manager/customers/models.py:127
-#: service_manager/master_data/models.py:11
-#: service_manager/master_data/models.py:23
-#: service_manager/master_data/models.py:38
-#: service_manager/master_data/models.py:83
-#: service_manager/master_data/models.py:96
-#: service_manager/master_data/models.py:121
+#: service_manager/master_data/models.py:12
+#: service_manager/master_data/models.py:24
+#: service_manager/master_data/models.py:39
+#: service_manager/master_data/models.py:84
+#: service_manager/master_data/models.py:106
+#: service_manager/master_data/models.py:131
 msgid "name"
 msgstr ""
 
@@ -418,11 +418,11 @@ msgstr ""
 msgid "Assets"
 msgstr ""
 
-#: service_manager/customers/templates/customer/customer_detail.html:43
+#: service_manager/customers/templates/customer/customer_detail.html:42
 msgid "Representatives"
 msgstr ""
 
-#: service_manager/customers/templates/customer/customer_detail.html:46
+#: service_manager/customers/templates/customer/customer_detail.html:47
 msgid "Departments"
 msgstr ""
 
@@ -446,7 +446,7 @@ msgstr ""
 #: service_manager/customers/templates/customer_asset/customer_assets_list.html:19
 #: service_manager/customers/templates/customer_department/customer_departments.html:14
 #: service_manager/customers/templates/customer_representatives/customer_representatives.html:14
-#: service_manager/main/forms.py:196
+#: service_manager/main/forms.py:201
 #: service_manager/main/templates/service_order_detail/service_order_details_create.html:18
 #: service_manager/main/templates/service_request/service_requests.html:23
 #: service_manager/master_data/forms.py:87
@@ -590,9 +590,10 @@ msgid "and PN"
 msgstr ""
 
 #: service_manager/customers/templates/customer_asset/customer_asset_detail.html:6
-#: service_manager/main/templates/index.html:45
-#: service_manager/main/templates/index.html:89
-#: service_manager/main/templates/index.html:134
+#: service_manager/main/templates/index.html:50
+#: service_manager/main/templates/index.html:60
+#: service_manager/main/templates/index.html:122
+#: service_manager/main/templates/index.html:167
 #: service_manager/main/templates/service_order_detail/service_order_details.html:70
 #: service_manager/main/templates/service_order_header/customer_printout.html:45
 #: service_manager/main/templates/service_order_header/service_order_track.html:32
@@ -601,8 +602,8 @@ msgid "Customer"
 msgstr ""
 
 #: service_manager/customers/templates/customer_asset/customer_asset_detail.html:23
-#: service_manager/main/templates/index.html:91
-#: service_manager/main/templates/index.html:136
+#: service_manager/main/templates/index.html:124
+#: service_manager/main/templates/index.html:169
 #: service_manager/main/templates/service_request/service_request_detail.html:159
 msgid "Asset"
 msgstr ""
@@ -770,9 +771,10 @@ msgstr ""
 #: service_manager/customers/templates/customer_asset/customer_asset_detail.html:101
 #: service_manager/customers/templates/customer_asset/customer_assets.html:71
 #: service_manager/main/templates/customer_notification/customer_notifications.html:33
-#: service_manager/main/templates/index.html:57
-#: service_manager/main/templates/index.html:102
-#: service_manager/main/templates/index.html:147
+#: service_manager/main/templates/index.html:80
+#: service_manager/main/templates/index.html:88
+#: service_manager/main/templates/index.html:135
+#: service_manager/main/templates/index.html:180
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:44
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:44
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:81
@@ -807,6 +809,7 @@ msgstr ""
 #: service_manager/customers/templates/customer_asset/customer_assets.html:59
 #: service_manager/customers/templates/customer_asset/customer_assets_list.html:58
 #: service_manager/main/models.py:296
+#: service_manager/main/templates/index.html:48
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:38
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:75
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:113
@@ -883,27 +886,27 @@ msgstr ""
 msgid "The allowed characters are: +, space and digits."
 msgstr ""
 
-#: service_manager/main/forms.py:186
+#: service_manager/main/forms.py:191
 msgid "Today"
 msgstr ""
 
-#: service_manager/main/forms.py:186
+#: service_manager/main/forms.py:191
 msgid "This week"
 msgstr ""
 
-#: service_manager/main/forms.py:186
+#: service_manager/main/forms.py:191
 msgid "Last week"
 msgstr ""
 
-#: service_manager/main/forms.py:187
+#: service_manager/main/forms.py:192
 msgid "This month"
 msgstr ""
 
-#: service_manager/main/forms.py:187
+#: service_manager/main/forms.py:192
 msgid "Last month"
 msgstr ""
 
-#: service_manager/main/forms.py:187
+#: service_manager/main/forms.py:192
 msgid "Older"
 msgstr ""
 
@@ -1069,6 +1072,7 @@ msgid "Rejected"
 msgstr ""
 
 #: service_manager/main/models.py:297
+#: service_manager/main/templates/index.html:58
 #: service_manager/main/templates/service_request/service_requests.html:148
 msgid "Delivery"
 msgstr ""
@@ -1111,6 +1115,14 @@ msgstr ""
 
 #: service_manager/main/models.py:394
 msgid "order type"
+msgstr ""
+
+#: service_manager/main/tasks.py:47
+msgid "New Service Order in ServiceManager"
+msgstr ""
+
+#: service_manager/main/tasks.py:51
+msgid "New Service Request in ServiceManager"
 msgstr ""
 
 #: service_manager/main/templates/contact_us.html:4 templates/base.html:146
@@ -1217,18 +1229,18 @@ msgstr ""
 msgid "Latest open Service requests"
 msgstr ""
 
-#: service_manager/main/templates/index.html:47
+#: service_manager/main/templates/index.html:67
 #: service_manager/main/templates/service_request/service_requests.html:153
 msgid "Phone number"
 msgstr ""
 
-#: service_manager/main/templates/index.html:50
+#: service_manager/main/templates/index.html:72
 msgid "Requested by"
 msgstr ""
 
-#: service_manager/main/templates/index.html:52
-#: service_manager/main/templates/index.html:97
-#: service_manager/main/templates/index.html:142
+#: service_manager/main/templates/index.html:74
+#: service_manager/main/templates/index.html:130
+#: service_manager/main/templates/index.html:175
 #: service_manager/main/templates/service_order_header/core/service_order_details.html:148
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:16
 #: service_manager/main/templates/service_request/service_request_detail.html:95
@@ -1237,8 +1249,8 @@ msgstr ""
 msgid "Accepted on"
 msgstr ""
 
-#: service_manager/main/templates/index.html:62
-#: service_manager/main/templates/index.html:107
+#: service_manager/main/templates/index.html:95
+#: service_manager/main/templates/index.html:140
 #: service_manager/main/templates/service_order_header/customer_printout.html:54
 #: service_manager/main/templates/service_order_header/service_order_track.html:41
 #: service_manager/main/templates/service_request/service_request_detail.html:41
@@ -1246,19 +1258,19 @@ msgstr ""
 msgid "Problem description"
 msgstr ""
 
-#: service_manager/main/templates/index.html:77
+#: service_manager/main/templates/index.html:110
 msgid "Pending Service orders"
 msgstr ""
 
-#: service_manager/main/templates/index.html:79
+#: service_manager/main/templates/index.html:112
 msgid "Total number of pending Service orders"
 msgstr ""
 
-#: service_manager/main/templates/index.html:82
+#: service_manager/main/templates/index.html:115
 msgid "Latest pending Service orders"
 msgstr ""
 
-#: service_manager/main/templates/index.html:94
+#: service_manager/main/templates/index.html:127
 #: service_manager/main/templates/service_order_header/core/service_order_details.html:129
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:17
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:15
@@ -1266,23 +1278,23 @@ msgstr ""
 msgid "SLA"
 msgstr ""
 
-#: service_manager/main/templates/index.html:122
+#: service_manager/main/templates/index.html:155
 msgid "Completed Service orders"
 msgstr ""
 
-#: service_manager/main/templates/index.html:124
+#: service_manager/main/templates/index.html:157
 msgid "Total number of completed Service orders"
 msgstr ""
 
-#: service_manager/main/templates/index.html:127
+#: service_manager/main/templates/index.html:160
 msgid "Latest completed Service orders"
 msgstr ""
 
-#: service_manager/main/templates/index.html:139
+#: service_manager/main/templates/index.html:172
 msgid "Amount due (VAT incl.)"
 msgstr ""
 
-#: service_manager/main/templates/index.html:140
+#: service_manager/main/templates/index.html:173
 #: service_manager/main/templates/service_order_detail/service_order_details.html:5
 #: service_manager/main/templates/service_order_detail/service_order_details.html:35
 #: service_manager/main/templates/service_order_detail/service_order_details.html:36
@@ -1819,11 +1831,11 @@ msgstr ""
 msgid "Requestor"
 msgstr ""
 
-#: service_manager/main/views.py:439
+#: service_manager/main/views.py:444
 msgid "The email message was sent."
 msgstr ""
 
-#: service_manager/main/views.py:509
+#: service_manager/main/views.py:514
 msgid "Invalid Tracking number!"
 msgstr ""
 
@@ -1843,28 +1855,28 @@ msgstr ""
 msgid "Material Category"
 msgstr ""
 
-#: service_manager/master_data/models.py:54
+#: service_manager/master_data/models.py:55
 msgid "model_number"
 msgstr ""
 
-#: service_manager/master_data/models.py:59
+#: service_manager/master_data/models.py:60
 msgid "model_name"
 msgstr ""
 
-#: service_manager/master_data/models.py:66
+#: service_manager/master_data/models.py:67
 msgid "brand"
 msgstr ""
 
-#: service_manager/master_data/models.py:72
-#: service_manager/master_data/models.py:105
+#: service_manager/master_data/models.py:73
+#: service_manager/master_data/models.py:115
 msgid "category"
 msgstr ""
 
-#: service_manager/master_data/models.py:100
+#: service_manager/master_data/models.py:110
 msgid "price"
 msgstr ""
 
-#: service_manager/master_data/models.py:128
+#: service_manager/master_data/models.py:138
 msgid "description"
 msgstr ""
 
@@ -2050,6 +2062,51 @@ msgstr ""
 
 #: templates/email_templates/contact_us_mail_template.html:6
 msgid "Message"
+msgstr ""
+
+#: templates/email_templates/internal_service_request_created.html:3
+#: templates/email_templates/internal_soh_created.html:3
+msgid "A new"
+msgstr ""
+
+#: templates/email_templates/internal_service_request_created.html:3
+msgid "request"
+msgstr ""
+
+#: templates/email_templates/internal_service_request_created.html:3
+#: templates/email_templates/internal_soh_created.html:3
+msgid "has been created"
+msgstr ""
+
+#: templates/email_templates/internal_service_request_created.html:3
+#: templates/email_templates/internal_soh_created.html:3
+msgid ""
+"for\n"
+"        customer"
+msgstr ""
+
+#: templates/email_templates/internal_service_request_created.html:4
+#: templates/email_templates/internal_soh_created.html:4
+msgid "at"
+msgstr ""
+
+#: templates/email_templates/internal_service_request_created.html:4
+#: templates/email_templates/internal_soh_created.html:4
+msgid "on"
+msgstr ""
+
+#: templates/email_templates/internal_service_request_created.html:4
+#: templates/email_templates/internal_soh_created.html:4
+msgid "Click the following link to for preview"
+msgstr ""
+
+#: templates/email_templates/internal_service_request_created.html:5
+#: templates/email_templates/internal_soh_created.html:5
+msgid "link"
+msgstr ""
+
+#: templates/email_templates/internal_soh_created.html:3
+msgid "order"
 msgstr ""
 
 #: templates/email_templates/service_order_created.html:3

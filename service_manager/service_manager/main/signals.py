@@ -3,8 +3,9 @@ import datetime
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from service_manager.main.models import ServiceOrderHeader, CustomerNotification
-from service_manager.main.tasks import send_successful_service_order_creation_email
+from service_manager.main.models import ServiceOrderHeader, CustomerNotification, ServiceRequest
+from service_manager.main.tasks import send_successful_service_order_creation_email, \
+    send_internal_service_order_creation_email
 
 
 @receiver(post_save, sender=ServiceOrderHeader)
@@ -22,3 +23,10 @@ def service_order_header_created(sender, instance, created, **kwargs):
         )
 
         send_successful_service_order_creation_email.delay(instance.pk)
+    send_internal_service_order_creation_email.delay(instance.pk, service_type='order')
+
+@receiver(post_save, sender=ServiceRequest)
+def service_request_created(sender, instance, created, **kwargs):
+    if not created:
+        return
+    send_internal_service_order_creation_email.delay(instance.pk, service_type='request')

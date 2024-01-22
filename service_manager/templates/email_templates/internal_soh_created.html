@@ -1,0 +1,6 @@
+{% load i18n %}
+{% autoescape off %}
+    <p>{% blocktrans %}A new{% endblocktrans %} {% trans 'order' %} {% trans 'has been created' %} {% blocktrans %}for
+        customer{% endblocktrans %} <b>{{ service.customer.name }}</b> {% trans 'at' %} <b>{{ service.created_on|time:'H:i' }}</b> {% trans 'on' %} <b>{{ service.created_on|date:'d.m.Y' }}</b>. {% trans 'Click the following link to for preview' %}:
+        <a href="{{ protocol_domain }}{% url 'detail_service_order' service.pk %}">{% trans 'link' %}</a></p>
+{% endautoescape %}

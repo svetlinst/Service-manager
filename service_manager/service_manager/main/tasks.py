@@ -5,7 +5,8 @@ from django.utils import translation
 
 from service_manager import settings
 from service_manager.core.utils import get_protocol_and_domain_as_string
-from service_manager.main.models import ServiceOrderHeader
+from service_manager.main.models import ServiceOrderHeader, ServiceRequest
+from django.utils.translation import gettext_lazy as _
 
 
 @shared_task
@@ -27,6 +28,43 @@ def send_successful_service_order_creation_email(service_order_id):
         message = render_to_string('email_templates/service_order_created.html', context)
         send_mail(
             subject='New Service order @ ServiceManager',
+            message=None,
+            html_message=message,
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[user_mail],
+        )
+    finally:
+        translation.activate(cur_language)
+
+@shared_task()
+def send_internal_service_order_creation_email(service_order_id, service_type:str):
+    EMAIL_ADDRESS = 'sm@elcomis.com'
+
+    if service_type == 'order':
+        service = ServiceOrderHeader.objects.get(pk=service_order_id)
+        template_name = 'email_templates/internal_soh_created.html'
+        subject = _('New Service Order in ServiceManager')
+    else:
+        service = ServiceRequest.objects.get(pk=service_order_id)
+        template_name = 'email_templates/internal_service_request_created.html'
+        subject = _('New Service Request in ServiceManager')
+
+    user_mail = EMAIL_ADDRESS
+
+    protocol_domain = get_protocol_and_domain_as_string()
+
+    context = {
+        'service': service,
+        'protocol_domain': protocol_domain,
+    }
+
+    cur_language = translation.get_language()
+
+    try:
+        translation.activate('bg')
+        message = render_to_string(template_name=template_name, context=context)
+        send_mail(
+            subject=subject,
             message=None,
             html_message=message,
             from_email=settings.EMAIL_HOST_USER,

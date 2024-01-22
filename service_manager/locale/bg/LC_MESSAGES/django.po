@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-28 20:38+0200\n"
-"PO-Revision-Date: 2023-11-28 20:41+0200\n"
+"POT-Creation-Date: 2024-01-22 10:59+0200\n"
+"PO-Revision-Date: 2024-01-22 10:59+0200\n"
 "Last-Translator: Anonymous User <su@su.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -168,12 +168,12 @@ msgstr "Регистрирай потребител"
 
 #: service_manager/customers/models.py:17
 #: service_manager/customers/models.py:127
-#: service_manager/master_data/models.py:11
-#: service_manager/master_data/models.py:23
-#: service_manager/master_data/models.py:38
-#: service_manager/master_data/models.py:83
-#: service_manager/master_data/models.py:96
-#: service_manager/master_data/models.py:121
+#: service_manager/master_data/models.py:12
+#: service_manager/master_data/models.py:24
+#: service_manager/master_data/models.py:39
+#: service_manager/master_data/models.py:84
+#: service_manager/master_data/models.py:106
+#: service_manager/master_data/models.py:131
 msgid "name"
 msgstr "Име"
 
@@ -430,11 +430,11 @@ msgstr "Редовен клиент"
 msgid "Assets"
 msgstr "Устройства"
 
-#: service_manager/customers/templates/customer/customer_detail.html:43
+#: service_manager/customers/templates/customer/customer_detail.html:42
 msgid "Representatives"
 msgstr "Представители"
 
-#: service_manager/customers/templates/customer/customer_detail.html:46
+#: service_manager/customers/templates/customer/customer_detail.html:47
 msgid "Departments"
 msgstr "Отдели"
 
@@ -458,7 +458,7 @@ msgstr "Клиенти"
 #: service_manager/customers/templates/customer_asset/customer_assets_list.html:19
 #: service_manager/customers/templates/customer_department/customer_departments.html:14
 #: service_manager/customers/templates/customer_representatives/customer_representatives.html:14
-#: service_manager/main/forms.py:196
+#: service_manager/main/forms.py:201
 #: service_manager/main/templates/service_order_detail/service_order_details_create.html:18
 #: service_manager/main/templates/service_request/service_requests.html:23
 #: service_manager/master_data/forms.py:87
@@ -602,9 +602,10 @@ msgid "and PN"
 msgstr "и продуктов номер"
 
 #: service_manager/customers/templates/customer_asset/customer_asset_detail.html:6
-#: service_manager/main/templates/index.html:45
-#: service_manager/main/templates/index.html:89
-#: service_manager/main/templates/index.html:134
+#: service_manager/main/templates/index.html:50
+#: service_manager/main/templates/index.html:60
+#: service_manager/main/templates/index.html:122
+#: service_manager/main/templates/index.html:167
 #: service_manager/main/templates/service_order_detail/service_order_details.html:70
 #: service_manager/main/templates/service_order_header/customer_printout.html:45
 #: service_manager/main/templates/service_order_header/service_order_track.html:32
@@ -613,8 +614,8 @@ msgid "Customer"
 msgstr "Клиент"
 
 #: service_manager/customers/templates/customer_asset/customer_asset_detail.html:23
-#: service_manager/main/templates/index.html:91
-#: service_manager/main/templates/index.html:136
+#: service_manager/main/templates/index.html:124
+#: service_manager/main/templates/index.html:169
 #: service_manager/main/templates/service_request/service_request_detail.html:159
 msgid "Asset"
 msgstr "Устройство"
@@ -782,9 +783,10 @@ msgstr "Действие"
 #: service_manager/customers/templates/customer_asset/customer_asset_detail.html:101
 #: service_manager/customers/templates/customer_asset/customer_assets.html:71
 #: service_manager/main/templates/customer_notification/customer_notifications.html:33
-#: service_manager/main/templates/index.html:57
-#: service_manager/main/templates/index.html:102
-#: service_manager/main/templates/index.html:147
+#: service_manager/main/templates/index.html:80
+#: service_manager/main/templates/index.html:88
+#: service_manager/main/templates/index.html:135
+#: service_manager/main/templates/index.html:180
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:44
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:44
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:81
@@ -819,6 +821,7 @@ msgstr "Добави устройство"
 #: service_manager/customers/templates/customer_asset/customer_assets.html:59
 #: service_manager/customers/templates/customer_asset/customer_assets_list.html:58
 #: service_manager/main/models.py:296
+#: service_manager/main/templates/index.html:48
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:38
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:75
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:113
@@ -895,27 +898,27 @@ msgstr "Моля, въведете единствено цифри."
 msgid "The allowed characters are: +, space and digits."
 msgstr "Позволените символи са: цифри, интервал и плюс"
 
-#: service_manager/main/forms.py:186
+#: service_manager/main/forms.py:191
 msgid "Today"
 msgstr "Днес"
 
-#: service_manager/main/forms.py:186
+#: service_manager/main/forms.py:191
 msgid "This week"
 msgstr "Тази седмица"
 
-#: service_manager/main/forms.py:186
+#: service_manager/main/forms.py:191
 msgid "Last week"
 msgstr "Предходна седмица"
 
-#: service_manager/main/forms.py:187
+#: service_manager/main/forms.py:192
 msgid "This month"
 msgstr "Този месец"
 
-#: service_manager/main/forms.py:187
+#: service_manager/main/forms.py:192
 msgid "Last month"
 msgstr "Предходен месец"
 
-#: service_manager/main/forms.py:187
+#: service_manager/main/forms.py:192
 msgid "Older"
 msgstr "Стари"
 
@@ -1081,6 +1084,7 @@ msgid "Rejected"
 msgstr "Отхвърлена"
 
 #: service_manager/main/models.py:297
+#: service_manager/main/templates/index.html:58
 #: service_manager/main/templates/service_request/service_requests.html:148
 msgid "Delivery"
 msgstr "Доставка"
@@ -1124,6 +1128,15 @@ msgstr "Сервизна поръчка"
 #: service_manager/main/models.py:394
 msgid "order type"
 msgstr "Тип на заявка"
+
+#: service_manager/main/tasks.py:47
+msgid "New Service Order in ServiceManager"
+msgstr "Нова Сервизна поръка на Service Manager"
+
+#: service_manager/main/tasks.py:51
+#| msgid "New Service Order in ServiceManager"
+msgid "New Service Request in ServiceManager"
+msgstr "Нова Сервизна заявка на Service Manager"
 
 #: service_manager/main/templates/contact_us.html:4 templates/base.html:146
 msgid "Contact Us"
@@ -1231,18 +1244,18 @@ msgstr "Общ брой отворени сервизни заявки"
 msgid "Latest open Service requests"
 msgstr "Най-нови отворени сервизни заявки"
 
-#: service_manager/main/templates/index.html:47
+#: service_manager/main/templates/index.html:67
 #: service_manager/main/templates/service_request/service_requests.html:153
 msgid "Phone number"
 msgstr "Телефонен номер"
 
-#: service_manager/main/templates/index.html:50
+#: service_manager/main/templates/index.html:72
 msgid "Requested by"
 msgstr "Заявена от"
 
-#: service_manager/main/templates/index.html:52
-#: service_manager/main/templates/index.html:97
-#: service_manager/main/templates/index.html:142
+#: service_manager/main/templates/index.html:74
+#: service_manager/main/templates/index.html:130
+#: service_manager/main/templates/index.html:175
 #: service_manager/main/templates/service_order_header/core/service_order_details.html:148
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:16
 #: service_manager/main/templates/service_request/service_request_detail.html:95
@@ -1251,8 +1264,8 @@ msgstr "Заявена от"
 msgid "Accepted on"
 msgstr "Приета на"
 
-#: service_manager/main/templates/index.html:62
-#: service_manager/main/templates/index.html:107
+#: service_manager/main/templates/index.html:95
+#: service_manager/main/templates/index.html:140
 #: service_manager/main/templates/service_order_header/customer_printout.html:54
 #: service_manager/main/templates/service_order_header/service_order_track.html:41
 #: service_manager/main/templates/service_request/service_request_detail.html:41
@@ -1260,19 +1273,19 @@ msgstr "Приета на"
 msgid "Problem description"
 msgstr "Описание на проблема"
 
-#: service_manager/main/templates/index.html:77
+#: service_manager/main/templates/index.html:110
 msgid "Pending Service orders"
 msgstr "Необслужени сервизни поръчки"
 
-#: service_manager/main/templates/index.html:79
+#: service_manager/main/templates/index.html:112
 msgid "Total number of pending Service orders"
 msgstr "Общ брой необслужени сервизни поръчки"
 
-#: service_manager/main/templates/index.html:82
+#: service_manager/main/templates/index.html:115
 msgid "Latest pending Service orders"
 msgstr "Най-нови необслужени сервизни поръчки"
 
-#: service_manager/main/templates/index.html:94
+#: service_manager/main/templates/index.html:127
 #: service_manager/main/templates/service_order_header/core/service_order_details.html:129
 #: service_manager/main/templates/service_order_header/list_views/service_orders_complete.html:17
 #: service_manager/main/templates/service_order_header/list_views/service_orders_service.html:15
@@ -1280,23 +1293,23 @@ msgstr "Най-нови необслужени сервизни поръчки"
 msgid "SLA"
 msgstr "Срок за изпълнение"
 
-#: service_manager/main/templates/index.html:122
+#: service_manager/main/templates/index.html:155
 msgid "Completed Service orders"
 msgstr "Обслужени сервизни поръчки"
 
-#: service_manager/main/templates/index.html:124
+#: service_manager/main/templates/index.html:157
 msgid "Total number of completed Service orders"
 msgstr "Общ брой обслужени сервизни поръчки"
 
-#: service_manager/main/templates/index.html:127
+#: service_manager/main/templates/index.html:160
 msgid "Latest completed Service orders"
 msgstr "Най-нови обслужени сервизни поръчки"
 
-#: service_manager/main/templates/index.html:139
+#: service_manager/main/templates/index.html:172
 msgid "Amount due (VAT incl.)"
 msgstr "Дължима сума (с ДДС)"
 
-#: service_manager/main/templates/index.html:140
+#: service_manager/main/templates/index.html:173
 #: service_manager/main/templates/service_order_detail/service_order_details.html:5
 #: service_manager/main/templates/service_order_detail/service_order_details.html:35
 #: service_manager/main/templates/service_order_detail/service_order_details.html:36
@@ -1421,7 +1434,6 @@ msgstr "бр."
 #: service_manager/main/templates/service_order_detail/service_order_details_create.html:64
 #: service_manager/service_requests/templates/delivery_request/delivery_request_create.html:67
 #, python-format
-#| msgid "Discount %%"
 msgid "Discount (%%)"
 msgstr "Отстъпка %"
 
@@ -1838,11 +1850,11 @@ msgstr "Отворени сервизни заявки"
 msgid "Requestor"
 msgstr "От"
 
-#: service_manager/main/views.py:439
+#: service_manager/main/views.py:444
 msgid "The email message was sent."
 msgstr "Вашият имейл беше изпратен."
 
-#: service_manager/main/views.py:509
+#: service_manager/main/views.py:514
 msgid "Invalid Tracking number!"
 msgstr "Невалиден номер за проследяване"
 
@@ -1862,28 +1874,28 @@ msgstr "име на материал"
 msgid "Material Category"
 msgstr "Категории материал"
 
-#: service_manager/master_data/models.py:54
+#: service_manager/master_data/models.py:55
 msgid "model_number"
 msgstr "Номер на модел"
 
-#: service_manager/master_data/models.py:59
+#: service_manager/master_data/models.py:60
 msgid "model_name"
 msgstr "Име на модел"
 
-#: service_manager/master_data/models.py:66
+#: service_manager/master_data/models.py:67
 msgid "brand"
 msgstr "Марка"
 
-#: service_manager/master_data/models.py:72
-#: service_manager/master_data/models.py:105
+#: service_manager/master_data/models.py:73
+#: service_manager/master_data/models.py:115
 msgid "category"
 msgstr "Категория"
 
-#: service_manager/master_data/models.py:100
+#: service_manager/master_data/models.py:110
 msgid "price"
 msgstr "Цена"
 
-#: service_manager/master_data/models.py:128
+#: service_manager/master_data/models.py:138
 msgid "description"
 msgstr "описание"
 
@@ -1992,12 +2004,10 @@ msgid "Returned On"
 msgstr "Върната на"
 
 #: service_manager/service_requests/models.py:31
-#| msgid "Service requests"
 msgid "service_request"
 msgstr "Сервизна заявка"
 
 #: service_manager/service_requests/templates/delivery_request/delivery_request_edit.html:4
-#| msgid "Edit service request"
 msgid "Edit delivery request"
 msgstr "Редактирай заявка за доставка"
 
@@ -2072,6 +2082,52 @@ msgstr "И-мейл адрес"
 #: templates/email_templates/contact_us_mail_template.html:6
 msgid "Message"
 msgstr "Съобщение"
+
+#: templates/email_templates/internal_service_request_created.html:3
+#: templates/email_templates/internal_soh_created.html:3
+msgid "A new"
+msgstr "Нова"
+
+#: templates/email_templates/internal_service_request_created.html:3
+#| msgid "Requests"
+msgid "request"
+msgstr "заявка"
+
+#: templates/email_templates/internal_service_request_created.html:3
+#: templates/email_templates/internal_soh_created.html:3
+msgid "has been created"
+msgstr "беше създадена"
+
+#: templates/email_templates/internal_service_request_created.html:3
+#: templates/email_templates/internal_soh_created.html:3
+msgid ""
+"for\n"
+"        customer"
+msgstr "за клиент"
+
+#: templates/email_templates/internal_service_request_created.html:4
+#: templates/email_templates/internal_soh_created.html:4
+msgid "at"
+msgstr "в"
+
+#: templates/email_templates/internal_service_request_created.html:4
+#: templates/email_templates/internal_soh_created.html:4
+msgid "on"
+msgstr "на"
+
+#: templates/email_templates/internal_service_request_created.html:4
+#: templates/email_templates/internal_soh_created.html:4
+msgid "Click the following link to for preview"
+msgstr "Моля, кликнете на линка за да я видите"
+
+#: templates/email_templates/internal_service_request_created.html:5
+#: templates/email_templates/internal_soh_created.html:5
+msgid "link"
+msgstr "линк"
+
+#: templates/email_templates/internal_soh_created.html:3
+msgid "order"
+msgstr "поръчка"
 
 #: templates/email_templates/service_order_created.html:3
 msgid " A new service order has been created at ServiceManager.net"
@@ -2160,9 +2216,6 @@ msgstr "последна"
 
 #~ msgid "search"
 #~ msgstr "търси"
-
-#~ msgid "None"
-#~ msgstr "Няма"
 
 #~ msgid ""
 #~ "Address: Kysutendil, 29 Hristo Botev str., bl. 109; Phone number: (078) 55 "
