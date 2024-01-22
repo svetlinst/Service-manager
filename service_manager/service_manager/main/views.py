@@ -14,6 +14,7 @@ from django.contrib.auth import mixins as auth_mixins
 
 from service_manager.core.mixins import MaterialFilteringMixin
 from service_manager.core.utils import get_protocol_and_domain_as_string, get_material_count_matching_conditions
+from service_manager.customers.models import CustomerRepresentative
 from service_manager.main.forms import CreateServiceOrderHeaderForm, CreateServiceOrderDetailForm, \
     EditServiceOrderDetailForm, CreateServiceOrderNoteForm, HandoverServiceOrderForm, ContactForm, TrackOrderSearchForm, \
     CreateCustomerNotificationForm
@@ -396,19 +397,23 @@ class HandoverServiceOrderView(auth_mixins.PermissionRequiredMixin, views.Update
     model = ServiceOrderHeader
     form_class = HandoverServiceOrderForm
     template_name = 'service_order_header/core/service_order_handover.html'
-    # success_url = reverse_lazy('service_orders_list_pending_service')
 
     permission_required = 'main.change_serviceorderheader'
 
     def get_initial(self):
+        initial = super().get_initial()
         service_order_header_id = self.kwargs['pk']
 
         if service_order_header_id:
-            self.initial.update({
-                'service_order': service_order_header_id,
-            })
+            initial.update({'service_order': service_order_header_id})
 
-        return super().get_initial()
+            service_order_header = ServiceOrderHeader.objects.get(pk=service_order_header_id)
+            representatives = CustomerRepresentative.objects.filter(customer=service_order_header.customer_id)
+
+            if representatives.exists():
+                initial['handed_over_to'] = representatives.first()
+
+        return initial
 
     def form_valid(self, form):
         service_oder = form.save(commit=False)
