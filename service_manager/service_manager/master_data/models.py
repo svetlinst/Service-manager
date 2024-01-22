@@ -1,6 +1,4 @@
 from django.db import models
-from django.db.models import Case, When, Value, CharField
-
 from service_manager.core.models import BaseAuditEntity, ActiveModel
 from django.utils.translation import gettext_lazy as _
 
@@ -89,14 +87,8 @@ class MaterialCategory(ActiveModel, BaseAuditEntity):
         return self.name
 
     class Meta:
-        ordering = [
-            Case(
-                When(name__iregex=r'^[А-ЯЁ]', then=Value(1)),
-                default=Value(2),
-                output_field=CharField(),
-            ),
-            'name',
-        ]
+        ordering = ['name']
+
 
 class Material(ActiveModel, BaseAuditEntity):
     NAME_MAX_LENGTH = 100
@@ -145,4 +137,3 @@ class SLA(ActiveModel, BaseAuditEntity):
         if self.description:
             return f'{self.name} ({self.description})'
         return self.name
-

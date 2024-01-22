@@ -2,6 +2,7 @@ import django.views.generic as views
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.contrib.auth import mixins as auth_mixins
+import re
 
 from service_manager.core.views import BootstrapFormViewMixin
 from service_manager.master_data.forms import CreateAssetForm, EditAssetForm, CreateMaterialForm, EditMaterialForm, \
@@ -77,7 +78,7 @@ class DeleteAssetView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
 class MaterialsListView(auth_mixins.PermissionRequiredMixin, views.ListView):
     model = Material
     template_name = 'material/materials.html'
-    ordering = ('category', 'name')
+    ordering = ('category__name', 'name')
 
     paginate_by = 10
 
@@ -102,6 +103,8 @@ class MaterialsListView(auth_mixins.PermissionRequiredMixin, views.ListView):
         category = self.request.GET.get('category', None)
         if category:
             queryset = queryset.filter(category=category)
+
+        queryset = sorted(queryset, key=lambda x: (1 if re.match("^[А-ЯЁ]", x.category.name, re.IGNORECASE) else 2, x.category.name))
 
         return queryset
 
@@ -137,7 +140,7 @@ class DeleteMaterialView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
 class MaterialCategoriesListView(auth_mixins.PermissionRequiredMixin, views.ListView):
     model = MaterialCategory
     template_name = 'material_category/material_categories.html'
-    ordering = ('name',)
+    # ordering = ('name',)
 
     paginate_by = 10
 
