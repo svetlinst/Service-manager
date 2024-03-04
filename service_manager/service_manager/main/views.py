@@ -1,6 +1,6 @@
 import datetime
 from io import BytesIO
-
+from django.db.models import F
 from django.conf import settings
 from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ValidationError
@@ -71,40 +71,23 @@ class ServiceOrderHeaderPendingServiceListView(auth_mixins.PermissionRequiredMix
     ordering = (
         'service_level_agreement', 'customer__has_subscription', 'customer__is_regular_customer', 'created_on',
         'customer')
+    context_object_name = 'service_orders'
     RELATED_ENTITIES = ['serviceordernote_set', 'serviceorderdetail_set', 'customer']
 
     permission_required = 'main.view_serviceorderheader'
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        queryset = self.get_queryset()
-
-        sla_orders = queryset.filter(service_level_agreement=True)
-
-        subscription_customers = queryset.filter(customer__has_subscription=True).exclude(
-            id__in=sla_orders.values_list('id', flat=True)
-        )
-
-        regular_customers = queryset.filter(customer__is_regular_customer=True).exclude(
-            Q(id__in=sla_orders.values_list('id', flat=True)) |
-            Q(id__in=subscription_customers.values_list('id', flat=True))
-        )
-
-        others = queryset.exclude(
-            Q(id__in=sla_orders.values_list('id', flat=True)) |
-            Q(id__in=subscription_customers.values_list('id', flat=True)) |
-            Q(id__in=regular_customers.values_list('id', flat=True))
-        )
-
-        context['sla_orders'] = sla_orders
-        context['subscription_customers'] = subscription_customers
-        context['regular_customers'] = regular_customers
-        context['others'] = others
-
-        return context
-
     def get_queryset(self):
+        """
+            Order:
+                1. SLA
+                2. Subscription
+                3. Regular
+                4. All others
+                5. By created on date ascending
+        """
+
         queryset = super().get_queryset()
+        queryset = queryset.order_by(F('service_level_agreement__id').desc(nulls_last=True), '-customer__has_subscription', '-customer__is_regular_customer', 'created_on')
         return queryset.filter(is_serviced=False).prefetch_related(*self.RELATED_ENTITIES)
 
 

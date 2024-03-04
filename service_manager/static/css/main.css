@@ -177,13 +177,13 @@ nav .logo {
     font-weight: 450;
 }
 
-.card-info .info-text .info-text-detail .text-negative {
+.text-negative {
     color: darkred;
-    font-weight: 500;
+    font-weight: 600;
 }
 
-.card-info .info-text .info-text-detail .text-positive {
-    font-weight: 500;
+.text-positive {
+    font-weight: 600;
     color: green;
 }
 
@@ -245,6 +245,10 @@ nav .logo {
     margin: 0;
 }
 
+.card-item-text-content{
+    margin:0;
+}
+
 .order-card-item-status-label {
     display: flex;
     justify-content: center;
@@ -284,8 +288,8 @@ nav .logo {
     border-radius: 5px;
     /*min-height: 50px;*/
     flex-wrap: wrap;
-    padding: 6px 12px 6px 12px;
-    margin-bottom: 12px;
+    padding: 4px;
+    margin-bottom: 6px;
     background-color: white;
 }
 
@@ -324,7 +328,7 @@ nav .logo {
     gap: 6px;
     /*border: 1px solid grey;*/
     /*border-radius: 5px;*/
-    padding: 0 6px 0 6px;
+    padding: 0;
     /*background-color: grey;*/
     /*width: 250px;*/
     flex-basis: 25%;

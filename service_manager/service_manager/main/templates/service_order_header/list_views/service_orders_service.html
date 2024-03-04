@@ -1,170 +1,132 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
-    <div class="d-block mt-5 rounded-lg bg-light my-3" style="padding:2%">
-        <h2 class='text-center text-secondary mb-3'>{% trans 'Pending Service Orders' %}</h2>
+    <div class="d-block mt-1 rounded-lg bg-light my-1" style="padding:0 2%">
+        <h2 class='text-center text-secondary mb-1'>{% trans 'Pending Service Orders' %}</h2>
         <section class="order-card-items">
-            <div class="order-card-item card-header">
-                <p class="card-item-text-content">{% trans 'Name' %}</p>
-                <p class="card-item-text-content">{% trans 'Category' %}</p>
-                <p class="card-item-text-content">{% trans 'Brand' %}</p>
-                <p class="card-item-text-content">{% trans 'Model Name' %}</p>
-                <p class="card-item-text-content">{% trans 'Model Number' %}</p>
-                <p class="card-item-text-content">{% trans 'Serial Number' %}</p>
-                <p class="card-item-text-content">{% trans 'Product Number' %}</p>
-                <p class="card-item-text-content">{% trans 'SLA' %}</p>
-                <p class="card-item-text-content">{% trans 'Accepted on' %}</p>
-                <p class="card-item-text-content">{% trans 'Accepted by' %}</p>
-                <p class="card-item-text-content actions-fixed">{% trans 'Action' %}</p>
-            </div>
-            {% if sla_orders %}
-                <p class="order-list-title">{% trans 'SLA orders' %}: {{ sla_orders.count }}</p>
-                {% for service_order in sla_orders %}
-                    <div class="order-card-item card-main sla">
-                        <p class="card-item-text-content">{{ service_order.customer.name }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.asset.category.name }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.asset.brand.name }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.asset.model_name }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.asset.model_number }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.serial_number }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.product_number }}</p>
-                        <p class="card-item-text-content">{{ service_order.service_level_agreement.name }}</p>
-                        <p class="card-item-text-content">{{ service_order.created_on }}</p>
-                        <p class="card-item-text-content">{{ service_order.accepted_by }}</p>
-                        <p class="card-item-text-content actions-fixed">{% if perms.main.add_serviceorderdetail %}
-                            <a class="btn btn-outline-success btn-md"
-                               href="{% url 'create_service_order_detail' service_order.pk %}"
-                               data-bs-toggle="tooltip"
-                               title="{% trans 'Service' %}"
-                               role="button"><i class="fa-solid fa-screwdriver-wrench"></i></a>
-                        {% endif %}
-                            <a class="btn btn-outline-info btn-md"
-                               href="{% url 'detail_service_order' service_order.id %}"
-                               data-bs-toggle="tooltip"
-                               title="{% trans 'Detail' %}"
-                               role="button"><i class="fa-solid fa-circle-info"></i></a>
-                            {% if perms.main.change_serviceorderheader %}
-                                <a class="btn btn-outline-danger btn-md"
-                                   href="{% url 'delete_service_order' service_order.id %}"
-                                   data-bs-toggle="tooltip"
-                                   title="{% trans 'Delete' %}"
-                                   role="button"><i class="fa-solid fa-trash"></i></a>
-                            {% endif %}
-                        </p>
-                    </div>
-                {% endfor %}
-            {% endif %}
-            {% if subscription_customers %}
-                <p class="order-list-title">{% trans 'Subscription customers orders' %}: {{ subscription_customers.count }}</p>
-                {% for service_order in subscription_customers %}
-                    <div class="order-card-item card-main subscription">
-                        <p class="card-item-text-content">{{ service_order.customer.name }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.asset.category.name }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.asset.brand.name }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.asset.model_name }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.asset.model_number }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.serial_number }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.product_number }}</p>
-                        <p class="card-item-text-content">{{ service_order.service_level_agreement.name }}</p>
-                        <p class="card-item-text-content">{{ service_order.created_on }}</p>
-                        <p class="card-item-text-content">{{ service_order.accepted_by }}</p>
-                        <p class="card-item-text-content actions-fixed">{% if perms.main.add_serviceorderdetail %}
-                            <a class="btn btn-outline-success btn-md"
-                               href="{% url 'create_service_order_detail' service_order.pk %}"
-                               data-bs-toggle="tooltip"
-                               title="{% trans 'Service' %}"
-                               role="button"><i class="fa-solid fa-screwdriver-wrench"></i></a>
-                        {% endif %}
-                            <a class="btn btn-outline-info btn-md"
-                               href="{% url 'detail_service_order' service_order.id %}"
-                               data-bs-toggle="tooltip"
-                               title="{% trans 'Detail' %}"
-                               role="button"><i class="fa-solid fa-circle-info"></i></a>
-                            {% if perms.main.change_serviceorderheader %}
-                                <a class="btn btn-outline-danger btn-md"
-                                   href="{% url 'delete_service_order' service_order.id %}"
-                                   data-bs-toggle="tooltip"
-                                   title="{% trans 'Delete' %}"
-                                   role="button"><i class="fa-solid fa-trash"></i></a>
-                            {% endif %}
-                        </p>
-                    </div>
-                {% endfor %}
-            {% endif %}
+            {% if service_orders %}
+                {% for service_order in service_orders %}
+                    <div class="service-request-card">
+                    <header class="sr-card-title">
 
-            {% if regular_customers %}
-                <p class="order-list-title">{% trans 'Regular customers orders' %}: {{ regular_customers.count }}</p>
-                {% for service_order in regular_customers %}
-                    <div class="order-card-item card-main regular">
-                        <p class="card-item-text-content">{{ service_order.customer.name }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.asset.category.name }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.asset.brand.name }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.asset.model_name }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.asset.model_number }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.serial_number }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.product_number }}</p>
-                        <p class="card-item-text-content">{{ service_order.service_level_agreement.name }}</p>
-                        <p class="card-item-text-content">{{ service_order.created_on }}</p>
-                        <p class="card-item-text-content">{{ service_order.accepted_by }}</p>
-                        <p class="card-item-text-content actions-fixed">{% if perms.main.add_serviceorderdetail %}
-                            <a class="btn btn-outline-success btn-md"
-                               href="{% url 'create_service_order_detail' service_order.pk %}"
-                               data-bs-toggle="tooltip"
-                               title="{% trans 'Service' %}"
-                               role="button"><i class="fa-solid fa-screwdriver-wrench"></i></a>
-                        {% endif %}
-                            <a class="btn btn-outline-info btn-md"
-                               href="{% url 'detail_service_order' service_order.id %}"
-                               data-bs-toggle="tooltip"
-                               title="{% trans 'Detail' %}"
-                               role="button"><i class="fa-solid fa-circle-info"></i></a>
-                            {% if perms.main.change_serviceorderheader %}
-                                <a class="btn btn-outline-danger btn-md"
-                                   href="{% url 'delete_service_order' service_order.id %}"
-                                   data-bs-toggle="tooltip"
-                                   title="{% trans 'Delete' %}"
-                                   role="button"><i class="fa-solid fa-trash"></i></a>
-                            {% endif %}
-                        </p>
-                    </div>
-                {% endfor %}
-            {% endif %}
+                        <section class="sr-card-header">
+                            <section class="sr-card-status">
+                                 <p class="info-text">{% trans 'Status' %}: <span
+                                            class="info-text-detail">{{ service_order.status }}</span></p>
+                            </section>
 
-            {% if others %}
-                <p class="order-list-title">{% trans 'Other orders' %}: {{ others.count }}</p>
-                {% for service_order in others %}
-                    <div class="order-card-item card-main">
-                        <p class="card-item-text-content">{{ service_order.customer.name }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.asset.category.name }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.asset.brand.name }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.asset.model_name }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.asset.model_number }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.serial_number }}</p>
-                        <p class="card-item-text-content">{{ service_order.customer_asset.product_number }}</p>
-                        <p class="card-item-text-content">{{ service_order.service_level_agreement.name }}</p>
-                        <p class="card-item-text-content">{{ service_order.created_on }}</p>
-                        <p class="card-item-text-content">{{ service_order.accepted_by }}</p>
-                        <p class="card-item-text-content actions-fixed">{% if perms.main.add_serviceorderdetail %}
-                            <a class="btn btn-outline-success btn-md"
-                               href="{% url 'create_service_order_detail' service_order.pk %}"
-                               data-bs-toggle="tooltip"
-                               title="{% trans 'Service' %}"
-                               role="button"><i class="fa-solid fa-screwdriver-wrench"></i></a>
-                        {% endif %}
-                            <a class="btn btn-outline-info btn-md"
-                               href="{% url 'detail_service_order' service_order.id %}"
-                               data-bs-toggle="tooltip"
-                               title="{% trans 'Detail' %}"
-                               role="button"><i class="fa-solid fa-circle-info"></i></a>
-                            {% if perms.main.change_serviceorderheader %}
-                                <a class="btn btn-outline-danger btn-md"
-                                   href="{% url 'delete_service_order' service_order.id %}"
-                                   data-bs-toggle="tooltip"
-                                   title="{% trans 'Delete' %}"
-                                   role="button"><i class="fa-solid fa-trash"></i></a>
-                            {% endif %}
+                            <section class="sr-card-info">
+                                <p class="info-text">{% trans 'Customer' %}: <a href={% url 'customer_detail' service_order.customer.id %}><span
+                                        class="info-text-detail">{{ service_order.customer.name }}</span></a></p>
+                            </section>
+
+                            <section class="sr-card-actions">
+                                <div class="sr-actions">
+                                    <p class="card-item-text-content actions-fixed">{% if perms.main.add_serviceorderdetail %}
+                                        <a class="btn btn-outline-success btn-md"
+                                           href="{% url 'create_service_order_detail' service_order.pk %}"
+                                           data-bs-toggle="tooltip"
+                                           title="{% trans 'Service' %}"
+                                           role="button"><i class="fa-solid fa-screwdriver-wrench"></i></a>
+                                    {% endif %}
+                                        <a class="btn btn-outline-info btn-md"
+                                           href="{% url 'detail_service_order' service_order.id %}"
+                                           data-bs-toggle="tooltip"
+                                           title="{% trans 'Detail' %}"
+                                           role="button"><i class="fa-solid fa-circle-info"></i></a>
+                                        {% if perms.main.change_serviceorderheader %}
+                                            <a class="btn btn-outline-danger btn-md"
+                                               href="{% url 'delete_service_order' service_order.id %}"
+                                               data-bs-toggle="tooltip"
+                                               title="{% trans 'Delete' %}"
+                                               role="button"><i class="fa-solid fa-trash"></i></a>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </section>
+                        </section>
+                        <section class="sr-requestor-info">
+                             <p class="info-text">
+                                 {% trans 'SLA' %}:
+                                 {% if service_order.service_level_agreement %}
+                                 <span class="info-text-detail text-positive">{{ service_order.service_level_agreement.name }}</span>
+                                 {% endif %}
+                             </p>
+                             <p class="info-text">
+                                 {% trans 'Subscription' %}: <span class="info-text-detail">
+                                 {%  if service_order.customer.has_subscription %}
+                                     <span class="text-positive">{% trans 'Yes' %}</span>
+                                 {% else %}
+                                     <span class="text-negative">{% trans 'No' %}</span>
+                                 {% endif %}</span>
+                             </p>
+                             <p class="info-text">
+                                 {% trans 'Regular' %}: <span class="info-text-detail">
+                                 {%  if service_order.customer.is_regular_customer %}
+                                     <span class="text-positive">{% trans 'Yes' %}</span>
+                                 {% else %}
+                                     <span class="text-negative">{% trans 'No' %}</span>
+                                 {% endif %}</span>
+                             </p>
+                        </section>
+                        <section class="sr-requestor-info">
+                            <p class="info-text">{% trans 'Category' %}: <span
+                                    class="info-text-detail">{{ service_order.customer_asset.asset.category.name }}</span></p>
+                            <p class="info-text">{% trans 'Brand' %}: <span
+                                    class="info-text-detail">{{ service_order.customer_asset.asset.brand.name }}</span></p>
+                            <p class="info-text">{% trans 'Model name' %}: <span
+                                    class="info-text-detail">{{ service_order.customer_asset.asset.model_name }}</span></p>
+
+                        </section>
+                        <section class="sr-requestor-info">
+                            <p class="info-text">{% trans 'Model number' %}: <span
+                                    class="info-text-detail">{{ service_order.customer_asset.asset.model_number }}</span></p>
+                            <p class="info-text">{% trans 'Serial number' %}: <span
+                                    class="info-text-detail">{{ service_order.customer_asset.serial_number }}</span></p>
+                            <p class="info-text">{% trans 'Product number' %}: <span
+                                    class="info-text-detail">{{ service_order.customer_asset.product_number }}</span></p>
+                        </section>
+                    </header>
+
+                    <section class="sr-body">
+                        <p class="info-text">
+                            <span class="bold">
+                                {% trans 'Problem description' %}:
+                            </span>
+                            <span class="info-text-detail">
+                                    {{ service_order.problem_description|truncatechars:256 }}
+                                </span>
                         </p>
-                    </div>
+                    </section>
+
+
+                    <section class="sr-timestamps">
+                        <div class="vertical-flex">
+                            <p class="info-text">{% trans 'Accepted on' %}:<span
+                                    class="info-text-detail"> {{ service_order.created_on }}</span></p>
+                            <p class="info-text">{% trans 'Accepted by' %}:<span
+                                    class="info-text-detail"> {{ service_order.accepted_by.profile_full_name }}</span>
+                            </p>
+                        </div>
+                        <div class="vertical-flex">
+                            <p class="info-text">{% trans 'Serviced on' %}: <span
+                                    class="info-text-detail">{{ service_order.serviced_on|default_if_none:'' }}</span>
+                            </p>
+                            <p class="info-text">{% trans 'Serviced by' %}: <span
+                                    class="info-text-detail">{{ service_order.serviced_by.profile_full_name }}</span>
+                            </p>
+                        </div>
+                        <div class="vertical-flex">
+                            <p class="info-text">{% trans 'Completed on' %}: <span
+                                    class="info-text-detail">{{ service_order.completed_on|default_if_none:'' }}</span>
+                            </p>
+                            <p class="info-text">{% trans 'Completed by' %}: <span
+                                    class="info-text-detail">{{ service_order.completed_by.profile_full_name }}</span>
+                            </p>
+                        </div>
+                    </section>
+
+                </div>
                 {% endfor %}
             {% endif %}
 
