@@ -212,6 +212,7 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT')
 EMAIL_USE_SSL = bool(os.environ.get('EMAIL_USE_SSL'))
 
 SUPPORT_EMAIL = os.environ.get('SUPPORT_EMAIL')
+INTERNAL_NOTIFICATION_EMAIL = os.environ.get('INTERNAL_NOTIFICATION_EMAIL')
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-secondary',

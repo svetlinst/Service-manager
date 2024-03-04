@@ -38,8 +38,6 @@ def send_successful_service_order_creation_email(service_order_id):
 
 @shared_task()
 def send_internal_service_order_creation_email(service_order_id, service_type:str):
-    EMAIL_ADDRESS = 'sm@elcomis.com'
-
     if service_type == 'order':
         service = ServiceOrderHeader.objects.get(pk=service_order_id)
         template_name = 'email_templates/internal_soh_created.html'
@@ -48,8 +46,6 @@ def send_internal_service_order_creation_email(service_order_id, service_type:st
         service = ServiceRequest.objects.get(pk=service_order_id)
         template_name = 'email_templates/internal_service_request_created.html'
         subject = _('New Service Request in ServiceManager')
-
-    user_mail = EMAIL_ADDRESS
 
     protocol_domain = get_protocol_and_domain_as_string()
 
@@ -68,7 +64,7 @@ def send_internal_service_order_creation_email(service_order_id, service_type:st
             message=None,
             html_message=message,
             from_email=settings.EMAIL_HOST_USER,
-            recipient_list=[user_mail],
+            recipient_list=[settings.INTERNAL_NOTIFICATION_EMAIL],
         )
     finally:
         translation.activate(cur_language)
