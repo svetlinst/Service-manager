@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-22 10:59+0200\n"
+"POT-Creation-Date: 2024-03-04 12:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -156,12 +156,12 @@ msgstr ""
 
 #: service_manager/customers/models.py:17
 #: service_manager/customers/models.py:127
-#: service_manager/master_data/models.py:12
-#: service_manager/master_data/models.py:24
-#: service_manager/master_data/models.py:39
-#: service_manager/master_data/models.py:84
-#: service_manager/master_data/models.py:106
-#: service_manager/master_data/models.py:131
+#: service_manager/master_data/models.py:10
+#: service_manager/master_data/models.py:22
+#: service_manager/master_data/models.py:37
+#: service_manager/master_data/models.py:82
+#: service_manager/master_data/models.py:98
+#: service_manager/master_data/models.py:123
 msgid "name"
 msgstr ""
 
@@ -441,6 +441,9 @@ msgid "Customers"
 msgstr ""
 
 #: service_manager/customers/templates/customer/customers.html:10
+msgid "Search in: VAT, name, e-mail, phone number, SN of devices"
+msgstr ""
+
 #: service_manager/customers/templates/customer/customers.html:15
 #: service_manager/customers/templates/customer_asset/customer_assets.html:13
 #: service_manager/customers/templates/customer_asset/customer_assets_list.html:19
@@ -1117,11 +1120,11 @@ msgstr ""
 msgid "order type"
 msgstr ""
 
-#: service_manager/main/tasks.py:47
+#: service_manager/main/tasks.py:46
 msgid "New Service Order in ServiceManager"
 msgstr ""
 
-#: service_manager/main/tasks.py:51
+#: service_manager/main/tasks.py:50
 msgid "New Service Request in ServiceManager"
 msgstr ""
 
@@ -1855,28 +1858,28 @@ msgstr ""
 msgid "Material Category"
 msgstr ""
 
-#: service_manager/master_data/models.py:55
+#: service_manager/master_data/models.py:53
 msgid "model_number"
 msgstr ""
 
-#: service_manager/master_data/models.py:60
+#: service_manager/master_data/models.py:58
 msgid "model_name"
 msgstr ""
 
-#: service_manager/master_data/models.py:67
+#: service_manager/master_data/models.py:65
 msgid "brand"
 msgstr ""
 
-#: service_manager/master_data/models.py:73
-#: service_manager/master_data/models.py:115
+#: service_manager/master_data/models.py:71
+#: service_manager/master_data/models.py:107
 msgid "category"
 msgstr ""
 
-#: service_manager/master_data/models.py:110
+#: service_manager/master_data/models.py:102
 msgid "price"
 msgstr ""
 
-#: service_manager/master_data/models.py:138
+#: service_manager/master_data/models.py:130
 msgid "description"
 msgstr ""
 

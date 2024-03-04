@@ -37,7 +37,8 @@ class CustomersListView(auth_mixins.PermissionRequiredMixin, views.ListView):
                 Q(name__icontains=search_text) |
                 Q(vat__icontains=search_text) |
                 Q(email_address__icontains=search_text) |
-                Q(phone_number__icontains=search_text)
+                Q(phone_number__icontains=search_text) |
+                Q(customerasset__serial_number__icontains=search_text)
             )
         return queryset
 
