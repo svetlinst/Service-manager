@@ -65,43 +65,49 @@ class HomeTemplateView(views.TemplateView):
         return context
 
 
-class ServiceOrderHeaderPendingServiceListView(auth_mixins.PermissionRequiredMixin, views.ListView):
+class ServiceOrderHeaderListBaseView(auth_mixins.PermissionRequiredMixin, views.ListView):
+    RELATED_ENTITIES = ['serviceordernote_set', 'serviceorderdetail_set', 'customer']
+
     model = ServiceOrderHeader
     template_name = 'service_order_header/list_views/service_orders_service.html'
     ordering = (
         'service_level_agreement', 'customer__has_subscription', 'customer__is_regular_customer', 'created_on',
         'customer')
     context_object_name = 'service_orders'
-    RELATED_ENTITIES = ['serviceordernote_set', 'serviceorderdetail_set', 'customer']
-
+    paginate_by = 10
     permission_required = 'main.view_serviceorderheader'
 
     def get_queryset(self):
-        """
-            Order:
-                1. SLA
-                2. Subscription
-                3. Regular
-                4. All others
-                5. By created on date ascending
-        """
-
         queryset = super().get_queryset()
-        queryset = queryset.order_by(F('service_level_agreement__id').desc(nulls_last=True), '-customer__has_subscription', '-customer__is_regular_customer', 'created_on')
+        queryset = queryset.order_by(
+            F('service_level_agreement__id').desc(nulls_last=True),
+            '-customer__has_subscription',
+            '-customer__is_regular_customer',
+            'created_on'
+        )
+        return queryset
+
+
+class ServiceOrderHeaderPendingServiceListView(ServiceOrderHeaderListBaseView):
+    def get_queryset(self):
+        queryset = super().get_queryset()
         return queryset.filter(is_serviced=False).prefetch_related(*self.RELATED_ENTITIES)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = _('Pending Service Orders')
+        return context
 
-class ServiceOrderHeaderServicedListView(auth_mixins.PermissionRequiredMixin, views.ListView):
-    model = ServiceOrderHeader
-    template_name = 'service_order_header/list_views/service_orders_complete.html'
-    ordering = ('serviced_on', 'customer')
-    RELATED_ENTITIES = ['serviceordernote_set', 'serviceorderdetail_set', ]
 
-    permission_required = 'main.view_serviceorderheader'
-
+class ServiceOrderHeaderServicedListView(ServiceOrderHeaderListBaseView):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(Q(is_serviced=True) & Q(is_completed=False)).prefetch_related(*self.RELATED_ENTITIES)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = _('Completed Service Orders')
+        return context
 
 
 class ServiceOrderHeaderDetailView(auth_mixins.PermissionRequiredMixin, views.DetailView):

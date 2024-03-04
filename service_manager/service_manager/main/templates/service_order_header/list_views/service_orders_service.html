@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block content %}
     <div class="d-block mt-1 rounded-lg bg-light my-1" style="padding:0 2%">
-        <h2 class='text-center text-secondary mb-1'>{% trans 'Pending Service Orders' %}</h2>
+        <h2 class='text-center text-secondary mb-1'>{{ page_title }}</h2>
         <section class="order-card-items">
             {% if service_orders %}
                 {% for service_order in service_orders %}
@@ -22,13 +22,21 @@
 
                             <section class="sr-card-actions">
                                 <div class="sr-actions">
-                                    <p class="card-item-text-content actions-fixed">{% if perms.main.add_serviceorderdetail %}
+                                    <p class="card-item-text-content actions-fixed">
+                                        {% if perms.main.add_serviceorderdetail and  service_order.is_serviced == False%}
                                         <a class="btn btn-outline-success btn-md"
                                            href="{% url 'create_service_order_detail' service_order.pk %}"
                                            data-bs-toggle="tooltip"
                                            title="{% trans 'Service' %}"
                                            role="button"><i class="fa-solid fa-screwdriver-wrench"></i></a>
-                                    {% endif %}
+                                        {% endif %}
+                                        {% if perms.main.add_serviceorderdetail and  service_order.is_serviced%}
+                                        <a class="btn btn-outline-success btn-md"
+                                           href="{% url 'handover_service_order' service_order.pk %}"
+                                           data-bs-toggle="tooltip"
+                                           title="{% trans 'Finalize Order' %}"
+                                           role="button"><i class="fa-solid fa-check"></i></a>
+                                        {% endif %}
                                         <a class="btn btn-outline-info btn-md"
                                            href="{% url 'detail_service_order' service_order.id %}"
                                            data-bs-toggle="tooltip"
@@ -86,6 +94,12 @@
                             <p class="info-text">{% trans 'Product number' %}: <span
                                     class="info-text-detail">{{ service_order.customer_asset.product_number }}</span></p>
                         </section>
+                    {% if service_order.is_serviced %}
+                    <section class="sr-card-status">
+                        <p class="info-text">{% trans 'Total amount' %}: <span
+                                    class="info-text-detail">{{ service_order.total_amount_due }} {% trans 'lv. (VAT incl.)' %}</span></p>
+                    </section>
+                    {% endif %}
                     </header>
 
                     <section class="sr-body">
@@ -131,5 +145,6 @@
             {% endif %}
 
         </section>
+    {% include 'partials/paginator.html' %}
     </div>
 {% endblock %}
