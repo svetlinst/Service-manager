@@ -92,24 +92,29 @@ class CreateCustomerView(auth_mixins.PermissionRequiredMixin, views.CreateView):
     form_class = CreateCustomerForm
     template_name = 'customer/customer_create.html'
     success_url = reverse_lazy('customers_list')
-
     permission_required = 'customers.add_customer'
 
     def form_valid(self, form):
         customer = form.save(commit=False)
         customer.save()
-        if customer.type.name == 'Individual':
-            first_name, *last_name = customer.name.split(' ')
-
-            representative = CustomerRepresentative(
-                first_name=first_name,
-                last_name=' '.join(last_name),
-                phone_number=customer.phone_number,
-                customer=customer,
-            )
-            representative.save()
-
+        self.create_representative_if_individual(customer)
         return super().form_valid(form)
+
+    @staticmethod
+    def create_representative_if_individual(customer):
+        if customer.type.name != 'Individual':
+            return
+
+        first_name, *last_name_tokens = customer.name.split(' ')
+        last_name = last_name_tokens[0] if last_name_tokens else ""
+
+        representative = CustomerRepresentative(
+            first_name=first_name,
+            last_name=last_name,
+            phone_number=customer.phone_number,
+            customer=customer,
+        )
+        representative.save()
 
 
 class DeleteCustomerView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
