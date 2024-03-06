@@ -29,17 +29,18 @@ class CustomersListView(auth_mixins.PermissionRequiredMixin, views.ListView):
         return context
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = super().get_queryset().prefetch_related('customerasset_set')
 
         search_text = self.request.GET.get('search_value', None)
         if search_text:
-            queryset = queryset.filter(
-                Q(name__icontains=search_text) |
-                Q(vat__icontains=search_text) |
-                Q(email_address__icontains=search_text) |
-                Q(phone_number__icontains=search_text) |
-                Q(customerasset__serial_number__icontains=search_text)
+            cond = (
+                    Q(name__icontains=search_text) |
+                    Q(vat__icontains=search_text) |
+                    Q(email_address__icontains=search_text) |
+                    Q(phone_number__icontains=search_text) |
+                    Q(customerasset__serial_number__icontains=search_text)
             )
+            queryset = queryset.filter(cond).distinct()
         return queryset
 
 
