@@ -54,10 +54,10 @@ class CreateServiceOrderHeaderForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        customer_id = kwargs.pop('customer_id', None)
         super().__init__(*args, **kwargs)
 
-        if 'customer' in self.initial:
-            customer_id = int(self.initial['customer'])
+        if customer_id is not None:
             representatives = CustomerRepresentative.objects.filter(customer=customer_id)
 
             self.fields['handed_over_by'].queryset = representatives

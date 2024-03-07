@@ -147,14 +147,10 @@ class CreateServiceOrderHeader(auth_mixins.PermissionRequiredMixin, views.Create
             }
         )
 
-    def get_initial(self):
-        customer_id = self.kwargs['customer_id']
-        if customer_id:
-            self.initial.update({
-                'customer': customer_id,
-            })
-
-        return super().get_initial()
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['customer_id'] = self.kwargs['customer_id']
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
