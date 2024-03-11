@@ -1,0 +1,75 @@
+{% load service_requests %}
+{% load i18n %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-9 my-3">
+            <form class="form" method="GET" action="">
+                <div class="input-group my-3">
+                    <input type="search" class="form-control rounded  mr-3"
+                           placeholder="{% trans 'Search by problem description' %}"
+                           aria-label="Search"
+                           aria-describedby="search-addon" name="service_requests"/>
+                    <input type="hidden" id="show_reps" name="show_service_requests" value="t">
+                    <button type="submit" class="btn btn-outline-primary"
+                            data-bs-toggle="tooltip"
+                            title="{% trans 'Search' %}"
+                            href="#">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        {#        {% if perms.customers.add_customerrepresentative %}#}
+        {#            <div class="col-md-3 text-right align-self-center my-3">#}
+        {#                <a href="{% url 'create_customer_representative' object.pk %}"#}
+        {#                   class="btn btn-success float-end">{% trans 'Add Representative' %}</a>#}
+        {#            </div>#}
+        {#        {% endif %}#}
+    </div>
+    <table class="table table-striped text-center">
+        <thead>
+        <tr>
+            <th scope="col">{% trans 'ID' %}</th>
+            <th scope="col">{% trans 'Created on' %}</th>
+            <th scope="col">{% trans 'Status' %}</th>
+            <th scope="col">{% trans 'Type' %}</th>
+            <th scope="col">{% trans 'Requestor name' %}</th>
+            <th scope="col">{% trans 'Problem description' %}</th>
+            <th scope="col">{% trans 'Action' %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if customer_service_requests %}
+            {% for service_request in customer_service_requests %}
+                <tr>
+                    <td>{{ service_request.id }}</td>
+                    <td>{{ service_request.created_on }}</td>
+                    {% get_status_value service_request.status as status_text %}
+                    <td>{{ status_text }}</td>
+                    <td>{{ service_request.get_order_type_display }}</td>
+                    <td>{{ service_request.requestor_name }}</td>
+                    <td>{{ service_request.problem_description|truncatechars:25 }}</td>
+                    <td>
+                        {% if perms.customers.change_serviceorderheader %}
+                            <a class="btn btn-outline-primary btn-md"
+                               href="{% url 'create_delivery_request' service_request.pk %}"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Detail' %}"
+                               role="button"><i class="fa-solid fa-circle-info"></i></a>
+
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="100%">
+                    <p>
+                        {% trans 'No records matching your search' %}
+                    </p>
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

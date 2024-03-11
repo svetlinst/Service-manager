@@ -57,6 +57,7 @@ class CustomerDetailView(auth_mixins.PermissionRequiredMixin, views.DetailView):
         context['customer_assets'] = customer.customerasset_set.all()
         context['customer_representatives'] = customer.customerrepresentative_set.all()
         context['customer_departments'] = customer.customerdepartment_set.all()
+        context['customer_service_requests'] = customer.servicerequest_set.all()
 
         search_text = self.request.GET.get('search_value', None)
         if search_text:
@@ -70,6 +71,11 @@ class CustomerDetailView(auth_mixins.PermissionRequiredMixin, views.DetailView):
         department_search = self.request.GET.get('departments', None)
         if department_search:
             context['customer_departments'] = customer.customerdepartment_set.filter(name__icontains=department_search)
+
+        service_requests_search = self.request.GET.get('service_requests', None)
+        if service_requests_search:
+            context['customer_service_requests'] = customer.servicerequest_set.filter(
+                problem_description__icontains=service_requests_search)
 
         assets_being_serviced = get_assets_currently_in_service(customer)
 

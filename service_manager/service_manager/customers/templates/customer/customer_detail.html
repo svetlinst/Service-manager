@@ -40,12 +40,15 @@
             <a class="nav-item nav-link {% if 'show_representatives' in request.GET %} active {% endif %}"
                href="{% url 'customer_detail' object.pk %}?show_representatives" role="tab"
                aria-selected="false">{% trans 'Representatives' %}</a>
+
             {% if object.type.name == 'Business' %}
-        
                 <a class="nav-item nav-link {% if 'show_departments' in request.GET %} active {% endif %}"
                    href="{% url 'customer_detail' object.pk %}?show_departments" role="tab"
                    aria-selected="false">{% trans 'Departments' %}</a>
             {% endif %}
+            <a class="nav-item nav-link {% if 'show_service_requests' in request.GET %} active {% endif %}"
+               href="{% url 'customer_detail' object.pk %}?show_service_requests" role="tab"
+               aria-selected="false">{% trans 'Service requests' %}</a>
         </div>
 
         {% if not request.GET or 'show_assets' in request.GET %}
@@ -54,6 +57,8 @@
             {% include 'customer_representatives/customer_representatives.html' %}
         {% elif 'show_departments' in request.GET %}
             {% include 'customer_department/customer_departments.html' %}
+        {% elif 'show_service_requests' in request.GET %}
+            {% include 'customer_service_requests.html' %}
         {% endif %}
     </div>
 {% endblock %}
