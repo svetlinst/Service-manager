@@ -91,10 +91,12 @@ nav .logo {
     border-bottom: 1px solid lightgrey;
 }
 
+
 .section-item-header p {
     margin: 0;
     width: 25%;
 }
+
 
 /*  CUSTOMERS   */
 .card-items {
@@ -245,8 +247,8 @@ nav .logo {
     margin: 0;
 }
 
-.card-item-text-content{
-    margin:0;
+.card-item-text-content {
+    margin: 0;
 }
 
 .order-card-item-status-label {
@@ -520,4 +522,92 @@ span.handover-right {
 
 .styled-table tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
+}
+
+.checkbox-holder {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 700px) {
+    .index-meta h5 {
+        display: none;
+    }
+
+    .index-meta p {
+        font-size: small;
+        display: none;
+    }
+
+    .home-section-container-header {
+        font-size: small;
+    }
+
+    .section-item-header p {
+        margin: 0;
+        width: 100%;
+    }
+
+    .section-item-header {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .section-item-header a {
+        align-self: end;
+        order: -1;
+        font-size: small;
+        width: 100%;
+    }
+
+    .service-request-card {
+        flex-direction: column;
+    }
+
+    .sr-card-title {
+        flex-direction: column;
+    }
+
+    .service-request-card .sr-card-header {
+        gap: 2px;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .service-request-card .sr-requestor-info {
+        gap: 2px;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .sr-requestor-info {
+        flex-direction: column;
+    }
+
+    .service-request-card .sr-timestamps {
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .service-request-card .sr-card-actions {
+        flex-basis: 100%;
+        width: 100%;
+        justify-content: center;
+        order: -1;
+    }
+
+    .sr-actions {
+        font-size: small;
+        width: 100%;
+    }
+
+    .sr-actions a {
+        width: 32%;
+    }
+
+    .checkbox-holder {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+    }
 }

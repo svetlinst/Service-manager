@@ -43,7 +43,7 @@
                             <h5 class="text-left">
                                 {% trans 'Status' %}
                             </h5>
-                            <div style="display: flex; justify-content: space-between">
+                            <div class="checkbox-holder">
                                 {% for checkbox in filter_form.status %}
                                     <div>
                                         {{ checkbox.tag }}
@@ -61,7 +61,7 @@
                             <h5 class="text-left">
                                 {% trans 'Period' %}
                             </h5>
-                            <div style="display: flex; justify-content: space-between">
+                            <div class="checkbox-holder">
                                 {% for checkbox in filter_form.period %}
                                     <div>
                                         {{ checkbox.tag }}
