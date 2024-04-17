@@ -2,69 +2,166 @@
 {% load i18n %}
 {% block content %}
     <div class="d-block mt-5 rounded-lg bg-light my-3" style="padding:2%">
-        <h2 class='text-center text-secondary mb-3'>{% trans 'Finished Service Orders' %}</h2>
+        <h2 class='text-center text-secondary mb-3'>{% trans 'Finished Service Orders' %}({{ orders_count }})</h2>
         {#    Filter results#}
         <div class="container-fluid my-3">
-            <div class="row">
-                <div class="col-lg-5"></div>
-                <div class="col-lg-2">
-                    <form class="form-inline" method="GET" action="">
-                        {% csrf_token %}
-                        <label class="m-2" for="from_date">{% trans 'From' %}:</label>
-                        <input class="form-control m-2" id="from_date" name="from" width="250" type="date" required/>
-                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                        <label class="m-2" for="to_date">{% trans 'To' %}:</label>
-                        <input class="form-control m-2" id="to_date" name="to" width="250" type="date" required/>
-                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                        <button type="submit" class="btn btn-outline-primary m-2"
-                                href="{% url 'customers_list' %}">{% trans 'filter' %}
-                        </button>
+            <div class="row align-items-end">
+                <div class="col-lg-10">
+                    <form class="row align-items-end" method="GET" action="">
+                        <div class="col-auto">
+                            <label class="m-2" for="from_date">{% trans 'From' %}:</label>
+                            <input class="form-control m-2" id="from_date" name="from" width="250" type="date" value="{{ from_date }}"
+                                   required/>
+                        </div>
+                        <div class="col-auto">
+                            <label class="m-2" for="to_date">{% trans 'To' %}:</label>
+                            <input class="form-control m-2" id="to_date" name="to" width="250" type="date" value="{{ to_date }}" required/>
+                        </div>
+
+                        <div class="col-auto">
+                            <button class="btn btn-outline-primary m-2">
+                                {% trans 'filter' %}
+                            </button>
+                        </div>
                     </form>
                 </div>
-                <div class="col-lg-5"></div>
+                <div class="col-lg-2 my-2 text-end">
+                    <a href="{% url 'finished_orders' %}" class="btn btn-outline-warning btn-md"
+                       data-bs-toggle="tooltip"
+                       title="{% trans 'Clear' %}">
+                        <i class="fa-solid fa-ban"></i></a>
+                </div>
             </div>
         </div>
-        <table class="table table-striped text-center">
-            <thead>
-            <tr>
-                <th scope="col">{% trans 'ID' %}</th>
-                <th scope="col">{% trans 'Name' %}</th>
-                <th scope="col">{% trans 'Category' %}</th>
-                <th scope="col">{% trans 'Brand' %}</th>
-                <th scope="col">{% trans 'Model Name' %}</th>
-                <th scope="col">{% trans 'Model Number' %}</th>
-                <th scope="col">{% trans 'Serial Number' %}</th>
-                <th scope="col">{% trans 'Product Number' %}</th>
-                <th scope="col">{% trans 'Accepted On' %}</th>
-                <th scope="col">{% trans 'Serviced On' %}</th>
-                <th scope="col">{% trans 'Returned On' %}</th>
-                <th scope="col">{% trans 'Action' %}</th>
+        <section class="order-card-items">
+            {% if service_orders %}
+                {% for service_order in service_orders %}
+                    <div class="service-request-card">
+                        <header class="sr-card-title">
 
-            </tr>
-            </thead>
-            <tbody>
-            {% if object_list %}
-                {% for service_order in object_list %}
-                    <tr>
-                        <td>{{ service_order.id }}</td>
-                        <td>{{ service_order.customer.name }}</td>
-                        <td>{{ service_order.customer_asset.asset.category.name }}</td>
-                        <td>{{ service_order.customer_asset.asset.brand.name }}</td>
-                        <td>{{ service_order.customer_asset.asset.model_name }}</td>
-                        <td>{{ service_order.customer_asset.asset.model_number }}</td>
-                        <td>{{ service_order.customer_asset.serial_number }}</td>
-                        <td>{{ service_order.customer_asset.product_number }}</td>
-                        <td>{{ service_order.created_on }}</td>
-                        <td>{{ service_order.serviced_on }}</td>
-                        <td>{{ service_order.completed_on }}</td>
-                        <td>
-                            <a class="btn btn-outline-primary btn-sm"
-                               href="{% url 'detail_service_order' service_order.id %}"
-                               role="button">{% trans 'Detail' %}</a>
-                    </tr>
+                            <section class="sr-card-header">
+                                <section class="sr-card-status">
+                                    <p class="info-text">{% trans 'Status' %}: <span
+                                            class="info-text-detail">{{ service_order.status }}</span></p>
+                                </section>
+
+                                <section class="sr-card-info">
+                                    <p class="info-text">{% trans 'Customer' %}: <a
+                                            href={% url 'customer_detail' service_order.customer.id %}><span
+                                            class="info-text-detail">{{ service_order.customer.name }}</span></a></p>
+                                </section>
+
+                                <section class="sr-card-actions">
+                                    <div class="sr-actions">
+                                        <p class="card-item-text-content actions-fixed">
+                                            <a class="btn btn-outline-info btn-md"
+                                               href="{% url 'detail_service_order' service_order.id %}"
+                                               data-bs-toggle="tooltip"
+                                               title="{% trans 'Detail' %}"
+                                               role="button"><i class="fa-solid fa-circle-info"></i></a>
+                                        </p>
+                                    </div>
+                                </section>
+                            </section>
+                            <section class="sr-requestor-info">
+                                <p class="info-text">
+                                    {% trans 'SLA' %}:
+                                    {% if service_order.service_level_agreement %}
+                                        <span class="info-text-detail text-positive">{{ service_order.service_level_agreement.name }}</span>
+                                    {% endif %}
+                                </p>
+                                <p class="info-text">
+                                    {% trans 'Subscription' %}: <span class="info-text-detail">
+                                 {% if service_order.customer.has_subscription %}
+                                     <span class="text-positive">{% trans 'Yes' %}</span>
+                                 {% else %}
+                                     <span class="text-negative">{% trans 'No' %}</span>
+                                 {% endif %}</span>
+                                </p>
+                                <p class="info-text">
+                                    {% trans 'Regular' %}: <span class="info-text-detail">
+                                 {% if service_order.customer.is_regular_customer %}
+                                     <span class="text-positive">{% trans 'Yes' %}</span>
+                                 {% else %}
+                                     <span class="text-negative">{% trans 'No' %}</span>
+                                 {% endif %}</span>
+                                </p>
+                            </section>
+                            <section class="sr-requestor-info">
+                                <p class="info-text">{% trans 'Category' %}: <span
+                                        class="info-text-detail">{{ service_order.customer_asset.asset.category.name }}</span>
+                                </p>
+                                <p class="info-text">{% trans 'Brand' %}: <span
+                                        class="info-text-detail">{{ service_order.customer_asset.asset.brand.name }}</span>
+                                </p>
+                                <p class="info-text">{% trans 'Model name' %}: <span
+                                        class="info-text-detail">{{ service_order.customer_asset.asset.model_name }}</span>
+                                </p>
+
+                            </section>
+                            <section class="sr-requestor-info">
+                                <p class="info-text">{% trans 'Model number' %}: <span
+                                        class="info-text-detail">{{ service_order.customer_asset.asset.model_number }}</span>
+                                </p>
+                                <p class="info-text">{% trans 'Serial number' %}: <span
+                                        class="info-text-detail">{{ service_order.customer_asset.serial_number }}</span>
+                                </p>
+                                <p class="info-text">{% trans 'Product number' %}: <span
+                                        class="info-text-detail">{{ service_order.customer_asset.product_number }}</span>
+                                </p>
+                            </section>
+                            {% if service_order.is_serviced %}
+                                <section class="sr-card-status">
+                                    <p class="info-text">{% trans 'Total amount' %}: <span
+                                            class="info-text-detail">{{ service_order.total_amount_due }} {% trans 'lv. (VAT incl.)' %}</span>
+                                    </p>
+                                </section>
+                            {% endif %}
+                        </header>
+
+                        <section class="sr-body">
+                            <p class="info-text">
+                            <span class="bold">
+                                {% trans 'Problem description' %}:
+                            </span>
+                                <span class="info-text-detail">
+                                    {{ service_order.problem_description|truncatechars:256 }}
+                                </span>
+                            </p>
+                        </section>
+
+
+                        <section class="sr-timestamps">
+                            <div class="vertical-flex">
+                                <p class="info-text">{% trans 'Accepted on' %}:<span
+                                        class="info-text-detail"> {{ service_order.created_on }}</span></p>
+                                <p class="info-text">{% trans 'Accepted by' %}:<span
+                                        class="info-text-detail"> {{ service_order.accepted_by.profile_full_name }}</span>
+                                </p>
+                            </div>
+                            <div class="vertical-flex">
+                                <p class="info-text">{% trans 'Serviced on' %}: <span
+                                        class="info-text-detail">{{ service_order.serviced_on|default_if_none:'' }}</span>
+                                </p>
+                                <p class="info-text">{% trans 'Serviced by' %}: <span
+                                        class="info-text-detail">{{ service_order.serviced_by.profile_full_name }}</span>
+                                </p>
+                            </div>
+                            <div class="vertical-flex">
+                                <p class="info-text">{% trans 'Completed on' %}: <span
+                                        class="info-text-detail">{{ service_order.completed_on|default_if_none:'' }}</span>
+                                </p>
+                                <p class="info-text">{% trans 'Completed by' %}: <span
+                                        class="info-text-detail">{{ service_order.completed_by.profile_full_name }}</span>
+                                </p>
+                            </div>
+                        </section>
+
+                    </div>
                 {% endfor %}
             {% endif %}
-            </tbody>
-        </table>
+
+        </section>
+        {% include 'partials/paginator.html' %}
     </div>
 {% endblock %}
