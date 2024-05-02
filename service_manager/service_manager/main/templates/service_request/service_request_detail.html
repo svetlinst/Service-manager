@@ -5,52 +5,49 @@
 {% block content %}
 
     <div class="container">
-        <div class="row">
-            <div class="col-9">
+        <div class="general-info-container">
+            <div style="width: 100%">
                 {#    Customer Information#}
-                <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:0.5%">
-                    <div class="text-center mb-4 d-flex justify-content-between align-items-center">
-                        <p></p>
+                <div class="content-container">
+                    <div class="general-info-container">
+                        <div></div>
                         <h4 class='d-inline text-secondary mb-3'>{% trans 'Customer Information' %}</h4>
-                        <a class="btn btn-outline-primary btn-md"
-                           href="{% url 'edit_service_request' service_request.pk %}"
-                           data-bs-toggle="tooltip"
-                           title="{% trans 'Edit' %}"
-                           role="button"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <div class="flex-row-static">
+                            <a class="btn btn-outline-primary btn-md"
+                               href="{% url 'edit_service_request' service_request.pk %}"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Edit' %}"
+                               role="button"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </div>
                     </div>
 
-                    <div class="row text-left">
-                        <div class="col">
-                            <p class="text-primary mb-0"><b
-                                    class="text-dark">{% trans 'Name' %}: </b>{{ service_request.customer.name }}</p>
-                        </div>
-                        <div class="col">
-                            <p class="text-primary mb-0"><b
-                                    class="text-dark">{% trans 'Requestor name' %}: </b>{{ service_request.requestor_name }}
-                            </p>
-                        </div>
-                        <div class="col">
-                            <p class="text-primary mb-0"><b
-                                    class="text-dark">{% trans 'Requestor phone number' %}: </b>{{ service_request.requestor_phone_number }}
-                            </p>
-                        </div>
+                    <div class="general-info-container">
+                        <p class="text-primary mb-0"><b
+                                class="text-dark">{% trans 'Name' %}: </b>{{ service_request.customer.name }}</p>
+
+                        <p class="text-primary mb-0"><b
+                                class="text-dark">{% trans 'Requestor name' %}: </b>{{ service_request.requestor_name }}
+                        </p>
+
+                        <p class="text-primary mb-0"><b
+                                class="text-dark">{% trans 'Requestor phone number' %}: </b>{{ service_request.requestor_phone_number }}
+                        </p>
                     </div>
-                    <div class="row text-left">
-                        <div class="col">
-                            <p class="text-primary mb-0"><b
-                                    class="text-dark">{% trans 'Problem description' %}: </b>{{ service_request.problem_description }}
-                            </p>
-                        </div>
+                    <div class="general-info-container text-left">
+                        <p class="text-primary mb-0"><b
+                                class="text-dark">{% trans 'Problem description' %}: </b>{{ service_request.problem_description }}
+                        </p>
                     </div>
                 </div>
 
                 {#    Status#}
-                <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:0.5%">
-                    <div class="text-center mb-4 d-flex justify-content-between align-items-center">
-                        <p></p>
+                <div class="content-container">
+                    <div class="general-info-container">
+                        <div></div>
                         {% get_status_value service_request.status as status_text %}
                         <h4 class='text-center text-secondary mt-1'>{% trans 'Status' %} - {{ status_text }}</h4>
-                        <div class="text-center mb-4 d-flex justify-content-between align-items-center">
+
+                        <div class="flex-row-static">
                             {% if service_request.is_open %}
                                 <a class="btn btn-outline-primary btn-md mx-1"
                                    href="{% url 'service_request_assign_handler' service_request.pk %}"
@@ -84,54 +81,44 @@
                         </div>
                     </div>
 
-                    <div class="row text-left">
-                        <div class="col">
-                            <p class="text-primary mb-0"><b
-                                    class="text-dark">{% trans 'Accepted by' %}: </b>{{ service_request.accepted_by.profile_full_name }}
-                            </p>
-                        </div>
-                        <div class="col">
-                            <p class="text-primary mb-0"><b
-                                    class="text-dark">{% trans 'Accepted on' %}: </b>{{ service_request.created_on }}
-                            </p>
-                        </div>
+                    <div class="general-info-container">
+                        <p class="text-primary mb-0"><b
+                                class="text-dark">{% trans 'Accepted by' %}: </b>{{ service_request.accepted_by.profile_full_name }}
+                        </p>
+                        <p class="text-primary mb-0"><b
+                                class="text-dark">{% trans 'Accepted on' %}: </b>{{ service_request.created_on }}
+                        </p>
                     </div>
-                    <div class="row text-left">
-                        <div class="col">
-                            <p class="text-primary mb-0"><b
-                                    class="text-dark">{% trans 'Handled by' %}: </b>{{ service_request.handled_by.profile_full_name }}
-                            </p>
-                        </div>
-                        <div class="col">
-                            <p class="text-primary mb-0"><b
-                                    class="text-dark">{% trans 'Handled on' %}: </b>{{ service_request.handled_on }}
-                            </p>
-                        </div>
+                    <div class="general-info-container">
+                        <p class="text-primary mb-0"><b
+                                class="text-dark">{% trans 'Handled by' %}: </b>{{ service_request.handled_by.profile_full_name }}
+                        </p>
+                        <p class="text-primary mb-0"><b
+                                class="text-dark">{% trans 'Handled on' %}: </b>{{ service_request.handled_on }}
+                        </p>
                     </div>
-                    <div class="row text-left">
-                        <div class="col">
-                            <p class="text-primary mb-0"><b
-                                    class="text-dark">{% trans 'Closed by' %}: </b>{{ service_request.closed_by.profile_full_name }}
-                            </p>
-                        </div>
-                        <div class="col">
-                            <p class="text-primary mb-0"><b
-                                    class="text-dark">{% trans 'Closed on' %}: </b>{{ service_request.closed_on }}
-                            </p>
-                        </div>
+                    <div class="general-info-container">
+                        <p class="text-primary mb-0"><b
+                                class="text-dark">{% trans 'Closed by' %}: </b>{{ service_request.closed_by.profile_full_name }}
+                        </p>
+                        <p class="text-primary mb-0"><b
+                                class="text-dark">{% trans 'Closed on' %}: </b>{{ service_request.closed_on }}
+                        </p>
                     </div>
                 </div>
 
                 {#    Resolution#}
-                <div class="d-block rounded-lg bg-light mb-1" style="padding:0.5%">
-                    <div class="text-center mb-4 d-flex justify-content-between align-items-center">
-                        <p></p>
+                <div class="content-container">
+                    <div class="general-info-container">
+                        <div></div>
                         <h4 class='text-center text-secondary mt-1'>{% trans 'Resolution' %}</h4>
-                        <a class="btn btn-outline-primary btn-md"
-                           href="{% url 'service_request_update_resolution' service_request.pk %}"
-                           data-bs-toggle="tooltip"
-                           title="{% trans 'Edit' %}"
-                           role="button"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <div class="flex-row-static">
+                            <a class="btn btn-outline-primary btn-md"
+                               href="{% url 'service_request_update_resolution' service_request.pk %}"
+                               data-bs-toggle="tooltip"
+                               title="{% trans 'Edit' %}"
+                               role="button"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </div>
                     </div>
 
                     <div class="text-left">
@@ -311,15 +298,20 @@
                     </div>
                 </div>
             </div>
+        </div>
 
-            {#    Workflow#}
-            <div class="col-3">
-                <div class="card mt-2">
-                    <div class="card-body">
-                        <h5 class="card-title">{% trans 'Workflow' %}</h5>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
+
+        {#    Workflow#}
+        <div class="content-container">
+            <div class="general-info-container">
+                <div></div>
+                <h4 class='d-inline text-secondary mb-3'>{% trans 'Workflow' %}</h4>
+                <div></div>
+            </div>
+            <div class="general-info-container">
+                <div class="service-request-status">
+                    <ul class="status-list">
+                        <li>
                             {% if service_request.handled_by %}
                                 <span class="text-success"><i class="fa-solid fa-check"></i></span>
                             {% else %}
@@ -327,7 +319,7 @@
                             {% endif %}
                             {% trans 'Handled' %}
                         </li>
-                        <li class="list-group-item">
+                        <li>
                             {% if service_request.resolution %}
                                 <span class="text-success"><i class="fa-solid fa-check"></i></span>
                             {% else %}
@@ -335,7 +327,7 @@
                             {% endif %}
                             {% trans 'Resolved' %}
                         </li>
-                        <li class="list-group-item">
+                        <li>
                             {% if service_request.closed_by %}
                                 <span class="text-success"><i class="fa-solid fa-check"></i></span>
                             {% else %}
@@ -344,7 +336,7 @@
                             {% trans 'Closed' %}
                         </li>
                         {% if service_request.order_type == 1 %}
-                            <li class="list-group-item">
+                            <li>
                                 {% if service_request.service_order %}
                                     <span class="text-success"><i class="fa-solid fa-check"></i></span>
                                 {% else %}
@@ -358,16 +350,13 @@
             </div>
         </div>
 
+
         {#    CREATE NEW DELIVERY REQUEST#}
         {% if service_request.order_type == 2 and not service_request.is_finalized %}
-            <div class="row">
-                <div class="col-12">
-                    <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:0.5%">
-                        {% block service_delivery_create %}
+            <div class="content-container">
+                {% block service_delivery_create %}
 
-                        {% endblock %}
-                    </div>
-                </div>
+                {% endblock %}
             </div>
         {% endif %}
 
@@ -375,7 +364,7 @@
             <div class="col-12">
                 {#    LIST ADDED DELIVERY REQUESTS#}
                 {% if service_request.order_type == 2 %}
-                    <div class="d-block mt-2 rounded-lg bg-light mb-2" style="padding:0.5%">
+                    <div class="content-container">
                         {% include 'delivery_request/delivery_requests.html' %}
                     </div>
                 {% endif %}
