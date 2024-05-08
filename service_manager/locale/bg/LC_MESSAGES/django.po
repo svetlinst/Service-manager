@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-08 11:22+0300\n"
-"PO-Revision-Date: 2024-05-08 11:24+0300\n"
+"PO-Revision-Date: 2024-05-08 11:47+0300\n"
 "Last-Translator: Anonymous User <su@su.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -2045,7 +2045,7 @@ msgstr "Цена с отстъпка"
 #: service_manager/service_requests/templates/delivery_request/delivery_requests.html:46
 #| msgid "Total Amount (no VAT)"
 msgid "Sum (no VAT)"
-msgstr "Общо (без ДДС)"
+msgstr "Общо"
 
 #: service_manager/service_requests/templates/delivery_request/delivery_requests.html:17
 #: service_manager/service_requests/templates/delivery_request/delivery_requests.html:47
