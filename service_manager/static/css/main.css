@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+* { box-sizing: border-box; }
+
 body {
     background-image: url('/static/background.jpg');
     -webkit-background-size: cover;
@@ -111,7 +113,7 @@ nav .logo {
 }
 
 .card-item {
-    min-width: 360px;
+    min-width: 260px;
     width: 30%;
     background-color: white;
     display: flex;
@@ -637,8 +639,9 @@ span.handover-right {
     display: flex;
     width: 100%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: end;
     border-bottom: 1px solid lightgrey;
+    padding-bottom: 4px;
 }
 
 .material-item-main {
@@ -655,12 +658,37 @@ span.handover-right {
 }
 
 .status-list {
-    /*display: inline-block;*/
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
 }
 
 .status-list > li {
     list-style: none;
     display: inline-block;
+    padding: 0 6px 0 6px;
+}
+
+.material-title {
+    display: none;
+    margin: 0;
+}
+
+.material-name {
+    flex-basis: 25%;
+    margin: 0;
+    /*text-align: center;*/
+}
+
+.material-pricing {
+    flex-basis: 12.5%;
+    margin: 0;
+    text-align: center;
+}
+
+.material-table-header {
+    display: flex;
 }
 
 /*Responsive*/
@@ -772,22 +800,38 @@ span.handover-right {
         flex-basis: 100%;
     }
 
+    .status-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
     .status-list > li {
         display: block;
+        min-width: 150px;
+    }
+
+    .material-card-item {
+        flex-direction: column;
+    }
+
+    .material-item-main {
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .table-headers, .table-detail {
+        flex-direction: column;
+    }
+
+    .material-title {
+        display: inline;
+    }
+
+    .material-table-header {
+        display: none;
+    }
+
+    .site-logo {
+        display: none;
     }
 }
-
-/*Responsive material tables*/
-/*@media screen and (max-width: 1000px) {*/
-/*    .material-card-item {*/
-/*        flex-direction: column;*/
-/*    }*/
-
-/*    .material-item-main {*/
-/*        flex-direction: column;*/
-/*    }*/
-
-/*    .table-headers, .table-detail {*/
-/*        flex-direction: column;*/
-/*    }*/
-/*}*/
