@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-08 11:22+0300\n"
-"PO-Revision-Date: 2024-05-08 11:47+0300\n"
+"PO-Revision-Date: 2024-05-08 11:51+0300\n"
 "Last-Translator: Anonymous User <su@su.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -1640,7 +1640,7 @@ msgstr "Изпълнено обслужване"
 #: service_manager/service_requests/templates/delivery_request/delivery_requests.html:39
 #: templates/base.html:107
 msgid "Material"
-msgstr "Материали"
+msgstr "Материал"
 
 #: service_manager/main/templates/service_order_header/customer_printout.html:67
 #: service_manager/main/templates/service_order_header/service_order_track.html:55
