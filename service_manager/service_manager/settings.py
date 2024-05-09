@@ -36,17 +36,19 @@ CSRF_TRUSTED_ORIGINS = [f'https://{x}' for x in ALLOWED_HOSTS]
 
 # Application definition
 DJANGO_APPS = (
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',
 )
 
 THIRD_PARTY_APPS = (
     'rosetta',
     'captcha',
+    'drf_yasg',
 )
 
 PROJECT_APPS = (
@@ -56,9 +58,10 @@ PROJECT_APPS = (
     'service_manager.master_data',
     'service_manager.reports',
     'service_manager.service_requests',
+    'service_manager.api',
 )
 
-INSTALLED_APPS = DJANGO_APPS +PROJECT_APPS + THIRD_PARTY_APPS
+INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

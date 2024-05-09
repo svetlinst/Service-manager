@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf.urls.i18n import i18n_patterns
+from service_manager.api.swagger import schema_view
+
 
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
@@ -25,5 +27,8 @@ urlpatterns = i18n_patterns(
     path('accounts/', include('service_manager.accounts.urls')),
     path('reports/', include('service_manager.reports.urls')),
     path('service_requests/', include('service_manager.service_requests.urls')),
-    re_path(r'^rosetta/', include('rosetta.urls'))
+    re_path(r'^rosetta/', include('rosetta.urls')),
+    path('api/', include('service_manager.api.urls')),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('api/schema/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
 )
