@@ -52,12 +52,16 @@ const ServiceRequestForm = () => {
     const fields = [
         {
             name: 'customer', label: 'Customer', type: 'dropdown', options:
-                allCustomers.map((customer) => ({'value': customer.id, 'label': customer.name}))
+                [
+                    {'value': '', 'label': ''},
+                    ...allCustomers.map((customer) => ({'value': customer.id, 'label': customer.name}))
+                ]
         },
         {name: 'requestor_name', label: 'Requestor name', type: 'text'},
         {name: 'requestor_phone_number', label: 'Phone number', type: 'text'},
         {
             name: 'order_type', label: 'Request type', type: 'dropdown', options: [
+                {label: '', value: ''},
                 {label: 'Service', value: '1'},
                 {label: 'Delivery', value: '2'},
             ]
