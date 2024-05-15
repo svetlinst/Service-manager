@@ -49,6 +49,7 @@ THIRD_PARTY_APPS = (
     'rosetta',
     'captcha',
     'drf_yasg',
+    'corsheaders',
 )
 
 PROJECT_APPS = (
@@ -67,6 +68,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     'django.middleware.locale.LocaleMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -228,3 +230,7 @@ MESSAGE_TAGS = {
 RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+]

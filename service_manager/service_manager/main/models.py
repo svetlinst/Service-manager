@@ -324,8 +324,8 @@ class ServiceRequest(ActiveModel, BaseAuditEntity):
     resolution = models.CharField(
         verbose_name=_('resolution'),
         max_length=RESOLUTION_MAX_LENGTH,
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
     )
 
     status = models.CharField(

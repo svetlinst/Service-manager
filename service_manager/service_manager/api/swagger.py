@@ -6,7 +6,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="Service Manager API",
         default_version='v.0.0.0',
-        description="API used for accessing Service Manager's information via API",
+        description="API used for accessing Service Manager's data via API",
         contact=openapi.Contact(email="svetlinst@gmail.com"),
     ),
     public=True,
