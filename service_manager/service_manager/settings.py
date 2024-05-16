@@ -15,6 +15,7 @@ from decouple import config
 from django.utils.translation import gettext_lazy as _
 import os
 from django.contrib.messages import constants as messages
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from django.urls import reverse_lazy
@@ -234,3 +235,14 @@ SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+  }
