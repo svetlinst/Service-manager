@@ -1,9 +1,12 @@
-import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import {useAuth} from "../contexts/AuthContext.jsx";
+import NavLink from "./NavLink/NavLink.jsx";
 
-const NavBar = (props) => {
+const NavBar = () => {
+    const {logout, userDetails} = useAuth();
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            {userDetails && (<p>{userDetails.profile.last_name}</p>)}
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">My App</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -12,13 +15,16 @@ const NavBar = (props) => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" to="/">Home</Link>
-                        </li>
+                        <NavLink label='Home' path={'/'}/>
+                        <NavLink label='Service Requests' path='/service_requests'/>
 
-                        <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" to="/service_requests">Service Requests</Link>
-                        </li>
+                        {!userDetails && (
+                            <NavLink label='Login' path='/login'/>
+                        )}
+
+                        {userDetails && (
+                            <NavLink label='Logout' action={() => logout()} path='/'/>
+                        )}
                     </ul>
                 </div>
             </div>
@@ -27,7 +33,3 @@ const NavBar = (props) => {
 }
 
 export default NavBar;
-
-NavBar.propTypes = {
-    props: PropTypes.object,
-};

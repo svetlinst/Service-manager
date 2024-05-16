@@ -1,10 +1,14 @@
 import axios from "axios";
 
-const baseUrl = 'http://127.0.0.1:8000/bg/api/'
+const baseUrl = import.meta.env.VITE_APP_API_URL
 
-export const getData = async () => {
+export const getData = async (token) => {
     try {
-        const res = await axios.get(`${baseUrl}service_requests`);
+        const res = await axios.get(`${baseUrl}service_requests`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return res.data;
     } catch (err) {
         return Promise.reject(err);

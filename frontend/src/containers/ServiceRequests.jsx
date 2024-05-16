@@ -2,14 +2,16 @@ import {getData} from '../services/get_data.js'
 import ServiceRequestList from "../components/ServiceRequestList.jsx";
 import {useEffect, useState} from "react";
 import LoadingSpinner from "../components/LoadingSpinner.jsx";
+import {useAuth} from "../contexts/AuthContext.jsx";
 
 const ServiceRequests = () => {
     const [serviceRequestItems, setServiceRequestItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const {token} = useAuth();
 
     useEffect(() => {
-        getData().then(
+        getData(token).then(
             data => {
                 setServiceRequestItems(data);
                 setIsLoading(false);

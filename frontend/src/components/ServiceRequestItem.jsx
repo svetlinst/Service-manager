@@ -11,9 +11,7 @@ const ServiceRequestItem = ({id, customer, problem_description, resolution}) => 
 }
 
 ServiceRequestItem.propTypes = {
-    customer: PropTypes.shape(
-        {name:PropTypes.string},
-    ),
+    customer: PropTypes.object,
     problem_description: PropTypes.string,
     resolution: PropTypes.string,
     id: PropTypes.number,
