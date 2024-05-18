@@ -3,6 +3,7 @@ import {createServiceRequest, getAllCustomers} from "../../services/get_data.js"
 import React, {useState, useEffect} from "react";
 import LoadingSpinner from "../LoadingSpinner.jsx";
 import {useNavigate} from 'react-router-dom'
+import {useAuth} from "../../contexts/AuthContext.jsx";
 
 const ServiceRequestForm = () => {
     const [allCustomers, setAllCustomers] = useState([]);
@@ -11,9 +12,12 @@ const ServiceRequestForm = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState(null);
     const navigate = useNavigate();
+    const {token, userDetails} = useAuth();
+
+    console.log(userDetails);
 
     useEffect(() => {
-        getAllCustomers().then(
+        getAllCustomers(token).then(
             (data) => {
                 setAllCustomers(data);
                 setIsLoading(false);
@@ -32,13 +36,14 @@ const ServiceRequestForm = () => {
             'order_type': Number(formData['order_type']),
             'problem_description': formData['problem_description'],
             'resolution': null,
+            'accepted_by': userDetails.profile.app_user,
         }
 
         setIsSubmitting(true);
         setSubmitError(null);
 
         try {
-            const res = await createServiceRequest(data);
+            const res = await createServiceRequest(data, token);
             navigate('/service_requests');
             console.log(res);
         } catch (err) {
