@@ -1,7 +1,7 @@
 import {getDataDetail} from "../services/get_data.js";
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import LoadingSpinner from '../components/LoadingSpinner.jsx'
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner.jsx'
 import {useAuth} from "../contexts/AuthContext.jsx";
 
 const ServiceRequestDetail = () => {

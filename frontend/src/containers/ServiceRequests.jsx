@@ -1,7 +1,7 @@
 import {getData} from '../services/get_data.js'
-import ServiceRequestList from "../components/ServiceRequestList.jsx";
+import ServiceRequestList from "../components/ServiceRequestList/ServiceRequestList.jsx";
 import {useEffect, useState} from "react";
-import LoadingSpinner from "../components/LoadingSpinner.jsx";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner.jsx";
 import {useAuth} from "../contexts/AuthContext.jsx";
 
 const ServiceRequests = () => {

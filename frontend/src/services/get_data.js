@@ -50,3 +50,12 @@ export const createServiceRequest = async (data, token) => {
     }
 }
 
+export const getProfileData = async (id, token) => {
+    const res = await axios.get(`${baseUrl}profiles/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    return res.data;
+}
+

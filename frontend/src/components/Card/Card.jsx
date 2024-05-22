@@ -1,7 +1,7 @@
 import classes from './Card.module.css'
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import Button from "./Button/Button.jsx";
+import Button from "../Button/Button.jsx";
 
 
 const Card = ({id, customer, problem_description, resolution}) => {

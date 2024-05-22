@@ -7,6 +7,7 @@ import ServiceRequestDetail from "./containers/ServiceRequestDetail.jsx";
 import ServiceRequestCreate from "./components/ServiceRequestCreate/ServiceRequestCreate.jsx";
 import {AuthProvider} from "./contexts/AuthContext.jsx";
 import Login from "./containers/Login.jsx";
+import Profile from "./containers/Profile.jsx";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                         <Route path="/service_requests/:id" element={<ServiceRequestDetail/>}/>
                         <Route path="/service_requests/create" element={<ServiceRequestCreate/>}/>
                         <Route path="/login" element={<Login/>}/>
+                        <Route path="/profile" element={<Profile/>}/>
                     </Routes>
                 </Layout>
             </BrowserRouter>

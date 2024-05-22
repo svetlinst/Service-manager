@@ -1,7 +1,7 @@
 import Form from "../Form/Form.jsx";
 import {createServiceRequest, getAllCustomers} from "../../services/get_data.js";
 import React, {useState, useEffect} from "react";
-import LoadingSpinner from "../LoadingSpinner.jsx";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 import {useNavigate} from 'react-router-dom'
 import {useAuth} from "../../contexts/AuthContext.jsx";
 

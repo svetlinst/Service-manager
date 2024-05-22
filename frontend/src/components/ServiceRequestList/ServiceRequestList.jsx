@@ -1,6 +1,6 @@
-import ServiceRequestItem from "./ServiceRequestItem.jsx";
+import ServiceRequestItem from "../ServiceRequestItem/ServiceRequestItem.jsx";
 import PropTypes from "prop-types";
-import Button from "./Button/Button.jsx";
+import Button from "../Button/Button.jsx";
 import {Link} from "react-router-dom";
 
 const ServiceRequestList = ({service_requests}) => {

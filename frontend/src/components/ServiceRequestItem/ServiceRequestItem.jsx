@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Card from "./Card.jsx";
+import Card from "../Card/Card.jsx";
 import classes from './ServiceRequestItem.module.css'
 
 const ServiceRequestItem = ({id, customer, problem_description, resolution}) => {
@@ -11,7 +11,7 @@ const ServiceRequestItem = ({id, customer, problem_description, resolution}) => 
 }
 
 ServiceRequestItem.propTypes = {
-    customer: PropTypes.object,
+    customer: PropTypes.number,
     problem_description: PropTypes.string,
     resolution: PropTypes.string,
     id: PropTypes.number,

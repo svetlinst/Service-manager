@@ -1,4 +1,4 @@
-import NavBar from "../components/NavBar.jsx";
+import NavBar from "../components/NavBar/NavBar.jsx";
 import PropTypes from "prop-types";
 const Layout = ({children}) => {
     return (
