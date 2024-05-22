@@ -23,10 +23,10 @@ class ServiceRequestSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = '__all__'
+        fields = ['first_name', 'last_name', 'phone_number']
 
 class AppUserSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
     class Meta:
         model = AppUser
-        fields = ['profile', 'email', 'is_active', 'is_staff', 'is_superuser']
+        fields = ['profile', 'email', 'is_active', 'is_staff', 'is_superuser', 'id']
