@@ -2,9 +2,9 @@ import axios from "axios";
 
 const baseUrl = import.meta.env.VITE_APP_API_URL;
 
-export const getData = async (token) => {
+export const getData = async (token, searchTerm) => {
     try {
-        const res = await axios.get(`${baseUrl}service_requests`, {
+        const res = await axios.get(`${baseUrl}service_requests?searchTerm=${searchTerm}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

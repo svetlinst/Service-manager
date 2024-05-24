@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner.jsx'
 import {useAuth} from "../contexts/AuthContext.jsx";
-import ServiceRequest from "../components/ServiceRequest/ServiceRequest.jsx";
+import ServiceRequest from "../components/ServiceRequestDetail/ServiceRequestDetail.jsx";
 
 const ServiceRequestDetail = () => {
     const {id} = useParams()
