@@ -275,11 +275,11 @@ class ServiceRequest(ActiveModel, BaseAuditEntity):
     RESOLUTION_MAX_LENGTH = 100
     ORDER_TYPE_MAX_LENGTH = 1
 
-    TYPE_NEW = 1
-    TYPE_IN_PROGRESS = 2
-    TYPE_RESOLVED = 3
-    TYPE_CLOSED = 4
-    TYPE_REJECTED = 5
+    TYPE_NEW = '1'
+    TYPE_IN_PROGRESS = '2'
+    TYPE_RESOLVED = '3'
+    TYPE_CLOSED = '4'
+    TYPE_REJECTED = '5'
 
     ORDER_TYPE_SERVICE = 1
     ORDER_TYPE_DELIVERY = 2
@@ -399,7 +399,7 @@ class ServiceRequest(ActiveModel, BaseAuditEntity):
     )
 
     def is_open(self):
-        if self.status in [str(k) for k, v in self.TYPE_CHOICES if k < 4]:
+        if self.status in [str(k) for k, v in self.TYPE_CHOICES if int(k) < 4]:
             return True
         return False
 

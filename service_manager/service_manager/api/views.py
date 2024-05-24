@@ -4,8 +4,8 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from service_manager.accounts.models import Profile, AppUser
-from service_manager.api.serializers import CustomerSerializer, ServiceRequestSerializer, AppUserSerializer, \
-    ProfileSerializer
+from service_manager.api.serializers import CustomerSerializer, AppUserSerializer, \
+    ProfileSerializer, ServiceRequestOutputSerializer, ServiceRequestInputSerializer
 from service_manager.customers.models import Customer
 from service_manager.main.models import ServiceRequest
 
@@ -19,8 +19,13 @@ class CustomerViewSet(viewsets.ModelViewSet):
 
 class ServiceRequestViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-    serializer_class = ServiceRequestSerializer
+    # serializer_class = ServiceRequestSerializer
     queryset = ServiceRequest.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method in ['GET']:
+            return ServiceRequestOutputSerializer
+        return ServiceRequestInputSerializer
 
 
 class CustomerNamesViewSet(viewsets.ViewSet):
