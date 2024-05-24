@@ -19,13 +19,20 @@ class CustomerViewSet(viewsets.ModelViewSet):
 
 class ServiceRequestViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-    # serializer_class = ServiceRequestSerializer
     queryset = ServiceRequest.objects.all()
 
     def get_serializer_class(self):
         if self.request.method in ['GET']:
             return ServiceRequestOutputSerializer
         return ServiceRequestInputSerializer
+
+    def list(self, request, *args, **kwargs):
+        search_term = self.request.query_params.get('searchTerm', None)
+        queryset = self.get_queryset()
+        if search_term is not None:
+            queryset = queryset.filter(problem_description__icontains=search_term)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 class CustomerNamesViewSet(viewsets.ViewSet):

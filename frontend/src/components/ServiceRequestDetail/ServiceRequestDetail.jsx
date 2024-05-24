@@ -3,7 +3,7 @@ import {useAuth} from "../../contexts/AuthContext.jsx";
 import {getDataDetail} from "../../services/get_data.js";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 import PropTypes from "prop-types";
-import classes from './ServiceRequest.module.css'
+import classes from './ServiceRequestDetail.module.css'
 import sharedStyles from '../../assets/styles/SharedStyles.module.css'
 import {parseISO, format} from 'date-fns';
 

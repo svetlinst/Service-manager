@@ -11,26 +11,6 @@ class CustomerSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# class ServiceRequestSerializer(serializers.ModelSerializer):
-#     customer = serializers.PrimaryKeyRelatedField(
-#         queryset=Customer.objects.all()
-#     )
-#     customer_detail = CustomerSerializer(source='customer', read_only=True)
-#
-#     status_display = serializers.SerializerMethodField()
-#
-#     def get_status_display(self, obj):
-#         return obj.get_status_display()
-#
-#     def to_representation(self, instance):
-#         representation = super().to_representation(instance)
-#         representation['customer_detail'] = CustomerSerializer(instance.customer).data
-#         return representation
-#
-#     class Meta:
-#         model = ServiceRequest
-#         fields = '__all__'
-
 class ServiceRequestInputSerializer(serializers.ModelSerializer):
     customer = serializers.PrimaryKeyRelatedField(queryset=Customer.objects.all())
     status_display = serializers.SerializerMethodField()
