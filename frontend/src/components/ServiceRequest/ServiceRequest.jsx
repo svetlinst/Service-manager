@@ -4,6 +4,7 @@ import {getDataDetail} from "../../services/get_data.js";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 import PropTypes from "prop-types";
 import classes from './ServiceRequest.module.css'
+import sharedStyles from '../../assets/styles/SharedStyles.module.css'
 import {parseISO, format} from 'date-fns';
 
 const ServiceRequest = ({id}) => {
@@ -32,20 +33,20 @@ const ServiceRequest = ({id}) => {
                     <p>{error}</p>
                 ) : (
                     <div>
-                        <header className={classes.roundedContainerPrimary}>
+                        <header className={sharedStyles.roundedContainerPrimary}>
                             Service Request Details
                         </header>
-                        <main className={classes.roundedContainerSecondary}>
+                        <main className={sharedStyles.roundedContainerSecondary}>
                             <p>Problem description: {serviceRequest['problem_description']}</p>
                             <p>Resolution: {serviceRequest['resolution']}</p>
                         </main>
-                        <footer className={classes.roundedContainerSecondary}>
-                            <div className={classes.horizontalFlex}>
+                        <footer className={sharedStyles.roundedContainerSecondary}>
+                            <div className={sharedStyles.horizontalFlex}>
                                 <p>Created by: {serviceRequest['requestor_name']}</p>
                                 <p>Created on: {format(parseISO(serviceRequest['created_on']), 'dd/MM/yyyy HH:mm')}</p>
                                 <p>Updated on: {format(parseISO(serviceRequest['updated_on']), 'dd/MM/yyyy HH:mm')}</p>
                             </div>
-                            <div className={classes.horizontalFlex}>
+                            <div className={sharedStyles.horizontalFlex}>
                                 <p>Status: {serviceRequest['status_display']}</p>
                             </div>
                         </footer>

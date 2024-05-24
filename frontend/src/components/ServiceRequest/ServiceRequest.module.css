@@ -1,38 +1,9 @@
-.roundedContainerPrimary {
-    border-radius: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    background-color: rgb(21, 79, 180);
-    margin-bottom: 8px;
-    color: white;
-    padding: 4px;
-    border: 1px solid white;
-}
-
-.roundedContainerSecondary {
-    border-radius: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    background-color: #f3f3f3;
-    padding: 4px 12px;
-    margin-bottom: 8px;
-    border: 1px solid white;
-}
-
-.roundedContainerSecondary:hover {
-    transform: scale(1.1);
+.horizontalFlex p {
+    flex-grow: 1;
+    flex-basis: 0;
 }
 
 p {
     text-align: left;
     margin-bottom: 2px;
-}
-
-.horizontalFlex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.horizontalFlex p {
-    flex-grow: 1;
-    flex-basis: 0;
 }
