@@ -71,7 +71,7 @@ const ServiceRequestForm = () => {
                 {label: 'Delivery', value: '2'},
             ]
         },
-        {name: 'problem_description', label: 'Problem description', type: 'text'},
+        {name: 'problem_description', label: 'Problem description', type: 'textarea'},
     ];
 
     return (

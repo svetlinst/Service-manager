@@ -2,9 +2,9 @@ import './App.css'
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Layout from "./containers/Layout.jsx";
 import Home from "./containers/Home.jsx";
-import ServiceRequests from "./containers/ServiceRequests.jsx";
+import ServiceRequests from "./containers/ServiceRequests/ServiceRequests.jsx";
 import ServiceRequestDetail from "./containers/ServiceRequestDetail.jsx";
-import ServiceRequestCreate from "./components/ServiceRequestCreate/ServiceRequestCreate.jsx";
+import ServiceRequestCreate from "./containers/ServiceRequestCreate/ServiceRequestCreate.jsx";
 import {AuthProvider} from "./contexts/AuthContext.jsx";
 import Login from "./containers/Login.jsx";
 import Profile from "./containers/Profile.jsx";

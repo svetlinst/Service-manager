@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import classes from './SearchInput.module.css'
 
 const ESC_KEY_CODE = 27;
 
@@ -17,6 +18,7 @@ const SearchInput = ({ placeholderText, onInputChange, searchValue }) => {
       onChange={onInputChange}
       onKeyDown={onKeyDown}
       value={searchValue}
+      className={classes.searchIinput}
     />
   );
 };

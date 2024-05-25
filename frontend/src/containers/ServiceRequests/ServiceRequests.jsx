@@ -1,12 +1,14 @@
-import { getData } from '../services/get_data.js'
-import ServiceRequestList from "../components/ServiceRequestList/ServiceRequestList.jsx";
-import { useEffect, useState, useRef } from "react";
-import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner.jsx";
-import { useAuth } from "../contexts/AuthContext.jsx";
-import sharedStyles from "../assets/styles/SharedStyles.module.css";
-import SearchInput from "../components/common/SearchInput/SerachInput.jsx";
-import { Link } from "react-router-dom";
-import Button from "../components/common/Button/Button.jsx";
+import {getData} from '../../services/get_data.js'
+import ServiceRequestList from "../../components/ServiceRequestList/ServiceRequestList.jsx";
+import {useEffect, useState, useRef} from "react";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner.jsx";
+import {useAuth} from "../../contexts/AuthContext.jsx";
+import sharedStyles from "../../assets/styles/SharedStyles.module.css";
+import SearchInput from "../../components/common/SearchInput/SerachInput.jsx";
+import {Link} from "react-router-dom";
+import Button from "../../components/common/Button/Button.jsx";
+import classes from './ServiceRequests.module.css'
+
 
 const ServiceRequests = () => {
     const [serviceRequestItems, setServiceRequestItems] = useState([]);
@@ -15,7 +17,7 @@ const ServiceRequests = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const searchTextRef = useRef(searchTerm);
     const [triggerUpdate, setTriggerUpdate] = useState(false);
-    const { token } = useAuth();
+    const {token} = useAuth();
 
     const handleInputChange = (e) => {
         searchTextRef.current = e.target.value;
@@ -45,9 +47,12 @@ const ServiceRequests = () => {
             <header className={sharedStyles.roundedContainerPrimary}>
                 <h3>Service Requests</h3>
                 <section className={sharedStyles.horizontalFlex}>
-                    <SearchInput placeholderText="Search..."
-                                 onInputChange={handleInputChange}
-                                 searchValue={searchTextRef.current}/>
+                    <div className={classes.searchBar}>
+                        <SearchInput placeholderText="Search..."
+                                     onInputChange={handleInputChange}
+                                     searchValue={searchTextRef.current}
+                                     className={classes.searchBar}/>
+                    </div>
                     <Link className="nav-link active" aria-current="page"
                           to={`/service_requests/create`}><Button>Create New</Button></Link>
                 </section>

@@ -17,12 +17,20 @@
     border: 1px solid white;
 }
 
-.roundedContainerSecondary:hover {
-    transform: scale(1.1);
-}
-
 .horizontalFlex {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.flexJustifyCenter {
+    justify-content: center;
+}
+
+.marginBottomSmall {
+    margin-bottom: 4px;
+}
+
+.marginBottomMid {
+    margin-bottom: 8px;
 }

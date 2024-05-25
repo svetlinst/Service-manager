@@ -1,6 +1,11 @@
 import PropTypes from "prop-types";
 import {useState} from "react";
 import Button from "../common/Button/Button.jsx";
+import FormLabel from "../common/FormLabel/FormLabel.jsx";
+import sharedStyles from '../../assets/styles/SharedStyles.module.css'
+import Select from "../common/Select/Select.jsx";
+import Input from "../common/Input/Input.jsx";
+import TextArea from "../common/TextArea/TextArea.jsx";
 
 const Form = ({onSubmit, fields}) => {
     const [formData, setFormData] = useState({});
@@ -19,25 +24,30 @@ const Form = ({onSubmit, fields}) => {
             {fields.map((field) => (
                 <div key={field.name}>
                     {field.type === 'dropdown' ? (
-                        <div>
-                            <label htmlFor={field.name}>{field.label}</label>
-                            <select
+                        <div className={sharedStyles.marginBottomMid}>
+                            <FormLabel labelText={field.label} htmlFor={field.name}/>
+                            <Select
                                 id={field.name}
                                 name={field.name}
                                 value={formData[field.name] || ''}
                                 onChange={handleChange}
-                            >
-                                {field.options.map((option) => (
-                                    <option key={option.value} value={option.value}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </select>
+                                options={field.options}
+                            />
+                        </div>
+                    ) : field.type === 'textarea' ? (
+                        <div>
+                            <FormLabel labelText={field.label} htmlFor={field.name}/>
+                            <TextArea
+                                id={field.name}
+                                name={field.name}
+                                value={formData[field.name] || ''}
+                                onChange={handleChange}
+                            />
                         </div>
                     ) : (
-                        <div>
-                            <label htmlFor={field.name}>{field.label}</label>
-                            <input
+                        <div className={sharedStyles.marginBottomMid}>
+                            <FormLabel labelText={field.label} htmlFor={field.name}/>
+                            <Input
                                 type={field.type}
                                 id={field.name}
                                 name={field.name}

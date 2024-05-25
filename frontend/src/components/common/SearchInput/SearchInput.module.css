@@ -1,0 +1,15 @@
+.searchIinput {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    background-color: white;
+    line-height: 1.5;
+    font-size: 17px;
+    padding: .375rem .75rem;
+    border-radius: .25rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    border: 1px solid #ced4da;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
