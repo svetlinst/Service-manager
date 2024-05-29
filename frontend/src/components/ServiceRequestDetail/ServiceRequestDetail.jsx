@@ -1,17 +1,22 @@
 import {useEffect, useState} from "react";
 import {useAuth} from "../../contexts/AuthContext.jsx";
-import {getDataDetail} from "../../services/get_data.js";
+import {getDataDetail, updateProblemDescription} from "../../services/get_data.js";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 import PropTypes from "prop-types";
 import classes from './ServiceRequestDetail.module.css'
-import sharedStyles from '../../assets/styles/SharedStyles.module.css'
-import {parseISO, format} from 'date-fns';
+import ServiceRequestDetailHeader from "../ServiceRequestDetailHeader/ServiceRequestDetailHeader.jsx";
+import ServiceRequestDetailsFooter from "../ServiceRequestDetailsFooter/ServiceRequestDetailsFooter.jsx";
+import ServiceRequestDetailsMain from "../ServiceRequestDetailsMain/ServiceRequestDetailsMain.jsx";
+
 
 const ServiceRequest = ({id}) => {
     const [serviceRequest, setServiceRequest] = useState({});
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const {token} = useAuth();
+    const [allowEdit, setAllowEdit] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState(null);
 
     useEffect(() => {
         getDataDetail(id, token).then(
@@ -26,36 +31,69 @@ const ServiceRequest = ({id}) => {
         })
     }, [id, token]);
 
+    const handleEdit = () => {
+        setAllowEdit(false);
+    }
+
+    const handleSave = async (formData) => {
+        const data = {
+            problem_description: formData.problem_description,
+        }
+        setIsSubmitting(true);
+        setSubmitError(null);
+
+        try {
+            const res = await updateProblemDescription(serviceRequest.id, data, token);
+            setServiceRequest(prevState => (
+                {
+                    ...prevState,
+                    updated_on: res.updated_on,
+                    problem_description: data.problem_description
+                }
+            ))
+        } catch (err) {
+            setSubmitError(err);
+            console.log(err)
+        } finally {
+            setAllowEdit(true);
+            setIsSubmitting(false);
+        }
+    }
+
+    const handleClose = () => {
+        setAllowEdit(true);
+    }
+
+    const fields = [
+        {
+            name: 'problem_description',
+            label: 'Problem description',
+            type: 'textarea',
+        },
+    ]
+
     return (
         <div className='container'>
-            {
-                isLoading ? (<LoadingSpinner/>) : error ? (
-                    <p>{error}</p>
-                ) : (
-                    <div>
-                        <header className={sharedStyles.roundedContainerPrimary}>
-                            Service Request Details
-                        </header>
-                        <main className={sharedStyles.roundedContainerSecondary}>
-                            <p>Problem description: {serviceRequest['problem_description']}</p>
-                            <p>Resolution: {serviceRequest['resolution']}</p>
-                        </main>
-                        <footer className={sharedStyles.roundedContainerSecondary}>
-                            <div className={sharedStyles.horizontalFlex}>
-                                <p>Created by: {serviceRequest['requestor_name']}</p>
-                                <p>Created on: {format(parseISO(serviceRequest['created_on']), 'dd/MM/yyyy HH:mm')}</p>
-                                <p>Updated on: {format(parseISO(serviceRequest['updated_on']), 'dd/MM/yyyy HH:mm')}</p>
-                            </div>
-                            <div className={sharedStyles.horizontalFlex}>
-                                <p>Status: {serviceRequest['status_display']}</p>
-                            </div>
-                        </footer>
-
-                    </div>
-
-
-                )
-            }
+            {isLoading ? (
+                <LoadingSpinner/>
+            ) : error ? (
+                <p>{error}</p>
+            ) : (
+                <div>
+                    <ServiceRequestDetailHeader/>
+                    <ServiceRequestDetailsMain
+                        serviceRequest={serviceRequest}
+                        allowEdit={allowEdit}
+                        handleEdit={handleEdit}
+                        fields={fields}
+                        handleSave={handleSave}
+                        handleClose={handleClose}
+                        isSubmitting={isSubmitting}
+                        submitError={submitError}
+                    />
+                    <ServiceRequestDetailsFooter serviceRequest={serviceRequest}/>
+                </div>
+            )}
         </div>
     )
 }

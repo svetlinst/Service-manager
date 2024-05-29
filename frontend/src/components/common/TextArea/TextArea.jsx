@@ -9,7 +9,7 @@ const TextArea = ({id, name, value, onChange}) => {
             id={id}
             value={value}
             onChange={onChange}
-            cols="30"
+            // cols="30"
             rows="5"
         />
     )

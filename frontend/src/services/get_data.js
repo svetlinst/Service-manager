@@ -59,3 +59,16 @@ export const getProfileData = async (id, token) => {
     return res.data;
 }
 
+export const updateProblemDescription = async (id, data, token) => {
+    try {
+        const res = await axios.patch(`${baseUrl}service_requests/${id}/`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return res.data;
+    } catch (err) {
+        return Promise.reject(err);
+    }
+}
+

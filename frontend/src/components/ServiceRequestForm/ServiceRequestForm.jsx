@@ -1,4 +1,4 @@
-import Form from "../Form/Form.jsx";
+import Form from "../common/Form/Form.jsx";
 import {createServiceRequest, getAllCustomers} from "../../services/get_data.js";
 import React, {useState, useEffect} from "react";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
@@ -26,7 +26,7 @@ const ServiceRequestForm = () => {
             setError('Error while fetching the data!');
             setIsLoading(false);
         })
-    }, []);
+    }, [token]);
 
     const handleSubmit = async (formData) => {
         const data = {
