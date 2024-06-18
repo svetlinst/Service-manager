@@ -19,7 +19,6 @@ const ServiceRequestDetailsMain = ({
                                        isSubmitting,
                                        submitError
                                    }) => {
-    const style = `${sharedStyles.horizontalFlex} ${sharedStyles.flexJustifyStretch}`
     return (
         <main className={sharedStyles.roundedContainerSecondary}>
             <p>{STATUS_TEXT}: {serviceRequest['status_display']}</p>

@@ -24,9 +24,23 @@
     align-items: center;
 }
 
+.verticalFlex {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: start;
+}
+
 .flexJustifyCenter {
     justify-content: center;
 }
+
+.flexCentered {
+    margin: auto;
+    width: 25%;
+}
+
 .flexJustifyStretch {
     justify-content: stretch;
 }
