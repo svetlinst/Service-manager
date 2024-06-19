@@ -5,6 +5,8 @@ from django.db import models
 from service_manager.accounts.managers import AppUserManager
 from django.utils.translation import gettext_lazy as _
 
+from service_manager.customers.models import Customer
+
 
 class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     email = models.EmailField(
@@ -24,6 +26,19 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
     is_active = models.BooleanField(
         default=True,
+    )
+
+    is_customer = models.BooleanField(
+        default=False,
+        verbose_name=_('is customer'),
+    )
+
+    customer_id = models.ForeignKey(
+        Customer,
+        on_delete=models.CASCADE,
+        verbose_name=_('customer id'),
+        null=True,
+        blank=True,
     )
 
     USERNAME_FIELD = 'email'

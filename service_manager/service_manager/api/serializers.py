@@ -38,4 +38,4 @@ class AppUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AppUser
-        fields = ['profile', 'email', 'is_active', 'is_staff', 'is_superuser', 'id']
+        fields = ['profile', 'email', 'is_active', 'is_staff', 'is_superuser', 'id', 'is_customer', 'customer_id']
