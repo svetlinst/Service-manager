@@ -85,3 +85,16 @@ export const updateProfile = async (id, token, data) => {
     }
 }
 
+export const getCustomerDetails = async (customerId, token) => {
+    try {
+        const response = await axios.get(`${baseUrl}customers/${customerId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (err) {
+        return Promise.reject(err);
+    }
+}
+

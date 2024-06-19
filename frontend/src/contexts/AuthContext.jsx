@@ -31,6 +31,7 @@ export const AuthProvider = ({children}) => {
         }
     };
 
+    //todo: move this function to the services API
     const getUserDetails = async () => {
         try {
             const response = await axios.get(`http://127.0.0.1:8000/bg/api/users/${userEmail}`, {

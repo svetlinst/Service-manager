@@ -5,7 +5,10 @@ import {useState} from "react";
 import Form from "../common/Form/Form.jsx";
 import {updateProfile} from '../../services/get_data.js'
 import {useAuth} from "../../contexts/AuthContext.jsx";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+const HEADER_TEXT = 'User Profile';
 const FIRST_NAME_TEXT = 'First name';
 const LAST_NAME_TEXT = 'Last name';
 const PHONE_NUMBER_TEXT = 'Phone number';
@@ -15,17 +18,18 @@ const UserProfileDetails = ({first_name, last_name, phone_number, email, id}) =>
     const styles = `${sharedStyles.horizontalFlex} ${sharedStyles.flexCentered}`;
     const [isEditTriggered, setIsEditTriggered] = useState(false);
     const {token} = useAuth();
-    const [userDetails, setUserDetails] = useState({first_name, last_name, phone_number})
+    const [profileDetails, setProfileDetails] = useState({first_name, last_name, phone_number})
 
     const handleEdit = () => {
         setIsEditTriggered(true);
     }
 
     const handleSubmit = async (values) => {
-        setUserDetails(values);
+        setProfileDetails(values);
         try {
             console.log(values);
             const response = await updateProfile(id, token, values);
+            toast.success("Profile updated successfully!");
             console.log(response);
             setIsEditTriggered(false);
         } catch (err) {
@@ -46,7 +50,7 @@ const UserProfileDetails = ({first_name, last_name, phone_number, email, id}) =>
     return (
         <div>
             <header className={sharedStyles.roundedContainerPrimary}>
-                Header
+                {HEADER_TEXT}
             </header>
             <main className={sharedStyles.roundedContainerSecondary}>
                 <section className={styles}>
@@ -56,16 +60,16 @@ const UserProfileDetails = ({first_name, last_name, phone_number, email, id}) =>
                                 fields={fields}
                                 onSubmit={handleSubmit}
                                 onCancel={handleCancel}
-                                initialValues={userDetails}
+                                initialValues={profileDetails}
                             />
                             <p>{EMAIL_TEXT}: {email}</p>
                         </div>
 
                     ) : (
                         <div className={sharedStyles.verticalFlex}>
-                            <p>{FIRST_NAME_TEXT}: {userDetails.first_name}</p>
-                            <p>{LAST_NAME_TEXT}: {userDetails.last_name}</p>
-                            <p>{PHONE_NUMBER_TEXT}: {userDetails.phone_number}</p>
+                            <p>{FIRST_NAME_TEXT}: {profileDetails.first_name}</p>
+                            <p>{LAST_NAME_TEXT}: {profileDetails.last_name}</p>
+                            <p>{PHONE_NUMBER_TEXT}: {profileDetails.phone_number}</p>
                             <p>{EMAIL_TEXT}: {email}</p>
                         </div>
                     )}
@@ -74,6 +78,7 @@ const UserProfileDetails = ({first_name, last_name, phone_number, email, id}) =>
                         {!isEditTriggered && <Button onClick={handleEdit}>Edit</Button>}
                     </div>
                 </section>
+                <ToastContainer />
             </main>
         </div>
     )
